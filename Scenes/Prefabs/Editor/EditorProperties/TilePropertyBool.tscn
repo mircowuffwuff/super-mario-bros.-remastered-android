@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://diqn7e5hqpbsk"]
+[gd_scene format=3 uid="uid://diqn7e5hqpbsk"]
 
 [ext_resource type="Script" uid="uid://b5jrj8u7cx8id" path="res://Scripts/Parts/TilePropertyValue.gd" id="1_gida3"]
 [ext_resource type="Texture2D" uid="uid://bnv2ocqgws3p7" path="res://Assets/Sprites/UI/Panel.png" id="2_6srr6"]
@@ -23,17 +23,17 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("3_qo1tt")
 region = Rect2(0, 0, 16, 16)
 
-[node name="TilePropertyBOOL" type="HBoxContainer"]
+[node name="TilePropertyBOOL" type="HBoxContainer" unique_id=978291941]
 script = ExtResource("1_gida3")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=796083320]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PROPERTY_NAME:"
 uppercase = true
 
-[node name="CheckBox" type="CheckBox" parent="."]
+[node name="CheckBox" type="CheckBox" parent="." unique_id=819276354]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0

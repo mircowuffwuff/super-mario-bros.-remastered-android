@@ -4,15 +4,18 @@ extends Node2D
 var can_menu := false
 const ENDING = preload("res://Assets/Audio/BGM/Ending.mp3")
 
+var talking := false
+
 func _ready() -> void:
-	if $Sprite is AnimatedSprite2D and Global.current_campaign == "SMBANN":
-		$Sprite.play("Idle")
 	Global.level_complete_begin.connect(begin)
-	for i in [$SpeedrunMSG/ThankYou, $StandardMSG/ThankYou]:
+	for i in get_tree().get_nodes_in_group("Messages"):
 		i.text = tr(i.text).replace("{PLAYER}", tr(Player.CHARACTER_NAMES[int(Global.player_characters[0])]))
+	if play_end_music and (Global.level_editor != null or Global.current_game_mode == Global.GameMode.CUSTOM_LEVEL):
+		$EndingSpeech/AnotherCastle5.modulate.a = 0
+		$EndingSpeech/AnotherCastle6.modulate.a = 0
 
 func begin() -> void:
-	$StaticBody2D/CollisionShape2D.set_deferred("disabled", false)
+	$Sprite.play("Await")
 	%PBMessage.modulate.a = int(SpeedrunHandler.timer < SpeedrunHandler.best_time)
 	if play_end_music:
 		Global.game_beaten = true
@@ -21,6 +24,7 @@ func begin() -> void:
 	%Time.text = tr(%Time.text).replace("{TIME}", SpeedrunHandler.gen_time_string(SpeedrunHandler.format_time(SpeedrunHandler.timer)))
 	$CameraRightLimit._enter_tree()
 	await get_tree().create_timer(3, false).timeout
+	$Sprite.play("Talk")
 	if Global.current_game_mode == Global.GameMode.MARATHON_PRACTICE or (Global.current_game_mode == Global.GameMode.MARATHON and play_end_music):
 		show_message($SpeedrunMSG)
 	else:
@@ -60,7 +64,7 @@ func play_music() -> void:
 		can_menu = true
 
 func _process(_delta: float) -> void:
-	if can_menu and Input.is_action_just_pressed("jump_0"):
+	if can_menu and Global.multibind_action_just_pressed("jump_0"):
 		can_menu = false
 		peach_level_exit()
 
@@ -86,3 +90,10 @@ func peach_level_exit() -> void:
 				CreditsLevel.go_to_title_screen = true
 				Global.transition_to_scene("res://Scenes/Levels/Credits.tscn")
 			else: Global.transition_to_scene("res://Scenes/Levels/TitleScreen.tscn")
+
+func toggle_talking() -> void:
+	talking = !talking
+	if talking:
+		$Sprite.play("Talk")
+	else:
+		$Sprite.play("Idle")

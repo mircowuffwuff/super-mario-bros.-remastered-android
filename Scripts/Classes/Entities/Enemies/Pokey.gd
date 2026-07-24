@@ -24,3 +24,6 @@ func summon_part_gibs() -> void:
 	for i in $Parts.get_children():
 		if i.visible:
 			i.get_node("GibSpawner").summon_gib([-1, 1][i.get_index() % 2])
+
+func add_score(_ughhhhhhhhh = null):
+	$ScoreNoteSpawner.spawn_note(length * 100)

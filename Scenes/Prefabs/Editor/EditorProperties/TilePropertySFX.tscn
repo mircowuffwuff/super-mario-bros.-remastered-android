@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c7rm3gsfo5067"]
+
+[ext_resource type="Script" uid="uid://codql1f5eca56" path="res://Scripts/Classes/Editor/OptionButtonThatIsntFuckingBlurry.gd" id="1_n3lng"]
+
+[sub_resource type="GDScript" id="GDScript_dvo62"]
+script/source = "extends TilePropertyContainer
+
+func _ready() -> void:
+	$Label.text = tile_property_name.replace(\"_\", \" \")
+	if has_meta(\"sfx\"):
+		add_sfx()
+	else:
+		for i in values:
+			$OptionButton.add_item(values[i].to_upper(), i)
+
+func add_sfx() -> void:
+	$OptionButton.clear()
+	for i in AudioManager.sfx_library.keys():
+		$OptionButton.add_item(i.to_upper())
+"
+
+[node name="TilePropertyEnum" type="HBoxContainer" unique_id=550470921]
+custom_minimum_size = Vector2(0, 24)
+offset_right = 145.0
+offset_bottom = 24.0
+script = SubResource("GDScript_dvo62")
+metadata/sfx = false
+
+[node name="Label" type="Label" parent="." unique_id=178167968]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PROPERTY_NAME:"
+uppercase = true
+
+[node name="OptionButton" type="OptionButton" parent="." unique_id=867951463]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_n3lng")
+metadata/_custom_type_script = "uid://codql1f5eca56"
+
+[connection signal="start_value_changed" from="." to="OptionButton" method="select"]
+[connection signal="item_selected" from="OptionButton" to="." method="set_value"]

@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bowadxqfmg636"]
+[gd_scene format=3 uid="uid://bowadxqfmg636"]
 
 [ext_resource type="Script" uid="uid://b0mk8rdwt73w0" path="res://Scripts/Classes/Entities/ShellClass.gd" id="1_diywd"]
 [ext_resource type="Texture2D" uid="uid://cy6v7tdtxebs5" path="res://Assets/Sprites/Enemies/KoopaTroopa.png" id="2_hddfq"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_y03il"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="3_6e771"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_hddfq"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/GreenKoopaShell.json" id="4_y03il"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="4_ygks6"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="7_03ndt"]
 [ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="8_0nmd6"]
@@ -85,7 +84,7 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hddfq"]
 size = Vector2(16, 12)
 
-[node name="GreenKoopaShell" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="GreenKoopaShell" type="CharacterBody2D" unique_id=1536039732 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 collision_layer = 32
 collision_mask = 6
 floor_constant_speed = true
@@ -95,7 +94,7 @@ script = ExtResource("1_diywd")
 on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=606427555]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_5qj7r")
 animation = &"Spin"
@@ -105,63 +104,66 @@ offset = Vector2(0, 1)
 script = ExtResource("2_y03il")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Sprite" unique_id=113289807 node_paths=PackedStringArray("node_to_affect", "property_node")]
+unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("3_hddfq")
 node_to_affect = NodePath("..")
+property_node = NodePath("../..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_y03il")
+json_path = "res://Assets/Sprites/Enemies/GreenKoopaShell.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="LCollision" type="CollisionShape2D" parent="."]
+[node name="LCollision" type="CollisionShape2D" parent="." unique_id=418181196]
 position = Vector2(0, -6)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_03ndt")
 one_way_collision = true
 
-[node name="RCollision" type="CollisionShape2D" parent="."]
+[node name="RCollision" type="CollisionShape2D" parent="." unique_id=1514555173]
 position = Vector2(0, -6)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_03ndt")
 one_way_collision = true
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1790874449]
 collision_mask = 5
 
-[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+[node name="Collision" type="CollisionShape2D" parent="Hitbox" unique_id=1527445453]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_hddfq")
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=1076850139 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("3_6e771")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=101417712]
 script = ExtResource("4_ygks6")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=2081894179 node_paths=PackedStringArray("visuals")]
 script = ExtResource("7_03ndt")
 visuals = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=993131691 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("8_0nmd6")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=1977263003 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("9_8vmgs")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="BlockBouncingDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=715392075 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("10_y03il")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://cmg61722ktg2m"
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=830166589]
 position = Vector2(0, -8)
 scale = Vector2(1, 0.98723614)
 rect = Rect2(-128, -128, 256, 256)
@@ -173,6 +175,7 @@ rect = Rect2(-128, -128, 256, 256)
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="on_player_hit"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="on_player_stomped_on"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="on_player_stomped_on"]
 [connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
 [connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]

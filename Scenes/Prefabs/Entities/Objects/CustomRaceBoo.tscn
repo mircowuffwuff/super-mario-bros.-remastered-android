@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccgskwqm418q0"]
+[gd_scene format=3 uid="uid://ccgskwqm418q0"]
 
 [ext_resource type="PackedScene" uid="uid://bbrkol4k3yobq" path="res://Scenes/Prefabs/Entities/Enemies/RaceBoo.tscn" id="1_gu5ge"]
 [ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="2_pcxou"]
@@ -6,24 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://dvmr3r2uub283" path="res://Scenes/Prefabs/Entities/Objects/TrackRider.tscn" id="5_4ndcc"]
 [ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="6_vsr7w"]
 
-[node name="CustomRaceBoo" type="Node2D"]
+[node name="CustomRaceBoo" type="Node2D" unique_id=322769512]
 
-[node name="RaceBoo" parent="." instance=ExtResource("1_gu5ge")]
+[node name="RaceBoo" parent="." unique_id=1814964214 instance=ExtResource("1_gu5ge")]
 force_colour = 0
 
-[node name="TrackJoint" type="Node" parent="RaceBoo"]
+[node name="TrackJoint" type="Node" parent="RaceBoo" unique_id=596787963]
 script = ExtResource("2_pcxou")
 disable_physics = false
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
 
-[node name="TrackRider" parent="." node_paths=PackedStringArray("attached_entity") instance=ExtResource("5_4ndcc")]
+[node name="TrackRider" parent="." unique_id=1443886723 node_paths=PackedStringArray("attached_entity") instance=ExtResource("5_4ndcc")]
 attached_entity = NodePath("../RaceBoo")
 
-[node name="BooRaceHandler" parent="." node_paths=PackedStringArray("boo") instance=ExtResource("4_4ndcc")]
+[node name="BooRaceHandler" parent="." unique_id=322625697 node_paths=PackedStringArray("boo") instance=ExtResource("4_4ndcc")]
 boo = NodePath("../RaceBoo")
 is_custom = true
 
-[node name="LevelEditorToggleDetection" type="Node" parent="BooRaceHandler"]
+[node name="LevelEditorToggleDetection" type="Node" parent="BooRaceHandler" unique_id=647467220]
 script = ExtResource("6_vsr7w")
 metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
 

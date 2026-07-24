@@ -1,15 +1,10 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://hdknummx4s5r"]
-
-[ext_resource type="AudioStream" uid="uid://dudkbw8bmvad5" path="res://Assets/Audio/BGM/Sky.mp3" id="1_0uim3"]
-[ext_resource type="AudioStream" uid="uid://byh32ldblcag" path="res://Assets/Audio/BGM/SkyHurry.mp3" id="2_rjgi2"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://hdknummx4s5r"]
 
 [resource]
 clip_count = 2
 clip_0/name = &"Normal"
-clip_0/stream = ExtResource("1_0uim3")
 clip_0/auto_advance = 0
 clip_1/name = &"Hurry"
-clip_1/stream = ExtResource("2_rjgi2")
 clip_1/auto_advance = 0
 _transitions = {
 Vector2i(-1, -1): {

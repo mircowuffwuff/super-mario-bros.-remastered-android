@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://kag5i607liua"]
+[gd_scene format=3 uid="uid://kag5i607liua"]
 
 [ext_resource type="Script" uid="uid://dxjp3pfd77xxa" path="res://Scripts/UI/TileModifierMenu.gd" id="2_0slfq"]
+[ext_resource type="PackedScene" uid="uid://l8qvjfxryj6m" path="res://Scenes/Prefabs/Editor/EditorProperties/SignalProperty.tscn" id="2_n7jgg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wognt"]
 bg_color = Color(0, 0, 0, 0.768627)
@@ -10,15 +11,53 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
 
-[node name="TileModifierMenu" type="PanelContainer" unique_id=1893735265]
-self_modulate = Color(1, 1, 1, 0.497)
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_wognt"]
+color = Color(1, 1, 1, 1)
+
+[node name="TileModifierMenu" type="PanelContainer" unique_id=1515322960]
+self_modulate = Color(1, 1, 1, 0.8)
 offset_right = 8.0
 offset_bottom = 8.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_wognt")
 script = ExtResource("2_0slfq")
 
-[node name="Container" type="VBoxContainer" parent="." unique_id=924516056]
+[node name="Container" type="VBoxContainer" parent="." unique_id=795672351]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Properties" type="VBoxContainer" parent="Container" unique_id=665623196]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Container/Properties" unique_id=329792231]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "PROPERTIES"
+
+[node name="HSeparator" type="HSeparator" parent="Container/Properties/Label" unique_id=1468004551]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_wognt")
+
+[node name="SignalDisplay" parent="Container" unique_id=1676529677 instance=ExtResource("2_n7jgg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="is_mouse_inside"]
+[connection signal="mouse_exited" from="." to="." method="is_mouse_inside" binds= [false]]
+[connection signal="start_connecting" from="Container/SignalDisplay" to="." method="begin_signal_connection"]

@@ -50,8 +50,10 @@ func return_focus() -> void:
 
 func check_for_warp() -> void:
 	SpeedrunHandler.is_warp_run = false
-	if SpeedrunHandler.WARP_LEVELS[Global.current_campaign].has(str(Global.world_num) + "-" + str(Global.level_num)) or Global.current_game_mode == Global.GameMode.MARATHON:
+	if Global.current_game_mode == Global.GameMode.MARATHON:
 		$SpeedrunTypeSelect.open()
+	elif SpeedrunHandler.WARP_LEVELS[Global.current_campaign].has(str(Global.world_num) + "-" + str(Global.level_num)):
+		$SpeedrunTypeSelectLevelSelect.open()
 	else:
 		restart_level()
 

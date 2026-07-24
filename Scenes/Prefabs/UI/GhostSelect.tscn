@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://r2n1ka3mc5v6"]
+[gd_scene format=3 uid="uid://r2n1ka3mc5v6"]
 
 [ext_resource type="Script" uid="uid://btp7od8thj3mk" path="res://Scripts/UI/GhostSelect.gd" id="1_jt66n"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="1_riont"]
 [ext_resource type="Texture2D" uid="uid://3p2l7rec0gh5" path="res://Assets/Sprites/UI/Cursor.png" id="2_jt66n"]
 [ext_resource type="Texture2D" uid="uid://dhu46wvad72wp" path="res://Assets/Sprites/UI/MarathonIcons.png" id="3_kqsc3"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_vlkxh"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/Cursor.json" id="5_6pjre"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_vlkxh"]
 color = Color(1, 1, 1, 1)
@@ -22,7 +21,7 @@ region = Rect2(112, 24, 8, 8)
 atlas = ExtResource("3_kqsc3")
 region = Rect2(96, 40, 8, 8)
 
-[node name="GhostSelect" type="Control"]
+[node name="GhostSelect" type="Control" unique_id=328088015]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jt66n")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=1770259780]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -46,16 +45,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_riont")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=810440850]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+[node name="Title" type="Label" parent="Panel/VBoxContainer" unique_id=76819019]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "GHOST_SELECT"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/Title"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/Title" unique_id=1427404105]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -66,64 +65,66 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_vlkxh")
 
-[node name="NoGhost" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="NoGhost" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=1218760587]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Cursor" type="TextureRect" parent="Panel/VBoxContainer/NoGhost"]
+[node name="Cursor" type="TextureRect" parent="Panel/VBoxContainer/NoGhost" unique_id=414092238]
 layout_mode = 2
 texture = SubResource("AtlasTexture_6pjre")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="Panel/VBoxContainer/NoGhost/Cursor" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Panel/VBoxContainer/NoGhost/Cursor" unique_id=1088032212 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_vlkxh")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("5_6pjre")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/NoGhost"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/NoGhost" unique_id=551578824]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/NoGhost/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/NoGhost/HBoxContainer" unique_id=693492657]
 layout_mode = 2
 texture = SubResource("AtlasTexture_rondi")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/NoGhost/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/NoGhost/HBoxContainer" unique_id=1654290528]
 layout_mode = 2
 text = "GHOST OFF"
 
-[node name="Ghost" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="Ghost" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=1294383695]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Cursor" type="TextureRect" parent="Panel/VBoxContainer/Ghost"]
+[node name="Cursor" type="TextureRect" parent="Panel/VBoxContainer/Ghost" unique_id=158844869]
 layout_mode = 2
 texture = SubResource("AtlasTexture_6pjre")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="Panel/VBoxContainer/Ghost/Cursor" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Panel/VBoxContainer/Ghost/Cursor" unique_id=1736005235 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_vlkxh")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("5_6pjre")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Ghost"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Ghost" unique_id=814226993]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/Ghost/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/Ghost/HBoxContainer" unique_id=713452883]
 layout_mode = 2
 texture = SubResource("AtlasTexture_2qsn7")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/Ghost/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Ghost/HBoxContainer" unique_id=1478888636]
 layout_mode = 2
 text = "GHOST ON"

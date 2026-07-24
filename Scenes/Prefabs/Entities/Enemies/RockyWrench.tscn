@@ -1,15 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://c3m38c2skawpj"]
+[gd_scene format=3 uid="uid://c3m38c2skawpj"]
 
 [ext_resource type="Script" uid="uid://bfsh8bhcmknkh" path="res://Scripts/Classes/Entities/Enemies/RockyWrench.gd" id="1_pl7bt"]
 [ext_resource type="Texture2D" uid="uid://bfora2lrmtyj4" path="res://Assets/Sprites/Enemies/RockyWrench.png" id="2_8y80u"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_4h1b4"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_wom81"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/RockyWrench.json" id="4_pl7bt"]
 [ext_resource type="Script" uid="uid://bx6r8sjar6cwr" path="res://Scripts/Classes/Components/BasicStaticMovement.gd" id="5_8y80u"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="7_pl7bt"]
 [ext_resource type="Texture2D" uid="uid://cop8x5m20cqal" path="res://Assets/Sprites/Items/WrenchProjectile.png" id="7_w66sd"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="8_nqvoc"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/WrenchProjectile.json" id="9_kxgad"]
 [ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="9_nxn7i"]
 [ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="10_w66sd"]
 [ext_resource type="Script" uid="uid://ba18grqjixded" path="res://Scripts/Classes/Components/ExplosionDetection.gd" id="13_h21ug"]
@@ -264,7 +262,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4tv3"]
 size = Vector2(14, 4)
 
-[node name="RockyWrench" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="RockyWrench" type="CharacterBody2D" unique_id=1986519950 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 z_index = -5
 collision_layer = 0
 collision_mask = 2
@@ -273,7 +271,7 @@ on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=312583145]
 position = Vector2(0, 12)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_h21ug")
@@ -284,42 +282,43 @@ script = ExtResource("3_wom81")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1169281784 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_4h1b4")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_pl7bt")
+json_path = "res://Assets/Sprites/Enemies/RockyWrench.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="StompHitbox" type="Area2D" parent="Sprite"]
+[node name="StompHitbox" type="Area2D" parent="Sprite" unique_id=606822192]
 position = Vector2(0, -11)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StompHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StompHitbox" unique_id=339229071]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_pl7bt")
 
-[node name="EnemyPlayerDetection" type="Node" parent="Sprite/StompHitbox" node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="Sprite/StompHitbox" unique_id=554200328 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_pl7bt")
 hitbox = NodePath("..")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sprite"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sprite" unique_id=261593473]
 position = Vector2(0, -14)
 remote_path = NodePath("../../AnimatableBody2D")
 
-[node name="EntityHitbox" type="Area2D" parent="Sprite"]
+[node name="EntityHitbox" type="Area2D" parent="Sprite" unique_id=608241809]
 position = Vector2(0, -12)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/EntityHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/EntityHitbox" unique_id=1002059788]
 position = Vector2(-0.5, 7.5)
 shape = SubResource("RectangleShape2D_nqvoc")
 
-[node name="EnemyPlayerDetection" type="Node" parent="Sprite/EntityHitbox" node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="Sprite/EntityHitbox" unique_id=1793515902 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_pl7bt")
 hitbox = NodePath("..")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="Wrench" type="AnimatedSprite2D" parent="Sprite"]
+[node name="Wrench" type="AnimatedSprite2D" parent="Sprite" unique_id=1938706566]
 visible = false
 position = Vector2(-3, -14)
 sprite_frames = SubResource("SpriteFrames_el25t")
@@ -329,80 +328,80 @@ script = ExtResource("3_wom81")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite/Wrench" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite/Wrench" unique_id=225124446 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_4h1b4")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("9_kxgad")
+json_path = "res://Assets/Sprites/Items/WrenchProjectile.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="BasicStaticMovement" type="Node" parent="."]
+[node name="BasicStaticMovement" type="Node" parent="." unique_id=806606881]
 script = ExtResource("5_8y80u")
 metadata/_custom_type_script = "uid://bx6r8sjar6cwr"
 
-[node name="Animations" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_3dqyr")
-}
+[node name="Animations" type="AnimationPlayer" parent="." unique_id=8877567]
+libraries/ = SubResource("AnimationLibrary_3dqyr")
 
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=439700727]
 position = Vector2(0, -2)
 rotation = 3.1415927
 scale = Vector2(1, -1)
 
-[node name="PlayerPlatform" type="CollisionShape2D" parent="AnimatableBody2D"]
+[node name="PlayerPlatform" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=481868073]
 shape = SubResource("RectangleShape2D_h4tv3")
 one_way_collision = true
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2051029024]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_h4tv3")
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=287465683 node_paths=PackedStringArray("visuals")]
 script = ExtResource("8_nqvoc")
 visuals = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=461918883 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("9_nxn7i")
 hitbox = NodePath("../Sprite/EntityHitbox")
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=1287402563 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("10_w66sd")
 hitbox = NodePath("../Sprite/EntityHitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1724020084]
 one_shot = true
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1849572613]
 rect = Rect2(-10, -10, 20, 29)
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=1957240337 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("13_h21ug")
 hitbox = NodePath("../Sprite/EntityHitbox")
 metadata/_custom_type_script = "uid://ba18grqjixded"
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1555442862]
 script = ExtResource("14_el25t")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="BlockBouncingDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=951033322 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("16_q44ss")
 hitbox = NodePath("../Sprite/EntityHitbox")
 metadata/_custom_type_script = "uid://cmg61722ktg2m"
 
 [connection signal="killed" from="." to="GibSpawner" method="summon_gib"]
+[connection signal="player_stomped_below" from="Sprite/StompHitbox/EnemyPlayerDetection" to="." method="on_player_stomped_on"]
 [connection signal="player_stomped_on" from="Sprite/StompHitbox/EnemyPlayerDetection" to="." method="on_player_stomped_on"]
 [connection signal="hammer_player_hit" from="Sprite/EntityHitbox/EnemyPlayerDetection" to="." method="die_from_hammer"]
 [connection signal="invincible_player_hit" from="Sprite/EntityHitbox/EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="player_hit" from="Sprite/EntityHitbox/EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="gib_about_to_spawn" from="GibSpawner" to="Sprite/Wrench" method="hide"]
+[connection signal="gib_about_to_spawn" from="GibSpawner" to="Sprite" method="set_flip_v" binds= [true]]
 [connection signal="gib_about_to_spawn" from="GibSpawner" to="Sprite" method="play" binds= ["Dead"]]
 [connection signal="gib_about_to_spawn" from="GibSpawner" to="Sprite" method="set_offset" binds= [Vector2(0, -8)]]
-[connection signal="gib_about_to_spawn" from="GibSpawner" to="Sprite" method="set_flip_v" binds= [true]]
 [connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]
 [connection signal="fireball_hit" from="FireballDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [500]]
 [connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]

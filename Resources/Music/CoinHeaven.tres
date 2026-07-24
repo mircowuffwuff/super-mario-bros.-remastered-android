@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://drj5grcwps78"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://drj5grcwps78"]
 
-[ext_resource type="AudioStream" uid="uid://ca2vai5x0d66r" path="res://Assets/Audio/BGM/CoinHeaven.mp3" id="1_tux42"]
-[ext_resource type="AudioStream" uid="uid://cgotpa57g4hpf" path="res://Assets/Audio/BGM/CoinHeavenHurry.mp3" id="2_xxxt6"]
+[ext_resource type="AudioStream" uid="uid://cwgdr0yjm8h7t" path="res://Assets/Audio/BGM/CoinHeaven.mp3" id="1_tux42"]
+[ext_resource type="AudioStream" uid="uid://6o1x4vq8jg22" path="res://Assets/Audio/BGM/CoinHeavenHurry.mp3" id="2_xxxt6"]
 
 [resource]
 clip_count = 2

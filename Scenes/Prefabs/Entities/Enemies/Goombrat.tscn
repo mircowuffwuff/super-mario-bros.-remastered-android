@@ -1,16 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkxaywyw6emlc"]
+[gd_scene format=3 uid="uid://bkxaywyw6emlc"]
 
 [ext_resource type="PackedScene" uid="uid://dnx48rakxib6u" path="res://Scenes/Prefabs/Entities/Enemies/Goomba.tscn" id="1_lifw8"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/Goombrat.json" id="2_mhe8b"]
 
-[node name="Goombrat" instance=ExtResource("1_lifw8")]
+[node name="Goombrat" unique_id=2066975580 instance=ExtResource("1_lifw8")]
 
-[node name="ResourceSetterNew" parent="Sprite" index="0"]
-resource_json = ExtResource("2_mhe8b")
+[node name="ResourceSetterNew" parent="Sprite" parent_id_path=PackedInt32Array(469346055) index="0" unique_id=1325056225]
+json_path = "res://Assets/Sprites/Enemies/Goombrat.json"
 
-[node name="LedgeDetectionCast" parent="." index="13"]
+[node name="LedgeDetectionCast" parent="." index="13" unique_id=1692928272]
 position = Vector2(-4, -5)
 target_position = Vector2(0, 8)
 
-[node name="BasicEnemyMovement" parent="." index="14" node_paths=PackedStringArray("ledge_detection_cast")]
+[node name="BasicEnemyMovement" parent="." index="14" unique_id=1877296495 node_paths=PackedStringArray("ledge_detection_cast")]
 ledge_detection_cast = NodePath("../LedgeDetectionCast")

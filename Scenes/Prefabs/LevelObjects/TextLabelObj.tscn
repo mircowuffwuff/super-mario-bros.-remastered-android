@@ -1,47 +1,161 @@
-[gd_scene load_steps=6 format=3 uid="uid://bri8d364obssw"]
+[gd_scene format=3 uid="uid://bri8d364obssw"]
 
 [ext_resource type="PackedScene" uid="uid://ccwil8rmgvund" path="res://Scenes/Prefabs/LevelObjects/TextLabel.tscn" id="1_lckm4"]
+[ext_resource type="Texture2D" uid="uid://guxs3fuqu0x8" path="res://Assets/Sprites/UI/TextBG.png" id="2_hiuu5"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="2_xh6kd"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="3_4ffmy"]
+[ext_resource type="Script" uid="uid://xem6lai3ufyj" path="res://Scripts/Classes/UI/PackNinePatch.gd" id="3_eedkt"]
 [ext_resource type="Texture2D" uid="uid://dlldh5aks0wff" path="res://Assets/Sprites/Editor/GhostTile.png" id="4_evdjo"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="5_xh6kd"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="6_4ffmy"]
 
 [sub_resource type="GDScript" id="GDScript_lckm4"]
 script/source = "extends Node2D
 
 @export var text := \"\"
-@export_enum(\"Left\", \"Center\", \"Right\") var alignment := 0
-# guzlad: Do we even need the 4th option \"fill\"?
-
 @export_enum(\"Left\", \"Center\", \"Right\") var text_alignment := 0
 @export var colour := Color.WHITE
+@export var animate_visibility := false
+
+@export var show_bg := false
+
+func _ready() -> void:
+	show()
+	$TextLabel.visible_ratio = 1
+	start()
+
+func clean_text(text := \"\") -> String:
+	text = text.replace(\"{CHARACTER}\", Player.CHARACTER_NAMES[Global.player_characters[0]])
+	return text
+
+func start() -> void:
+	$TextLabel.visible_ratio = 1
+	$TextLabel.text = clean_text($TextLabel.text)
+	if $SignalExposer.total_inputs > 0:
+		$TextLabel.visible_ratio = 0
+		hide()
 
 func _process(_delta: float) -> void:
+	$TextLabel/MarginContainer.visible = show_bg and $TextLabel.visible_ratio > 0 and text.length() > 0
 	$TextLabel.text = text
 	$TextLabel.horizontal_alignment = text_alignment
+	if text_alignment == 0:
+		$TextLabel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT, Control.PRESET_MODE_MINSIZE, -8)
+	elif text_alignment == 1:
+		$TextLabel.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_MINSIZE, 0)
+	elif text_alignment == 2:
+		$TextLabel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT, Control.PRESET_MODE_MINSIZE, -8)
 	$TextLabel.add_theme_color_override(\"font_color\", colour)
+
+func toggle_visibility() -> void:
+	visible = !visible
+	$TextLabel.visible_ratio = int(visible)
+	if animate_visibility:
+		if visible:
+			animate()
+		else:
+			animate_hide()
+
+
+func on_lost_power() -> void:
+	if animate_visibility:
+		animate_hide()
+	else:
+		hide()
+
+
+func on_recieved_power() -> void:
+	show()
+	if animate_visibility:
+		animate()
+	else:
+		$TextLabel.visible_ratio = 1
+
+func animate() -> void:
+	show()
+	$TextLabel.visible_ratio = 0
+	var tween = create_tween()
+	var time = $TextLabel.text.length() * 0.05
+	tween.tween_property($TextLabel, \"visible_ratio\", 1, time)
+
+func animate_hide() -> void:
+	show()
+	$TextLabel.visible_ratio = 1
+	var tween = create_tween()
+	var time = $TextLabel.text.length() * 0.01
+	tween.tween_property($TextLabel, \"visible_ratio\", 0, time)
+	await tween.finished
+	hide()
 "
 
-[node name="TextLabelOBJ" type="Node2D"]
+[node name="TextLabelOBJ" type="Node2D" unique_id=1072665822]
 process_mode = 3
 script = SubResource("GDScript_lckm4")
 
-[node name="TextLabel" parent="." instance=ExtResource("1_lckm4")]
-offset_left = -8.0
+[node name="TextLabel" parent="." unique_id=115788005 instance=ExtResource("1_lckm4")]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
 offset_top = -8.0
-offset_right = 32.0
+offset_right = 24.0
 offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="TextLabel" unique_id=1436026139]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="NinePatchRect" parent="TextLabel/MarginContainer" unique_id=1433029084]
+layout_mode = 2
+texture = ExtResource("2_hiuu5")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+script = ExtResource("3_eedkt")
+metadata/_custom_type_script = "uid://xem6lai3ufyj"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=369647739]
 script = ExtResource("2_xh6kd")
-properties = Array[String](["text", "text_alignment", "colour"])
+properties = Array[String](["text", "text_alignment", "colour", "animate_visibility", "show_bg"])
 metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
-[node name="LevelEditorVisibleNode" type="Node2D" parent="."]
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." unique_id=104207969]
 visibility_layer = 2
 position = Vector2(-8, -8)
 script = ExtResource("3_4ffmy")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode"]
+[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=189151355]
 position = Vector2(8, 8)
 texture = ExtResource("4_evdjo")
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=2145530636]
+script = ExtResource("5_xh6kd")
+can_output = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=700864296]
+script = ExtResource("6_4ffmy")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="lost_power" from="SignalExposer" to="." method="on_lost_power"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="on_recieved_power"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="toggle_visibility"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="start"]

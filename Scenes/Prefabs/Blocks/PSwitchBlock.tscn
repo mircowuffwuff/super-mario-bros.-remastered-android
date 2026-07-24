@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://q3aaukgw01nw"]
+[gd_scene format=3 uid="uid://q3aaukgw01nw"]
 
 [ext_resource type="Texture2D" uid="uid://ln7uey6c4mf" path="res://Assets/Sprites/Blocks/PSwitchBlock.png" id="1_8hxb6"]
 [ext_resource type="Script" uid="uid://bul1nbd2in1gn" path="res://Scripts/Classes/Components/PSwitcher.gd" id="2_13wn0"]
@@ -7,21 +7,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13wn0"]
 size = Vector2(16, 16)
 
-[node name="PSwitchBlock" type="StaticBody2D"]
+[node name="PSwitchBlock" type="StaticBody2D" unique_id=125521366]
 collision_layer = 6
 collision_mask = 0
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=267734597]
 texture = ExtResource("1_8hxb6")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 script = ExtResource("2_ok1ms")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1327133666]
 shape = SubResource("RectangleShape2D_13wn0")
 
-[node name="PSwitcher" type="Node" parent="."]
+[node name="PSwitcher" type="Node" parent="." unique_id=2059857604]
 script = ExtResource("2_13wn0")
 new_scene = "uid://cn7wwtug5xman"
 metadata/_custom_type_script = "uid://bul1nbd2in1gn"

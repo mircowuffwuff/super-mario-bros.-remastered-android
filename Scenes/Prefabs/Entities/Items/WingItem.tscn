@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck0spcws71sg5"]
+[gd_scene format=3 uid="uid://ck0spcws71sg5"]
 
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="1_fcvyr"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="2_gjj3y"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/WingItem.json" id="3_1uenh"]
 [ext_resource type="Script" uid="uid://bx6r8sjar6cwr" path="res://Scripts/Classes/Components/BasicStaticMovement.gd" id="3_143ya"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="4_gdso8"]
 
@@ -11,6 +10,7 @@ script/source = "extends PowerUpItem
 
 func on_area_entered(area: Area2D) -> void:
 	if area.owner is Player:
+		collected.emit()
 		AudioManager.play_global_sfx(\"power_up\")
 		$ScoreNoteSpawner.spawn_note(1000)
 		area.owner.wing_get()
@@ -23,40 +23,41 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjj3y"]
 size = Vector2(10, 5)
 
-[node name="WingItem" type="CharacterBody2D"]
+[node name="WingItem" type="CharacterBody2D" unique_id=313537685]
 collision_layer = 8
 collision_mask = 6
 script = SubResource("GDScript_gdso8")
 power_up_state = ""
 metadata/_custom_type_script = "uid://cjkurwybsaywm"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=943575923]
 position = Vector2(0, -8)
 script = ExtResource("1_fcvyr")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=781730887 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_gjj3y")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("3_1uenh")
+json_path = "res://Assets/Sprites/Items/WingItem.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=197058261]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=518323222]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_fcvyr")
 
-[node name="BasicStaticMovement" type="Node" parent="."]
+[node name="BasicStaticMovement" type="Node" parent="." unique_id=357477408]
 script = ExtResource("3_143ya")
 metadata/_custom_type_script = "uid://bx6r8sjar6cwr"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1215419034]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_gjj3y")
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1264372424]
 script = ExtResource("4_gdso8")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"

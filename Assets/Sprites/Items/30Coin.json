@@ -1,0 +1,55 @@
+{
+	"animations": {
+		"Idle": {
+			"frames": [
+				[0, 0, 32, 32],
+				[32, 0, 32, 32],
+				[64, 0, 32, 32],
+				[96, 0, 32, 32]
+			],
+			"speed": 10,
+			"loop": true
+		},
+		"Spin": {
+			"frames": [
+				[0, 0, 32, 32],
+				[32, 0, 32, 32],
+				[64, 0, 32, 32],
+				[96, 0, 32, 32]
+			],
+			"speed": 20,
+			"loop": true
+		}
+	},
+	"variations": {
+		"default": {
+			"source": "30Coin.png",
+			"rect": [0, 0, 128, 32]
+		},
+		"Underground": {
+			"source": "30Coin.png",
+			"rect": [0, 32, 128, 32]
+		},
+		"GhostHouse": {"link": "Underground"},
+		"Castle": {
+			"source": "30Coin.png",
+			"rect": [0, 64, 128, 32]
+		},
+		"Snow": {
+			"source": "30Coin.png",
+			"rect": [0, 96, 128, 32]
+		},
+		"Space": {
+			"source": "30Coin.png",
+			"rect": [0, 128, 128, 32]
+		},
+		"Volcano": {
+			"source": "30Coin.png",
+			"rect": [0, 160, 128, 32]
+		},
+		"Bonus": {
+			"source": "30Coin.png",
+			"rect": [0, 192, 128, 32]
+		}
+	}
+}

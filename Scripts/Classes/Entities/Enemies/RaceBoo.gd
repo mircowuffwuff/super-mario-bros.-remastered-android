@@ -13,7 +13,7 @@ var tween: Tween = null
 @export var force_colour := -1
 
 func play_laugh_animation() -> void:
-	if get_tree().get_nodes_in_group("BooSwitchBlocks").is_empty() == false:
+	if get_tree().get_first_node_in_group("BooSwitches") != null:
 		$Warning.show()
 	$Sprite.play("Laugh")
 	await get_tree().create_timer(1, false).timeout

@@ -1,41 +1,51 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvmr3r2uub283"]
+[gd_scene format=3 uid="uid://dvmr3r2uub283"]
 
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="1_n5i2x"]
 [ext_resource type="Script" uid="uid://dg16ltpjq1r4r" path="res://Scripts/Classes/Entities/Objects/TrackRider.gd" id="1_xlgar"]
 [ext_resource type="Texture2D" uid="uid://dtrgyp1sjp568" path="res://Assets/Sprites/Editor/TrackRider.png" id="2_qkkla"]
 [ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="4_yiejl"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="5_yiejl"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="6_62713"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlgar"]
-size = Vector2(12, 12)
+size = Vector2(4, 4)
 
-[node name="TrackRider" type="Node2D"]
+[node name="TrackRider" type="Node2D" unique_id=794638291]
 z_index = -1
 script = ExtResource("1_xlgar")
 
-[node name="LevelEditorVisibleNode" type="Node2D" parent="."]
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." unique_id=2035403980]
 script = ExtResource("1_n5i2x")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="Sprite" type="Sprite2D" parent="LevelEditorVisibleNode"]
+[node name="Sprite" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=1043336640]
 texture = ExtResource("2_qkkla")
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_mask = 61
+[node name="Hitbox" type="Area2D" parent="." unique_id=262813979]
+collision_mask = 32829
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1462043229]
 shape = SubResource("RectangleShape2D_xlgar")
 
-[node name="LevelEditorToggleDetection" type="Node" parent="."]
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=1639444026]
 script = ExtResource("4_yiejl")
 metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=353646907]
 script = ExtResource("5_yiejl")
 properties = Array[String](["speed", "direction"])
 metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
-[node name="Joint" type="Node2D" parent="."]
+[node name="Joint" type="Node2D" parent="." unique_id=1144801055]
 z_as_relative = false
 
+[node name="SignalExposer" type="Node2D" parent="." unique_id=920527108]
+script = ExtResource("6_62713")
+do_animation = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[connection signal="reached_end" from="." to="SignalExposer" method="emit_pulse"]
 [connection signal="toggled" from="LevelEditorToggleDetection" to="." method="start"]
+[connection signal="lost_power" from="SignalExposer" to="." method="stop_moving"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="start_moving"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="toggle"]

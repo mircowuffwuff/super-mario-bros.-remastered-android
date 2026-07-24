@@ -1,26 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8cxhsod82kwm"]
+[gd_scene format=3 uid="uid://c8cxhsod82kwm"]
 
 [ext_resource type="PackedScene" uid="uid://c8m8455b6ikrn" path="res://Scenes/Prefabs/Entities/Objects/SidewaysPlatform.tscn" id="1_m1s5k"]
 [ext_resource type="Texture2D" uid="uid://dfpbjnd1o5tig" path="res://Assets/Sprites/Tilesets/OnOffPlatform.png" id="2_m1s5k"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/OnOffPlatform.json" id="3_p1l0p"]
 [ext_resource type="Script" uid="uid://364rywt44hy6" path="res://Scripts/Classes/UI/PackSprite.gd" id="4_mdd6r"]
 [ext_resource type="Script" uid="uid://cb0spbe0l8mof" path="res://Scripts/Classes/Components/AnimationPauser.gd" id="4_p1l0p"]
+[ext_resource type="Script" uid="uid://q45b31h6356r" path="res://Scripts/Classes/Components/OnOffSwitcher.gd" id="6_jsrxu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdd6r"]
 size = Vector2(48, 8)
 
-[node name="SidewaysPlatform" instance=ExtResource("1_m1s5k")]
+[node name="SidewaysPlatform" unique_id=1890188889 instance=ExtResource("1_m1s5k")]
 
-[node name="Sprite" parent="AnimatableBody2D" index="0"]
+[node name="Sprite" parent="AnimatableBody2D" parent_id_path=PackedInt32Array(497869728) index="0" unique_id=2119390451]
 offset_left = -20.0
 offset_right = 20.0
 texture = ExtResource("2_m1s5k")
 region_rect = Rect2(0, 0, 24, 8)
 
-[node name="ResourceSetter" parent="AnimatableBody2D/Sprite" index="0"]
-resource_json = ExtResource("3_p1l0p")
+[node name="ResourceSetter" parent="AnimatableBody2D/Sprite" index="0" unique_id=675104811]
+json_path = "res://Assets/Sprites/Tilesets/OnOffPlatform.json"
 
-[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D/Sprite" index="1"]
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D/Sprite" index="1" unique_id=54457281]
 position = Vector2(16, 0)
 texture = ExtResource("2_m1s5k")
 centered = false
@@ -30,18 +30,23 @@ region_rect = Rect2(24, 0, 16, 8)
 script = ExtResource("4_mdd6r")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="Collision" parent="AnimatableBody2D" index="1"]
-visible = true
+[node name="Collision" parent="AnimatableBody2D" parent_id_path=PackedInt32Array(497869728) index="1" unique_id=486455362]
 shape = SubResource("RectangleShape2D_mdd6r")
 
-[node name="LevelEditorVisibleNode" parent="." index="2"]
+[node name="LevelEditorVisibleNode" parent="." index="2" unique_id=1115693752]
 visible = true
 
-[node name="AnimationPauser" type="Node" parent="." index="4" node_paths=PackedStringArray("animation_player") groups=["BooBlocks"]]
+[node name="AnimationPauser" type="Node" parent="." index="4" unique_id=742086155 node_paths=PackedStringArray("animation_player") groups=["BooBlocks"]]
 script = ExtResource("4_p1l0p")
 animation_player = NodePath("../AnimationPlayer")
 paused = true
 metadata/_custom_type_script = "uid://cb0spbe0l8mof"
 
+[node name="OnOffSwitcher" type="Node" parent="." index="5" unique_id=2037754299]
+script = ExtResource("6_jsrxu")
+metadata/_custom_type_script = "uid://q45b31h6356r"
+
 [connection signal="just_paused" from="AnimationPauser" to="AnimatableBody2D/Sprite/Sprite2D" method="set_frame" binds= [0]]
 [connection signal="resumed" from="AnimationPauser" to="AnimatableBody2D/Sprite/Sprite2D" method="set_frame" binds= [1]]
+[connection signal="switched_off" from="OnOffSwitcher" to="AnimationPauser" method="pause"]
+[connection signal="switched_on" from="OnOffSwitcher" to="AnimationPauser" method="resume"]

@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://epltraxjntji"]
+
+[ext_resource type="Script" uid="uid://dehhxend1vj2m" path="res://Scripts/Classes/Entities/Enemies/SpikeTop.gd" id="1_ol6o0"]
+[ext_resource type="Texture2D" uid="uid://drww2yy32q3qv" path="res://Assets/Sprites/Enemies/SpikeTop.png" id="2_7s4ia"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_as5ol"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="5_b28ri"]
+[ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="6_fmlc0"]
+[ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="7_5smfw"]
+[ext_resource type="Script" uid="uid://ba18grqjixded" path="res://Scripts/Classes/Components/ExplosionDetection.gd" id="8_dwwms"]
+[ext_resource type="Script" uid="uid://cmg61722ktg2m" path="res://Scripts/Classes/Components/BlockBouncingDetection.gd" id="9_bxsyc"]
+[ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="10_aexo1"]
+[ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="11_5smfw"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="12_dwwms"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="13_bxsyc"]
+[ext_resource type="Script" uid="uid://maqpreddu5kg" path="res://Scripts/Classes/Components/LevelPersistance.gd" id="14_aexo1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as5ol"]
+atlas = ExtResource("2_7s4ia")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b28ri"]
+atlas = ExtResource("2_7s4ia")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qwf1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as5ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b28ri")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_014pt"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_as5ol"]
+size = Vector2(4, 4)
+
+[node name="SpikeTop" type="CharacterBody2D" unique_id=1562484431 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+collision_layer = 16
+collision_mask = 2
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_block_on_wall = false
+script = ExtResource("1_ol6o0")
+on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
+score_note_adder = NodePath("ScoreNoteSpawner")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="RotationJoint" type="Node2D" parent="." unique_id=1188855388]
+unique_name_in_owner = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="RotationJoint" unique_id=642148009]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_0qwf1")
+autoplay = "default"
+frame = 1
+frame_progress = 0.8592592
+offset = Vector2(0, 1)
+flip_h = true
+
+[node name="ResourceSetterNew" type="Node" parent="RotationJoint/Sprite" unique_id=680243608 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_as5ol")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Enemies/SpikeTop.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Checks" type="Node2D" parent="RotationJoint" unique_id=837557960]
+
+[node name="FloorCheck" type="RayCast2D" parent="RotationJoint/Checks" unique_id=1922404240]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+target_position = Vector2(-1, 6)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="CornerCheck" type="RayCast2D" parent="RotationJoint/Checks" unique_id=693820416]
+unique_name_in_owner = true
+position = Vector2(-4, 1)
+target_position = Vector2(8, 1)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="WallCheck" type="RayCast2D" parent="RotationJoint/Checks" unique_id=1980957081]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+target_position = Vector2(-5, 0)
+collision_mask = 2
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RotationJoint" unique_id=1518715764]
+position = Vector2(0, -2)
+rotation = -1.5707964
+remote_path = NodePath("../../LCollision")
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="RotationJoint" unique_id=33718424]
+position = Vector2(0, -2)
+rotation = 1.5707964
+remote_path = NodePath("../../RCollision")
+
+[node name="Hitbox" type="Area2D" parent="RotationJoint" unique_id=337335188]
+position = Vector2(0, -4)
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationJoint/Hitbox" unique_id=914836369]
+shape = SubResource("RectangleShape2D_014pt")
+
+[node name="LCollision" type="CollisionShape2D" parent="." unique_id=779059181]
+position = Vector2(0, -2)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_as5ol")
+one_way_collision = true
+
+[node name="RCollision" type="CollisionShape2D" parent="." unique_id=1067747845]
+position = Vector2(0, -2)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_as5ol")
+one_way_collision = true
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=1347907228]
+script = ExtResource("5_b28ri")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=2110441526 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("6_fmlc0")
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://chj8hu207lrh"
+
+[node name="FireballDetection" type="Node" parent="." unique_id=816100093 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("7_5smfw")
+hitbox = NodePath("../RotationJoint/Hitbox")
+play_sfx_on_hit = true
+metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
+
+[node name="ExplosionDetection" type="Node" parent="." unique_id=1408383348 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("8_dwwms")
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://ba18grqjixded"
+
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=463807279 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("9_bxsyc")
+detection_type = 1
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://cmg61722ktg2m"
+
+[node name="ShellDetection" type="Node" parent="." unique_id=2046978242 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("10_aexo1")
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://bbww34oiexbx2"
+
+[node name="GibSpawner" type="Node" parent="." unique_id=1600998376 node_paths=PackedStringArray("visuals")]
+script = ExtResource("11_5smfw")
+visuals = NodePath("../RotationJoint/Sprite")
+metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=93872714]
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1564801947]
+script = ExtResource("12_dwwms")
+properties = Array[String](["starting_direction", "movement_direction"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1760637221]
+script = ExtResource("13_bxsyc")
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="LevelPersistance" type="Node" parent="." unique_id=1299196883]
+script = ExtResource("14_aexo1")
+metadata/_custom_type_script = "uid://maqpreddu5kg"
+
+[connection signal="killed" from="." to="GibSpawner" method="summon_gib"]
+[connection signal="killed" from="." to="LevelPersistance" method="set_as_active"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="_ready"]
+[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="explosion_entered" from="ExplosionDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
+[connection signal="modifier_applied" from="EditorPropertyExposer" to="." method="on_modifier_applied"]
+[connection signal="enabled" from="LevelPersistance" to="." method="queue_free"]

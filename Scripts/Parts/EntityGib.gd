@@ -21,6 +21,11 @@ func _ready() -> void:
 	match gib_type:
 		0:
 			velocity = Vector2(100 * direction, -200) 
+	await get_tree().process_frame
+	if visuals is AnimatedSprite2D:
+		if visuals.sprite_frames.has_animation("Death"):
+			visuals.process_mode = Node.PROCESS_MODE_PAUSABLE
+			visuals.call_deferred("play", ("Death"))
 
 func _physics_process(delta: float) -> void:
 	match gib_type:

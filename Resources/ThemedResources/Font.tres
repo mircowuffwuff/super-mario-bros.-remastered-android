@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CampaignResource" load_steps=3 format=3 uid="uid://8dcuxbc3h2u2"]
+[gd_resource type="Resource" script_class="CampaignResource" format=3 uid="uid://8dcuxbc3h2u2"]
 
 [ext_resource type="FontVariation" uid="uid://bl7sbw4nx3l1t" path="res://Resources/ThemedResources/FontMain.tres" id="1_okl0f"]
 [ext_resource type="Script" uid="uid://cixtosud3mfaq" path="res://Scripts/Classes/Resources/CampaignResource.gd" id="3_61m36"]

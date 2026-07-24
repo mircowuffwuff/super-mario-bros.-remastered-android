@@ -1,11 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://ny5glffi0suh"]
+[gd_scene format=3 uid="uid://ny5glffi0suh"]
 
 [ext_resource type="Texture2D" uid="uid://bagrao4ahra76" path="res://Assets/Sprites/Items/Key.png" id="1_883rn"]
 [ext_resource type="Script" uid="uid://cjgbt7iof66j0" path="res://Scripts/Classes/Entities/Items/KeyItem.gd" id="1_l02ex"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_ecusj"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_l02ex"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/Key.json" id="4_m8uts"]
 [ext_resource type="Texture2D" uid="uid://sgrcmlktp2dk" path="res://Assets/Sprites/Particles/SRankParticles.png" id="7_2yl70"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="7_imihh"]
+[ext_resource type="Script" uid="uid://maqpreddu5kg" path="res://Scripts/Classes/Components/LevelPersistance.gd" id="8_imihh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l02ex"]
 atlas = ExtResource("1_883rn")
@@ -125,10 +126,10 @@ gravity = Vector3(0, 0, 0)
 anim_speed_min = 2.0
 anim_speed_max = 2.0
 
-[node name="KeyItem" type="Node2D"]
+[node name="KeyItem" type="Node2D" unique_id=131698320]
 script = ExtResource("1_l02ex")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1387807273]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rls2x")
 autoplay = "default"
@@ -136,25 +137,24 @@ frame_progress = 0.18760097
 script = ExtResource("2_ecusj")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=2079443886 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_l02ex")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_m8uts")
+json_path = "res://Assets/Sprites/Items/Key.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=502498006]
 position = Vector2(0, -8)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1587674996]
 shape = SubResource("RectangleShape2D_2u37r")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_e440m")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=296688612]
+libraries/ = SubResource("AnimationLibrary_e440m")
 
-[node name="GoldParticles" type="GPUParticles2D" parent="."]
+[node name="GoldParticles" type="GPUParticles2D" parent="." unique_id=954075066]
 z_index = 1
 material = SubResource("CanvasItemMaterial_imihh")
 position = Vector2(0, -8)
@@ -163,4 +163,17 @@ texture = ExtResource("7_2yl70")
 randomness = 0.12
 process_material = SubResource("ParticleProcessMaterial_rls2x")
 
+[node name="SignalExposer" type="Node2D" parent="." unique_id=2037408662]
+position = Vector2(0, -8)
+script = ExtResource("7_imihh")
+can_input = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="LevelPersistance" type="Node" parent="." unique_id=47894584]
+script = ExtResource("8_imihh")
+metadata/_custom_type_script = "uid://maqpreddu5kg"
+
+[connection signal="collected" from="." to="SignalExposer" method="emit_pulse"]
+[connection signal="collected" from="." to="LevelPersistance" method="set_as_active"]
 [connection signal="area_entered" from="Hitbox" to="." method="on_area_entered"]
+[connection signal="enabled" from="LevelPersistance" to="." method="queue_free"]

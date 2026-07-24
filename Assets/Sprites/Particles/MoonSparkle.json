@@ -1,0 +1,9 @@
+{
+	"properties": {
+		"amount": 5,
+		"process_material.emission_shape": 1,
+		"material.particles_anim_h_frames": 8,
+		"lifetime": 0.5
+	},
+	"variations": {"source": "MoonSparkle.png"}
+}

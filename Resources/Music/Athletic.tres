@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://d205cxhmqwsws"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://d205cxhmqwsws"]
 
-[ext_resource type="AudioStream" uid="uid://dbaf3vhbmeer8" path="res://Assets/Audio/BGM/Athletic.mp3" id="1_p1h3u"]
-[ext_resource type="AudioStream" uid="uid://bvsm8432et3hv" path="res://Assets/Audio/BGM/AthleticHurry.mp3" id="2_din1e"]
+[ext_resource type="AudioStream" uid="uid://beeipg2acvcms" path="res://Assets/Audio/BGM/Athletic.mp3" id="1_p1h3u"]
+[ext_resource type="AudioStream" uid="uid://cwxaatxijflao" path="res://Assets/Audio/BGM/AthleticHurry.mp3" id="2_din1e"]
 
 [resource]
 clip_count = 2

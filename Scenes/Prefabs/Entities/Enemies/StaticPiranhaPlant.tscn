@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://csw2u3q38xrq0"]
+
+[ext_resource type="Script" uid="uid://cvqh3d3x1aicv" path="res://Scripts/Classes/Entities/Enemies/StaticPiranhaPlant.gd" id="1_w45fi"]
+[ext_resource type="Texture2D" uid="uid://dbq6cn2hp6ijx" path="res://Assets/Sprites/Enemies/PiranhaPlant.png" id="2_oy87v"]
+[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_1x1il"]
+[ext_resource type="Script" uid="uid://bx6r8sjar6cwr" path="res://Scripts/Classes/Components/BasicStaticMovement.gd" id="4_oy87v"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_xj1cg"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="5_1x1il"]
+[ext_resource type="Script" uid="uid://ba18grqjixded" path="res://Scripts/Classes/Components/ExplosionDetection.gd" id="6_jddy0"]
+[ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="7_hqsfc"]
+[ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="8_q1mv6"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="9_hqsfc"]
+[ext_resource type="Script" uid="uid://cmg61722ktg2m" path="res://Scripts/Classes/Components/BlockBouncingDetection.gd" id="10_q1mv6"]
+[ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="13_bc7fo"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="13_w45fi"]
+[ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="15_2s76u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64ore"]
+atlas = ExtResource("2_oy87v")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iso6"]
+atlas = ExtResource("2_oy87v")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jddy0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64ore")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iso6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oy87v"]
+size = Vector2(6, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vypk5"]
+size = Vector2(10, 10)
+
+[sub_resource type="GDScript" id="GDScript_qutrf"]
+script/source = "extends Node
+
+func _physics_process(_delta: float) -> void:
+	$\"../RotationJoint\".global_rotation_degrees = [0, 180, 270, 90][owner.pipe_direction]
+	$\"../RotationJoint\".position = [Vector2.ZERO, Vector2(0, -16), Vector2(8, -8), Vector2(-8, -8)][owner.pipe_direction]
+"
+
+[node name="StaticPiranhaPlant" type="CharacterBody2D" unique_id=1453745756 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_w45fi")
+on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
+score_note_adder = NodePath("ScoreNoteSpawner")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="RotationJoint" type="Node2D" parent="." unique_id=149871732]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="RotationJoint" unique_id=1886446228]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_jddy0")
+autoplay = "default"
+frame_progress = 0.2978113
+offset = Vector2(0, 1)
+script = ExtResource("3_1x1il")
+metadata/_custom_type_script = "uid://caq1qiwmy0mox"
+
+[node name="ResourceSetterNew" type="Node" parent="RotationJoint/Sprite" unique_id=1213319844 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("4_xj1cg")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Enemies/PiranhaPlant.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Hitbox" type="Area2D" parent="RotationJoint" unique_id=154198614]
+script = ExtResource("5_1x1il")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotationJoint/Hitbox" unique_id=1098284799]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_oy87v")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RotationJoint" unique_id=584721705]
+position = Vector2(0, -5)
+remote_path = NodePath("../../Collision")
+
+[node name="SmokeParticleJoint" type="Node2D" parent="RotationJoint" unique_id=1035438801]
+position = Vector2(0, -8)
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1294483231]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_vypk5")
+
+[node name="BasicStaticMovement" type="Node" parent="." unique_id=1202683613]
+script = ExtResource("4_oy87v")
+auto_call = false
+metadata/_custom_type_script = "uid://bx6r8sjar6cwr"
+
+[node name="ExplosionDetection" type="Node" parent="." unique_id=319113680 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("6_jddy0")
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://ba18grqjixded"
+
+[node name="FireballDetection" type="Node" parent="." unique_id=1228539268 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("7_hqsfc")
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
+
+[node name="ShellDetection" type="Node" parent="." unique_id=171044912 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("8_q1mv6")
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://bbww34oiexbx2"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=594296051]
+position = Vector2(0, -9)
+rect = Rect2(-10, -16, 20, 26)
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=103208922]
+script = ExtResource("9_hqsfc")
+add_score = true
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=1805524087 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("10_q1mv6")
+detection_type = 1
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://cmg61722ktg2m"
+
+[node name="GibSpawner" type="Node" parent="." unique_id=2085030428 node_paths=PackedStringArray("visuals")]
+script = ExtResource("13_bc7fo")
+visuals = NodePath("../RotationJoint/SmokeParticleJoint")
+gib_type = 2
+metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
+
+[node name="RotationStuff" type="Node" parent="." unique_id=1285741073]
+process_mode = 3
+script = SubResource("GDScript_qutrf")
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=593577841]
+script = ExtResource("13_w45fi")
+properties = Array[String](["pipe_direction", "gravity_enabled"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=652251952 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("15_2s76u")
+hitbox = NodePath("../RotationJoint/Hitbox")
+metadata/_custom_type_script = "uid://chj8hu207lrh"
+
+[connection signal="killed" from="." to="GibSpawner" method="summon_gib"]
+[connection signal="explosion_entered" from="ExplosionDetection" to="." method="die_from_object"]
+[connection signal="explosion_entered" from="ExplosionDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
+[connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]
+[connection signal="fireball_hit" from="FireballDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
+[connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="BlockBouncingDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
+[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
+[connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]

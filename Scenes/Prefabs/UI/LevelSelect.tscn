@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1kedqb68p7vw"]
+[gd_scene format=3 uid="uid://d1kedqb68p7vw"]
 
 [ext_resource type="Script" uid="uid://bupc8brk48aqi" path="res://Scripts/UI/LevelSelect.gd" id="1_mvafj"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_k7cgt"]
@@ -7,14 +7,14 @@
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_k7cgt"]
 color = Color(1, 1, 1, 1)
 
-[node name="WorldSelect" type="Control"]
+[node name="WorldSelect" type="Control" unique_id=1207862862]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 128.0
 offset_bottom = 48.0
 script = ExtResource("1_mvafj")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1923086494]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,24 +23,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_k7cgt")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=55513734]
 layout_mode = 2
 theme_override_constants/margin_left = -4
 theme_override_constants/margin_top = -4
 theme_override_constants/margin_right = -4
 theme_override_constants/margin_bottom = -4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1622641631]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=133842275]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "MENU_LEVEL_SELECT"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Label"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Label" unique_id=887206869]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -51,11 +51,11 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_k7cgt")
 
-[node name="SlotContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SlotContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1855952982]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Level1" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer"]
+[node name="Level1" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer" unique_id=1652689947]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -63,7 +63,7 @@ size_flags_vertical = 0
 text = "1"
 uppercase = true
 
-[node name="Level2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer"]
+[node name="Level2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer" unique_id=1619934939]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -71,7 +71,7 @@ size_flags_vertical = 0
 text = "2"
 uppercase = true
 
-[node name="Level3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer"]
+[node name="Level3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer" unique_id=803345167]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -79,7 +79,7 @@ size_flags_vertical = 0
 text = "3"
 uppercase = true
 
-[node name="Level4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer"]
+[node name="Level4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SlotContainer" unique_id=1828475934]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -87,10 +87,10 @@ size_flags_vertical = 0
 text = "4"
 uppercase = true
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1412486578]
 layout_mode = 2
 
-[node name="Cursor" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control"]
+[node name="Cursor" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=376226504]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = -8.0
@@ -99,7 +99,7 @@ offset_bottom = 8.0
 text = "^"
 uppercase = true
 
-[node name="LabelFontChanger" type="Node" parent="PanelContainer" node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="PanelContainer" unique_id=302358121 node_paths=PackedStringArray("labels")]
 script = ExtResource("3_a7p1d")
 labels = [NodePath("../MarginContainer/VBoxContainer/Label"), NodePath("../MarginContainer/VBoxContainer/SlotContainer/Level1"), NodePath("../MarginContainer/VBoxContainer/SlotContainer/Level2"), NodePath("../MarginContainer/VBoxContainer/SlotContainer/Level3"), NodePath("../MarginContainer/VBoxContainer/SlotContainer/Level4"), NodePath("../MarginContainer/VBoxContainer/Control/Cursor")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"

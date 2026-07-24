@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2ainv86lt68a"]
+[gd_scene format=3 uid="uid://d2ainv86lt68a"]
 
 [ext_resource type="PackedScene" uid="uid://by6ndsjhlkmbt" path="res://Scenes/Prefabs/Blocks/BooRaceBlocks/BooOnOffBlock.tscn" id="1_qn0kk"]
 [ext_resource type="Texture2D" uid="uid://cv27sth0k3amk" path="res://Assets/Sprites/Blocks/SwitchSpike.png" id="2_kmalu"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/SwitchSpikeBlock.json" id="3_gfl4j"]
 [ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="3_kmalu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1hcn"]
@@ -89,38 +88,30 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfl4j"]
 size = Vector2(17, 18)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe1rr"]
-size = Vector2(16, 16)
+[node name="SwitchSpikeBlock" unique_id=340226892 instance=ExtResource("1_qn0kk")]
+script = null
 
-[node name="SwitchSpikeBlock" node_paths=PackedStringArray("hurtbox") instance=ExtResource("1_qn0kk")]
-hurtbox = NodePath("PlayerHurtBox/CollisionShape2D")
-
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" unique_id=2047715053]
 sprite_frames = SubResource("SpriteFrames_cjipk")
 animation = &"Rest"
 autoplay = "Rest"
 
-[node name="ResourceSetter" parent="Sprite" index="0"]
-resource_json = ExtResource("3_gfl4j")
+[node name="ResourceSetter" parent="Sprite" index="0" unique_id=873755014]
+json_path = "res://Assets/Sprites/Blocks/SwitchSpikeBlock.json"
 
-[node name="Collision" parent="." index="1"]
+[node name="Collision" parent="." index="1" unique_id=687421064]
 visible = true
+disabled = false
 
-[node name="PlayerHurtBox" type="Area2D" parent="." index="3"]
+[node name="PlayerHurtBox" type="Area2D" parent="." index="3" unique_id=2052825988]
 script = ExtResource("3_kmalu")
 metadata/_custom_type_script = "uid://cnheej0sxmoxg"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtBox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtBox" index="0" unique_id=1545913678]
 shape = SubResource("RectangleShape2D_gfl4j")
-disabled = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="4"]
+[node name="OnOffSwitcher" parent="." index="5" unique_id=1468268568 node_paths=PackedStringArray("sprite", "collision_to_change")]
+sprite = NodePath("../Sprite")
+collision_to_change = NodePath("../PlayerHurtBox/CollisionShape2D")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." index="5"]
-collision_layer = 6
-collision_mask = 0
-
-[node name="Collision" type="CollisionShape2D" parent="StaticBody2D2" index="0"]
-shape = SubResource("RectangleShape2D_fe1rr")
-
-[connection signal="player_entered" from="PlayerHurtBox" to="." method="damage_player"]
+[connection signal="player_entered" from="PlayerHurtBox" to="PlayerHurtBox" method="damage_player"]

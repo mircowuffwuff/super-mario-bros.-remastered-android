@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3diry65fdrj6"]
+[gd_scene format=3 uid="uid://b3diry65fdrj6"]
 
 [ext_resource type="PackedScene" uid="uid://dekuqrdjmnr1m" path="res://Scenes/Prefabs/UI/BasePauseMenu.tscn" id="1_uvhg6"]
 
@@ -20,6 +20,8 @@ func restart_run() -> void:
 		Global.world_num = 1
 		LevelTransition.level_to_transition_to = Level.get_scene_string(1, 1)
 		Global.transition_to_scene(\"res://Scenes/Levels/LevelTransition.tscn\")
+	await Global.current_level.tree_exited
+	get_parent().close()
 
 func quit_to_menu() -> void:
 	AudioManager.stop_all_music()
@@ -32,16 +34,24 @@ func quit_to_menu() -> void:
 	get_tree().paused = false
 "
 
-[node name="PauseMenu" instance=ExtResource("1_uvhg6")]
+[node name="PauseMenu" unique_id=890111580 instance=ExtResource("1_uvhg6")]
 
-[node name="Label2" parent="Control/PanelContainer/MarginContainer/VBoxContainer" index="1"]
+[node name="Label2" parent="Control/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1254587209) index="1" unique_id=1280773023]
 text = "Restart run"
 
-[node name="Handler" type="Node" parent="." index="2"]
+[node name="Handler" type="Node" parent="." index="2" unique_id=1115424336]
 script = SubResource("GDScript_k4rkm")
 
+[node name="LabelFontChanger" parent="SettingsMenu" parent_id_path=PackedInt32Array(740137315) index="1" unique_id=1797639177 node_paths=PackedStringArray("labels")]
+labels = [NodePath("../PanelContainer/MarginContainer/VBoxContainer/Title"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer/Category"), null, null, null, null, null, null, null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3/Value"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer/MarginContainer/Desc")]
+
 [connection signal="option_1_selected" from="." to="." method="close"]
-[connection signal="option_2_selected" from="." to="." method="close"]
 [connection signal="option_2_selected" from="." to="Handler" method="restart_run"]
 [connection signal="option_4_selected" from="." to="." method="close"]
 [connection signal="option_4_selected" from="." to="Handler" method="quit_to_menu"]
+
+[editable path="SettingsMenu"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Video/Language"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3"]

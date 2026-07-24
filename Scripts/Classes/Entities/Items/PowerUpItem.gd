@@ -8,6 +8,8 @@ var direction := 1
 
 signal physics_tick(delta: float)
 
+var rising := false
+
 const player_angles := [Vector2(-1, -1), Vector2(1, -1), Vector2(-0.5, -2), Vector2(0.5, -2)]
 
 func _physics_process(delta: float) -> void:
@@ -28,21 +30,24 @@ func on_area_entered(area: Area2D) -> void:
 		collect_item(area.owner)
 
 func block_bounce_up(block: Node2D) -> void:
+	if rising: return
 	direction = -sign(block.global_position.x - global_position.x + 0.1)
 	velocity.y = -200
 
 func block_dispense_tween() -> void:
+	rising = true
 	var old_z = z_index
 	z_index = -2
-	show()
-	reset_physics_interpolation()
 	AudioManager.play_sfx("item_appear", global_position)
 	set_physics_process(false)
 	set_process(false)
 	global_position.y += 8
+	show()
+	reset_physics_interpolation()
 	var time := 1
 	var tween = create_tween().tween_property(self, "position:y", position.y - 15, time)
 	await tween.finished
+	rising = false
 	if get_parent().get_parent() is TrackRider:
 		reparent(get_parent().get_parent().get_parent())
 		reset_physics_interpolation()

@@ -1,15 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://knfs0rx7n1ry"]
+[gd_scene format=3 uid="uid://knfs0rx7n1ry"]
 
 [ext_resource type="Script" uid="uid://dx0yj4sc1lnpu" path="res://Scripts/Classes/Editor/EditorTileSelector.gd" id="1_ecw13"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_bh0ve"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_irc6t"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru7c4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xy0d6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bh0ve"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecw13"]
 bg_color = Color(0, 0, 0, 1)
@@ -20,17 +14,26 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy0d6"]
-bg_color = Color(0, 0, 0, 0.580392)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xy0d6"]
 
-[node name="EditorTileSelector" type="Control"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bh0ve"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy0d6"]
+bg_color = Color(0, 0, 0, 0.892)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ecw13"]
+color = Color(1, 1, 1, 1)
+grow_begin = -1.0
+grow_end = -1.0
+
+[node name="EditorTileSelector" type="Control" unique_id=937752968]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 3
 anchors_preset = 0
 mouse_default_cursor_shape = 2
 script = ExtResource("1_ecw13")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=2108211137]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,26 +41,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_irc6t")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ru7c4")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ru7c4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ecw13")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_xy0d6")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_bh0ve")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ecw13")
 
-[node name="Icon" type="NinePatchRect" parent="Button"]
+[node name="Icon" type="NinePatchRect" parent="Button" unique_id=1832924189]
 unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
+axis_stretch_vertical = 2
 
-[node name="SecondaryIcon" type="NinePatchRect" parent="Button/Icon"]
+[node name="SecondaryIcon" type="NinePatchRect" parent="Button/Icon" unique_id=833052772]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
+axis_stretch_vertical = 2
 
-[node name="ResourceSetterNew" type="Node" parent="." node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="." unique_id=633166499 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_bh0ve")
 node_to_affect = NodePath("../Button/Icon")
 property_name = "texture"
@@ -65,7 +71,8 @@ mode = 1
 use_cache = false
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="ResourceSetterNew2" type="Node" parent="." node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew2" type="Node" parent="." unique_id=1958858714 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_bh0ve")
 node_to_affect = NodePath("../Button/Icon/SecondaryIcon")
 property_name = "texture"
@@ -73,13 +80,14 @@ mode = 1
 use_cache = false
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1878125320]
+layer = 99999
 
-[node name="NamePanel" type="Node2D" parent="CanvasLayer"]
+[node name="NamePanel" type="Node2D" parent="CanvasLayer" unique_id=1559205178]
 unique_name_in_owner = true
 visible = false
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/NamePanel"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/NamePanel" unique_id=1601483820]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -94,11 +102,55 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xy0d6")
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/NamePanel/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/NamePanel/Panel" unique_id=420988235]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/NamePanel/Panel/VBoxContainer" unique_id=1551794302]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
+text = "DICE"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Line" type="HSeparator" parent="CanvasLayer/NamePanel/Panel/VBoxContainer/NameLabel" unique_id=327969178]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ecw13")
+
+[node name="DescriptionSizer" type="Control" parent="CanvasLayer/NamePanel/Panel/VBoxContainer" unique_id=1117357971]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+
+[node name="DescPreview" type="Label" parent="CanvasLayer/NamePanel/Panel/VBoxContainer" unique_id=274185489]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.46229053, 0.4622907, 0.46229017, 1)
+layout_mode = 2
+text = "..."
+uppercase = true
+
+[node name="Description" type="Label" parent="CanvasLayer/NamePanel/Panel/VBoxContainer" unique_id=476339118]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.46229053, 0.4622907, 0.46229017, 1)
+layout_mode = 2
+text = "Emits a Signal"
+autowrap_mode = 2
 uppercase = true
 
 [connection signal="mouse_entered" from="Button" to="." method="on_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="on_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="on_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="grab_focus"]

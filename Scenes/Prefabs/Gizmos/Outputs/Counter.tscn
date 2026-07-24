@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://1rjmesav4wm0"]
+
+[ext_resource type="Script" uid="uid://b7nk37vb0kdof" path="res://Scripts/Classes/Gizmos/Counter.gd" id="1_trtuy"]
+[ext_resource type="Texture2D" uid="uid://cumync742jg78" path="res://Assets/Sprites/Editor/Gizmos/Counter.png" id="2_66481"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_2v6is"]
+[ext_resource type="FontFile" uid="uid://cwv0t2khcwe00" path="res://Assets/Sprites/Editor/Gizmos/CounterFont.png" id="3_s0rif"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_66481"]
+[ext_resource type="PackedScene" uid="uid://dse5pwhodrqcr" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyIntRangeSpin.tscn" id="6_s0rif"]
+
+[sub_resource type="FontVariation" id="FontVariation_2v6is"]
+base_font = ExtResource("3_s0rif")
+spacing_glyph = 1
+
+[node name="BaseOutput" type="Node2D" unique_id=515746201 groups=["Gizmos"]]
+process_mode = 3
+z_index = 500
+z_as_relative = false
+script = ExtResource("1_trtuy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1224179792]
+texture = ExtResource("2_66481")
+hframes = 2
+frame = 1
+
+[node name="Total" type="Label" parent="Sprite2D" unique_id=1540313486]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_2v6is")
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1403115602]
+script = ExtResource("3_2v6is")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1046722467]
+script = ExtResource("4_66481")
+properties = Array[String](["total_needed", "reset_on_total_reached"])
+properties_force_selector = Dictionary[String, PackedScene]({
+"total_needed": ExtResource("6_s0rif")
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[connection signal="total_reached" from="." to="SignalExposer" method="emit_pulse"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="increment"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="increment"]

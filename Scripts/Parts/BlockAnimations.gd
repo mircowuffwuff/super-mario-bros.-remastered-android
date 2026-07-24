@@ -14,6 +14,7 @@ func bounce_block() -> void:
 	owner.visuals.z_index = 3
 	owner.get_parent().move_child(owner, -1)
 	owner.bouncing = true
+	$Animations.stop()
 	$Animations.play("BlockHit")
 	await $Animations.animation_finished
 	owner.visuals.z_index = 0

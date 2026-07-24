@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b2r255cb4tt7t"]
+
+[ext_resource type="Script" uid="uid://dtp713kj1agoh" path="res://Scripts/Classes/Gizmos/Gizmo.gd" id="1_un31n"]
+[ext_resource type="Texture2D" uid="uid://bpgqqibmk2pkl" path="res://Assets/Sprites/Editor/Enemy.svg" id="2_1nhw7"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_1nhw7"]
+
+[node name="BaseInput" type="Node2D" unique_id=515746201 groups=["Gizmos"]]
+process_mode = 3
+z_index = 500
+z_as_relative = false
+script = ExtResource("1_un31n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1224179792]
+texture = ExtResource("2_1nhw7")
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=634423865]
+script = ExtResource("3_1nhw7")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"

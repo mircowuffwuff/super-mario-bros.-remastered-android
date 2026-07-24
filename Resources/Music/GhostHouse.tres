@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://be1qlqai7aopg"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://be1qlqai7aopg"]
 
-[ext_resource type="AudioStream" uid="uid://smh2kvtkpa4p" path="res://Assets/Audio/BGM/GhostHouse.mp3" id="1_y6q4w"]
-[ext_resource type="AudioStream" uid="uid://b05iaocw6bfws" path="res://Assets/Audio/BGM/GhostHouseHurry.mp3" id="2_dswoi"]
+[ext_resource type="AudioStream" uid="uid://e2flymkiiitc" path="res://Assets/Audio/BGM/GhostHouse.mp3" id="1_y6q4w"]
+[ext_resource type="AudioStream" uid="uid://cxb3ojbsvdhv7" path="res://Assets/Audio/BGM/GhostHouseHurry.mp3" id="2_dswoi"]
 
 [resource]
 clip_count = 2

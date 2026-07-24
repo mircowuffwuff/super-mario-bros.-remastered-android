@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://6ay8vxqqyw3v"]
+
+[ext_resource type="Script" uid="uid://ni7duf1botaj" path="res://Scripts/Classes/Entities/Objects/WarpVine.gd" id="1_s8udo"]
+[ext_resource type="PackedScene" uid="uid://dkxkrqflg46b2" path="res://Scenes/Prefabs/Entities/Items/Vine.tscn" id="2_r0orp"]
+[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="3_25uon"]
+[ext_resource type="Texture2D" uid="uid://dlldh5aks0wff" path="res://Assets/Sprites/Editor/GhostTile.png" id="4_7urmc"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="5_r0orp"]
+
+[node name="WarpVine" type="Node2D" unique_id=1882857873 groups=["WarpVine"]]
+script = ExtResource("1_s8udo")
+
+[node name="VineJoint" type="Node2D" parent="." unique_id=2042075377]
+
+[node name="Vine" parent="VineJoint" unique_id=1927177956 instance=ExtResource("2_r0orp")]
+
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." unique_id=1565848778]
+script = ExtResource("3_25uon")
+metadata/_custom_type_script = "uid://cpwloakvp672a"
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=1096491190]
+texture = ExtResource("4_7urmc")
+
+[node name="Sprite2D2" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=2058087554]
+position = Vector2(0, 48)
+texture = ExtResource("4_7urmc")
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=1387067224]
+script = ExtResource("5_r0orp")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="start"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://crdxibqdds04v"]
+[gd_scene format=3 uid="uid://crdxibqdds04v"]
 
 [ext_resource type="PackedScene" uid="uid://b07v70sioegsj" path="res://Scenes/Prefabs/Entities/Enemies/BobOmb.tscn" id="1_w8ebw"]
 [ext_resource type="PackedScene" uid="uid://d075e1520ngrv" path="res://Scenes/Prefabs/Entities/Objects/BobOmbHeld.tscn" id="2_i60fb"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/LitBobOmb.json" id="3_j2qyw"]
 
 [sub_resource type="PackedScene" id="PackedScene_j2qyw"]
 _bundled = {
@@ -10,21 +9,23 @@ _bundled = {
 "conn_count": 0,
 "conns": PackedInt32Array(),
 "editable_instances": [],
+"id_paths": [],
 "names": PackedStringArray("BobOmbHeld", "timer"),
 "node_count": 1,
+"node_ids": PackedInt32Array(),
 "node_paths": [],
 "nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 1, 1, 1, 0),
 "variants": [ExtResource("2_i60fb"), 1.0],
 "version": 3
 }
 
-[node name="LitBobOmb" instance=ExtResource("1_w8ebw")]
+[node name="LitBobOmb" unique_id=1104211583 instance=ExtResource("1_w8ebw")]
 held_scene = SubResource("PackedScene_j2qyw")
 
-[node name="ResourceSetterNew" parent="Sprite" index="0"]
-resource_json = ExtResource("3_j2qyw")
+[node name="ResourceSetterNew" parent="Sprite" parent_id_path=PackedInt32Array(1481848789) index="0" unique_id=287184371]
+json_path = "res://Assets/Sprites/Enemies/LitBobOmb.json"
 
-[node name="Timer" type="Timer" parent="." index="12"]
+[node name="Timer" type="Timer" parent="." index="12" unique_id=115745415]
 wait_time = 3.0
 one_shot = true
 

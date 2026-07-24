@@ -1,17 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://w2ubxsaw6ofp"]
+[gd_scene format=3 uid="uid://w2ubxsaw6ofp"]
 
 [ext_resource type="PackedScene" uid="uid://4fwln7wo5cja" path="res://Scenes/Prefabs/Entities/Enemies/GreenKoopaParaTroopa.tscn" id="1_pd6rg"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="2_6kidr"]
 [ext_resource type="Texture2D" uid="uid://dpdrrkqtcedgm" path="res://Assets/Sprites/Tilesets/DottedLine.png" id="3_kfyly"]
 
-[node name="GreenKoopaTroopa" instance=ExtResource("1_pd6rg")]
+[node name="GreenKoopaTroopa" unique_id=287819354 instance=ExtResource("1_pd6rg")]
 metadata/fly_2 = true
 
-[node name="LevelEditorVisibleNode" type="Node2D" parent="." index="18"]
+[node name="Wing" parent="Sprite" parent_id_path=PackedInt32Array(1845041467) index="1" unique_id=1386975840]
+metadata/WingType = "GreenKoopaHori"
+
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." index="18" unique_id=1769048555]
 script = ExtResource("2_6kidr")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="Line2D" type="Line2D" parent="LevelEditorVisibleNode" index="0"]
+[node name="Line2D" type="Line2D" parent="LevelEditorVisibleNode" index="0" unique_id=736163917]
 texture_repeat = 2
 points = PackedVector2Array(0, 0, -96, 0)
 width = 1.0

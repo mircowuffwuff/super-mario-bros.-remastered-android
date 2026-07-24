@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://4livv5qmwy2x"]
+[gd_scene format=4 uid="uid://4livv5qmwy2x"]
 
 [ext_resource type="Script" uid="uid://bcqr1v25ygedb" path="res://Scripts/Classes/LevelClass.gd" id="1_o1m72"]
 [ext_resource type="PackedScene" uid="uid://githt8ci1xal" path="res://Scenes/Parts/StartCastle.tscn" id="3_j12wv"]
@@ -8,25 +8,25 @@
 [ext_resource type="Script" uid="uid://dl2nxlgmoa5t2" path="res://Scripts/Parts/EndlessLevelConstructor.gd" id="6_akn6l"]
 [ext_resource type="PackedScene" uid="uid://ct5rrpa7uehkk" path="res://Scenes/Parts/Tiles.tscn" id="7_ws1ef"]
 
-[node name="EndlessLevel" type="Node"]
+[node name="EndlessLevel" type="Node" unique_id=609471195]
 script = ExtResource("1_o1m72")
 metadata/_custom_type_script = "uid://bcqr1v25ygedb"
 
-[node name="Pieces" type="Node2D" parent="."]
+[node name="Pieces" type="Node2D" parent="." unique_id=1180428652]
 
-[node name="EndlessLevelConstructor" type="Node" parent="."]
+[node name="EndlessLevelConstructor" type="Node" parent="." unique_id=1244696069]
 script = ExtResource("6_akn6l")
 
-[node name="BrickBlock" parent="EndlessLevelConstructor" instance=ExtResource("3_ws1ef")]
+[node name="BrickBlock" parent="EndlessLevelConstructor" unique_id=2071482061 instance=ExtResource("3_ws1ef")]
 position = Vector2(-64, -64)
 
-[node name="StartCastle" parent="." instance=ExtResource("3_j12wv")]
+[node name="StartCastle" parent="." unique_id=1885002042 instance=ExtResource("3_j12wv")]
 position = Vector2(-216, -40)
 
-[node name="Player" parent="." instance=ExtResource("4_74hgd")]
+[node name="Player" parent="." unique_id=368756565 instance=ExtResource("4_74hgd")]
 position = Vector2(-216, 0)
 
-[node name="DropShadow" parent="." instance=ExtResource("5_5xn7b")]
+[node name="DropShadow" parent="." unique_id=397484214 instance=ExtResource("5_5xn7b")]
 
-[node name="Tiles" parent="." instance=ExtResource("7_ws1ef")]
+[node name="Tiles" parent="." unique_id=2134516249 instance=ExtResource("7_ws1ef")]
 tile_map_data = PackedByteArray("AADw/wAAAAAAAAAAAADw/wEAAAAAAAAAAADx/wAAAAAAAAAAAADx/wEAAAAAAAAAAADy/wAAAAAAAAAAAADy/wEAAAAAAAAAAADz/wAAAAAAAAAAAADz/wEAAAAAAAAAAAD0/wAAAAAAAAAAAAD0/wEAAAAAAAAAAAD1/wAAAAAAAAAAAAD1/wEAAAAAAAAAAAD2/wAAAAAAAAAAAAD2/wEAAAAAAAAAAAD3/wAAAAAAAAAAAAD3/wEAAAAAAAAAAAD4/wAAAAAAAAAAAAD4/wEAAAAAAAAAAAD5/wAAAAAAAAAAAAD5/wEAAAAAAAAAAAA=")

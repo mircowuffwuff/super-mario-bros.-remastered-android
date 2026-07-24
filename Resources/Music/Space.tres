@@ -1,6 +1,6 @@
-[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://crbckm4k8a1gy"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://crbckm4k8a1gy"]
 
-[ext_resource type="AudioStream" uid="uid://c4svli24tscoj" path="res://Assets/Audio/BGM/Space.mp3" id="1_xpg78"]
+[ext_resource type="AudioStream" uid="uid://bh5q08duqcfqo" path="res://Assets/Audio/BGM/Space.mp3" id="1_xpg78"]
 
 [resource]
 clip_count = 1

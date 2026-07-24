@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c6fdpk8ktl2go"]
+
+[ext_resource type="Script" uid="uid://dpd88tvdaw0xv" path="res://Scripts/Classes/Entities/Objects/PitWarp.gd" id="1_q3icm"]
+[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="1_t3iyn"]
+[ext_resource type="Texture2D" uid="uid://d08xv46j8rdhn" path="res://Assets/Sprites/Editor/PitWarp.png" id="2_q3icm"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="3_kr6ep"]
+[ext_resource type="Script" uid="uid://bjdkv7qdyewc4" path="res://Scripts/Classes/Components/AmountLimiter.gd" id="5_kr6ep"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="6_qmaow"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qmaow"]
+
+[node name="PitWarp" type="Node2D" unique_id=255197999]
+script = ExtResource("1_q3icm")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=258353757]
+script = ExtResource("1_t3iyn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=503624000]
+texture = ExtResource("2_q3icm")
+
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=2032087575 groups=["PitWarps"]]
+top_level = true
+position = Vector2(0, 64)
+script = ExtResource("3_kr6ep")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=1538374922]
+shape = SubResource("WorldBoundaryShape2D_qmaow")
+
+[node name="AmountLimiter" type="Node" parent="." unique_id=1411822153]
+script = ExtResource("5_kr6ep")
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1066441836]
+script = ExtResource("6_qmaow")
+properties = Array[String](["target_sub_level"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[connection signal="player_entered" from="PlayerDetection" to="." method="warp_back"]

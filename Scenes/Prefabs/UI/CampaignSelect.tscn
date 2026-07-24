@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7w8dmlmj0hoh"]
+[gd_scene format=3 uid="uid://c7w8dmlmj0hoh"]
 
 [ext_resource type="Script" uid="uid://cae4v54jq1gs3" path="res://Scripts/UI/CampaignSelect.gd" id="1_ngr5x"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_36wrd"]
@@ -34,16 +34,16 @@ color = Color(1, 1, 1, 1)
 atlas = ExtResource("3_6ft85")
 region = Rect2(0, 0, 68, 68)
 
-[node name="CampaignSelect" type="Control"]
+[node name="CampaignSelect" type="Control" unique_id=1543209486]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 256.0
 offset_bottom = 128.0
 script = ExtResource("1_ngr5x")
-campaign_icons = Array[Texture2D]([SubResource("AtlasTexture_6ft85"), SubResource("AtlasTexture_uaivh"), SubResource("AtlasTexture_l766q"), SubResource("AtlasTexture_n66kg"), SubResource("AtlasTexture_q8lhv")])
+campaign_icons = Array[Texture]([SubResource("AtlasTexture_6ft85"), SubResource("AtlasTexture_uaivh"), SubResource("AtlasTexture_l766q"), SubResource("AtlasTexture_n66kg"), SubResource("AtlasTexture_q8lhv")])
 campaign = ["SMB1", "SMBLL", "SMBS", "SMBANN", "SMB1"]
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1199319149]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,24 +52,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_36wrd")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=915597267]
 layout_mode = 2
 theme_override_constants/margin_left = -4
 theme_override_constants/margin_right = -4
 theme_override_constants/margin_bottom = -8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1459855113]
 layout_mode = 2
 theme_override_constants/separation = -4
 
-[node name="SelectWorld" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SelectWorld" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1968228774]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "MENU_GAME_SELECT"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/SelectWorld"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/SelectWorld" unique_id=1720771952]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -80,17 +80,17 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_0j631")
 
-[node name="Buffer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Buffer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=809092704]
 custom_minimum_size = Vector2(0, 9)
 layout_mode = 2
 
-[node name="CampaignNames" type="BoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="CampaignNames" type="BoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1519962608]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 alignment = 1
 
-[node name="SMB1" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames"]
+[node name="SMB1" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames" unique_id=795027134]
 custom_minimum_size = Vector2(190, 32)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -102,7 +102,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="SMBLL" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames"]
+[node name="SMBLL" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames" unique_id=2007204212]
 visible = false
 custom_minimum_size = Vector2(164, 32)
 layout_mode = 2
@@ -115,7 +115,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="SMBS" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames"]
+[node name="SMBS" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames" unique_id=990592070]
 visible = false
 custom_minimum_size = Vector2(190, 32)
 layout_mode = 2
@@ -128,7 +128,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="SMBANN" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames"]
+[node name="SMBANN" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames" unique_id=1322333952]
 visible = false
 custom_minimum_size = Vector2(190, 32)
 layout_mode = 2
@@ -141,7 +141,8 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Custom" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames"]
+[node name="Custom" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CampaignNames" unique_id=329132360]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(190, 32)
 layout_mode = 2
@@ -154,22 +155,22 @@ vertical_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="Buffer2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Buffer2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1901973498]
 custom_minimum_size = Vector2(0, 9)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1373246090]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_right = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=122828592]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Left" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Left" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1243020802]
 unique_name_in_owner = true
 modulate = Color(0.5370987, 0.5370987, 0.5370987, 1)
 layout_mode = 2
@@ -180,7 +181,7 @@ stretch_mode = 2
 script = ExtResource("4_uaivh")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Middle" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Middle" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=792498741]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -190,7 +191,7 @@ stretch_mode = 2
 script = ExtResource("4_uaivh")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Right" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Right" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1211227258]
 unique_name_in_owner = true
 modulate = Color(0.5411765, 0.5411765, 0.5411765, 1)
 layout_mode = 2
@@ -201,10 +202,10 @@ stretch_mode = 2
 script = ExtResource("4_uaivh")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Buffer3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Buffer3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=993921623]
 layout_mode = 2
 
-[node name="BarLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="BarLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1864078674]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -212,11 +213,11 @@ text = "◄--┼--►"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1006714801 node_paths=PackedStringArray("labels")]
 script = ExtResource("6_1wxv0")
 labels = [NodePath("../PanelContainer/MarginContainer/VBoxContainer/CampaignNames/SMB1"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/SelectWorld"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CampaignNames/SMBLL"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CampaignNames/SMBS"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CampaignNames/SMBANN"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CampaignNames/Custom"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/BarLabel")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="ResourceGetter" type="Node" parent="."]
+[node name="ResourceGetter" type="Node" parent="." unique_id=284612298]
 script = ExtResource("6_6ft85")
 metadata/_custom_type_script = "uid://bsp584niccobr"

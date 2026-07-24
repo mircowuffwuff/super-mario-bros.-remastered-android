@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq0eq3mftva0w"]
+[gd_scene format=3 uid="uid://dq0eq3mftva0w"]
 
 [ext_resource type="PackedScene" uid="uid://bjo3ghjnca7i5" path="res://Scenes/Levels/GameOver.tscn" id="1_xms3k"]
 [ext_resource type="AudioStream" uid="uid://bb3bg4c6hsfjm" path="res://Assets/Audio/BGM/ChallengeFail.mp3" id="2_gyxu7"]
@@ -9,19 +9,19 @@ script = ExtResource("3_gyxu7")
 Overworld = ExtResource("2_gyxu7")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="Miss" instance=ExtResource("1_xms3k")]
+[node name="Miss" unique_id=709943000 instance=ExtResource("1_xms3k")]
 reset_level = true
 has_menu = false
 
-[node name="Music" parent="." index="0"]
+[node name="Music" parent="." index="0" unique_id=1419335797]
 stream = ExtResource("2_gyxu7")
 
-[node name="ResourceSetter" parent="Music" index="0"]
+[node name="ResourceSetter" parent="Music" index="0" unique_id=1572840031]
 themed_resource = SubResource("Resource_ud4io")
 
-[node name="Label" parent="CanvasLayer" index="1"]
+[node name="Label" parent="CanvasLayer" parent_id_path=PackedInt32Array(922575584) index="1" unique_id=1354989011]
 text = "CHALLENGE_MISS"
 
-[node name="VBoxContainer" parent="CanvasLayer" index="2"]
+[node name="VBoxContainer" parent="CanvasLayer" parent_id_path=PackedInt32Array(922575584) index="2" unique_id=1538966158]
 offset_top = -34.0
 offset_bottom = 34.0

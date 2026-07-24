@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbjqtjhb2t4cn"]
+[gd_scene format=3 uid="uid://dbjqtjhb2t4cn"]
 
 [ext_resource type="Script" uid="uid://cjkurwybsaywm" path="res://Scripts/Classes/Entities/Items/PowerUpItem.gd" id="1_paqft"]
 [ext_resource type="Texture2D" uid="uid://qwqprcst4mtg" path="res://Assets/Sprites/Items/FireFlower.png" id="2_x8n8e"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_db8fa"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/FireFlower.json" id="4_11cns"]
 [ext_resource type="Script" uid="uid://bx6r8sjar6cwr" path="res://Scripts/Classes/Components/BasicStaticMovement.gd" id="5_11cns"]
 [ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="6_brn7u"]
 
@@ -49,7 +48,7 @@ size = Vector2(8, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjjbq"]
 size = Vector2(8, 8)
 
-[node name="FireFlower" type="CharacterBody2D"]
+[node name="FireFlower" type="CharacterBody2D" unique_id=604474299]
 z_index = -1
 collision_layer = 8
 collision_mask = 2
@@ -57,34 +56,35 @@ script = ExtResource("1_paqft")
 power_up_state = "Fire"
 metadata/_custom_type_script = "uid://cjkurwybsaywm"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=929899976]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_gid51")
 autoplay = "default"
 frame_progress = 0.157931
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1815355599 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_db8fa")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_11cns")
+json_path = "res://Assets/Sprites/Items/FireFlower.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=942244260]
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=759178151]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_16uf3")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=503955060]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_kjjbq")
 
-[node name="StaticEntityMovement" type="Node" parent="."]
+[node name="StaticEntityMovement" type="Node" parent="." unique_id=653242148]
 script = ExtResource("5_11cns")
 auto_call = false
 
-[node name="TrackJoint" type="Node" parent="." node_paths=PackedStringArray("movement_node")]
+[node name="TrackJoint" type="Node" parent="." unique_id=1510103918 node_paths=PackedStringArray("movement_node")]
 script = ExtResource("6_brn7u")
 movement_node = NodePath("../StaticEntityMovement")
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"

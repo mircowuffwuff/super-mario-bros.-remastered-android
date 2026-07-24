@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://dw4c5uhs2wijk"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://dw4c5uhs2wijk"]
 
-[ext_resource type="AudioStream" uid="uid://cp2ur00e2q168" path="res://Assets/Audio/BGM/Mountain.mp3" id="1_017yp"]
-[ext_resource type="AudioStream" uid="uid://cakxd53ds47us" path="res://Assets/Audio/BGM/MountainHurry.mp3" id="2_wdk8a"]
+[ext_resource type="AudioStream" uid="uid://blie0qqaptvj8" path="res://Assets/Audio/BGM/Mountain.mp3" id="1_017yp"]
+[ext_resource type="AudioStream" uid="uid://dxrweyhdlmii8" path="res://Assets/Audio/BGM/MountainHurry.mp3" id="2_wdk8a"]
 
 [resource]
 clip_count = 2

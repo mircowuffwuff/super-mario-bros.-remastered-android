@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://mihebn0ybnjn"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://mihebn0ybnjn"]
 
-[ext_resource type="AudioStream" uid="uid://r63keear067" path="res://Assets/Audio/BGM/Garden.mp3" id="1_m265a"]
-[ext_resource type="AudioStream" uid="uid://cemux531rahja" path="res://Assets/Audio/BGM/GardenHurry.mp3" id="2_veq2k"]
+[ext_resource type="AudioStream" uid="uid://c4fg6f7voynom" path="res://Assets/Audio/BGM/Garden.mp3" id="1_m265a"]
+[ext_resource type="AudioStream" uid="uid://c3dpcdrx8bfc5" path="res://Assets/Audio/BGM/GardenHurry.mp3" id="2_veq2k"]
 
 [resource]
 clip_count = 2

@@ -9,7 +9,6 @@ const MOVE_SPEED := 96
 var cannon := false
 
 func _ready() -> void:
-	amount += 1
 	$Sprite.scale.x = direction
 	if cannon:
 		await get_tree().create_timer(0.2, false).timeout
@@ -17,9 +16,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	global_position.x += (90 * delta) * direction
-
-func _exit_tree() -> void:
-	amount -= 1
 
 func on_screen_entered() -> void:
 	if Global.level_editor != null:

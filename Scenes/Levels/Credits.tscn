@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://bgeh6ex0lbqfq"]
+[gd_scene format=3 uid="uid://bgeh6ex0lbqfq"]
 
 [ext_resource type="Script" uid="uid://b3stoe2kp1nv1" path="res://Scripts/UI/Credits.gd" id="1_db8c5"]
 [ext_resource type="AudioStream" uid="uid://cdhsj02wqdt7y" path="res://Assets/Audio/BGM/Credits.mp3" id="1_k57dj"]
@@ -36,6 +36,10 @@ region = Rect2(64, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ssyu"]
 atlas = ExtResource("4_g2gtw")
 region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owhsx"]
+atlas = ExtResource("4_g2gtw")
+region = Rect2(16, 112, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8pyc7"]
 atlas = ExtResource("4_g2gtw")
@@ -265,6 +269,10 @@ region = Rect2(16, 96, 16, 16)
 atlas = ExtResource("4_g2gtw")
 region = Rect2(96, 80, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_da2e7"]
+atlas = ExtResource("4_g2gtw")
+region = Rect2(32, 112, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2gfq"]
 atlas = ExtResource("4_g2gtw")
 region = Rect2(0, 0, 16, 16)
@@ -272,6 +280,10 @@ region = Rect2(0, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wkf2d"]
 atlas = ExtResource("4_g2gtw")
 region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edser"]
+atlas = ExtResource("4_g2gtw")
+region = Rect2(48, 112, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i07m6"]
 atlas = ExtResource("4_g2gtw")
@@ -284,6 +296,10 @@ region = Rect2(80, 96, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbi86"]
 atlas = ExtResource("4_g2gtw")
 region = Rect2(64, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrxkq"]
+atlas = ExtResource("4_g2gtw")
+region = Rect2(0, 112, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x68qv"]
 atlas = ExtResource("4_g2gtw")
@@ -301,13 +317,13 @@ region = Rect2(144, 0, 64, 64)
 atlas = ExtResource("14_4e2pw")
 region = Rect2(0, 16, 144, 48)
 
-[node name="Credits" type="Node"]
+[node name="Credits" type="Node" unique_id=1881687987]
 script = ExtResource("1_db8c5")
 campaign = "SMBLL"
 world_id = 8
 level_id = 4
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="ColorRect" parent="." unique_id=1769007305]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -315,15 +331,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2055088138]
 stream = ExtResource("1_k57dj")
 bus = &"Music"
 script = ExtResource("3_suvme")
 metadata/_custom_type_script = "uid://dmtw1jesw1vl7"
 
-[node name="Labels" type="Node" parent="."]
+[node name="Labels" type="Node" parent="." unique_id=1273351746]
 
-[node name="Label" type="Label" parent="Labels"]
+[node name="Label" type="Label" parent="Labels" unique_id=1698166234]
 visible = false
 anchors_preset = 14
 anchor_top = 0.5
@@ -338,7 +354,7 @@ horizontal_alignment = 1
 uppercase = true
 metadata/time = 2
 
-[node name="Label2" type="Label" parent="Labels"]
+[node name="Label2" type="Label" parent="Labels" unique_id=1304047403]
 visible = false
 anchors_preset = 14
 anchor_top = 0.5
@@ -348,12 +364,12 @@ offset_top = -8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Created by JoeMama"
+text = "CREDITS_CREATOR"
 horizontal_alignment = 1
 uppercase = true
 metadata/time = 2
 
-[node name="TileArtists" type="Control" parent="Labels"]
+[node name="TileArtists" type="Control" parent="Labels" unique_id=694282089]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -364,16 +380,16 @@ offset_right = 128.0
 offset_bottom = 240.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Labels/TileArtists"]
+[node name="Label" type="Label" parent="Labels/TileArtists" unique_id=186663480]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
 offset_right = 112.0
 offset_bottom = 32.0
-text = "Tile Artists"
+text = "CREDITS_TILES"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/TileArtists/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/TileArtists/Label" unique_id=413502125]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -384,7 +400,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/TileArtists/Label"]
+[node name="Label2" type="Label" parent="Labels/TileArtists/Label" unique_id=1323437201]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 40.0
@@ -392,7 +408,7 @@ offset_bottom = 32.0
 text = "amer241"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label2" unique_id=835357204]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -405,7 +421,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/TileArtists/Label"]
+[node name="Label3" type="Label" parent="Labels/TileArtists/Label" unique_id=1116434938]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 112.0
@@ -413,7 +429,7 @@ offset_bottom = 48.0
 text = "HOT CROSS BUN"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label3" unique_id=677802814]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -426,7 +442,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/TileArtists/Label"]
+[node name="Label4" type="Label" parent="Labels/TileArtists/Label" unique_id=2146106582]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 56.0
@@ -434,7 +450,7 @@ offset_bottom = 64.0
 text = "MARTIN LOZANO"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label4" unique_id=442741495]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -447,7 +463,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/TileArtists/Label"]
+[node name="Label5" type="Label" parent="Labels/TileArtists/Label" unique_id=902465977]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 40.0
@@ -455,7 +471,7 @@ offset_bottom = 96.0
 text = "hdtv"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label5" unique_id=1726041545]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -468,7 +484,28 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/TileArtists/Label"]
+[node name="Label7" type="Label" parent="Labels/TileArtists/Label" unique_id=144779880]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 40.0
+offset_bottom = 112.0
+text = "CRAFINK"
+uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label7" unique_id=241685839]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_owhsx")
+stretch_mode = 2
+script = ExtResource("11_d4vu4")
+metadata/_custom_type_script = "uid://ca3bew33g45eq"
+
+[node name="Label6" type="Label" parent="Labels/TileArtists/Label" unique_id=721563025]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 200.0
@@ -476,7 +513,7 @@ offset_bottom = 80.0
 text = "DIAMOND-LOCK PRODUCTIONS"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists/Label/Label6" unique_id=157036857]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -489,7 +526,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists"]
+[node name="TextureRect" type="TextureRect" parent="Labels/TileArtists" unique_id=1672702618]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 120.0
@@ -499,7 +536,7 @@ texture = ExtResource("4_j3afk")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="BGArtists" type="Control" parent="Labels"]
+[node name="BGArtists" type="Control" parent="Labels" unique_id=1474925022]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -510,16 +547,16 @@ offset_right = 128.0
 offset_bottom = 240.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Labels/BGArtists"]
+[node name="Label" type="Label" parent="Labels/BGArtists" unique_id=1445052876]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 104.0
 offset_bottom = 32.0
-text = "BG ARTISTS"
+text = "CREDITS_BGS"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/BGArtists/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/BGArtists/Label" unique_id=1916951870]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -530,7 +567,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/BGArtists/Label"]
+[node name="Label2" type="Label" parent="Labels/BGArtists/Label" unique_id=30312686]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -538,7 +575,7 @@ offset_bottom = 32.0
 text = "amer241"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label2" unique_id=772005821]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -551,7 +588,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/BGArtists/Label"]
+[node name="Label3" type="Label" parent="Labels/BGArtists/Label" unique_id=1951279647]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 112.0
@@ -559,7 +596,7 @@ offset_bottom = 48.0
 text = "HOT CROSS BUN"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label3" unique_id=331125683]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -572,7 +609,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/BGArtists/Label"]
+[node name="Label4" type="Label" parent="Labels/BGArtists/Label" unique_id=894357634]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 200.0
@@ -580,7 +617,7 @@ offset_bottom = 64.0
 text = "Diamond-Lock Productions"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label4" unique_id=1199961486]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -593,7 +630,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/BGArtists/Label"]
+[node name="Label6" type="Label" parent="Labels/BGArtists/Label" unique_id=774170081]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 80.0
@@ -601,7 +638,7 @@ offset_bottom = 80.0
 text = "vannyarts"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label6" unique_id=1992673937]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -614,7 +651,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/BGArtists/Label"]
+[node name="Label5" type="Label" parent="Labels/BGArtists/Label" unique_id=1797572479]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 80.0
@@ -622,7 +659,7 @@ offset_bottom = 96.0
 text = "SamButSam"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists/Label/Label5" unique_id=1193114331]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -635,7 +672,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BGArtists" unique_id=1933312522]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 112.0
@@ -645,7 +682,7 @@ texture = ExtResource("6_s34bh")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="EnemyArtists" type="Control" parent="Labels"]
+[node name="EnemyArtists" type="Control" parent="Labels" unique_id=68226020]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -656,16 +693,16 @@ offset_right = 128.0
 offset_bottom = 240.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Labels/EnemyArtists"]
+[node name="Label" type="Label" parent="Labels/EnemyArtists" unique_id=1353022351]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 128.0
 offset_bottom = 24.0
-text = "ENEMY, PLAYER, NPC ARTISTS"
+text = "CREDITS_ENEMIES"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/EnemyArtists/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/EnemyArtists/Label" unique_id=371901040]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -676,7 +713,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/EnemyArtists/Label"]
+[node name="Label2" type="Label" parent="Labels/EnemyArtists/Label" unique_id=1441140488]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -684,7 +721,7 @@ offset_bottom = 32.0
 text = "amer241"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label2" unique_id=1275194763]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -697,7 +734,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/EnemyArtists/Label"]
+[node name="Label3" type="Label" parent="Labels/EnemyArtists/Label" unique_id=2025192778]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 80.0
@@ -705,7 +742,7 @@ offset_bottom = 48.0
 text = "SamButSam"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label3" unique_id=1254420312]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -718,7 +755,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/EnemyArtists/Label"]
+[node name="Label4" type="Label" parent="Labels/EnemyArtists/Label" unique_id=678889969]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 200.0
@@ -726,7 +763,7 @@ offset_bottom = 64.0
 text = "Diamond-Lock Productions"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label4" unique_id=768706418]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -739,7 +776,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/EnemyArtists/Label"]
+[node name="Label5" type="Label" parent="Labels/EnemyArtists/Label" unique_id=1757666780]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 112.0
@@ -747,7 +784,7 @@ offset_bottom = 80.0
 text = "Hot Cross Bun"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label5" unique_id=1457231768]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -760,7 +797,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/EnemyArtists/Label"]
+[node name="Label6" type="Label" parent="Labels/EnemyArtists/Label" unique_id=257533778]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 128.0
@@ -768,7 +805,7 @@ offset_bottom = 96.0
 text = "GLACIALSIREN484"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label6" unique_id=502881519]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -781,7 +818,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label7" type="Label" parent="Labels/EnemyArtists/Label"]
+[node name="Label7" type="Label" parent="Labels/EnemyArtists/Label" unique_id=548305807]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 64.0
@@ -789,7 +826,7 @@ offset_bottom = 112.0
 text = "FUNGICAPTAIN"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label7"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label/Label7" unique_id=535555385]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -802,7 +839,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists" unique_id=498111865]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 120.0
@@ -812,7 +849,7 @@ texture = ExtResource("7_k6bv2")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label10" type="Label" parent="Labels/EnemyArtists"]
+[node name="Label10" type="Label" parent="Labels/EnemyArtists" unique_id=1292644810]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 120.0
@@ -821,7 +858,7 @@ offset_bottom = 136.0
 text = "OhthatGuy"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label10"]
+[node name="TextureRect" type="TextureRect" parent="Labels/EnemyArtists/Label10" unique_id=244670395]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -834,7 +871,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="LevelDesign" type="Control" parent="Labels"]
+[node name="LevelDesign" type="Control" parent="Labels" unique_id=516259832]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -845,16 +882,16 @@ offset_right = 128.0
 offset_bottom = 240.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Labels/LevelDesign"]
+[node name="Label" type="Label" parent="Labels/LevelDesign" unique_id=787563578]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 112.0
 offset_right = 112.0
 offset_bottom = 128.0
-text = "Level Design"
+text = "CREDITS_LEVELS"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/LevelDesign/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/LevelDesign/Label" unique_id=1385727988]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -865,7 +902,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/LevelDesign/Label"]
+[node name="Label2" type="Label" parent="Labels/LevelDesign/Label" unique_id=757006949]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -873,7 +910,7 @@ offset_bottom = 32.0
 text = "amer241"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label2" unique_id=1051077027]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -886,7 +923,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/LevelDesign/Label"]
+[node name="Label4" type="Label" parent="Labels/LevelDesign/Label" unique_id=1629488230]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 72.0
@@ -894,7 +931,7 @@ offset_bottom = 48.0
 text = "SlavaWow"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label4" unique_id=1057200427]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -907,7 +944,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/LevelDesign/Label/Label4"]
+[node name="Label5" type="Label" parent="Labels/LevelDesign/Label/Label4" unique_id=342356407]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -915,7 +952,7 @@ offset_bottom = 32.0
 text = "Makerk6"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label4/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label4/Label5" unique_id=865576249]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -928,7 +965,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/LevelDesign/Label"]
+[node name="Label5" type="Label" parent="Labels/LevelDesign/Label" unique_id=2024049267]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 40.0
@@ -936,7 +973,7 @@ offset_bottom = 80.0
 text = "hdtv"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label5" unique_id=1680876941]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -949,7 +986,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label7" type="Label" parent="Labels/LevelDesign/Label"]
+[node name="Label7" type="Label" parent="Labels/LevelDesign/Label" unique_id=1277194893]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 96.0
@@ -957,7 +994,7 @@ offset_bottom = 96.0
 text = "speedymcfly"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label7"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label7" unique_id=147614357]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -970,7 +1007,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/LevelDesign/Label/Label7/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/LevelDesign/Label/Label7/TextureRect" unique_id=727725505]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -983,7 +1020,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/LevelDesign/Label"]
+[node name="Label3" type="Label" parent="Labels/LevelDesign/Label" unique_id=985983840]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 80.0
@@ -991,7 +1028,7 @@ offset_bottom = 112.0
 text = "SamButSam"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label/Label3" unique_id=1209183765]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1004,17 +1041,17 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label2" type="Label" parent="Labels/LevelDesign"]
+[node name="Label2" type="Label" parent="Labels/LevelDesign" unique_id=738004915]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 56.0
 offset_right = 136.0
 offset_bottom = 72.0
-text = "UI DESIGN + ART"
+text = "CREDITS_UI"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/LevelDesign/Label2"]
+[node name="HSeparator" type="HSeparator" parent="Labels/LevelDesign/Label2" unique_id=1293482286]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1025,7 +1062,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label4" type="Label" parent="Labels/LevelDesign/Label2"]
+[node name="Label4" type="Label" parent="Labels/LevelDesign/Label2" unique_id=1559988485]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 64.0
@@ -1033,7 +1070,7 @@ offset_bottom = 48.0
 text = "amer241"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label2/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label2/Label4" unique_id=2096235453]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1046,7 +1083,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label2" type="Label" parent="Labels/LevelDesign/Label2"]
+[node name="Label2" type="Label" parent="Labels/LevelDesign/Label2" unique_id=1431763982]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -1054,7 +1091,7 @@ offset_bottom = 32.0
 text = "VannyArts"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label2/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label2/Label2" unique_id=29365804]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1067,16 +1104,16 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/LevelDesign"]
+[node name="Label3" type="Label" parent="Labels/LevelDesign" unique_id=1874980061]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
 offset_right = 96.0
 offset_bottom = 32.0
-text = "LSS BANNER + ICON"
+text = "CREDITS_LSSART"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/LevelDesign/Label3"]
+[node name="HSeparator" type="HSeparator" parent="Labels/LevelDesign/Label3" unique_id=568309226]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1087,7 +1124,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/LevelDesign/Label3"]
+[node name="Label2" type="Label" parent="Labels/LevelDesign/Label3" unique_id=896461844]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -1095,7 +1132,7 @@ offset_bottom = 32.0
 text = "KrystalPhantasm"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label3/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign/Label3/Label2" unique_id=1716445678]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1108,7 +1145,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign"]
+[node name="TextureRect" type="TextureRect" parent="Labels/LevelDesign" unique_id=1163521381]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 120.0
@@ -1118,7 +1155,7 @@ texture = ExtResource("8_3648a")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Sound" type="Control" parent="Labels"]
+[node name="Sound" type="Control" parent="Labels" unique_id=1334279118]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -1129,16 +1166,16 @@ offset_right = 128.0
 offset_bottom = 240.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Labels/Sound"]
+[node name="Label" type="Label" parent="Labels/Sound" unique_id=1644327202]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
 offset_right = 88.0
 offset_bottom = 32.0
-text = "Composers"
+text = "CREDITS_OST"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/Sound/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/Sound/Label" unique_id=1108875636]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1149,7 +1186,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/Sound/Label"]
+[node name="Label2" type="Label" parent="Labels/Sound/Label" unique_id=1785519546]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -1157,7 +1194,7 @@ offset_bottom = 32.0
 text = "amer241"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label2" unique_id=701192151]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1170,7 +1207,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/Sound/Label"]
+[node name="Label3" type="Label" parent="Labels/Sound/Label" unique_id=776334170]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 40.0
@@ -1178,7 +1215,7 @@ offset_bottom = 48.0
 text = "hdtv"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label3" unique_id=804422862]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1191,7 +1228,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/Sound/Label"]
+[node name="Label4" type="Label" parent="Labels/Sound/Label" unique_id=185060448]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 88.0
@@ -1199,7 +1236,7 @@ offset_bottom = 64.0
 text = "Blindspuut"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label4" unique_id=2118532685]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1212,7 +1249,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/Sound/Label"]
+[node name="Label6" type="Label" parent="Labels/Sound/Label" unique_id=1335191705]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 88.0
@@ -1220,7 +1257,7 @@ offset_bottom = 80.0
 text = "LeviR.star"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label/Label6" unique_id=806340323]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1233,16 +1270,16 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label2" type="Label" parent="Labels/Sound"]
+[node name="Label2" type="Label" parent="Labels/Sound" unique_id=1717217896]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 112.0
 offset_right = 48.0
 offset_bottom = 128.0
-text = "SFXs"
+text = "CREDITS_SFX"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/Sound/Label2"]
+[node name="HSeparator" type="HSeparator" parent="Labels/Sound/Label2" unique_id=221115915]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1253,7 +1290,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/Sound/Label2"]
+[node name="Label2" type="Label" parent="Labels/Sound/Label2" unique_id=830366301]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 64.0
@@ -1261,7 +1298,7 @@ offset_bottom = 32.0
 text = "QuagIsCool"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label2" unique_id=526037870]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1274,7 +1311,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/Sound/Label2"]
+[node name="Label6" type="Label" parent="Labels/Sound/Label2" unique_id=1789199205]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 88.0
@@ -1282,7 +1319,7 @@ offset_bottom = 48.0
 text = "LeviR.star"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label6" unique_id=1480120348]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1295,7 +1332,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label7" type="Label" parent="Labels/Sound/Label2"]
+[node name="Label7" type="Label" parent="Labels/Sound/Label2" unique_id=32654506]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 88.0
@@ -1303,7 +1340,7 @@ offset_bottom = 64.0
 text = "BlindSpuut"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label7"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label7" unique_id=406362526]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1316,7 +1353,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label8" type="Label" parent="Labels/Sound/Label2"]
+[node name="Label8" type="Label" parent="Labels/Sound/Label2" unique_id=1754150621]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 64.0
@@ -1324,7 +1361,7 @@ offset_bottom = 80.0
 text = "Trimint"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label8"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound/Label2/Label8" unique_id=1343792032]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1337,7 +1374,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Sound"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Sound" unique_id=2084301385]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 120.0
@@ -1347,7 +1384,7 @@ texture = ExtResource("9_shsp7")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Localizers" type="Control" parent="Labels"]
+[node name="Localizers" type="Control" parent="Labels" unique_id=1796768344]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -1358,16 +1395,16 @@ offset_right = 128.0
 offset_bottom = 240.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="Labels/Localizers"]
+[node name="Label" type="Label" parent="Labels/Localizers" unique_id=1631401474]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 104.0
 offset_bottom = 24.0
-text = "localizers"
+text = "CREDITS_LOCALE"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/Localizers/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/Localizers/Label" unique_id=8788557]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1378,7 +1415,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label2" type="Label" parent="Labels/Localizers/Label" unique_id=667289768]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 40.0
@@ -1386,7 +1423,7 @@ offset_bottom = 32.0
 text = "Cube"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label2" unique_id=852602510]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1399,7 +1436,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label2/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label2/TextureRect" unique_id=1233921851]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1412,7 +1449,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label3" type="Label" parent="Labels/Localizers/Label" unique_id=2142714979]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 40.0
@@ -1420,7 +1457,7 @@ offset_bottom = 48.0
 text = "TRIPPY"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label3" unique_id=2116530336]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1433,7 +1470,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label3/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label3/TextureRect" unique_id=888855918]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1446,7 +1483,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label4" type="Label" parent="Labels/Localizers/Label" unique_id=1979044852]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 40.0
@@ -1454,7 +1491,7 @@ offset_bottom = 64.0
 text = "SlavaWow"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label4" unique_id=403840305]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1467,7 +1504,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label4/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label4/TextureRect" unique_id=1482430745]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1480,7 +1517,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label5" type="Label" parent="Labels/Localizers/Label" unique_id=905706831]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 64.0
@@ -1488,7 +1525,7 @@ offset_bottom = 80.0
 text = "Makerk6"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label5" unique_id=522167757]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1501,7 +1538,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label5/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label5/TextureRect" unique_id=1280685036]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1514,7 +1551,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label6" type="Label" parent="Labels/Localizers/Label" unique_id=1331486162]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 64.0
@@ -1522,7 +1559,7 @@ offset_bottom = 96.0
 text = "vannyarts"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label6" unique_id=286070239]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1535,7 +1572,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label6/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label6/TextureRect" unique_id=1517718616]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1548,7 +1585,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label7" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label7" type="Label" parent="Labels/Localizers/Label" unique_id=1980451453]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 80.0
@@ -1556,7 +1593,7 @@ offset_bottom = 112.0
 text = "speedymcfly"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label7"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label7" unique_id=884238873]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1569,7 +1606,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label7/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label7/TextureRect" unique_id=1041523939]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1582,7 +1619,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label8" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label8" type="Label" parent="Labels/Localizers/Label" unique_id=1165600220]
 layout_mode = 0
 offset_top = 112.0
 offset_right = 96.0
@@ -1590,7 +1627,7 @@ offset_bottom = 128.0
 text = "Kirbo The Poyo"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label8"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label8" unique_id=1737382545]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1603,7 +1640,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label8/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label8/TextureRect" unique_id=1986692141]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1616,7 +1653,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label9" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label9" type="Label" parent="Labels/Localizers/Label" unique_id=1215010210]
 layout_mode = 0
 offset_top = 128.0
 offset_right = 96.0
@@ -1624,7 +1661,7 @@ offset_bottom = 144.0
 text = "_Apostrophe"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label9"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label9" unique_id=808776928]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1637,7 +1674,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label9/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label9/TextureRect" unique_id=1039728956]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1650,7 +1687,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label10" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label10" type="Label" parent="Labels/Localizers/Label" unique_id=706928944]
 layout_mode = 0
 offset_top = 144.0
 offset_right = 56.0
@@ -1658,7 +1695,7 @@ offset_bottom = 160.0
 text = "TBB369"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label10"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label10" unique_id=2048717439]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1671,7 +1708,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label10/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label10/TextureRect" unique_id=333295733]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1684,7 +1721,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label11" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label11" type="Label" parent="Labels/Localizers/Label" unique_id=520566711]
 layout_mode = 0
 offset_top = 160.0
 offset_right = 56.0
@@ -1692,7 +1729,7 @@ offset_bottom = 176.0
 text = "CHRYSS"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label11"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label11" unique_id=2023029577]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1705,7 +1742,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label11/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label11/TextureRect" unique_id=1464464852]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1718,7 +1755,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label12" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label12" type="Label" parent="Labels/Localizers/Label" unique_id=1758826491]
 layout_mode = 0
 offset_top = 176.0
 offset_right = 56.0
@@ -1726,7 +1763,7 @@ offset_bottom = 192.0
 text = "TheOliveOli"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label12"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label12" unique_id=1275528308]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1739,7 +1776,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label12/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label12/TextureRect" unique_id=721585055]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1752,7 +1789,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label13" type="Label" parent="Labels/Localizers/Label"]
+[node name="Label13" type="Label" parent="Labels/Localizers/Label" unique_id=1786291351]
 layout_mode = 0
 offset_top = 192.0
 offset_right = 96.0
@@ -1760,7 +1797,7 @@ offset_bottom = 208.0
 text = "Edwrin (Skopler)"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label13"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers/Label/Label13" unique_id=1604613376]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1773,7 +1810,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label13/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Labels/Localizers/Label/Label13/TextureRect" unique_id=1266348769]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1786,7 +1823,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Localizers"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Localizers" unique_id=103598155]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 8.0
@@ -1796,7 +1833,7 @@ texture = ExtResource("11_kpq8t")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="BetaTesters" type="Control" parent="Labels"]
+[node name="BetaTesters" type="Control" parent="Labels" unique_id=1521869023]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -1808,16 +1845,16 @@ offset_bottom = 240.0
 grow_horizontal = 2
 metadata/time = 5
 
-[node name="Label" type="Label" parent="Labels/BetaTesters"]
+[node name="Label" type="Label" parent="Labels/BetaTesters" unique_id=277673837]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 112.0
 offset_bottom = 24.0
-text = "Beta Testers"
+text = "CREDITS_TESTERS"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/BetaTesters/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/BetaTesters/Label" unique_id=601599773]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1828,7 +1865,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label2" type="Label" parent="Labels/BetaTesters/Label" unique_id=1659423336]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 32.0
@@ -1836,7 +1873,7 @@ offset_bottom = 32.0
 text = "ian"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label2" unique_id=1711851399]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1849,7 +1886,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label3" type="Label" parent="Labels/BetaTesters/Label" unique_id=1213203338]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 32.0
@@ -1857,7 +1894,7 @@ offset_bottom = 48.0
 text = "Raykol"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label3" unique_id=371771832]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1870,7 +1907,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label4" type="Label" parent="Labels/BetaTesters/Label" unique_id=1432224768]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 56.0
@@ -1878,7 +1915,7 @@ offset_bottom = 64.0
 text = "Gweenie"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label4" unique_id=1831748268]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1891,7 +1928,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label5" type="Label" parent="Labels/BetaTesters/Label" unique_id=594628709]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 64.0
@@ -1899,7 +1936,7 @@ offset_bottom = 80.0
 text = "Cr4ftex"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label5" unique_id=531878643]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1912,7 +1949,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label6" type="Label" parent="Labels/BetaTesters/Label" unique_id=965887058]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 72.0
@@ -1920,7 +1957,7 @@ offset_bottom = 96.0
 text = "Pincelle"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label6" unique_id=2117410080]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1933,7 +1970,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label7" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label7" type="Label" parent="Labels/BetaTesters/Label" unique_id=432678459]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 88.0
@@ -1941,7 +1978,7 @@ offset_bottom = 112.0
 text = "JamiesName"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label7"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label7" unique_id=1316588645]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1954,7 +1991,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label8" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label8" type="Label" parent="Labels/BetaTesters/Label" unique_id=981060182]
 layout_mode = 0
 offset_top = 112.0
 offset_right = 48.0
@@ -1962,7 +1999,7 @@ offset_bottom = 128.0
 text = "vorzo"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label8"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label8" unique_id=1123214309]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1975,7 +2012,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label9" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label9" type="Label" parent="Labels/BetaTesters/Label" unique_id=1048578919]
 layout_mode = 0
 offset_top = 128.0
 offset_right = 72.0
@@ -1983,7 +2020,7 @@ offset_bottom = 144.0
 text = "leanycat"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label9"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label9" unique_id=614011576]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1996,7 +2033,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label12" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label12" type="Label" parent="Labels/BetaTesters/Label" unique_id=420321967]
 layout_mode = 0
 offset_top = 160.0
 offset_right = 56.0
@@ -2004,7 +2041,7 @@ offset_bottom = 176.0
 text = "Hooked"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label12"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label12" unique_id=61194113]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2017,7 +2054,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label14" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label14" type="Label" parent="Labels/BetaTesters/Label" unique_id=1253117288]
 layout_mode = 0
 offset_top = 176.0
 offset_right = 112.0
@@ -2025,7 +2062,7 @@ offset_bottom = 192.0
 text = "Pixelcraftian"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label14"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label14" unique_id=1976554842]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2038,7 +2075,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label13" type="Label" parent="Labels/BetaTesters/Label"]
+[node name="Label13" type="Label" parent="Labels/BetaTesters/Label" unique_id=1889039056]
 layout_mode = 0
 offset_top = 144.0
 offset_right = 56.0
@@ -2046,7 +2083,7 @@ offset_bottom = 160.0
 text = "Rhyvit"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label13"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label/Label13" unique_id=157650521]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2059,7 +2096,7 @@ expand_mode = 1
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters" unique_id=1357340977]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 32.0
@@ -2069,7 +2106,7 @@ texture = ExtResource("12_oe1k8")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label2" type="Label" parent="Labels/BetaTesters"]
+[node name="Label2" type="Label" parent="Labels/BetaTesters" unique_id=2117320765]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 200.0
@@ -2078,7 +2115,7 @@ offset_bottom = 216.0
 text = "Starrymari"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label2" unique_id=758560931]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2091,7 +2128,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/BetaTesters"]
+[node name="Label3" type="Label" parent="Labels/BetaTesters" unique_id=1219203622]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 216.0
@@ -2100,7 +2137,7 @@ offset_bottom = 232.0
 text = "Jonthejeph"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters/Label3" unique_id=48549440]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2113,7 +2150,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="BetaTesters2" type="Control" parent="Labels"]
+[node name="BetaTesters2" type="Control" parent="Labels" unique_id=1222453387]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -2125,16 +2162,16 @@ offset_bottom = 240.0
 grow_horizontal = 2
 metadata/time = 5
 
-[node name="Label" type="Label" parent="Labels/BetaTesters2"]
+[node name="Label" type="Label" parent="Labels/BetaTesters2" unique_id=26213769]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 144.0
 offset_bottom = 32.0
-text = "Beta Testers..."
+text = "CREDITS_TESTERS2"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/BetaTesters2/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/BetaTesters2/Label" unique_id=1910113220]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -2145,7 +2182,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label4" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label4" type="Label" parent="Labels/BetaTesters2/Label" unique_id=1991560384]
 layout_mode = 0
 offset_top = 16.0
 offset_right = 56.0
@@ -2153,7 +2190,7 @@ offset_bottom = 32.0
 text = "kosmic"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label4" unique_id=336551487]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2166,7 +2203,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label5" type="Label" parent="Labels/BetaTesters2/Label" unique_id=1722516790]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 80.0
@@ -2174,7 +2211,7 @@ offset_bottom = 48.0
 text = "TheLBcats"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label5"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label5" unique_id=87137691]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2187,7 +2224,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label6" type="Label" parent="Labels/BetaTesters2/Label" unique_id=653990033]
 layout_mode = 0
 offset_top = 48.0
 offset_right = 104.0
@@ -2195,7 +2232,7 @@ offset_bottom = 64.0
 text = "LadiesMan217"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label6" unique_id=581952117]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2207,7 +2244,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label7" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label7" type="Label" parent="Labels/BetaTesters2/Label" unique_id=1960364287]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 104.0
@@ -2215,7 +2252,7 @@ offset_bottom = 112.0
 text = "MusicalMan"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label7"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label7" unique_id=1802260544]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2227,7 +2264,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label8" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label8" type="Label" parent="Labels/BetaTesters2/Label" unique_id=880666726]
 layout_mode = 0
 offset_top = 112.0
 offset_right = 72.0
@@ -2235,7 +2272,7 @@ offset_bottom = 128.0
 text = "bluseven"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label8"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label8" unique_id=1355406581]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2248,7 +2285,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label9" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label9" type="Label" parent="Labels/BetaTesters2/Label" unique_id=1617908933]
 layout_mode = 0
 offset_top = 144.0
 offset_right = 104.0
@@ -2256,7 +2293,7 @@ offset_bottom = 160.0
 text = "MRGERUND"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label9"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label9" unique_id=1075391347]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2270,7 +2307,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label10" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label10" type="Label" parent="Labels/BetaTesters2/Label" unique_id=511259083]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 112.0
@@ -2278,7 +2315,7 @@ offset_bottom = 96.0
 text = "popthatcorn14"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label10"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label10" unique_id=909231695]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2290,7 +2327,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label11" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label11" type="Label" parent="Labels/BetaTesters2/Label" unique_id=1938967264]
 layout_mode = 0
 offset_top = 128.0
 offset_right = 112.0
@@ -2298,7 +2335,7 @@ offset_bottom = 144.0
 text = "LuigiBonus"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label11"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label11" unique_id=981388910]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2310,7 +2347,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label12" type="Label" parent="Labels/BetaTesters2/Label"]
+[node name="Label12" type="Label" parent="Labels/BetaTesters2/Label" unique_id=1188931550]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 136.0
@@ -2318,7 +2355,7 @@ offset_bottom = 80.0
 text = "EngingerBreadMan"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label12"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2/Label/Label12" unique_id=1098532654]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2326,11 +2363,12 @@ anchor_right = 1.0
 offset_right = 16.0
 offset_bottom = 16.0
 grow_horizontal = 0
+texture = SubResource("AtlasTexture_da2e7")
 stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/BetaTesters2" unique_id=383700882]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 120.0
@@ -2340,7 +2378,8 @@ texture = ExtResource("13_17gvw")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Github" type="Control" parent="Labels"]
+[node name="Github" type="Control" parent="Labels" unique_id=1714294472]
+visible = false
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -2350,7 +2389,7 @@ offset_right = 128.0
 offset_bottom = 240.0
 grow_horizontal = 2
 
-[node name="Label3" type="Label" parent="Labels/Github"]
+[node name="Label3" type="Label" parent="Labels/Github" unique_id=152672234]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2360,10 +2399,10 @@ offset_top = 8.0
 offset_right = 80.0
 offset_bottom = 24.0
 grow_horizontal = 2
-text = "GITHUB CONTRIBUTORS"
+text = "CREDITS_GITHUB"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/Github/Label3"]
+[node name="HSeparator" type="HSeparator" parent="Labels/Github/Label3" unique_id=436724697]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -2374,7 +2413,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/Github/Label3"]
+[node name="Label2" type="Label" parent="Labels/Github/Label3" unique_id=1331475433]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 40.0
@@ -2383,7 +2422,7 @@ offset_bottom = 56.0
 text = "JOEMAMA"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label2" unique_id=1424190291]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2396,7 +2435,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label3" type="Label" parent="Labels/Github/Label3"]
+[node name="Label3" type="Label" parent="Labels/Github/Label3" unique_id=201368058]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 40.0
@@ -2405,7 +2444,7 @@ offset_bottom = 56.0
 text = "ALOELUCIDITY"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label3"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label3" unique_id=1193885612]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2418,7 +2457,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label4" type="Label" parent="Labels/Github/Label3"]
+[node name="Label4" type="Label" parent="Labels/Github/Label3" unique_id=1168154163]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 56.0
@@ -2427,7 +2466,7 @@ offset_bottom = 72.0
 text = "GUZLAD"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label4"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label4" unique_id=1389431297]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2441,7 +2480,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label5" type="Label" parent="Labels/Github/Label3"]
+[node name="Label5" type="Label" parent="Labels/Github/Label3" unique_id=1775563575]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 56.0
@@ -2450,8 +2489,7 @@ offset_bottom = 72.0
 text = "KirbyKid256"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label5"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label5" unique_id=850056292]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2459,12 +2497,12 @@ anchor_right = 1.0
 offset_right = 16.0
 offset_bottom = 16.0
 grow_horizontal = 0
-texture = SubResource("AtlasTexture_wkf2d")
+texture = SubResource("AtlasTexture_edser")
 stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label6" type="Label" parent="Labels/Github/Label3"]
+[node name="Label6" type="Label" parent="Labels/Github/Label3" unique_id=1474781837]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 72.0
@@ -2473,7 +2511,7 @@ offset_bottom = 88.0
 text = "kittenchilly"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label6"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label6" unique_id=1705929160]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2487,7 +2525,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label7" type="Label" parent="Labels/Github/Label3"]
+[node name="Label7" type="Label" parent="Labels/Github/Label3" unique_id=257808739]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 72.0
@@ -2496,7 +2534,7 @@ offset_bottom = 88.0
 text = "skyanultra"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label7"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label7" unique_id=1284052703]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2509,16 +2547,16 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label8" type="Label" parent="Labels/Github/Label3"]
+[node name="Label8" type="Label" parent="Labels/Github/Label3" unique_id=486365366]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 144.0
 offset_top = 56.0
-offset_right = 176.0
+offset_right = 192.0
 offset_bottom = 72.0
 text = "jeodc"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label8"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label8" unique_id=25181396]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2531,7 +2569,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label9" type="Label" parent="Labels/Github/Label3"]
+[node name="Label9" type="Label" parent="Labels/Github/Label3" unique_id=2087669527]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 88.0
@@ -2540,7 +2578,7 @@ offset_bottom = 104.0
 text = "Nabbup"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label9"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label9" unique_id=592847514]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2553,7 +2591,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label10" type="Label" parent="Labels/Github/Label3"]
+[node name="Label10" type="Label" parent="Labels/Github/Label3" unique_id=866544637]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 88.0
@@ -2562,8 +2600,7 @@ offset_bottom = 104.0
 text = "jdaster64"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label10"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label10" unique_id=747628058]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2571,12 +2608,12 @@ anchor_right = 1.0
 offset_right = 16.0
 offset_bottom = 16.0
 grow_horizontal = 0
-texture = SubResource("AtlasTexture_gbi86")
+texture = SubResource("AtlasTexture_mrxkq")
 stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label11" type="Label" parent="Labels/Github/Label3"]
+[node name="Label11" type="Label" parent="Labels/Github/Label3" unique_id=539759340]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 104.0
@@ -2585,7 +2622,7 @@ offset_bottom = 120.0
 text = "amer241"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label11"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label11" unique_id=370808383]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2598,7 +2635,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label12" type="Label" parent="Labels/Github/Label3"]
+[node name="Label12" type="Label" parent="Labels/Github/Label3" unique_id=574159217]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 104.0
@@ -2607,7 +2644,7 @@ offset_bottom = 120.0
 text = "falkimore"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label12"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label12" unique_id=560225281]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2620,7 +2657,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label13" type="Label" parent="Labels/Github/Label3"]
+[node name="Label13" type="Label" parent="Labels/Github/Label3" unique_id=1121497672]
 layout_mode = 0
 offset_left = 56.0
 offset_top = 120.0
@@ -2629,7 +2666,7 @@ offset_bottom = 136.0
 text = "kustaagames"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label13"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label13" unique_id=2102744692]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2643,16 +2680,16 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label15" type="Label" parent="Labels/Github/Label3"]
+[node name="Label15" type="Label" parent="Labels/Github/Label3" unique_id=1836890548]
 layout_mode = 0
-offset_left = 128.0
+offset_left = 144.0
 offset_top = 88.0
-offset_right = 192.0
+offset_right = 208.0
 offset_bottom = 104.0
 text = "renhoex"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label15"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label15" unique_id=2054549432]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2666,7 +2703,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label16" type="Label" parent="Labels/Github/Label3"]
+[node name="Label16" type="Label" parent="Labels/Github/Label3" unique_id=1304366771]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 104.0
@@ -2675,7 +2712,7 @@ offset_bottom = 120.0
 text = "a2937"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label16"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label16" unique_id=447895157]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2689,7 +2726,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label17" type="Label" parent="Labels/Github/Label3"]
+[node name="Label17" type="Label" parent="Labels/Github/Label3" unique_id=217580907]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 136.0
@@ -2698,7 +2735,7 @@ offset_bottom = 152.0
 text = "tristan35"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label17"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label17" unique_id=1653266489]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2712,7 +2749,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label18" type="Label" parent="Labels/Github/Label3"]
+[node name="Label18" type="Label" parent="Labels/Github/Label3" unique_id=1146499920]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 136.0
@@ -2721,7 +2758,7 @@ offset_bottom = 152.0
 text = "basilicon"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label18"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label18" unique_id=1859766610]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2735,7 +2772,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label19" type="Label" parent="Labels/Github/Label3"]
+[node name="Label19" type="Label" parent="Labels/Github/Label3" unique_id=1239611932]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 152.0
@@ -2744,7 +2781,7 @@ offset_bottom = 168.0
 text = "nathanmarioman"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label19"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label19" unique_id=1846808159]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2758,7 +2795,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label20" type="Label" parent="Labels/Github/Label3"]
+[node name="Label20" type="Label" parent="Labels/Github/Label3" unique_id=581936680]
 layout_mode = 0
 offset_left = 136.0
 offset_top = 136.0
@@ -2767,7 +2804,7 @@ offset_bottom = 152.0
 text = "cst1229"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label20"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label20" unique_id=9170435]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2781,7 +2818,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label21" type="Label" parent="Labels/Github/Label3"]
+[node name="Label21" type="Label" parent="Labels/Github/Label3" unique_id=1506205456]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 152.0
@@ -2790,7 +2827,7 @@ offset_bottom = 168.0
 text = "dankcoffee"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label21"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label21" unique_id=90180657]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2804,7 +2841,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label22" type="Label" parent="Labels/Github/Label3"]
+[node name="Label22" type="Label" parent="Labels/Github/Label3" unique_id=2059991328]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 168.0
@@ -2813,7 +2850,7 @@ offset_bottom = 184.0
 text = "valham1"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label22"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label22" unique_id=1360426232]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2827,7 +2864,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label14" type="Label" parent="Labels/Github/Label3"]
+[node name="Label14" type="Label" parent="Labels/Github/Label3" unique_id=1147208040]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 120.0
@@ -2836,7 +2873,7 @@ offset_bottom = 136.0
 text = "leanycat"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label14"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label14" unique_id=1572282955]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2849,7 +2886,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label23" type="Label" parent="Labels/Github/Label3"]
+[node name="Label23" type="Label" parent="Labels/Github/Label3" unique_id=405879541]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 168.0
@@ -2858,7 +2895,7 @@ offset_bottom = 184.0
 text = "TheOliveOli"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label23"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label23" unique_id=857962155]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -2871,7 +2908,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label24" type="Label" parent="Labels/Github/Label3"]
+[node name="Label24" type="Label" parent="Labels/Github/Label3" unique_id=2073506802]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 184.0
@@ -2880,7 +2917,7 @@ offset_bottom = 200.0
 text = "yuriko-shimizu"
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label24"]
+[node name="TextureRect" type="TextureRect" parent="Labels/Github/Label3/Label24" unique_id=760162256]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -2894,7 +2931,7 @@ stretch_mode = 2
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="SpecialThanks" type="Control" parent="Labels"]
+[node name="SpecialThanks" type="Control" parent="Labels" unique_id=2095742586]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -2906,7 +2943,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 metadata/time = 6
 
-[node name="TextureRect" type="TextureRect" parent="Labels/SpecialThanks"]
+[node name="TextureRect" type="TextureRect" parent="Labels/SpecialThanks" unique_id=1789227584]
 layout_mode = 0
 offset_left = 60.0
 offset_top = 7.0
@@ -2916,7 +2953,7 @@ texture = ExtResource("13_irr87")
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label" type="Label" parent="Labels/SpecialThanks"]
+[node name="Label" type="Label" parent="Labels/SpecialThanks" unique_id=1734494369]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2929,11 +2966,11 @@ offset_right = 56.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Special Thanks"
+text = "CREDITS_SPECIAL"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/SpecialThanks/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/SpecialThanks/Label" unique_id=1075264915]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -2944,7 +2981,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label" type="Label" parent="Labels/SpecialThanks/Label"]
+[node name="Label" type="Label" parent="Labels/SpecialThanks/Label" unique_id=2016427549]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 104.0
@@ -2953,7 +2990,7 @@ offset_bottom = 132.0
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Labels/SpecialThanks/Label"]
+[node name="HFlowContainer" type="HFlowContainer" parent="Labels/SpecialThanks/Label" unique_id=111566621]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2967,53 +3004,52 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = -4
 alignment = 1
 
-[node name="Label" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=1090504498]
 layout_mode = 2
 text = "ALESAN99"
 uppercase = true
 
-[node name="Label2" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label2" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=2079998536]
 layout_mode = 2
 text = "StabYourself"
 uppercase = true
 
-[node name="Label3" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label3" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=367306739]
 layout_mode = 2
 text = "exploding rabbit"
 uppercase = true
 
-[node name="Label4" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label4" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=1134848897]
 layout_mode = 2
 text = "Portponky"
 uppercase = true
 
-[node name="Label5" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label5" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=1982213065]
 layout_mode = 2
 text = "nintendo"
 uppercase = true
 
-[node name="Label7" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label7" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=704457874]
 layout_mode = 2
 text = "mika"
 uppercase = true
 
-[node name="Label8" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label8" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=950160382]
 layout_mode = 2
 text = "kaze emanuar"
 uppercase = true
 
-[node name="Label9" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label9" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=1565294869]
 layout_mode = 2
 text = "Level share Square"
 uppercase = true
 
-[node name="Label10" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer"]
+[node name="Label10" type="Label" parent="Labels/SpecialThanks/Label/HFlowContainer" unique_id=1587600019]
 layout_mode = 2
-text = "
-...and you!"
+text = "CREDITS_SPECIAL_PLAYER"
 uppercase = true
 
-[node name="MadeWith" type="Control" parent="Labels"]
+[node name="MadeWith" type="Control" parent="Labels" unique_id=634566690]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -3025,7 +3061,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 metadata/time = 5
 
-[node name="Label" type="Label" parent="Labels/MadeWith"]
+[node name="Label" type="Label" parent="Labels/MadeWith" unique_id=669281476]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3038,11 +3074,11 @@ offset_right = 40.0
 offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Made With"
+text = "CREDITS_MADEWITH"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/MadeWith/Label"]
+[node name="HSeparator" type="HSeparator" parent="Labels/MadeWith/Label" unique_id=521864103]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -3053,7 +3089,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="Label2" type="Label" parent="Labels/MadeWith/Label"]
+[node name="Label2" type="Label" parent="Labels/MadeWith/Label" unique_id=772753761]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -3069,7 +3105,7 @@ text = "Godot Engine"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="Labels/MadeWith/Label"]
+[node name="TextureRect" type="TextureRect" parent="Labels/MadeWith/Label" unique_id=1414754597]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -3083,7 +3119,7 @@ stretch_mode = 3
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label2" type="Label" parent="Labels/MadeWith"]
+[node name="Label2" type="Label" parent="Labels/MadeWith" unique_id=824187350]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3093,11 +3129,11 @@ offset_top = 17.0
 offset_right = 68.0
 offset_bottom = 33.0
 grow_horizontal = 2
-text = "original game by"
+text = "CREDITS_MADEWITH_NIN"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="Labels/MadeWith/Label2"]
+[node name="HSeparator" type="HSeparator" parent="Labels/MadeWith/Label2" unique_id=1707192831]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -3108,7 +3144,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_g2gtw")
 
-[node name="TextureRect" type="TextureRect" parent="Labels/MadeWith/Label2"]
+[node name="TextureRect" type="TextureRect" parent="Labels/MadeWith/Label2" unique_id=502544289]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -3124,7 +3160,7 @@ stretch_mode = 3
 script = ExtResource("11_d4vu4")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="MadeWith2" type="Control" parent="Labels"]
+[node name="MadeWith2" type="Control" parent="Labels" unique_id=1004202070]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -3136,7 +3172,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 metadata/time = 9999
 
-[node name="Label2" type="Label" parent="Labels/MadeWith2"]
+[node name="Label2" type="Label" parent="Labels/MadeWith2" unique_id=887916043]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -3146,11 +3182,11 @@ offset_top = -8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Thank you for Playing! :)"
+text = "CREDITS_THANKYOU"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Skip" type="Label" parent="."]
+[node name="Skip" type="Label" parent="." unique_id=836989659]
 visible = false
 anchors_preset = 2
 anchor_top = 1.0
@@ -3158,10 +3194,10 @@ anchor_bottom = 1.0
 offset_top = -16.0
 offset_right = 168.0
 grow_vertical = 0
-text = "Press Any To Skip..."
+text = "CREDITS_SKIP"
 uppercase = true
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1386281980 node_paths=PackedStringArray("labels")]
 script = ExtResource("15_suvme")
 labels = [NodePath("../Skip")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"

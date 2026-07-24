@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn3cblgvf2ba1"]
+[gd_scene format=3 uid="uid://dn3cblgvf2ba1"]
 
 [ext_resource type="PackedScene" uid="uid://bm8obwlkm56wb" path="res://Scenes/Prefabs/Entities/Objects/FallingPlatform.tscn" id="1_6dtc5"]
 [ext_resource type="Script" uid="uid://d0mqkvopasu8k" path="res://Scripts/Classes/Components/SecondQuestReplaceComponent.gd" id="2_jcaah"]
@@ -9,20 +9,19 @@ size = Vector2(48, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0y68"]
 size = Vector2(48, 10)
 
-[node name="FallingPlatform" instance=ExtResource("1_6dtc5")]
+[node name="FallingPlatform" unique_id=1846663454 instance=ExtResource("1_6dtc5")]
 
-[node name="TextureRect" parent="." index="0"]
+[node name="TextureRect" parent="." index="0" unique_id=1038958970]
 offset_left = -24.0
 offset_right = 24.0
 
-[node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 4)
+[node name="CollisionShape2D" parent="." index="1" unique_id=809571846]
 shape = SubResource("RectangleShape2D_jcaah")
 
-[node name="CollisionShape2D" parent="PlayerDetect" index="0"]
+[node name="CollisionShape2D" parent="PlayerDetect" parent_id_path=PackedInt32Array(784976500) index="0" unique_id=863753777]
 shape = SubResource("RectangleShape2D_w0y68")
 
-[node name="SecondQuestReplacer" type="Node" parent="." index="4"]
+[node name="SecondQuestReplacer" type="Node" parent="." index="4" unique_id=891270654]
 script = ExtResource("2_jcaah")
 new_scene = "uid://bm8obwlkm56wb"
 metadata/_custom_type_script = "uid://d0mqkvopasu8k"

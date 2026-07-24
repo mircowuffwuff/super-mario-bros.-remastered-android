@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://bjlbx3coi21hy"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://bjlbx3coi21hy"]
 
-[ext_resource type="AudioStream" uid="uid://bitfhsd6cm86s" path="res://Assets/Audio/BGM/Volcano.mp3" id="1_ssv37"]
-[ext_resource type="AudioStream" uid="uid://33ga0m8me818" path="res://Assets/Audio/BGM/VolcanoHurry.mp3" id="2_01rvb"]
+[ext_resource type="AudioStream" uid="uid://c4pt3br3is12a" path="res://Assets/Audio/BGM/Volcano.mp3" id="1_ssv37"]
+[ext_resource type="AudioStream" uid="uid://bwykua4berql1" path="res://Assets/Audio/BGM/VolcanoHurry.mp3" id="2_01rvb"]
 
 [resource]
 clip_count = 2

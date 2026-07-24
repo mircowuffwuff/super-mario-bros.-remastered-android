@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://blv1d12smlibh"]
+[gd_scene format=3 uid="uid://blv1d12smlibh"]
 
 [ext_resource type="Script" uid="uid://bqhrq7sabq811" path="res://Scripts/UI/ChallengeModeResults.gd" id="1_3x4fv"]
 [ext_resource type="Texture2D" uid="uid://116yaio262mj" path="res://Assets/Sprites/UI/ChallengeResultsTemplate.png" id="3_um36a"]
@@ -15,20 +15,16 @@
 [ext_resource type="Script" uid="uid://cmvlgsjmsk0v5" path="res://Scripts/Classes/Resources/ThemedResource.gd" id="10_bylb3"]
 [ext_resource type="Texture2D" uid="uid://de6otencrflfo" path="res://Assets/Sprites/UI/RedCoins.png" id="10_d76il"]
 [ext_resource type="Texture2D" uid="uid://wx6yyqabrelf" path="res://Assets/Sprites/UI/ChallengeResultsPanel.png" id="11_02i7h"]
-[ext_resource type="AudioStream" uid="uid://n07ty0sc76em" path="res://Assets/Audio/SFX/ChallengeModeGive.mp3" id="11_nym8o"]
-[ext_resource type="JSON" path="res://Assets/Audio/BGM/ChallengeResults.json" id="12_fb45j"]
 [ext_resource type="AudioStream" uid="uid://dhiy4bmyu3j0r" path="res://Assets/Audio/BGM/ChallengeEnd.mp3" id="12_x7w5s"]
-[ext_resource type="JSON" path="res://Assets/Audio/BGM/ChallengeEnd.json" id="12_y63tt"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Players/ToadNPC.json" id="14_sv6qk"]
 [ext_resource type="Texture2D" uid="uid://cxtan2ap83u3d" path="res://Assets/Sprites/UI/ChallengeMedals.png" id="14_woqpu"]
-[ext_resource type="Texture2D" uid="uid://c7jq6t1d2mhur" path="res://Assets/Sprites/Items/YoshiEgg.png" id="16_1h3k2"]
 [ext_resource type="AudioStream" uid="uid://bvyklj5qhjkvn" path="res://Assets/Audio/SFX/ChallengeMedalAward.wav" id="16_eupxr"]
 [ext_resource type="Texture2D" uid="uid://hdpdek7jitea" path="res://Assets/Sprites/Players/Yoshi.png" id="18_n4lt1"]
+[ext_resource type="Texture2D" uid="uid://sccnux5ovdi4" path="res://Assets/Sprites/UI/EggMedals.png" id="18_y63tt"]
 [ext_resource type="AudioStream" uid="uid://cl4e0p4fnpjn1" path="res://Assets/Audio/SFX/Yoshi.wav" id="19_n4lt1"]
 [ext_resource type="Texture2D" uid="uid://byy3k1pdrp77" path="res://Assets/Sprites/Particles/Smoke.png" id="20_n4lt1"]
 [ext_resource type="PackedScene" uid="uid://cinr6kcbmo6gr" path="res://Scenes/Parts/DropShadowRenderer.tscn" id="21_bob8r"]
 [ext_resource type="Script" uid="uid://dmtw1jesw1vl7" path="res://Scripts/Classes/Components/PackStreamPlayer.gd" id="21_xk7j8"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Players/Yoshi.json" id="23_vohx7"]
+[ext_resource type="AudioStream" uid="uid://b7acwb3r4teop" path="res://Assets/Audio/SFX/ChallengeModeGive.wav" id="21_y63tt"]
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="24_cq5a1"]
 [ext_resource type="Texture2D" uid="uid://ccb8wtuolj7i3" path="res://Assets/Sprites/Backgrounds/ChallengeModeResults/Results3.png" id="27_w3bjn"]
 [ext_resource type="Texture2D" uid="uid://dyckss38aqmvl" path="res://Assets/Sprites/Backgrounds/ChallengeModeResults/Results2.png" id="28_vohx7"]
@@ -51,7 +47,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-96, 16), Vector2(-40, 16)]
+"values": [Vector2(-96, 17), Vector2(-40, 17)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -147,7 +143,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0, 1.5, 3.5, 5.5, 7, 8.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [&"Idle", &"Emote", &"Emote", &"Idle", &"Emote", &"Idle"]
+"values": [&"Idle", &"Talk", &"Talk", &"Idle", &"Talk", &"Idle"]
 }
 tracks/9/type = "method"
 tracks/9/imported = false
@@ -421,6 +417,10 @@ region = Rect2(0, 0, 16, 32)
 atlas = ExtResource("7_y11uu")
 region = Rect2(16, 0, 16, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_02i7h"]
+atlas = ExtResource("7_y11uu")
+region = Rect2(32, 0, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nud7a"]
 atlas = ExtResource("7_y11uu")
 region = Rect2(32, 0, 16, 32)
@@ -428,10 +428,6 @@ region = Rect2(32, 0, 16, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_d76il"]
 atlas = ExtResource("7_y11uu")
 region = Rect2(48, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_02i7h"]
-atlas = ExtResource("7_y11uu")
-region = Rect2(32, 0, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_woqpu"]
 animations = [{
@@ -448,22 +444,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_02i7h")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nud7a")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d76il")
 }],
 "loop": true,
-"name": &"Emote",
+"name": &"Talk",
 "speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_02i7h")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 5.0
 }]
 
 [sub_resource type="Shader" id="Shader_vohx7"]
@@ -699,7 +695,7 @@ position = Vector2(72, 12)
 [node name="1" type="Sprite2D" parent="Sprite2D/Sprite2D3/Coins" unique_id=1528461058]
 position = Vector2(-5, 36)
 texture = ExtResource("10_d76il")
-hframes = 2
+hframes = 3
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
 metadata/_custom_type_script = "uid://364rywt44hy6"
@@ -707,7 +703,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 [node name="2" type="Sprite2D" parent="Sprite2D/Sprite2D3/Coins" unique_id=1836829558]
 position = Vector2(3, 36)
 texture = ExtResource("10_d76il")
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -716,7 +712,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 [node name="3" type="Sprite2D" parent="Sprite2D/Sprite2D3/Coins" unique_id=831763568]
 position = Vector2(11, 36)
 texture = ExtResource("10_d76il")
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -725,7 +721,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 [node name="4" type="Sprite2D" parent="Sprite2D/Sprite2D3/Coins" unique_id=696674550]
 position = Vector2(19, 36)
 texture = ExtResource("10_d76il")
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -734,7 +730,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 [node name="5" type="Sprite2D" parent="Sprite2D/Sprite2D3/Coins" unique_id=1701753957]
 position = Vector2(27, 36)
 texture = ExtResource("10_d76il")
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -760,19 +756,22 @@ resource_setter = NodePath("ResourceSetterNew")
 metadata/_custom_type_script = "uid://b08qfwj5jk6g1"
 
 [node name="ResourceSetterNew" type="Node" parent="PlayerSprite" unique_id=951425779]
+process_mode = 3
 script = ExtResource("7_bob8r")
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
 [node name="ChallengeResults" type="AudioStreamPlayer" parent="." unique_id=1689039047]
+process_mode = 3
 stream = ExtResource("7_6dwpv")
 bus = &"Music"
 
 [node name="ResourceSetterNew" type="Node" parent="ChallengeResults" unique_id=127176486 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("7_bob8r")
 node_to_affect = NodePath("..")
 property_name = "stream"
 mode = 2
-resource_json = ExtResource("12_fb45j")
+json_path = "res://Assets/Audio/BGM/ChallengeResults.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
 [node name="ChallengeEnd" type="AudioStreamPlayer" parent="." unique_id=377169015]
@@ -780,32 +779,32 @@ stream = ExtResource("12_x7w5s")
 bus = &"Music"
 
 [node name="ResourceSetterNew" type="Node" parent="ChallengeEnd" unique_id=593640018 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("7_bob8r")
 node_to_affect = NodePath("..")
 property_name = "stream"
 mode = 2
-resource_json = ExtResource("12_y63tt")
+json_path = "res://Assets/Audio/BGM/ChallengeEnd.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
 [node name="MainSequence" type="AnimationPlayer" parent="." unique_id=877815898]
-libraries = {
-&"": SubResource("AnimationLibrary_nud7a")
-}
+libraries/ = SubResource("AnimationLibrary_nud7a")
 autoplay = &"Main"
 speed_scale = 0.8
 
 [node name="Toad" type="AnimatedSprite2D" parent="." unique_id=130158692]
-position = Vector2(56, 0)
+position = Vector2(56, 1)
 sprite_frames = SubResource("SpriteFrames_woqpu")
 animation = &"1Idle"
 autoplay = "Idle"
 speed_scale = 2.0
 
 [node name="ResourceSetterNew" type="Node" parent="Toad" unique_id=826345731 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("7_bob8r")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_sv6qk")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 use_cache = false
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
@@ -831,11 +830,12 @@ uppercase = true
 [node name="Results" type="Label" parent="SpeechBubble/Your" unique_id=1456303163]
 use_parent_material = true
 layout_mode = 0
-offset_left = 27.0
+offset_left = -13.0
 offset_top = 8.0
-offset_right = 131.0
+offset_right = 91.0
 offset_bottom = 31.0
-text = "results"
+text = "RESULTS"
+horizontal_alignment = 2
 uppercase = true
 
 [node name="Coins" type="Label" parent="SpeechBubble" unique_id=893262062]
@@ -855,7 +855,7 @@ visible = false
 position = Vector2(52, 12)
 texture = ExtResource("10_d76il")
 centered = false
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -865,7 +865,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 position = Vector2(60, 12)
 texture = ExtResource("10_d76il")
 centered = false
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -875,7 +875,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 position = Vector2(68, 12)
 texture = ExtResource("10_d76il")
 centered = false
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -885,7 +885,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 position = Vector2(76, 12)
 texture = ExtResource("10_d76il")
 centered = false
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -895,7 +895,7 @@ metadata/_custom_type_script = "uid://364rywt44hy6"
 position = Vector2(84, 12)
 texture = ExtResource("10_d76il")
 centered = false
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(8, 0, 8, 8)
 script = ExtResource("3_xe6g7")
@@ -949,11 +949,13 @@ script = ExtResource("3_xe6g7")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
 [node name="YoshiEgg" type="Sprite2D" parent="Sprite2D3" unique_id=1296085224]
+unique_name_in_owner = true
 visible = false
 position = Vector2(46, 12)
-texture = ExtResource("16_1h3k2")
+texture = ExtResource("18_y63tt")
 hframes = 2
-vframes = 4
+vframes = 2
+frame = 2
 script = ExtResource("3_xe6g7")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
@@ -965,7 +967,7 @@ metadata/_custom_type_script = "uid://dmtw1jesw1vl7"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2109458546]
 process_mode = 3
-stream = ExtResource("11_nym8o")
+stream = ExtResource("21_y63tt")
 bus = &"SFX"
 script = ExtResource("21_xk7j8")
 metadata/_custom_type_script = "uid://dmtw1jesw1vl7"
@@ -980,7 +982,7 @@ metadata/_custom_type_script = "uid://dmtw1jesw1vl7"
 [node name="Yoshi" type="AnimatedSprite2D" parent="." unique_id=227881632]
 process_mode = 3
 visible = false
-position = Vector2(16, 0)
+position = Vector2(16, 1)
 sprite_frames = SubResource("SpriteFrames_21ujm")
 animation = &"1"
 autoplay = "1"
@@ -1000,10 +1002,11 @@ themed_resource = SubResource("Resource_vohx7")
 metadata/_custom_type_script = "uid://cq6f682453q6o"
 
 [node name="ResourceSetterNew" type="Node" parent="Yoshi" unique_id=1898262442 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("7_bob8r")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("23_vohx7")
+json_path = "res://Assets/Sprites/Players/Yoshi.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
 [node name="SmokeParticle" type="AnimatedSprite2D" parent="." unique_id=865577033]
@@ -1018,7 +1021,7 @@ offset_left = -112.0
 offset_top = -112.0
 offset_right = -64.0
 offset_bottom = -89.0
-text = "world"
+text = "HUD_WORLD"
 uppercase = true
 
 [node name="WorldLevel" type="Label" parent="." unique_id=1548529906]

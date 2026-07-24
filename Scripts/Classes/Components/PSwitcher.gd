@@ -1,7 +1,7 @@
 class_name PSwitcher
 extends Node
 
-var enabled := true
+@export var enabled := true
 @export_file("*.tscn") var new_scene := ""
 @export var new_offset := Vector2.ZERO
 
@@ -25,4 +25,4 @@ func switch_to_other() -> void:
 		for i in properties:
 			new.set(i, owner.get(i))
 		owner.call_deferred("add_sibling", new)
-	owner.queue_free()
+		owner.queue_free()

@@ -3,8 +3,6 @@ extends Node
 
 @export var auto_call := true
 
-@export var visuals: Node2D = null
-
 func _physics_process(delta: float) -> void:
 	if auto_call:
 		handle_movement(delta)

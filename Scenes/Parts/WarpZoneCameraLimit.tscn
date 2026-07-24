@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0peppjq7jrcp"]
+[gd_scene format=3 uid="uid://b0peppjq7jrcp"]
 
 [ext_resource type="Script" uid="uid://cm3twgvpdyjbw" path="res://Scripts/Parts/WarpZoneCameraLimit.gd" id="1_0xtta"]
 
-[node name="WarpZoneCameraLimit" type="Node2D"]
+[node name="WarpZoneCameraLimit" type="Node2D" unique_id=1714087646]
 process_mode = 4
 script = ExtResource("1_0xtta")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=892823660]
 
 [connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="enter_screen"]

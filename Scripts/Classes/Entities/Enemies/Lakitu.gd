@@ -18,8 +18,14 @@ var retreat := false
 
 var can_enter := false
 
+@export var max_spiny_amount := 3
+
 static var spiny_amount := 0
-@export var item: PackedScene = null
+@export var item: PackedScene = null:
+	set(value):
+		item = value
+		set_meta_data()
+		
 @export var retreat_x := 3072
 
 func _ready() -> void:
@@ -36,7 +42,8 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 
 func handle_movement(_delta: float) -> void:
-	retreat = Global.get_game_viewport().get_camera_2d().get_screen_center_position().x >= retreat_x
+	if Global.get_game_viewport().get_camera_2d().get_screen_center_position().x >= retreat_x:
+		retreat = true
 	var player_x = player.global_position.x + ((player.velocity.x))
 	var distance = abs(global_position.x - player_x)
 	get_direction(player_x)
@@ -46,6 +53,9 @@ func handle_movement(_delta: float) -> void:
 		velocity.x = -48
 	$Cloud.scale.x = direction
 	move_and_slide()
+
+func start_retreat() -> void:
+	retreat = true
 
 func get_direction(player_x := 0.0) -> void:
 	if retreat:
@@ -58,12 +68,14 @@ func get_direction(player_x := 0.0) -> void:
 		direction = -1
 
 func summon_cloud_particle() -> void:
+	if Settings.file.visuals.extra_particles == 0:
+		return
 	var node = preload("res://Scenes/Prefabs/Particles/LakituCloudBurst.tscn").instantiate()
 	node.global_position = $Cloud.global_position
 	add_sibling(node)
 
 func on_timeout() -> void:
-	if spiny_amount >= 3 or retreat or $WallCheck.is_colliding():
+	if spiny_amount >= max_spiny_amount or retreat or $WallCheck.is_colliding():
 		return
 	$Cloud/Sprite.play("Throw")
 	await get_tree().create_timer(0.5, false).timeout
@@ -76,8 +88,8 @@ func throw_spiny() -> void:
 	spiny_amount += 1
 	node.set("in_egg", true)
 	node.global_position = $Cloud/Sprite.global_position
-	node.velocity = Vector2(0, -150)
-	if Settings.file.difficulty.lakitu_style == 1:
+	node.set("velocity", Vector2(0, -200))
+	if Settings.file.gameplay.lakitu_style == 1:
 		node.velocity.x = 50 * (sign(player.global_position.x - global_position.x))
 		node.set("direction", sign(node.velocity.x))
 	add_sibling(node)
@@ -92,3 +104,7 @@ func on_screen_entered() -> void:
 	add_to_group("Lakitus")
 	if get_tree().get_node_count_in_group("Lakitus") >= 2:
 		queue_free()
+
+func set_meta_data():
+	var item_path = item.resource_path
+	set_meta("Item", item_path.right(-item_path.rfind("/") - 1).left(-5))

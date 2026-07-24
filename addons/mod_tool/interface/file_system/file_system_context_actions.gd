@@ -30,10 +30,15 @@ func connect_file_system_context_actions(file_system : FileSystemDock) -> void:
 	var file_list : ItemList
 
 	for node in file_system.get_children():
-		if is_instance_of(node, SplitContainer):
-			file_tree = node.get_child(0)
-			file_list = node.get_child(1).get_child(1)
-			break
+		if node is VBoxContainer || node is HBoxContainer:
+			for i in get_all_children(node):
+				if (i is Tree):
+					file_tree = i
+			for j in get_all_children(node):
+				if (j is ItemList):
+					file_list = j
+			if (file_tree != null && file_list != null):
+				break
 
 	for node in file_system.get_children():
 		var context_menu : PopupMenu = node as PopupMenu
@@ -46,9 +51,9 @@ func connect_file_system_context_actions(file_system : FileSystemDock) -> void:
 		if not signals.is_empty():
 			match signals[0]["callable"].get_method():
 				&"FileSystemDock::_tree_rmb_option":
-					context_menu.about_to_popup.connect(_on_file_tree_context_actions_about_to_popup.bind(context_menu, file_tree))
+					context_menu.about_to_popup.connect(_on_file_tree_context_actions_about_to_popup.bind(context_menu, file_tree, file_system))
 				&"FileSystemDock::_file_list_rmb_option":
-					context_menu.about_to_popup.connect(_on_file_list_context_actions_about_to_popup.bind(context_menu, file_tree))
+					context_menu.about_to_popup.connect(_on_file_list_context_actions_about_to_popup.bind(context_menu, file_tree, file_system))
 
 
 # Called every time the file system context actions pop up
@@ -129,7 +134,6 @@ func create_mod_hook_file(file_path: String) -> String:
 
 	var hook_file_name := "%s.hooks.%s" % [file_path.get_file().get_basename(), file_path.get_extension()]
 	var extension_path := extension_directory.path_join(hook_file_name)
-	print(extension_path)
 	var file := FileAccess.open(extension_path, FileAccess.WRITE)
 	if not FileAccess.file_exists(extension_path):
 		file.store_line('extends Object')
@@ -250,7 +254,7 @@ func create_overwrite_asset(file_path: String) -> String:
 
 	EditorInterface.get_resource_filesystem().scan()
 	EditorInterface.get_file_system_dock().navigate_to_path(overwrite_path)
-
+	
 	return overwrite_path
 
 
@@ -282,7 +286,7 @@ func _init():
 		overwrite_resources.push_back(overwrite_resource)
 		overwrite_resource.take_over_path(vanilla_path)
 """
-
+	
 	# overwrite.gd does not exist yet
 	if not FileAccess.file_exists(overwrites_script_path):
 		overwrites_script = GDScript.new()
@@ -460,12 +464,13 @@ func handle_override_creation(metadata: Dictionary) -> void:
 	var file_paths: Array[String] = metadata.mod_tool_override_paths
 	var current_script: GDScript
 	var overwrites_path := mod_tool_store.path_mod_dir.path_join("overwrites.gd")
-
+	
 	for file_path in file_paths:
+		
 		var asset_path := create_overwrite_asset(file_path)
 		if asset_path:
 			add_asset_overwrite_to_overwrites(file_path, asset_path)
-
+	
 	current_script = EditorInterface.get_script_editor().get_current_script()
 
 	mod_tool_store.pending_reloads.push_back(overwrites_path)
@@ -514,8 +519,13 @@ func handle_mod_hook_restore(metadata: Dictionary) -> void:
 		if current_script.resource_path == file_path:
 			ModToolUtils.reload_script(current_script, mod_tool_store)
 
+func get_all_children(in_node, arr := []):
+	arr.push_back(in_node)
+	for child in in_node.get_children():
+		arr = get_all_children(child, arr)
+	return arr
 
-func _on_file_tree_context_actions_about_to_popup(context_menu: PopupMenu, tree: Tree) -> void:
+func _on_file_tree_context_actions_about_to_popup(context_menu: PopupMenu, tree: Tree, file_system: FileSystemDock) -> void:
 	var selected := tree.get_next_selected(null)
 	if not selected:		# Empty space was clicked
 		return
@@ -548,7 +558,7 @@ func _on_file_system_context_menu_pressed(id: int, context_menu: PopupMenu) -> v
 	var file_paths: PackedStringArray
 	var metadata = context_menu.get_item_metadata(id)
 	var current_script: GDScript
-
+	
 	# Ensure that the metadata is actually set by the ModTool
 	# Since id and index of the item can always change
 	if metadata is Dictionary and metadata.has("mod_tool_script_paths"):

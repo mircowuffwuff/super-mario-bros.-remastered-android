@@ -9,6 +9,8 @@ func _ready() -> void:
 		$TurnTimer.start()
 
 func _physics_process(delta: float) -> void:
+	if $TrackJoint.is_attached:
+		return
 	if can_move:
 		$Movement.handle_movement(delta)
 	else:
@@ -29,7 +31,10 @@ func throw_ball() -> void:
 func summon_ball() -> void:
 	var ball = SPIKE_BALL.instantiate()
 	ball.global_position = %Ball.global_position
-	add_sibling(ball)
+	var parent = get_parent()
+	if $TrackJoint.is_attached:
+		parent = get_parent().owner.get_parent()
+	parent.add_child(ball)
 	ball.velocity.x = 100 * direction
 
 

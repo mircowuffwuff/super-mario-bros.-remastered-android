@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://csl71p1unsc8p"]
+[gd_scene format=3 uid="uid://csl71p1unsc8p"]
 
 [ext_resource type="PackedScene" uid="uid://bn1kect7h2dlp" path="res://Scenes/Prefabs/LevelObjects/BulletBillGenerator.tscn" id="1_3kjea"]
 [ext_resource type="PackedScene" uid="uid://cwyxi1uihf35y" path="res://Scenes/Prefabs/Entities/Enemies/LeapingCheepCheep.tscn" id="2_kcmvv"]
 [ext_resource type="Texture2D" uid="uid://7vndrgnnti11" path="res://Assets/Sprites/Editor/CheepCheepGenerator.png" id="3_y6j8r"]
 
-[node name="EntityGenerator" instance=ExtResource("1_3kjea")]
+[node name="EntityGenerator" unique_id=632048322 instance=ExtResource("1_3kjea")]
 threshold = 1.0
 direction = 1
 entity_scene = ExtResource("2_kcmvv")
 
-[node name="Sprite" parent="LevelEditorVisibleNode" index="0"]
+[node name="Sprite" parent="LevelEditorVisibleNode" parent_id_path=PackedInt32Array(1819047736) index="0" unique_id=2086579252]
 texture = ExtResource("3_y6j8r")

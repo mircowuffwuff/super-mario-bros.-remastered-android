@@ -3,14 +3,15 @@ extends Node
 var file := {
 	"video": {
 		"mode": 1,
-		"size": 1,
+		"size": 2,
+		"multiplier": 3,
 		"vsync": 1,
 		"drop_shadows": 1,
 		"scaling": 1,
 		"visuals": 1,
 		"hud_size": 0, 
 		"frame_limit" : 0,
-		"window_size": [256, 240]
+		"window_size": [1024, 960]
 	},
 	"audio": {
 		"master": 10,
@@ -25,7 +26,18 @@ var file := {
 	},
 	"game": {
 		"campaign": "SMB1",
-		"lang": "en"
+		"lang": "en",
+	},
+	"editor": {
+		"seen_guide": false,
+		
+		"show_trail": false,
+		"show_grid": true,
+		"show_gizmos": true,
+		
+		"autosave_enabled": true,
+		"autosave_min_timer": 5,
+		"autosave_before_test": false
 	},
 	"osc": {
 		"visibility": 0,
@@ -47,6 +59,7 @@ var file := {
 	},
 	"controller":
 	{
+		"deadzone": 0.5,
 		"jump": [0, 1],
 		"run": [2, 3],
 		"action": [2, 3],
@@ -78,22 +91,29 @@ var file := {
 		"firebar_style": 0,
 		"extra_particles": 0
 	},
+	"gameplay":
+	{
+		"physics_style": 1,
+		"checkpoint_style": 0,
+		"back_scroll": 0,
+		"spiny_style": 1,
+		"lakitu_style": 0,
+		"hammer_bro_style": 1,
+		"bowser_style": 1,
+	},
 	"difficulty":
 	{
 		"damage_style": 1,
-		"checkpoint_style": 0,
+		"level_design": 0,
+		"time_limit": 1,
 		"inf_lives": 0,
 		"flagpole_lives": 0,
 		"game_over_behaviour": 0,
-		"level_design": 0,
 		"extra_checkpoints": 0,
-		"back_scroll": 0,
-		"time_limit": 1,
-		"lakitu_style": 0
 	}
 }
 
-static var SETTINGS_DIR := Global.config_path.path_join("settings.cfg")
+static var SETTINGS_DIR: String = Global.config_path.path_join("settings.cfg")
 
 func _enter_tree() -> void:
 	DirAccess.make_dir_absolute(Global.config_path.path_join("resource_packs"))
@@ -107,17 +127,19 @@ func _enter_tree() -> void:
 	#Settings.refresh_window_size(size)
 	#print(file.video.size)
 	TranslationServer.set_locale(Settings.file.game.lang)
-	get_window().size_changed.connect(update_window_size)
-
-func update_window_size() -> void:
-	var window_size = get_window().size
-	Settings.file.video.window_size = [window_size.x, window_size.y]
+	get_last_exclusive_window().size_changed.connect(on_window_resized)
 
 func save_settings() -> void:
 	var cfg_file = ConfigFile.new()
-	for section in file.keys():
-		for key in file[section].keys():
-			cfg_file.set_value(section, key, file[section][key])
+	var file_to_save = file.duplicate_deep()
+	var idx := 0
+	for i in file_to_save.visuals.resource_packs:
+		if i == Global.custom_pack:
+			file_to_save.visuals.resource_packs.remove_at(idx)
+		idx += 1
+	for section in file_to_save.keys():
+		for key in file_to_save[section].keys():
+			cfg_file.set_value(section, key, file_to_save[section][key])
 	cfg_file.set_value("game", "seen_disclaimer", true)
 	cfg_file.set_value("game", "campaign", Global.current_campaign)
 	cfg_file.save(SETTINGS_DIR)
@@ -130,6 +152,8 @@ func load_settings() -> void:
 	for section in cfg_file.get_sections():
 		for key in cfg_file.get_section_keys(section):
 			file[section][key] = cfg_file.get_value(section, key)
+			print([section, key, cfg_file.get_value(section, key)])
+			print(file[section][key])
 	fix_broken_settings()
 
 func fix_broken_settings() -> void:
@@ -148,6 +172,33 @@ func apply_settings() -> void:
 		for i in Settings.file.game.characters:
 			Global.player_characters[idx] = int(i)
 			idx += 1
+	if Global.CAMPAIGNS.has(Global.current_campaign) == false:
+		Global.current_campaign = "SMB1"
 
 func refresh_window_size(value) -> void:
 	$Apply/Video.set_value("size", value)
+
+## Used for the settings menu to update when pressing the fullscreen shortcut.
+signal fullscreen_toggled
+
+## The last window mode before toggle to Fullscreen.
+var old_mode_value := 0
+
+## Toggle Fullscreen with the press of a shortcut.
+func toggle_fullscreen() -> void:
+	if (Settings.file.video.mode != 3):
+		old_mode_value = Settings.file.video.mode
+		$Apply/Video.window_mode_changed(3)
+	else:
+		$Apply/Video.window_mode_changed(old_mode_value)
+	fullscreen_toggled.emit()
+
+func on_window_resized() -> void:
+	var window_size = get_viewport().get_window().size
+	if get_viewport().get_window().mode == Window.Mode.MODE_MAXIMIZED:
+		Settings.file.video.mode = 1
+	elif get_viewport().get_window().mode == Window.Mode.MODE_WINDOWED:
+		Settings.file.video.mode = 0
+	Settings.file.video.window_size[0] = window_size.x
+	Settings.file.video.window_size[1] = window_size.y
+	Settings.save_settings()

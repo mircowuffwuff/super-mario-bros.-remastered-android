@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cassl51oehlb6"]
+[gd_scene format=3 uid="uid://cassl51oehlb6"]
 
 [ext_resource type="Script" uid="uid://hk6ml16axmcc" path="res://Scripts/Classes/Entities/Objects/CheckpointFlag.gd" id="1_5d61x"]
 [ext_resource type="Script" uid="uid://dtdc4oaygllfa" path="res://Scripts/Parts/Checkpoint.gd" id="1_dai6d"]
 [ext_resource type="Texture2D" uid="uid://3rk8lq7kdaox" path="res://Assets/Sprites/Items/CheckpointFlag.png" id="1_iutnx"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_sdjg4"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/CheckpointFlag.json" id="4_2u6vm"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="4_dai6d"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="7_2u6vm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dai6d"]
 atlas = ExtResource("1_iutnx")
@@ -41,7 +41,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dai6d")
 }],
-"loop": false,
+"loop": 0,
 "name": &"Hit",
 "speed": 20.0
 }, {
@@ -49,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2u6vm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 5.0
 }]
@@ -59,50 +59,58 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dai6d"]
 size = Vector2(8, 32)
 
-[node name="CheckpointFlag" type="Node2D"]
+[node name="CheckpointFlag" type="Node2D" unique_id=268694612]
 z_index = -5
 script = ExtResource("1_dai6d")
 metadata/is_flag = true
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=313542870]
 process_mode = 3
 position = Vector2(8, -16)
 sprite_frames = SubResource("SpriteFrames_1u6i2")
 animation = &"Hit"
 autoplay = "Idle"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=588317761 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_sdjg4")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_2u6vm")
+json_path = "res://Assets/Sprites/Items/CheckpointFlag.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Activated" type="AnimatedSprite2D" parent="."]
+[node name="Activated" type="AnimatedSprite2D" parent="." unique_id=1760330322]
 visible = false
 position = Vector2(8, -16)
 sprite_frames = SubResource("SpriteFrames_sdjg4")
 
-[node name="ResourceSetterNew" type="Node" parent="Activated" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Activated" unique_id=1952035775 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_sdjg4")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Players/Mario/CheckpointFlag.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="PlayerDetection" type="Area2D" parent="."]
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=1190311934]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=1162448773]
 position = Vector2(2, -16)
 shape = SubResource("RectangleShape2D_dai6d")
 
-[node name="Flag" type="Node2D" parent="."]
+[node name="Flag" type="Node2D" parent="." unique_id=789769548]
 script = ExtResource("1_5d61x")
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=805385428]
 script = ExtResource("4_dai6d")
 note_offset = Vector2(0, -24)
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1288270678]
+script = ExtResource("7_2u6vm")
+properties = Array[String](["give_mushroom"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
 [connection signal="crossed" from="." to="Flag" method="activate"]
 [connection signal="crossed" from="." to="ScoreNoteSpawner" method="spawn_note" binds= [2000]]

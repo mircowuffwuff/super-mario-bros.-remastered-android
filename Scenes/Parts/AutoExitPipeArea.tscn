@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ch20va50duqps"]
+[gd_scene format=3 uid="uid://ch20va50duqps"]
 
 [ext_resource type="PackedScene" uid="uid://dkgu57is78lro" path="res://Scenes/Parts/PipeArea.tscn" id="1_0lajc"]
 
-[node name="AutoExitPipeArea" instance=ExtResource("1_0lajc")]
+[node name="AutoExitPipeArea" unique_id=1866674137 instance=ExtResource("1_0lajc")]
 
-[node name="Visual" parent="." index="0"]
+[node name="Visual" parent="." index="0" unique_id=335893336]
 debug_color = Color(0.65145713, 0.34785283, 0.72637105, 0.41960785)
 
 [connection signal="ready" from="." to="." method="exit_pipe"]

@@ -1,50 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://kj5pw3xhq8f7"]
+[gd_scene format=3 uid="uid://kj5pw3xhq8f7"]
 
-[ext_resource type="PackedScene" uid="uid://1rxw4k4wq3ni" path="res://Scenes/Prefabs/Entities/Enemies/PiranhaPlant.tscn" id="1_6wd2m"]
-[ext_resource type="Texture2D" uid="uid://dbq6cn2hp6ijx" path="res://Assets/Sprites/Enemies/PiranhaPlant.png" id="2_jkccd"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/RedPiranhaPlant.json" id="3_jkccd"]
+[ext_resource type="PackedScene" uid="uid://1rxw4k4wq3ni" path="res://Scenes/Prefabs/Entities/Enemies/PiranhaPlant.tscn" id="1_potth"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xlwxk"]
-atlas = ExtResource("2_jkccd")
-region = Rect2(0, 0, 16, 24)
+[node name="PirannhaPlant" unique_id=877679531 instance=ExtResource("1_potth")]
+rise_animation = "RiseRed"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4qm6i"]
-atlas = ExtResource("2_jkccd")
-region = Rect2(16, 0, 16, 24)
+[node name="ResourceSetterNew" parent="RotationJoint/PositionJoint/Visuals/Sprite" parent_id_path=PackedInt32Array(533885688, 211744012) index="0" unique_id=1028226469]
+json_path = "res://Assets/Sprites/Enemies/RedPiranhaPlant.json"
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ep4ch"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xlwxk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4qm6i")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
+[node name="ResourceSetterNew" parent="RotationJoint/LevelEditorVisibleNode/Sprite" parent_id_path=PackedInt32Array(280669304) index="0" unique_id=2135118533]
+json_path = "res://Assets/Sprites/Enemies/RedPiranhaPlant.json"
 
-[node name="RedPirannhaPlant" instance=ExtResource("1_6wd2m")]
-player_range = 16
-
-[node name="Sprite" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_ep4ch")
-frame_progress = 0.762071
-
-[node name="CollisionShape2D" parent="Sprite/Hitbox" index="0"]
-visible = false
-position = Vector2(0, -9.75)
-
-[node name="ResourceSetterNew" parent="Sprite" index="1"]
-resource_json = ExtResource("3_jkccd")
-
-[node name="Animation" parent="." index="1"]
+[node name="Animation" parent="." index="4" unique_id=1714542832]
 speed_scale = 2.0
 
-[node name="ResourceSetterNew" parent="LevelEditorVisibleNode/Sprite" index="0"]
-resource_json = ExtResource("3_jkccd")
-
-[node name="SecondQuestReplacer" parent="." index="9"]
+[node name="SecondQuestReplacer" parent="." index="7" unique_id=1574329925]
 new_scene = ""
+
+[editable path="RotationJoint/PositionJoint/Visuals"]

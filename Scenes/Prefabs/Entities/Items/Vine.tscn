@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkxkrqflg46b2"]
+[gd_scene format=3 uid="uid://dkxkrqflg46b2"]
 
 [ext_resource type="Texture2D" uid="uid://ck2ac2a266r6i" path="res://Assets/Sprites/Items/Vine.png" id="1_pfdri"]
 [ext_resource type="AudioStream" uid="uid://bdm8wm7vy4r12" path="res://Assets/Audio/SFX/VineAppear.wav" id="2_ap2o3"]
 [ext_resource type="Script" uid="uid://cxtvy2qolon2f" path="res://Scripts/Classes/Entities/Items/Vine.gd" id="2_tlgk1"]
-[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_ni768"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_e75m7"]
 [ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="4_m01lk"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/Vine.json" id="4_q1cik"]
 [ext_resource type="Script" uid="uid://cq6f682453q6o" path="res://Scripts/Classes/Components/ResourceSetter.gd" id="6_ohmvf"]
 [ext_resource type="Script" uid="uid://cmvlgsjmsk0v5" path="res://Scripts/Classes/Resources/ThemedResource.gd" id="7_e75m7"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="9_e75m7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ap2o3"]
 resource_local_to_scene = true
@@ -19,56 +19,121 @@ Overworld = ExtResource("2_ap2o3")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ssycu"]
+radius = 4.0
 
-[node name="Vine" type="Node2D"]
+[sub_resource type="GDScript" id="GDScript_ohmvf"]
+script/source = "extends Node
+@onready var collision: CollisionShape2D = $\"../Hitbox/Collision\"
+
+func _physics_process(_delta: float) -> void:
+	if Global.level_editor_is_playtesting() == false and owner.can_grow == false and not owner.finished:
+		handle_sizing()
+
+func handle_sizing() -> void:
+	%Middle.position.y = %Top.position.y + 8
+	%Middle.size.y = abs(%Top.global_position.y - %Bottom.global_position.y) - 16
+	%Bottom.position.y = owner.length * 16 - 16
+	collision.shape.size.y = owner.length * 16
+	collision.position.y = collision.shape.size.y / 2
+"
+
+[node name="Vine" type="Node2D" unique_id=1927177956]
 z_index = -5
 script = ExtResource("2_tlgk1")
+top_point = -99999
+can_tele = false
 
-[node name="Visuals" type="NinePatchRect" parent="."]
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-pivot_offset = Vector2(8, 8)
+[node name="Visuals" type="Node2D" parent="." unique_id=1356050465]
+
+[node name="Top" type="Sprite2D" parent="Visuals" unique_id=737542036]
+unique_name_in_owner = true
 texture = ExtResource("1_pfdri")
-patch_margin_top = 16
-axis_stretch_vertical = 1
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
 
-[node name="ResourceSetterNew" type="Node" parent="Visuals" node_paths=PackedStringArray("node_to_affect")]
-script = ExtResource("3_ni768")
+[node name="ResourceSetterNew" type="Node" parent="Visuals/Top" unique_id=824773028 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_e75m7")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_q1cik")
+json_path = "res://Assets/Sprites/Items/Vine.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Middle" type="NinePatchRect" parent="Visuals" unique_id=1848044494]
+unique_name_in_owner = true
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = ExtResource("1_pfdri")
+region_rect = Rect2(0, 16, 16, 16)
+axis_stretch_vertical = 1
+
+[node name="ResourceSetterNew" type="Node" parent="Visuals/Middle" unique_id=703421939 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_e75m7")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Items/Vine.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Bottom" type="Sprite2D" parent="Visuals" unique_id=709992208]
+unique_name_in_owner = true
+texture = ExtResource("1_pfdri")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="ResourceSetterNew" type="Node" parent="Visuals/Bottom" unique_id=357439461 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_e75m7")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Items/Vine.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1558826366]
 position = Vector2(-8, -8)
 
-[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+[node name="Collision" type="CollisionShape2D" parent="Hitbox" unique_id=248728446]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_ap2o3")
 
-[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+[node name="SFX" type="AudioStreamPlayer2D" parent="." unique_id=1450888137]
 stream = ExtResource("2_ap2o3")
-autoplay = true
 bus = &"SFX"
 
-[node name="ResourceSetter" type="Node" parent="SFX" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="SFX" unique_id=2131516720 node_paths=PackedStringArray("node_to_affect")]
 script = ExtResource("6_ohmvf")
 node_to_affect = NodePath("..")
 property_name = "stream"
 themed_resource = SubResource("Resource_cmcye")
 metadata/_custom_type_script = "uid://cq6f682453q6o"
 
-[node name="WarpHitbox" type="Area2D" parent="."]
+[node name="WarpHitbox" type="Area2D" parent="." unique_id=160890404]
 script = ExtResource("4_m01lk")
 metadata/_custom_type_script = "uid://cnheej0sxmoxg"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WarpHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WarpHitbox" unique_id=1130500755]
 shape = SubResource("CircleShape2D_ssycu")
 disabled = true
 
+[node name="Node" type="Node" parent="." unique_id=129581238]
+process_mode = 3
+script = SubResource("GDScript_ohmvf")
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=595958086]
+script = ExtResource("9_e75m7")
+properties = Array[String](["length"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="CeilingCheck" type="RayCast2D" parent="." unique_id=699406085]
+unique_name_in_owner = true
+position = Vector2(0, 8)
+target_position = Vector2(0, -8)
+collision_mask = 2
+
 [connection signal="area_exited" from="Hitbox" to="." method="on_area_exited"]
-[connection signal="sprites_updated" from="SFX/ResourceSetter" to="SFX" method="play"]
 [connection signal="player_entered" from="WarpHitbox" to="." method="on_player_entered"]

@@ -1,26 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq355ycinib3p"]
-
+[gd_scene format=3 uid="uid://bq355ycinib3p"]
 [ext_resource type="PackedScene" uid="uid://ba2w224ffs88p" path="res://Scenes/Levels/SMBLL/World8/8-4a.tscn" id="1_aa1yb"]
 [ext_resource type="Script" uid="uid://bjs5mlc3xrxud" path="res://Scripts/Parts/DiscoLevel.gd" id="2_6xm61"]
 [ext_resource type="PackedScene" uid="uid://1rxw4k4wq3ni" path="res://Scenes/Prefabs/Entities/Enemies/PiranhaPlant.tscn" id="3_6xm61"]
-
-[node name="8-4a" instance=ExtResource("1_aa1yb")]
-theme_time = "Night"
+[node name="8-4a" unique_id=902469562 instance=ExtResource("1_aa1yb")]
 campaign = "SMBANN"
-
-[node name="PipeArea2" parent="." index="8"]
+[node name="PipeArea2" parent="." index="8" unique_id=1000574229]
 target_level = "uid://ck5d1abcduiku"
-
-[node name="RedPirannhaPlant" parent="." index="9"]
+[node name="RedPirannhaPlant" parent="." index="9" unique_id=1755895216]
 position = Vector2(-216, 288)
-
-[node name="LevelBG" parent="." index="14"]
+[node name="LevelBG" parent="." index="14" unique_id=965679748]
 time_of_day = 1
-
-[node name="DiscoLevel" type="Node" parent="." index="16"]
+[node name="DiscoLevel" type="Node" parent="." index="16" unique_id=58480806]
 script = ExtResource("2_6xm61")
 combo_meter_rate = 0.1
 metadata/_custom_type_script = "uid://bjs5mlc3xrxud"
-
-[node name="PirannhaPlant" parent="." index="17" instance=ExtResource("3_6xm61")]
+[node name="PirannhaPlant" parent="." index="17" unique_id=1442858637 instance=ExtResource("3_6xm61")]
 position = Vector2(-192, -32)

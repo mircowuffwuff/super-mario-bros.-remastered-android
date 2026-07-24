@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://ivcbqb21gx8b"]
+
+[ext_resource type="Script" uid="uid://wrtlstuv8bix" path="res://Scripts/Classes/Gizmos/Timer.gd" id="1_1xm48"]
+[ext_resource type="Texture2D" uid="uid://w2bfti6riv20" path="res://Assets/Sprites/Editor/Gizmos/Timer.png" id="2_855jj"]
+[ext_resource type="FontFile" uid="uid://cwv0t2khcwe00" path="res://Assets/Sprites/Editor/Gizmos/CounterFont.png" id="3_3cy1h"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_7kkwh"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_855jj"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="5_7kkwh"]
+[ext_resource type="PackedScene" uid="uid://cxrx8ogihsuad" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyFloatRangeSpin.tscn" id="6_et032"]
+
+[node name="BaseOutput" type="Node2D" unique_id=515746201 groups=["Gizmos"]]
+process_mode = 3
+script = ExtResource("1_1xm48")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1224179792]
+texture = ExtResource("2_855jj")
+hframes = 2
+frame = 1
+
+[node name="Label" type="Label" parent="Sprite" unique_id=397278501]
+unique_name_in_owner = true
+modulate = Color(0.23921569, 0.24313726, 0.23921569, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_3cy1h")
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1403115602]
+script = ExtResource("3_7kkwh")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="Timer" type="Timer" parent="." unique_id=781792681]
+process_mode = 1
+one_shot = true
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1294009337]
+script = ExtResource("4_855jj")
+properties = Array[String](["duration", "loop", "reset_when_lost_power"])
+properties_force_selector = Dictionary[String, PackedScene]({
+"duration": ExtResource("6_et032")
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=544234059]
+script = ExtResource("5_7kkwh")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="lost_power" from="SignalExposer" to="." method="on_lost_power"]
+[connection signal="powered_off" from="SignalExposer" to="." method="on_powered_off"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="start_timer"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="start_timer"]
+[connection signal="timeout" from="Timer" to="." method="timeout"]
+[connection signal="timeout" from="Timer" to="SignalExposer" method="emit_pulse"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="level_start"]

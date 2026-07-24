@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ThemedResource" load_steps=16 format=3 uid="uid://8kt7ubo0xk7y"]
+[gd_resource type="Resource" script_class="ThemedResource" format=3 uid="uid://8kt7ubo0xk7y"]
 
 [ext_resource type="Texture2D" uid="uid://bk0p52ttwojml" path="res://Assets/Sprites/Tilesets/Platform.png" id="1_md2y0"]
 [ext_resource type="Texture2D" uid="uid://dydljla7iancf" path="res://Assets/Sprites/Tilesets/LLPlatform.png" id="2_g4u7w"]

@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkgu57is78lro"]
+[gd_scene format=3 uid="uid://dkgu57is78lro"]
 
 [ext_resource type="Texture2D" uid="uid://c8yio3lpcsvqu" path="res://Assets/Sprites/UI/PipeArrow.png" id="1_5qh6k"]
 [ext_resource type="Script" uid="uid://bqqbvhchdvhyv" path="res://Scripts/Classes/Entities/PipeArea.gd" id="1_w8y82"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="3_0pvle"]
 [ext_resource type="Texture2D" uid="uid://dlldh5aks0wff" path="res://Assets/Sprites/Editor/GhostTile.png" id="3_4vmio"]
+[ext_resource type="Texture2D" uid="uid://d3w3ydebdoimy" path="res://Assets/Sprites/Editor/PipeOutline.png" id="3_10g1e"]
 [ext_resource type="PackedScene" uid="uid://dse5pwhodrqcr" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyIntRangeSpin.tscn" id="4_g36rp"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="6_10g1e"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="8_f4pwd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lv0oh"]
 size = Vector2(16, 16)
@@ -12,58 +15,75 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qh6k"]
 size = Vector2(4, 4)
 
-[node name="PipeArea" type="Node2D" groups=["Pipes"]]
+[node name="PipeArea" type="Node2D" unique_id=2023971993 groups=["Pipes"]]
+visibility_layer = 2
 script = ExtResource("1_w8y82")
 target_level = "uid://gbcmqonky63j"
 
-[node name="Visual" type="CollisionShape2D" parent="."]
+[node name="Visual" type="CollisionShape2D" parent="." unique_id=335893336]
 shape = SubResource("RectangleShape2D_lv0oh")
 debug_color = Color(0, 0.6, 0, 0.419608)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1995709228]
 priority = -1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1235478095]
 shape = SubResource("RectangleShape2D_5qh6k")
 
-[node name="ArrowJoint" type="Node2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1248282748]
+offset_left = -16.0
+offset_bottom = 16.0
+texture = ExtResource("3_4vmio")
 
-[node name="Arrow" type="Sprite2D" parent="ArrowJoint"]
+[node name="ArrowJoint" type="Node2D" parent="." unique_id=589259211]
+
+[node name="Arrow" type="Sprite2D" parent="ArrowJoint" unique_id=148507863]
 position = Vector2(0, -8)
 texture = ExtResource("1_5qh6k")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="ArrowJoint"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="ArrowJoint" unique_id=593610837]
 position = Vector2(0, 8)
 remote_path = NodePath("../../Node2D")
 update_rotation = false
 update_scale = false
 
-[node name="TargetPoint" type="Node2D" parent="ArrowJoint"]
+[node name="TargetPoint" type="Node2D" parent="ArrowJoint" unique_id=667040706]
 position = Vector2(0, 32)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="ColorRect" type="Sprite2D" parent="ArrowJoint" unique_id=1106163041]
+show_behind_parent = true
+position = Vector2(0, 8)
+texture = ExtResource("3_10g1e")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1862855632]
 z_index = 50
 z_as_relative = false
-position = Vector2(-3.496911e-07, 8)
+position = Vector2(0, 8)
 
-[node name="CenterContainer" type="CenterContainer" parent="Node2D"]
+[node name="CenterContainer" type="CenterContainer" parent="Node2D" unique_id=188264350]
 use_top_left = true
 
-[node name="Label" type="Label" parent="Node2D/CenterContainer"]
+[node name="Label" type="Label" parent="Node2D/CenterContainer" unique_id=121679609]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "0"
 
-[node name="ColorRect" type="TextureRect" parent="Node2D"]
-show_behind_parent = true
-offset_left = -16.0
-offset_top = -8.0
-offset_bottom = 8.0
-texture = ExtResource("3_4vmio")
-
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=875653293]
 script = ExtResource("3_0pvle")
 properties = Array[String](["enter_direction", "pipe_id", "target_sub_level", "exit_only"])
 properties_force_selector = Dictionary[String, PackedScene]({
 "pipe_id": ExtResource("4_g36rp")
 })
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=801835421]
+script = ExtResource("6_10g1e")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=2024586853]
+script = ExtResource("8_f4pwd")
+can_output = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="_ready"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="exit_pipe"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="exit_pipe"]

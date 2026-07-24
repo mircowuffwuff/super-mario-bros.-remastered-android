@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://chfnuhi45nquf"]
+[gd_scene format=3 uid="uid://chfnuhi45nquf"]
 
 [ext_resource type="PackedScene" uid="uid://u3t1k5j28yap" path="res://Scenes/Prefabs/Entities/Objects/Door.tscn" id="1_t0orm"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/LockedDoors.json" id="2_0bcyf"]
 [ext_resource type="Texture2D" uid="uid://fyxbhdmqfxk5" path="res://Assets/Sprites/Tilesets/Doors.png" id="2_0u2mu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kr4bu"]
@@ -60,16 +59,16 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="LockedDoor" instance=ExtResource("1_t0orm")]
+[node name="LockedDoor" unique_id=287853894 instance=ExtResource("1_t0orm")]
 locked = true
 start_locked = true
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="1" unique_id=2013555801]
 sprite_frames = SubResource("SpriteFrames_1efep")
 animation = &"Locked"
 autoplay = "Locked"
 frame = 0
 frame_progress = 0.0
 
-[node name="ResourceSetterNew" parent="Sprite" index="0"]
-resource_json = ExtResource("2_0bcyf")
+[node name="ResourceSetterNew" parent="Sprite" index="0" unique_id=1666477828]
+json_path = "res://Assets/Sprites/Tilesets/LockedDoors.json"

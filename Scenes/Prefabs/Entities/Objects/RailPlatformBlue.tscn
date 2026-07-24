@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://bnsrlatt0obpe"]
+
+[ext_resource type="PackedScene" uid="uid://dvmr3r2uub283" path="res://Scenes/Prefabs/Entities/Objects/TrackRider.tscn" id="1_20sbx"]
+[ext_resource type="Script" uid="uid://cdx37y58vp4u0" path="res://Scripts/Classes/Entities/Objects/RailPlatform.gd" id="2_63dei"]
+[ext_resource type="Texture2D" uid="uid://bk0p52ttwojml" path="res://Assets/Sprites/Tilesets/Platform.png" id="3_lhlsm"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_drvml"]
+[ext_resource type="Texture2D" uid="uid://iwtwy2g6bjrn" path="res://Assets/Sprites/Tilesets/TrackPlatformEngine.png" id="6_kf1hb"]
+[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="7_oj23m"]
+[ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="9_ekagy"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="10_cie0x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78uil"]
+resource_local_to_scene = true
+size = Vector2(16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8i0k"]
+atlas = ExtResource("6_kf1hb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn0mk"]
+atlas = ExtResource("6_kf1hb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ulcaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8i0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn0mk")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_wkfgu"]
+script/source = "extends Node
+@onready var sprite: NinePatchRect = $\"../AnimatableBody2D/Sprite\"
+@onready var collision: CollisionShape2D = $\"../AnimatableBody2D/Collision\"
+
+func _physics_process(delta: float) -> void:
+	sprite.size.x = owner.length * 8
+	sprite.position.x = -(owner.length * 8) / 2
+	collision.shape.size.x = owner.length * 8
+"
+
+[node name="TrackRider" unique_id=754831465 node_paths=PackedStringArray("attached_entity") instance=ExtResource("1_20sbx")]
+script = ExtResource("2_63dei")
+length = 4
+attached_entity = NodePath("AnimatableBody2D")
+
+[node name="LevelEditorVisibleNode" parent="." index="0" unique_id=2035403980]
+visible = false
+
+[node name="EditorPropertyExposer" parent="." index="3" unique_id=353646907]
+properties = Array[String](["length", "speed", "direction"])
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." index="5" unique_id=1080561384]
+collision_layer = 2
+collision_mask = 0
+sync_to_physics = false
+
+[node name="Collision" type="CollisionShape2D" parent="AnimatableBody2D" index="0" unique_id=114051892]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_78uil")
+
+[node name="Sprite" type="NinePatchRect" parent="AnimatableBody2D" index="1" unique_id=1208408756]
+show_behind_parent = true
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+texture = ExtResource("3_lhlsm")
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1
+
+[node name="ResourceSetter" type="Node" parent="AnimatableBody2D/Sprite" index="0" unique_id=1881433782 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("4_drvml")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Platform.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Engine" type="AnimatedSprite2D" parent="AnimatableBody2D" index="2" unique_id=1900342393]
+sprite_frames = SubResource("SpriteFrames_ulcaa")
+animation = &"Active"
+autoplay = "Active"
+script = ExtResource("7_oj23m")
+do_offset = false
+metadata/_custom_type_script = "uid://caq1qiwmy0mox"
+
+[node name="ResourceSetterNew" type="Node" parent="AnimatableBody2D/Engine" index="0" unique_id=1779341195]
+process_mode = 3
+script = ExtResource("4_drvml")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Tilesets/TrackPlatformEngine.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="TrackJoint" type="Node" parent="AnimatableBody2D" index="3" unique_id=265948923]
+script = ExtResource("9_ekagy")
+offset = Vector2(0, 0)
+disable_physics = false
+metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
+
+[node name="PlayerDetection" type="Area2D" parent="AnimatableBody2D" index="4" unique_id=2076330775]
+position = Vector2(0, -1)
+script = ExtResource("10_cie0x")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="Collision" type="CollisionShape2D" parent="AnimatableBody2D/PlayerDetection" index="0" unique_id=1547148344]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_78uil")
+
+[node name="Node" type="Node" parent="." index="6" unique_id=1245256142]
+process_mode = 3
+script = SubResource("GDScript_wkfgu")
+
+[connection signal="player_entered" from="AnimatableBody2D/PlayerDetection" to="." method="set_physics_process" binds= [true]]

@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://cyfxysds8uhnx"]
+
+[ext_resource type="Script" uid="uid://b4hyuuqfggra4" path="res://addons/anim_player_refactor/scenes/refactor_dialogue/refactor_dialogue.gd" id="1_nkqdl"]
+[ext_resource type="Script" uid="uid://dvca5vn0ny2k7" path="res://addons/anim_player_refactor/scenes/refactor_dialogue/components/anim_player_tree.gd" id="2_7pqfs"]
+[ext_resource type="Script" uid="uid://nggyjof6sabe" path="res://addons/anim_player_refactor/scenes/refactor_dialogue/components/node_select.gd" id="3_87x4i"]
+
+[node name="RefactorDialogue" type="AcceptDialog" unique_id=671910027]
+title = "Refactor Animations"
+size = Vector2i(400, 599)
+ok_button_text = "Close"
+script = ExtResource("1_nkqdl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=49344623]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 550.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="TreeContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=538706003]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TreeContainer" unique_id=1872350537]
+layout_mode = 2
+text = "Properties:"
+
+[node name="FilterInput" type="LineEdit" parent="VBoxContainer/TreeContainer" unique_id=1320298884]
+layout_mode = 2
+placeholder_text = "Filter..."
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="AnimPlayerTree" type="Tree" parent="VBoxContainer/TreeContainer" unique_id=1961221704]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+size_flags_vertical = 3
+hide_root = true
+scroll_horizontal_enabled = false
+script = ExtResource("2_7pqfs")
+
+[node name="RootNodeContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=712720872]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/RootNodeContainer" unique_id=1705744153]
+layout_mode = 2
+text = "Root Node"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/RootNodeContainer" unique_id=1703050623]
+layout_mode = 2
+
+[node name="ChangeRoot" type="Button" parent="VBoxContainer/RootNodeContainer/HBoxContainer" unique_id=187117993]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Change Root"
+
+[node name="EditDialogue" type="ConfirmationDialog" parent="." unique_id=1764040734]
+unique_name_in_owner = true
+title = "Renaming"
+position = Vector2i(0, 36)
+size = Vector2i(230, 239)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialogue" unique_id=334746071]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 222.0
+offset_bottom = 190.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialogue/VBoxContainer" unique_id=2054752809]
+layout_mode = 2
+
+[node name="EditDialogueButton" type="Button" parent="EditDialogue/VBoxContainer/HBoxContainer" unique_id=1628617605]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="EditInput" type="LineEdit" parent="EditDialogue/VBoxContainer" unique_id=1065377896]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditDialogue/VBoxContainer" unique_id=540662704]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EditDialogue/VBoxContainer/HBoxContainer2" unique_id=1497423231]
+layout_mode = 2
+text = "Used in:"
+
+[node name="EditFullPathToggle" type="CheckButton" parent="EditDialogue/VBoxContainer/HBoxContainer2" unique_id=1814483832]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Edit full path"
+
+[node name="MarginContainer" type="MarginContainer" parent="EditDialogue/VBoxContainer" unique_id=2052640781]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="EditDialogue/VBoxContainer/MarginContainer" unique_id=1644875343]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.211765)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="EditDialogue/VBoxContainer/MarginContainer" unique_id=268605205]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="EditDialogue/VBoxContainer/MarginContainer/ScrollContainer" unique_id=1088099154]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="EditAnimationList" type="Label" parent="EditDialogue/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer" unique_id=667628516]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Test
+Test 2"
+
+[node name="NodeSelectDialogue" type="ConfirmationDialog" parent="." unique_id=1535568918]
+unique_name_in_owner = true
+title = "Select a node..."
+size = Vector2i(616, 557)
+ok_button_text = "Change"
+
+[node name="NodeSelect" type="Tree" parent="NodeSelectDialogue" unique_id=715125808]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 500)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 608.0
+offset_bottom = 508.0
+scroll_horizontal_enabled = false
+script = ExtResource("3_87x4i")
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=287520000]
+unique_name_in_owner = true
+size = Vector2i(300, 200)
+ok_button_text = "Delete"
+dialog_autowrap = true
+
+[connection signal="about_to_popup" from="." to="VBoxContainer/TreeContainer/FilterInput" method="clear"]
+[connection signal="text_changed" from="VBoxContainer/TreeContainer/FilterInput" to="VBoxContainer/TreeContainer/AnimPlayerTree" method="set_filter"]
+[connection signal="button_clicked" from="VBoxContainer/TreeContainer/AnimPlayerTree" to="." method="_on_tree_button_clicked"]
+[connection signal="item_activated" from="VBoxContainer/TreeContainer/AnimPlayerTree" to="." method="_on_tree_activated"]
+[connection signal="rendered" from="VBoxContainer/TreeContainer/AnimPlayerTree" to="VBoxContainer/TreeContainer/FilterInput" method="clear"]
+[connection signal="pressed" from="VBoxContainer/RootNodeContainer/HBoxContainer/ChangeRoot" to="." method="_on_change_root_pressed"]
+[connection signal="confirmed" from="EditDialogue" to="." method="_on_rename_confirmed"]
+[connection signal="text_submitted" from="EditDialogue/VBoxContainer/EditInput" to="." method="_on_rename_confirmed"]
+[connection signal="toggled" from="EditDialogue/VBoxContainer/HBoxContainer2/EditFullPathToggle" to="." method="_on_full_path_toggled"]
+[connection signal="confirmed" from="NodeSelectDialogue" to="." method="_on_node_select_confirmed"]

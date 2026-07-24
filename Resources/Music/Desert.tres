@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://vsom5wgougwy"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://vsom5wgougwy"]
 
-[ext_resource type="AudioStream" uid="uid://c16o17sqx56hg" path="res://Assets/Audio/BGM/Desert.mp3" id="1_2v0s0"]
-[ext_resource type="AudioStream" uid="uid://4nhg43o6u1ii" path="res://Assets/Audio/BGM/DesertHurry.mp3" id="2_reh3y"]
+[ext_resource type="AudioStream" uid="uid://bmewa84fv3bxb" path="res://Assets/Audio/BGM/Desert.mp3" id="1_2v0s0"]
+[ext_resource type="AudioStream" uid="uid://f6nyqn6mfh0j" path="res://Assets/Audio/BGM/DesertHurry.mp3" id="2_reh3y"]
 
 [resource]
 clip_count = 2

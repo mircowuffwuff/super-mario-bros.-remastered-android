@@ -1,9 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://yqunqjn0cyef"]
-
+[gd_scene format=3 uid="uid://yqunqjn0cyef"]
 [ext_resource type="PackedScene" uid="uid://cnn6e523gkoa0" path="res://Scenes/Levels/SMB1/CoinHeavens/1.tscn" id="1_ilew6"]
-
-[node name="Level" instance=ExtResource("1_ilew6")]
+[node name="Level" unique_id=1028004515 instance=ExtResource("1_ilew6")]
 theme_time = "Night"
-
-[node name="LevelBG" parent="." index="8"]
+[node name="LevelBG" parent="." index="8" unique_id=458182856]
 time_of_day = 1

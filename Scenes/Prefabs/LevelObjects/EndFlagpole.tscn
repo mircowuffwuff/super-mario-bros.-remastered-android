@@ -1,21 +1,35 @@
-[gd_scene load_steps=22 format=3 uid="uid://c6loucilra6da"]
+[gd_scene format=3 uid="uid://c6loucilra6da"]
 
 [ext_resource type="Script" uid="uid://dwfnvpioh2kvi" path="res://Scripts/Parts/EndFlagpole.gd" id="1_3rtm4"]
 [ext_resource type="Texture2D" uid="uid://3vg41a5plc4e" path="res://Assets/Sprites/Tilesets/FlagPole.png" id="1_hnd65"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/FlagPole.json" id="4_nykv5"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="5_dm4yn"]
 [ext_resource type="Script" uid="uid://cmvlgsjmsk0v5" path="res://Scripts/Classes/Resources/ThemedResource.gd" id="5_jihtx"]
+[ext_resource type="Texture2D" uid="uid://bwr6tw20gji88" path="res://Assets/Sprites/Tilesets/Flag.png" id="5_nykv5"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="5_sjcdg"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Flag.json" id="6_tpsyw"]
 [ext_resource type="FontVariation" uid="uid://cflgloiossd8a" path="res://Resources/ThemedResources/ScoreFont.tres" id="8_sjcdg"]
 [ext_resource type="Script" uid="uid://dt2p68xl462v2" path="res://Scripts/Parts/TextShadowColourChanger.gd" id="9_jihtx"]
+[ext_resource type="Texture2D" uid="uid://bm7mgynp4ow0g" path="res://Assets/Sprites/Tilesets/HollowFlag.png" id="11_tpsyw"]
 [ext_resource type="Script" uid="uid://cqif1li7otvpl" path="res://Scripts/Parts/SpriteFramesToJsonConverter.gd" id="12_jgs31"]
+[ext_resource type="Script" uid="uid://364rywt44hy6" path="res://Scripts/Classes/UI/PackSprite.gd" id="12_nykv5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uwkl1"]
 atlas = ExtResource("1_hnd65")
 region = Rect2(0, 0, 16, 176)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgs31"]
+atlas = ExtResource("5_nykv5")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_tpsyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgs31")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hnd65"]
 b = Vector2(0, -152)
@@ -25,14 +39,14 @@ resource_name = "FlagDown"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Flag:position")
+tracks/0/path = NodePath("FlagJoint:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-8, -152), Vector2(-8, -32)]
+"values": [Vector2(0, -151), Vector2(0, -29)]
 }
 
 [sub_resource type="Animation" id="Animation_xwflf"]
@@ -40,14 +54,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Flag:position")
+tracks/0/path = NodePath("FlagJoint:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8, -152)]
+"values": [Vector2(0, -151)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_62gix"]
@@ -126,52 +140,54 @@ Overworld = SubResource("AtlasTexture_uwkl1")
 Snow = SubResource("AtlasTexture_jihtx")
 metadata/_custom_type_script = ExtResource("5_jihtx")
 
-[node name="EndFlagpole" type="Node2D" groups=["Flagpole"]]
+[node name="EndFlagpole" type="Node2D" unique_id=1255509850 groups=["Flagpole"]]
 z_index = -5
 script = ExtResource("1_3rtm4")
 
-[node name="Pole" type="Sprite2D" parent="."]
+[node name="Pole" type="Sprite2D" parent="." unique_id=1401990690]
 position = Vector2(0, -88)
 texture = SubResource("AtlasTexture_uwkl1")
 
-[node name="ResourceSetterNew" type="Node" parent="Pole" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Pole" unique_id=1759828279 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("5_sjcdg")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_nykv5")
+json_path = "res://Assets/Sprites/Tilesets/FlagPole.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Flag" type="AnimatedSprite2D" parent="."]
-position = Vector2(-8, -152)
+[node name="FlagJoint" type="Node2D" parent="." unique_id=431859251]
+position = Vector2(0, -151)
+
+[node name="Flag" type="AnimatedSprite2D" parent="FlagJoint" unique_id=333888864]
+position = Vector2(-7, 0)
 sprite_frames = SubResource("SpriteFrames_tpsyw")
 autoplay = "default"
-offset = Vector2(-1, 0)
 
-[node name="ResourceSetterNew" type="Node" parent="Flag" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="FlagJoint/Flag" unique_id=494528197 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("5_sjcdg")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("6_tpsyw")
+json_path = "res://Assets/Sprites/Tilesets/Flag.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=2097646295]
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=2028033976]
 position = Vector2(0, -16)
 shape = SubResource("SegmentShape2D_hnd65")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_62gix")
-}
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1311634048]
+libraries/ = SubResource("AnimationLibrary_62gix")
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1669438609]
 script = ExtResource("5_dm4yn")
 note_offset = Vector2(0, -160)
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="Score" type="Label" parent="."]
+[node name="Score" type="Label" parent="." unique_id=1536676848]
 visible = false
 visibility_layer = 2
 offset_left = 8.0
@@ -181,21 +197,26 @@ offset_bottom = -8.0
 theme_override_fonts/font = ExtResource("8_sjcdg")
 text = "5000"
 
-[node name="Animation2" type="AnimationPlayer" parent="Score"]
+[node name="Animation2" type="AnimationPlayer" parent="Score" unique_id=685191019]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_jihtx")
-}
+libraries/ = SubResource("AnimationLibrary_jihtx")
 
-[node name="TextShadowColourChanger" type="Node" parent="Score" node_paths=PackedStringArray("labels")]
+[node name="TextShadowColourChanger" type="Node" parent="Score" unique_id=1380205900 node_paths=PackedStringArray("labels")]
 script = ExtResource("9_jihtx")
 labels = [NodePath("..")]
 metadata/_custom_type_script = "uid://dt2p68xl462v2"
 
-[node name="ThemedToJSONConverter" type="Node" parent="."]
+[node name="ThemedToJSONConverter" type="Node" parent="." unique_id=693468775]
 script = ExtResource("12_jgs31")
 resource = SubResource("Resource_a0hgu")
 json_file_path = "res://Assets/Sprites/Tilesets/FlagPole.json"
 metadata/_custom_type_script = "uid://cqif1li7otvpl"
+
+[node name="Hollow" type="Sprite2D" parent="." unique_id=1482269532]
+visible = false
+position = Vector2(0, -96)
+texture = ExtResource("11_tpsyw")
+script = ExtResource("12_nykv5")
+metadata/_custom_type_script = "uid://364rywt44hy6"
 
 [connection signal="area_entered" from="Hitbox" to="." method="on_area_entered"]

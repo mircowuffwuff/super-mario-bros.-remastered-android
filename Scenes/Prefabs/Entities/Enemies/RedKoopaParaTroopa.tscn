@@ -1,20 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://doguqwqut2s5e"]
+[gd_scene format=3 uid="uid://doguqwqut2s5e"]
 
 [ext_resource type="PackedScene" uid="uid://cmvugag0kupgu" path="res://Scenes/Prefabs/Entities/Enemies/RedKoopaTroopa.tscn" id="1_7ppsp"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="2_7ppsp"]
 [ext_resource type="Texture2D" uid="uid://dpdrrkqtcedgm" path="res://Assets/Sprites/Tilesets/DottedLine.png" id="3_q8ix4"]
 
-[node name="RedKoopaTroopa" instance=ExtResource("1_7ppsp")]
+[node name="RedKoopaTroopa" unique_id=1621551953 instance=ExtResource("1_7ppsp")]
 winged = true
 
-[node name="Wing" parent="Sprite" index="1"]
+[node name="Wing" parent="Sprite" parent_id_path=PackedInt32Array(1845041467) index="1" unique_id=1386975840]
 visible = true
 frame_progress = 0.539258
+metadata/WingType = "RedKoopa"
 
-[node name="Node2D" type="Node2D" parent="." index="15"]
+[node name="Node2D" type="Node2D" parent="." index="15" unique_id=118285782]
 script = ExtResource("2_7ppsp")
 
-[node name="Line2D" type="Line2D" parent="Node2D" index="0"]
+[node name="Line2D" type="Line2D" parent="Node2D" index="0" unique_id=1309919727]
 visibility_layer = 2
 texture_repeat = 2
 points = PackedVector2Array(0, 0, 0, 96)

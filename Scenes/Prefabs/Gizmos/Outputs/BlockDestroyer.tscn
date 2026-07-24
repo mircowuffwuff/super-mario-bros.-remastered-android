@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://qr3r007ycaye"]
+
+[ext_resource type="Script" uid="uid://cla6sm4iau5kc" path="res://Scripts/Classes/Gizmos/BlockDestroyer.gd" id="1_aassf"]
+[ext_resource type="Texture2D" uid="uid://byl13xpy37d7h" path="res://Assets/Sprites/Editor/Gizmos/BlockBreak.png" id="2_5gu88"]
+[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="3_5gu88"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_qcbnr"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="5_qcbnr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcbnr"]
+size = Vector2(14, 14)
+
+[node name="BaseOutput" type="Node2D" unique_id=515746201 groups=["Gizmos"]]
+process_mode = 3
+z_index = 500
+z_as_relative = false
+script = ExtResource("1_aassf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1224179792]
+texture = ExtResource("2_5gu88")
+script = ExtResource("3_5gu88")
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1403115602]
+script = ExtResource("3_qcbnr")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="Area" type="Area2D" parent="." unique_id=756811219]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=2031348606]
+shape = SubResource("RectangleShape2D_qcbnr")
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=549668171]
+script = ExtResource("5_qcbnr")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="recieved_power" from="SignalExposer" to="." method="destroy_blocks"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="destroy_blocks"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="Area" method="force_update_transform"]

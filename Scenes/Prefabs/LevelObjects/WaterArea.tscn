@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cnr4hhk0kgrxu"]
+
+[ext_resource type="PackedScene" uid="uid://e3wkbwtm7sh" path="res://Scenes/Parts/WaterArea.tscn" id="1_m0o0e"]
+[ext_resource type="Texture2D" uid="uid://bdb7ua7lnmwn" path="res://Assets/Sprites/Editor/WaterLevel.png" id="2_ft5si"]
+[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="3_yqdt0"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="4_ft5si"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="5_yqdt0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_py77t"]
+normal = Vector2(-1, 0)
+
+[node name="WaterArea" unique_id=1731195511 instance=ExtResource("1_m0o0e")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=42652536]
+top_level = true
+position = Vector2(-256, 0)
+shape = SubResource("WorldBoundaryShape2D_py77t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1" unique_id=1900064714]
+texture = ExtResource("2_ft5si")
+script = ExtResource("3_yqdt0")
+
+[node name="SignalExposer" type="Node2D" parent="." index="2" unique_id=890770992]
+script = ExtResource("4_ft5si")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." index="3" unique_id=669519615]
+script = ExtResource("5_yqdt0")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="lost_power" from="SignalExposer" to="CollisionShape2D" method="set_disabled" flags=3 binds= [true]]
+[connection signal="recieved_power" from="SignalExposer" to="CollisionShape2D" method="set_disabled" flags=3 binds= [false]]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="toggle"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="on_level_start"]

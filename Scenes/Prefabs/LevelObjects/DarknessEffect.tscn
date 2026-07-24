@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://coephittbrnw7"]
+
+[ext_resource type="Texture2D" uid="uid://duxkbhsbnmrvs" path="res://Assets/Sprites/Editor/Darkness.png" id="1_5kpm8"]
+[ext_resource type="Script" uid="uid://ck3usg0sqgnoa" path="res://Scripts/Classes/Entities/Objects/DarknessEffect.gd" id="1_5svaq"]
+[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="2_4owni"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="3_4owni"]
+
+[sub_resource type="Animation" id="Animation_4owni"]
+resource_name = "Grow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5svaq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3hppk"]
+_data = {
+&"Grow": SubResource("Animation_4owni"),
+&"RESET": SubResource("Animation_5svaq")
+}
+
+[node name="DarknessEffect" type="Node2D" unique_id=1780321762]
+script = ExtResource("1_5svaq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=15729374]
+texture = ExtResource("1_5kpm8")
+script = ExtResource("2_4owni")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=473971628]
+layer = 0
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasLayer" unique_id=1577256594]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Darkness" type="ColorRect" parent="CanvasLayer/CanvasGroup" unique_id=824235620]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 256.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=1091307709]
+root_node = NodePath("../CanvasGroup")
+libraries/ = SubResource("AnimationLibrary_3hppk")
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=202866656]
+script = ExtResource("3_4owni")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[node name="Label" type="Label" parent="." unique_id=1683324224]
+visibility_layer = 2
+offset_left = -112.0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 72.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+text = "THIS IS VERY UNFINISHED! ONLY LEAVING IT TO SEE IF PEOPLE ARE ACTUALLY INTERESTED IN HAVING IT AS AN ACTUAL THING"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="add_nodes"]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://mqkp4iqgnnm5"]
+
+[ext_resource type="PackedScene" uid="uid://b2r255cb4tt7t" path="res://Scenes/Prefabs/Gizmos/Inputs/BaseInput.tscn" id="1_th3pe"]
+[ext_resource type="Texture2D" uid="uid://beemg8bkiqjm" path="res://Assets/Sprites/Editor/Gizmos/Linker.png" id="2_0ks8n"]
+
+[node name="Linker" unique_id=515746201 instance=ExtResource("1_th3pe")]
+script = null
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("2_0ks8n")
+
+[node name="SignalExposer" parent="." index="1" unique_id=634423865]
+can_input = false
+connect_type = 1

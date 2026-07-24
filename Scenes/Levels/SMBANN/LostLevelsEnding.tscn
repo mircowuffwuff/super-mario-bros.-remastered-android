@@ -1,17 +1,14 @@
-[gd_scene load_steps=21 format=4 uid="uid://bxjdmt70ady6e"]
-
+[gd_scene format=4 uid="uid://bxjdmt70ady6e"]
 [ext_resource type="Script" uid="uid://caugelxhwlvl0" path="res://Scripts/Parts/LostLevelsEnding.gd" id="1_d3n3y"]
 [ext_resource type="PackedScene" uid="uid://ct5rrpa7uehkk" path="res://Scenes/Parts/Tiles.tscn" id="5_2k64g"]
 [ext_resource type="PackedScene" uid="uid://bksxgpygrdjl7" path="res://Scenes/Prefabs/LevelBG.tscn" id="6_cg4ss"]
+[ext_resource type="PackedScene" uid="uid://ckrna543ixu1b" path="res://Scenes/Prefabs/LevelObjects/CastlePeach.tscn" id="7_1jjur"]
 [ext_resource type="SpriteFrames" uid="uid://df4enjjl84mji" path="res://Resources/SpriteFrames/Player/Mario/Small.tres" id="7_40pis"]
 [ext_resource type="Script" uid="uid://b08qfwj5jk6g1" path="res://Scripts/Parts/PlayerSprite.gd" id="8_gnn3a"]
 [ext_resource type="PackedScene" uid="uid://cinr6kcbmo6gr" path="res://Scenes/Parts/DropShadowRenderer.tscn" id="9_3f2f2"]
-[ext_resource type="Texture2D" uid="uid://boivfkpqvnx45" path="res://Assets/Sprites/Players/Peach.png" id="10_5xkvw"]
 [ext_resource type="FontVariation" uid="uid://bl7sbw4nx3l1t" path="res://Resources/ThemedResources/FontMain.tres" id="11_yglne"]
 [ext_resource type="Texture2D" uid="uid://fdn41mmtnhdt" path="res://Assets/Sprites/Players/ToadNPCLL.png" id="12_gvpv4"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="13_2i527"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Players/ToadNPC.json" id="14_swpxw"]
-
 [sub_resource type="Animation" id="Animation_xoqts"]
 resource_name = "Appear"
 length = 5.0
@@ -111,7 +108,6 @@ tracks/7/keys = {
 "update": 1,
 "values": [false, true]
 }
-
 [sub_resource type="Animation" id="Animation_wr0ye"]
 length = 0.001
 tracks/0/type = "value"
@@ -210,13 +206,11 @@ tracks/7/keys = {
 "update": 1,
 "values": [false]
 }
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k7rel"]
 _data = {
 &"Appear": SubResource("Animation_xoqts"),
 &"RESET": SubResource("Animation_wr0ye")
 }
-
 [sub_resource type="Animation" id="Animation_ecp1v"]
 resource_name = "Main"
 length = 50.0
@@ -283,7 +277,6 @@ tracks/4/keys = {
 "update": 1,
 "values": ["Light", "Dark"]
 }
-
 [sub_resource type="Animation" id="Animation_1flm1"]
 length = 0.001
 tracks/0/type = "value"
@@ -310,21 +303,17 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3n3sl"]
 _data = {
 &"Main": SubResource("Animation_ecp1v"),
 &"RESET": SubResource("Animation_1flm1")
 }
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xoqts"]
 atlas = ExtResource("12_gvpv4")
 region = Rect2(32, 0, 16, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wr0ye"]
 atlas = ExtResource("12_gvpv4")
 region = Rect2(48, 0, 16, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_k7rel"]
 animations = [{
 "frames": [{
@@ -338,59 +327,40 @@ animations = [{
 "name": &"Emote",
 "speed": 5.0
 }]
-
-[node name="LostLevelsEnding" type="Node"]
+[node name="LostLevelsEnding" type="Node" unique_id=826441681]
 script = ExtResource("1_d3n3y")
 theme = "Castle"
 campaign = "SMBLL"
 world_id = 8
 level_id = 4
 metadata/_custom_type_script = "uid://bcqr1v25ygedb"
-
-[node name="Tiles" parent="." instance=ExtResource("5_2k64g")]
+[node name="Tiles" parent="." unique_id=461206861 instance=ExtResource("5_2k64g")]
 tile_map_data = PackedByteArray("AADv/wAAAAACAAAAAADv/wEAAAACAAEAAADv/wIAAAACAAEAAADw/wAAAAACAAAAAADw/wEAAAACAAEAAADw/wIAAAACAAEAAADx/wAAAAACAAAAAADx/wEAAAACAAEAAADx/wIAAAACAAEAAADy/wAAAAACAAAAAADy/wEAAAACAAEAAADy/wIAAAACAAEAAADz/wAAAAACAAAAAADz/wEAAAACAAEAAADz/wIAAAACAAEAAAD0/wAAAAACAAAAAAD0/wEAAAACAAEAAAD0/wIAAAACAAEAAAD1/wAAAAACAAAAAAD1/wEAAAACAAEAAAD1/wIAAAACAAEAAAD2/wAAAAACAAAAAAD2/wEAAAACAAEAAAD2/wIAAAACAAEAAAD3/wAAAAACAAAAAAD3/wEAAAACAAEAAAD3/wIAAAACAAEAAAD4/wAAAAACAAAAAAD4/wEAAAACAAEAAAD4/wIAAAACAAEAAAD5/wAAAAACAAAAAAD5/wEAAAACAAEAAAD5/wIAAAACAAEAAAD6/wAAAAACAAAAAAD6/wEAAAACAAEAAAD6/wIAAAACAAEAAAD7/wAAAAACAAAAAAD7/wEAAAACAAEAAAD7/wIAAAACAAEAAAD8/wAAAAACAAAAAAD8/wEAAAACAAEAAAD8/wIAAAACAAEAAAD9/wAAAAACAAAAAAD9/wEAAAACAAEAAAD9/wIAAAACAAEAAAD+/wAAAAACAAAAAAD+/wEAAAACAAEAAAD+/wIAAAACAAEAAAD//wAAAAACAAAAAAD//wEAAAACAAEAAAD//wIAAAACAAEAAAAAAAAAAAACAAAAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAABAAAAAAACAAAAAAABAAEAAAACAAEAAAABAAIAAAACAAEAAAACAAAAAAACAAAAAAACAAEAAAACAAEAAAACAAIAAAACAAEAAAADAAAAAAACAAAAAAADAAEAAAACAAEAAAADAAIAAAACAAEAAAAEAAAAAAACAAAAAAAEAAEAAAACAAEAAAAEAAIAAAACAAEAAAAFAAAAAAACAAAAAAAFAAEAAAACAAEAAAAFAAIAAAACAAEAAAAGAAAAAAACAAAAAAAGAAEAAAACAAEAAAAGAAIAAAACAAEAAAAHAAAAAAACAAAAAAAHAAEAAAACAAEAAAAHAAIAAAACAAEAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAJAAAAAAACAAAAAAAJAAEAAAACAAEAAAAJAAIAAAACAAEAAAAKAAAAAAACAAAAAAAKAAEAAAACAAEAAAAKAAIAAAACAAEAAAALAAAAAAACAAAAAAALAAEAAAACAAEAAAALAAIAAAACAAEAAAAMAAAAAAACAAAAAAAMAAEAAAACAAEAAAAMAAIAAAACAAEAAAANAAAAAAACAAAAAAANAAEAAAACAAEAAAANAAIAAAACAAEAAAAOAAAAAAACAAAAAAAOAAEAAAACAAEAAAAOAAIAAAACAAEAAAAPAAAAAAACAAAAAAAPAAEAAAACAAEAAAAPAAIAAAACAAEAAAAQAAAAAAACAAAAAAAQAAEAAAACAAEAAAAQAAIAAAACAAEAAAARAAAAAAACAAAAAAARAAEAAAACAAEAAAARAAIAAAACAAEAAAASAAAAAAACAAAAAAASAAEAAAACAAEAAAASAAIAAAACAAEAAAATAAAAAAACAAAAAAATAAEAAAACAAEAAAATAAIAAAACAAEAAAAUAAAAAAACAAAAAAAUAAEAAAACAAEAAAAUAAIAAAACAAEAAAAVAAAAAAACAAAAAAAVAAEAAAACAAEAAAAVAAIAAAACAAEAAAAWAAAAAAACAAAAAAAWAAEAAAACAAEAAAAWAAIAAAACAAEAAAAXAAAAAAACAAAAAAAXAAEAAAACAAEAAAAXAAIAAAACAAEAAAAYAAAAAAACAAAAAAAYAAEAAAACAAEAAAAYAAIAAAACAAEAAAAZAAAAAAACAAAAAAAZAAEAAAACAAEAAAAZAAIAAAACAAEAAAAaAAAAAAACAAEAAAAaAAEAAAACAAEAAAAaAAIAAAACAAEAAADs/wAAAAACAAAAAADs/wEAAAACAAEAAADs/wIAAAACAAEAAADt/wAAAAACAAAAAADt/wEAAAACAAEAAADt/wIAAAACAAEAAADu/wAAAAACAAAAAADu/wEAAAACAAEAAADu/wIAAAACAAEAAADu//X/AAACAAMAAADv//X/AAACAAMAAADw//X/AAACAAMAAADx//X/AAACAAMAAADy//X/AAACAAMAAADz//X/AAACAAMAAAD0//X/AAACAAMAAAD1//X/AAACAAMAAAD2//X/AAACAAMAAAD3//X/AAACAAMAAAD4//X/AAACAAMAAAD5//X/AAACAAMAAAD6//X/AAACAAMAAAD7//X/AAACAAMAAAD8//X/AAACAAMAAAD9//X/AAACAAMAAAD+//X/AAACAAMAAAD///X/AAACAAMAAAAAAPX/AAACAAMAAAABAPX/AAACAAMAAAACAPX/AAACAAMAAAADAPX/AAACAAMAAAAEAPX/AAACAAMAAAAFAPX/AAACAAMAAAAGAPX/AAACAAMAAAAHAPX/AAACAAMAAAAIAPX/AAACAAMAAAAJAPX/AAACAAMAAAAKAPX/AAACAAMAAAALAPX/AAACAAMAAAAMAPX/AAACAAMAAAANAPX/AAACAAMAAAAOAPX/AAACAAMAAAAPAPX/AAACAAMAAAAQAPX/AAACAAMAAAARAPX/AAACAAMAAAASAPX/AAACAAMAAAATAPX/AAACAAMAAAAUAPX/AAACAAMAAAAVAPX/AAACAAMAAAAWAPX/AAACAAMAAAAXAPX/AAACAAMAAAAYAPX/AAACAAMAAAAZAPX/AAACAAMAAADp//X/AAACAAMAAADq//X/AAACAAMAAADr//X/AAACAAMAAADs//X/AAACAAMAAADt//X/AAACAAMAAADp/wAAAAACAAAAAADq/wAAAAACAAAAAADr/wAAAAACAAAAAADp/wEAAAACAAEAAADq/wEAAAACAAEAAADr/wEAAAACAAEAAADp/wIAAAACAAEAAADq/wIAAAACAAEAAADr/wIAAAACAAEAAADp/wMAAAACAAIAAADq/wMAAAACAAIAAADr/wMAAAACAAIAAADs/wMAAAACAAIAAADt/wMAAAACAAIAAADu/wMAAAACAAIAAADv/wMAAAACAAIAAADw/wMAAAACAAIAAADx/wMAAAACAAIAAADy/wMAAAACAAIAAADz/wMAAAACAAIAAAD0/wMAAAACAAIAAAD1/wMAAAACAAIAAAD2/wMAAAACAAIAAAD3/wMAAAACAAIAAAD4/wMAAAACAAIAAAD5/wMAAAACAAIAAAD6/wMAAAACAAIAAAD7/wMAAAACAAIAAAD8/wMAAAACAAIAAAD9/wMAAAACAAIAAAD+/wMAAAACAAIAAAD//wMAAAACAAIAAAAAAAMAAAACAAIAAAABAAMAAAACAAIAAAACAAMAAAACAAIAAAADAAMAAAACAAIAAAAEAAMAAAACAAIAAAAFAAMAAAACAAIAAAAGAAMAAAACAAIAAAAHAAMAAAACAAIAAAAIAAMAAAACAAIAAAAJAAMAAAACAAIAAAAKAAMAAAACAAIAAAALAAMAAAACAAIAAAAMAAMAAAACAAIAAAANAAMAAAACAAIAAAAOAAMAAAACAAIAAAAPAAMAAAACAAIAAAAQAAMAAAACAAIAAAARAAMAAAACAAIAAAASAAMAAAACAAIAAAATAAMAAAACAAIAAAAUAAMAAAACAAIAAAAVAAMAAAACAAIAAAAWAAMAAAACAAIAAAAXAAMAAAACAAIAAAAYAAMAAAACAAIAAAAZAAMAAAACAAIAAAAaAAMAAAACAAIAAAAaAPX/AAACAAAAAAAbAPX/AAACAAAAAAAcAPX/AAACAAAAAADm//X/AAABAAAAAADn//X/AAACAAAAAADo//X/AAACAAAAAADm//b/AAABAAEAAADn//b/AAACAAEAAADo//b/AAADAAEAAADm//f/AAABAAEAAADn//f/AAACAAEAAADo//f/AAADAAEAAADm//j/AAABAAEAAADn//j/AAACAAEAAADo//j/AAADAAEAAADm//n/AAABAAEAAADn//n/AAACAAEAAADo//n/AAADAAEAAADm//r/AAABAAEAAADn//r/AAACAAEAAADo//r/AAADAAEAAADm//v/AAABAAEAAADn//v/AAACAAEAAADo//v/AAADAAEAAADm//z/AAABAAEAAADn//z/AAACAAEAAADo//z/AAADAAEAAADm//3/AAABAAEAAADn//3/AAACAAEAAADo//3/AAADAAEAAADm//7/AAABAAEAAADn//7/AAACAAEAAADo//7/AAADAAEAAADm////AAABAAEAAADn////AAACAAEAAADo////AAADAAEAAADm/wAAAAABAAEAAADn/wAAAAACAAEAAADo/wAAAAACAAEAAADm/wEAAAABAAEAAADn/wEAAAACAAEAAADo/wEAAAACAAEAAADm/wIAAAABAAEAAADn/wIAAAACAAEAAADo/wIAAAACAAEAAADm/wMAAAABAAIAAADn/wMAAAACAAIAAADo/wMAAAACAAIAAAAdAPX/AAADAAAAAAAaAPb/AAABAAEAAAAbAPb/AAACAAEAAAAcAPb/AAACAAEAAAAdAPb/AAADAAEAAAAaAPf/AAABAAEAAAAbAPf/AAACAAEAAAAcAPf/AAACAAEAAAAdAPf/AAADAAEAAAAaAPj/AAABAAEAAAAbAPj/AAACAAEAAAAcAPj/AAACAAEAAAAdAPj/AAADAAEAAAAaAPn/AAABAAEAAAAbAPn/AAACAAEAAAAcAPn/AAACAAEAAAAdAPn/AAADAAEAAAAaAPr/AAABAAEAAAAbAPr/AAACAAEAAAAcAPr/AAACAAEAAAAdAPr/AAADAAEAAAAaAPv/AAABAAEAAAAbAPv/AAACAAEAAAAcAPv/AAACAAEAAAAdAPv/AAADAAEAAAAaAPz/AAABAAEAAAAbAPz/AAACAAEAAAAcAPz/AAACAAEAAAAdAPz/AAADAAEAAAAaAP3/AAABAAEAAAAbAP3/AAACAAEAAAAcAP3/AAACAAEAAAAdAP3/AAADAAEAAAAaAP7/AAABAAEAAAAbAP7/AAACAAEAAAAcAP7/AAACAAEAAAAdAP7/AAADAAEAAAAaAP//AAABAAEAAAAbAP//AAACAAEAAAAcAP//AAACAAEAAAAdAP//AAADAAEAAAAbAAAAAAACAAEAAAAcAAAAAAACAAEAAAAdAAAAAAADAAEAAAAbAAEAAAACAAEAAAAcAAEAAAACAAEAAAAdAAEAAAADAAEAAAAbAAIAAAACAAEAAAAcAAIAAAACAAEAAAAdAAIAAAADAAEAAAAbAAMAAAACAAIAAAAcAAMAAAACAAIAAAAdAAMAAAADAAIAAAA=")
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=821504557]
 position = Vector2(0, -88)
 process_callback = 0
-
-[node name="LevelBG" parent="." instance=ExtResource("6_cg4ss")]
+[node name="LevelBG" parent="." unique_id=303809688 instance=ExtResource("6_cg4ss")]
 primary_layer = 1
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Node2D" type="Node2D" parent="." unique_id=2031993762]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="Node2D" unique_id=1857340598]
 position = Vector2(-104, -16)
 sprite_frames = ExtResource("7_40pis")
 animation = &"Idle"
 offset = Vector2(0, 1)
 script = ExtResource("8_gnn3a")
 metadata/_custom_type_script = "uid://b08qfwj5jk6g1"
-
-[node name="DropShadow" parent="." instance=ExtResource("9_3f2f2")]
+[node name="DropShadow" parent="." unique_id=1481533456 instance=ExtResource("9_3f2f2")]
 z_as_relative = false
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
-[node name="TextAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_k7rel")
-}
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=455397204]
+[node name="TextAnimation" type="AnimationPlayer" parent="." unique_id=1252467016]
+libraries/ = SubResource("AnimationLibrary_k7rel")
 speed_scale = 0.5
-
-[node name="MainSequence" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_3n3sl")
-}
-autoplay = "Main"
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(16, -16)
-texture = ExtResource("10_5xkvw")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 32)
-
-[node name="ThankYou" type="Label" parent="."]
+[node name="MainSequence" type="AnimationPlayer" parent="." unique_id=677484124]
+libraries/ = SubResource("AnimationLibrary_3n3sl")
+autoplay = &"Main"
+[node name="Peach" parent="." unique_id=463369987 instance=ExtResource("7_1jjur")]
+position = Vector2(-8, -1)
+[node name="ThankYou" type="Label" parent="." unique_id=1304330097]
 visible = false
 visibility_layer = 2
 offset_left = -64.0
@@ -400,10 +370,8 @@ offset_bottom = -144.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Thank you Mario!"
 uppercase = true
-
-[node name="Text2" type="Node2D" parent="."]
-
-[node name="PeaceIsPaved" type="Label" parent="Text2"]
+[node name="Text2" type="Node2D" parent="." unique_id=71310838]
+[node name="PeaceIsPaved" type="Label" parent="Text2" unique_id=1421772333]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -416,8 +384,7 @@ theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_1"
 horizontal_alignment = 1
 uppercase = true
-
-[node name="KingdomSaved" type="Label" parent="Text2"]
+[node name="KingdomSaved" type="Label" parent="Text2" unique_id=744063540]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -430,8 +397,7 @@ theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_2"
 horizontal_alignment = 1
 uppercase = true
-
-[node name="Hurrah" type="Label" parent="Text2"]
+[node name="Hurrah" type="Label" parent="Text2" unique_id=832772014]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -443,8 +409,7 @@ theme_override_colors/font_shadow_color = Color(0.054902, 0.109804, 0.643137, 1)
 theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_3"
 uppercase = true
-
-[node name="Hero" type="Label" parent="Text2"]
+[node name="Hero" type="Label" parent="Text2" unique_id=1619347737]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -457,8 +422,7 @@ theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_4"
 horizontal_alignment = 1
 uppercase = true
-
-[node name="EndsTrip" type="Label" parent="Text2"]
+[node name="EndsTrip" type="Label" parent="Text2" unique_id=405165393]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -471,8 +435,7 @@ theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_5"
 horizontal_alignment = 1
 uppercase = true
-
-[node name="LongFriendship" type="Label" parent="Text2"]
+[node name="LongFriendship" type="Label" parent="Text2" unique_id=1169233656]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -485,8 +448,7 @@ theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_6"
 horizontal_alignment = 1
 uppercase = true
-
-[node name="PointsAdded" type="Label" parent="Text2"]
+[node name="PointsAdded" type="Label" parent="Text2" unique_id=816310353]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -499,8 +461,7 @@ theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_7"
 horizontal_alignment = 1
 uppercase = true
-
-[node name="ForEachLife" type="Label" parent="Text2"]
+[node name="ForEachLife" type="Label" parent="Text2" unique_id=89791941]
 visible = false
 visibility_layer = 2
 offset_left = -128.0
@@ -513,110 +474,102 @@ theme_override_fonts/font = ExtResource("11_yglne")
 text = "CUTSCENE_LL_PEACH_8"
 horizontal_alignment = 1
 uppercase = true
-
-[node name="Toads" type="Node" parent="."]
-
-[node name="1" type="AnimatedSprite2D" parent="Toads"]
+[node name="Toads" type="Node" parent="." unique_id=1593893945]
+[node name="1" type="AnimatedSprite2D" parent="Toads" unique_id=591832197]
 visible = false
 position = Vector2(-88, -16)
 sprite_frames = SubResource("SpriteFrames_k7rel")
 animation = &"Emote"
 autoplay = "Emote"
 offset = Vector2(0, 1)
-
-[node name="ResourceSetterNew" type="Node" parent="Toads/1" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Toads/1" unique_id=137128093 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("13_2i527")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_swpxw")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
-
-[node name="2" type="AnimatedSprite2D" parent="Toads"]
+[node name="2" type="AnimatedSprite2D" parent="Toads" unique_id=2018908343]
 visible = false
 position = Vector2(-64, -16)
 sprite_frames = SubResource("SpriteFrames_k7rel")
 animation = &"Emote"
 autoplay = "Emote"
 offset = Vector2(0, 1)
-
-[node name="ResourceSetterNew" type="Node" parent="Toads/2" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Toads/2" unique_id=248156844 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("13_2i527")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_swpxw")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
-
-[node name="3" type="AnimatedSprite2D" parent="Toads"]
+[node name="3" type="AnimatedSprite2D" parent="Toads" unique_id=1596745432]
 visible = false
 position = Vector2(-40, -16)
 sprite_frames = SubResource("SpriteFrames_k7rel")
 animation = &"Emote"
 autoplay = "Emote"
 offset = Vector2(0, 1)
-
-[node name="ResourceSetterNew" type="Node" parent="Toads/3" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Toads/3" unique_id=1772178980 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("13_2i527")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_swpxw")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
-
-[node name="4" type="AnimatedSprite2D" parent="Toads"]
+[node name="4" type="AnimatedSprite2D" parent="Toads" unique_id=1077941395]
 visible = false
 position = Vector2(-16, -16)
 sprite_frames = SubResource("SpriteFrames_k7rel")
 animation = &"Emote"
 autoplay = "Emote"
 offset = Vector2(0, 1)
-
-[node name="ResourceSetterNew" type="Node" parent="Toads/4" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Toads/4" unique_id=1005817246 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("13_2i527")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_swpxw")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
-
-[node name="5" type="AnimatedSprite2D" parent="Toads"]
+[node name="5" type="AnimatedSprite2D" parent="Toads" unique_id=1157515086]
 visible = false
 position = Vector2(40, -16)
 sprite_frames = SubResource("SpriteFrames_k7rel")
 animation = &"Emote"
 autoplay = "Emote"
 offset = Vector2(0, 1)
-
-[node name="ResourceSetterNew" type="Node" parent="Toads/5" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Toads/5" unique_id=1556100404 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("13_2i527")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_swpxw")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
-
-[node name="6" type="AnimatedSprite2D" parent="Toads"]
+[node name="6" type="AnimatedSprite2D" parent="Toads" unique_id=702500657]
 visible = false
 position = Vector2(64, -16)
 sprite_frames = SubResource("SpriteFrames_k7rel")
 animation = &"Emote"
 autoplay = "Emote"
 offset = Vector2(0, 1)
-
-[node name="ResourceSetterNew" type="Node" parent="Toads/6" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Toads/6" unique_id=1364316194 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("13_2i527")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_swpxw")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
-
-[node name="7" type="AnimatedSprite2D" parent="Toads"]
+[node name="7" type="AnimatedSprite2D" parent="Toads" unique_id=1985293924]
 visible = false
 position = Vector2(88, -16)
 sprite_frames = SubResource("SpriteFrames_k7rel")
 animation = &"Emote"
 autoplay = "Emote"
 offset = Vector2(0, 1)
-
-[node name="ResourceSetterNew" type="Node" parent="Toads/7" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Toads/7" unique_id=1998950244 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("13_2i527")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("14_swpxw")
+json_path = "res://Assets/Sprites/Players/ToadNPC.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"

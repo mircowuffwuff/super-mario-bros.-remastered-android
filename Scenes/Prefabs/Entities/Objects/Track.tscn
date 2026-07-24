@@ -1,31 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://dijxmmwdyjbjc"]
+[gd_scene format=3 uid="uid://dijxmmwdyjbjc"]
 
 [ext_resource type="Script" uid="uid://3heyyx506fnu" path="res://Scripts/Classes/Entities/Objects/Track.gd" id="1_5apin"]
 [ext_resource type="Texture2D" uid="uid://50hm4xgnw8ks" path="res://Assets/Sprites/Tilesets/Tracks.png" id="1_jn31b"]
 [ext_resource type="PackedScene" uid="uid://4gxhnql5bjk6" path="res://Scenes/Prefabs/Entities/Objects/TrackPiece.tscn" id="2_4k6gi"]
+[ext_resource type="Script" uid="uid://364rywt44hy6" path="res://Scripts/Classes/UI/PackSprite.gd" id="3_hxi2f"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_kxiuq"]
 [ext_resource type="PackedScene" uid="uid://byv4sv3cayrmo" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyTrackPath.tscn" id="5_ivm63"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="6_r3crv"]
 [ext_resource type="Texture2D" uid="uid://dlldh5aks0wff" path="res://Assets/Sprites/Editor/GhostTile.png" id="7_eovtp"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="8_bnrke"]
 
-[node name="Track" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p5se"]
+size = Vector2(15, 15)
+
+[node name="Track" type="Node2D" unique_id=699421484]
 process_mode = 3
-z_index = -5
+physics_interpolation_mode = 2
+z_index = -20
 script = ExtResource("1_5apin")
 
-[node name="Point" type="Sprite2D" parent="."]
+[node name="Point" type="Sprite2D" parent="." unique_id=1237301472]
 texture = ExtResource("1_jn31b")
 hframes = 2
 frame = 1
 region_enabled = true
 region_rect = Rect2(0, 16, 32, 16)
+script = ExtResource("3_hxi2f")
+metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="Pieces" type="Node2D" parent="."]
+[node name="End" type="Sprite2D" parent="." unique_id=1379707574]
+texture = ExtResource("1_jn31b")
+hframes = 2
+frame = 1
+region_enabled = true
+region_rect = Rect2(0, 16, 32, 16)
+script = ExtResource("3_hxi2f")
+metadata/_custom_type_script = "uid://364rywt44hy6"
+
+[node name="Pieces" type="Node2D" parent="." unique_id=66185304]
 show_behind_parent = true
 
-[node name="TrackPiece" parent="Pieces" instance=ExtResource("2_4k6gi")]
+[node name="TrackPiece" parent="Pieces" unique_id=2114488722 instance=ExtResource("2_4k6gi")]
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1999998224]
 script = ExtResource("4_kxiuq")
 properties = Array[String](["path", "start_point", "end_point", "invisible"])
 properties_force_selector = Dictionary[String, PackedScene]({
@@ -33,9 +50,215 @@ properties_force_selector = Dictionary[String, PackedScene]({
 })
 metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
-[node name="LevelEditorVisibleNode" type="Node2D" parent="."]
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." unique_id=1212671991]
 script = ExtResource("6_r3crv")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode"]
+[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=1908912395]
 texture = ExtResource("7_eovtp")
+
+[node name="PlacePreview" type="Node2D" parent="." unique_id=1421778283]
+z_index = 1
+
+[node name="NW" type="Sprite2D" parent="PlacePreview" unique_id=904068195]
+position = Vector2(-16, -16)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/NW" unique_id=1616129040]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/NW/MouseArea" unique_id=150150759]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/NW" unique_id=607087153 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="N" type="Sprite2D" parent="PlacePreview" unique_id=1729022571]
+position = Vector2(0, -16)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/N" unique_id=1353253092]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/N/MouseArea" unique_id=757205445]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/N" unique_id=1170311601 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="NE" type="Sprite2D" parent="PlacePreview" unique_id=181215597]
+position = Vector2(16, -16)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/NE" unique_id=457900567]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/NE/MouseArea" unique_id=1591297238]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/NE" unique_id=1610108150 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="E" type="Sprite2D" parent="PlacePreview" unique_id=453513369]
+position = Vector2(16, 0)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/E" unique_id=1039425768]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/E/MouseArea" unique_id=234477862]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/E" unique_id=1034322373 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="SE" type="Sprite2D" parent="PlacePreview" unique_id=2113462188]
+position = Vector2(16, 16)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/SE" unique_id=546749943]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/SE/MouseArea" unique_id=1007736535]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/SE" unique_id=57058549 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="S" type="Sprite2D" parent="PlacePreview" unique_id=1029775032]
+position = Vector2(0, 16)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/S" unique_id=1986561171]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/S/MouseArea" unique_id=1169257169]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/S" unique_id=2129041483 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="SW" type="Sprite2D" parent="PlacePreview" unique_id=1300120046]
+position = Vector2(-16, 16)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/SW" unique_id=481273917]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/SW/MouseArea" unique_id=308619750]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/SW" unique_id=605760934 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="W" type="Sprite2D" parent="PlacePreview" unique_id=131670953]
+position = Vector2(-16, 0)
+texture = ExtResource("1_jn31b")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/W" unique_id=1649080367]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/W/MouseArea" unique_id=1652222185]
+shape = SubResource("RectangleShape2D_7p5se")
+
+[node name="ResourceSetterNew" type="Node" parent="PlacePreview/W" unique_id=1551747431 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="ResourceSetterNew" type="Node" parent="." unique_id=269757700 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "track_texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Track.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="ResourceSetterNew2" type="Node" parent="." unique_id=1543136306 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("8_bnrke")
+node_to_affect = NodePath("..")
+property_name = "invis_track_texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/InvisibleTrack.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[connection signal="mouse_entered" from="PlacePreview/NW/MouseArea" to="." method="on_mouse_entered" binds= [0]]
+[connection signal="mouse_exited" from="PlacePreview/NW/MouseArea" to="." method="on_mouse_exited" binds= [0]]
+[connection signal="mouse_entered" from="PlacePreview/N/MouseArea" to="." method="on_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="PlacePreview/N/MouseArea" to="." method="on_mouse_exited" binds= [1]]
+[connection signal="mouse_entered" from="PlacePreview/NE/MouseArea" to="." method="on_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="PlacePreview/NE/MouseArea" to="." method="on_mouse_exited" binds= [2]]
+[connection signal="mouse_entered" from="PlacePreview/E/MouseArea" to="." method="on_mouse_entered" binds= [3]]
+[connection signal="mouse_exited" from="PlacePreview/E/MouseArea" to="." method="on_mouse_exited" binds= [3]]
+[connection signal="mouse_entered" from="PlacePreview/SE/MouseArea" to="." method="on_mouse_entered" binds= [4]]
+[connection signal="mouse_exited" from="PlacePreview/SE/MouseArea" to="." method="on_mouse_exited" binds= [4]]
+[connection signal="mouse_entered" from="PlacePreview/S/MouseArea" to="." method="on_mouse_entered" binds= [5]]
+[connection signal="mouse_exited" from="PlacePreview/S/MouseArea" to="." method="on_mouse_exited" binds= [5]]
+[connection signal="mouse_entered" from="PlacePreview/SW/MouseArea" to="." method="on_mouse_entered" binds= [6]]
+[connection signal="mouse_exited" from="PlacePreview/SW/MouseArea" to="." method="on_mouse_exited" binds= [6]]
+[connection signal="mouse_entered" from="PlacePreview/W/MouseArea" to="." method="on_mouse_entered" binds= [7]]
+[connection signal="mouse_exited" from="PlacePreview/W/MouseArea" to="." method="on_mouse_exited" binds= [7]]

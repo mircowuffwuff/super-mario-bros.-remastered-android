@@ -1,5 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://b25x1t17eeod4"]
-
+[gd_scene format=4 uid="uid://b25x1t17eeod4"]
 [ext_resource type="PackedScene" uid="uid://cnn6e523gkoa0" path="res://Scenes/Levels/SMB1/CoinHeavens/1.tscn" id="1_qlbtg"]
 [ext_resource type="Texture2D" uid="uid://dt0qtxu2l646n" path="res://Assets/Sprites/Tilesets/Terrain/Overworld.png" id="2_jk3bo"]
 [ext_resource type="PackedScene" uid="uid://dsa8lpl7n8ge0" path="res://Scenes/Prefabs/Blocks/BrickBlocks/BrickBlock.tscn" id="3_waun8"]
@@ -25,32 +24,23 @@
 [ext_resource type="Texture2D" uid="uid://clbmg515rgdhs" path="res://Assets/Sprites/Tilesets/Liquids.png" id="23_lj18u"]
 [ext_resource type="Texture2D" uid="uid://cntkcqc74qp50" path="res://Assets/Sprites/Tilesets/Deco/OverworldDeco.png" id="24_wxafy"]
 [ext_resource type="Texture2D" uid="uid://cfk7rvu4in71u" path="res://Assets/Sprites/Blocks/ConveyorBelt.png" id="25_aielr"]
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_b6qiv"]
 tile_data = PackedInt32Array(0, 524288, 0, 1, 589824, 0)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_d4nyf"]
 tile_data = PackedInt32Array(0, 524288, 1, 1, 589824, 1)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_ls3wh"]
 tile_data = PackedInt32Array(0, 524288, 2, 1, 589824, 2)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_vt0hv"]
 tile_data = PackedInt32Array(0, 524288, 3, 1, 589824, 3)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_xj38k"]
 tile_data = PackedInt32Array(0, 524288, 4, 1, 589824, 4)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_o5705"]
 tile_data = PackedInt32Array(0, 524288, 5, 1, 589824, 5)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_ra18v"]
 tile_data = PackedInt32Array(0, 524288, 6, 1, 589824, 6)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_7cpm5"]
 tile_data = PackedInt32Array(0, 524288, 7, 1, 589824, 7)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_23b45"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8d0v"]
 resource_name = "Terrain"
 texture = ExtResource("2_jk3bo")
 0:0/0 = 0
@@ -716,8 +706,7 @@ texture = ExtResource("2_jk3bo")
 13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:10/0 = 0
 11:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5wh78"]
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ggfae"]
 scenes/1/scene = ExtResource("3_waun8")
 scenes/2/scene = ExtResource("14_4355d")
 scenes/3/scene = ExtResource("16_21roy")
@@ -738,8 +727,7 @@ scenes/17/scene = ExtResource("11_f4oyx")
 scenes/18/scene = ExtResource("12_wdsdg")
 scenes/19/scene = ExtResource("13_bilbw")
 scenes/20/scene = ExtResource("15_aetcf")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_unhax"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qlbtg"]
 texture = ExtResource("23_lj18u")
 0:0/next_alternative_id = 2
 0:0/animation_speed = 8.0
@@ -835,8 +823,7 @@ texture = ExtResource("23_lj18u")
 &"type": 14
 }
 0:7/1 = 1
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qohio"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jk3bo"]
 texture = ExtResource("24_wxafy")
 0:0/0 = 0
 0:0/0/z_index = -10
@@ -858,8 +845,7 @@ texture = ExtResource("24_wxafy")
 3:0/0/z_index = -10
 4:0/0 = 0
 4:0/0/z_index = -10
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qc2cq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_waun8"]
 texture = ExtResource("25_aielr")
 0:0/next_alternative_id = 3
 0:0/animation_speed = 20.0
@@ -941,8 +927,7 @@ texture = ExtResource("25_aielr")
 8: [17],
 &"type": 17
 }
-
-[sub_resource type="TileSet" id="TileSet_ll25q"]
+[sub_resource type="TileSet" id="TileSet_gr4ho"]
 resource_local_to_scene = true
 physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
@@ -957,11 +942,11 @@ terrain_set_0/terrain_0/name = "Ground"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 custom_data_layer_0/name = "OneWay"
 custom_data_layer_0/type = 1
-sources/0 = SubResource("TileSetAtlasSource_23b45")
-sources/1 = SubResource("TileSetScenesCollectionSource_5wh78")
-sources/2 = SubResource("TileSetAtlasSource_unhax")
-sources/3 = SubResource("TileSetAtlasSource_qohio")
-sources/4 = SubResource("TileSetAtlasSource_qc2cq")
+sources/0 = SubResource("TileSetAtlasSource_f8d0v")
+sources/1 = SubResource("TileSetScenesCollectionSource_ggfae")
+sources/2 = SubResource("TileSetAtlasSource_qlbtg")
+sources/3 = SubResource("TileSetAtlasSource_jk3bo")
+sources/4 = SubResource("TileSetAtlasSource_waun8")
 pattern_0 = SubResource("TileMapPattern_b6qiv")
 pattern_1 = SubResource("TileMapPattern_d4nyf")
 pattern_2 = SubResource("TileMapPattern_ls3wh")
@@ -1016,48 +1001,12 @@ metadata/_better_terrain = {
 }]],
 &"version": "0.2"
 }
-
-[node name="Level" instance=ExtResource("1_qlbtg")]
+[node name="Level" unique_id=419050985 instance=ExtResource("1_qlbtg")]
 campaign = "SMBS"
-
-[node name="CloudPlatform" parent="." index="0"]
+[node name="CloudPlatform" parent="." index="0" unique_id=1058582462]
 position = Vector2(-152, -48)
-
-[node name="Tiles" parent="." index="1"]
+[node name="Tiles" parent="." index="1" unique_id=1674661667]
 tile_map_data = PackedByteArray("AADw/wAAAAAEAAEAAADx/wAAAAAEAAEAAADy/wAAAAAEAAEAAADz/wAAAAAEAAEAAAD1/wAAAAAEAAEAAAD2/wAAAAAEAAEAAAD3/wAAAAAEAAEAAAD4/wAAAAAEAAEAAAD5/wAAAAAEAAEAAAD6/wAAAAAEAAEAAAD7/wAAAAAEAAEAAAD8/wAAAAAEAAEAAAD9/wAAAAAEAAEAAAD+/wAAAAAEAAEAAAD//wAAAAAEAAEAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAEAAAACAAAAAAAEAAEAAAADAAAAAAAEAAEAAAAEAAAAAAAEAAEAAAAFAAAAAAAEAAEAAAAGAAAAAAAEAAEAAAAHAAAAAAAEAAEAAAAIAAAAAAAEAAEAAAAJAAAAAAAEAAEAAAAKAAAAAAAEAAEAAAALAAAAAAAEAAEAAAAMAAAAAAAEAAEAAAANAAAAAAAEAAEAAAAOAAAAAAAEAAEAAAAPAAAAAAAEAAEAAAAQAAAAAAAEAAEAAAARAAAAAAAEAAEAAAASAAAAAAAEAAEAAAATAAAAAAAEAAEAAAAQAPf/AQAAAAAAAwARAPf/AQAAAAAAAwASAPf/AQAAAAAAAwD///n/AQAAAAAAAwAAAPn/AQAAAAAAAwABAPn/AQAAAAAAAwD4//n/AQAAAAAAAwD5//n/AQAAAAAAAwD6//n/AQAAAAAAAwD7//n/AQAAAAAAAwD8//n/AQAAAAAAAwD9//n/AQAAAAAAAwD+//n/AQAAAAAAAwACAPf/AQAAAAAAAwADAPf/AQAAAAAAAwAEAPf/AQAAAAAAAwAFAPf/AQAAAAAAAwAGAPf/AQAAAAAAAwAHAPj/AQAAAAAAAwAIAPj/AQAAAAAAAwAJAPj/AQAAAAAAAwAKAPj/AQAAAAAAAwALAPj/AQAAAAAAAwAMAPj/AQAAAAAAAwANAPj/AQAAAAAAAwAOAPj/AQAAAAAAAwAPAPf/AQAAAAAAAwATAPf/AQAAAAAAAwAZAP//AQAAAAAAAwAaAP//AQAAAAAAAwAbAP//AQAAAAAAAwA=")
-tile_set = SubResource("TileSet_ll25q")
-
-[node name="CameraRightLimit" parent="." index="7"]
+tile_set = SubResource("TileSet_gr4ho")
+[node name="CameraRightLimit" parent="." index="7" unique_id=1562605601]
 position = Vector2(544, -16)
-
-[connection signal="collected" from="Tiles/Coin" to="Tiles/Coin/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38411" to="Tiles/@Node2D@38411/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38412" to="Tiles/@Node2D@38412/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38413" to="Tiles/@Node2D@38413/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38414" to="Tiles/@Node2D@38414/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38415" to="Tiles/@Node2D@38415/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38416" to="Tiles/@Node2D@38416/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38417" to="Tiles/@Node2D@38417/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38418" to="Tiles/@Node2D@38418/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38419" to="Tiles/@Node2D@38419/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38420" to="Tiles/@Node2D@38420/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38421" to="Tiles/@Node2D@38421/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38422" to="Tiles/@Node2D@38422/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38423" to="Tiles/@Node2D@38423/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38424" to="Tiles/@Node2D@38424/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38425" to="Tiles/@Node2D@38425/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38426" to="Tiles/@Node2D@38426/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38427" to="Tiles/@Node2D@38427/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38428" to="Tiles/@Node2D@38428/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38429" to="Tiles/@Node2D@38429/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38430" to="Tiles/@Node2D@38430/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38431" to="Tiles/@Node2D@38431/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38432" to="Tiles/@Node2D@38432/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38433" to="Tiles/@Node2D@38433/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38434" to="Tiles/@Node2D@38434/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38435" to="Tiles/@Node2D@38435/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38436" to="Tiles/@Node2D@38436/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38437" to="Tiles/@Node2D@38437/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38438" to="Tiles/@Node2D@38438/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38439" to="Tiles/@Node2D@38439/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@38440" to="Tiles/@Node2D@38440/LevelPersistance" method="set_as_active"]

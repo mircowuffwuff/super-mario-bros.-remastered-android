@@ -30,7 +30,7 @@ func _exit_tree() -> void:
 	OnScreenControls.should_show = true
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept") and can_skip:
+	if Global.multibind_action_just_pressed("ui_accept") and can_skip:
 		go_to_menu()
 
 func on_screen_tapped() -> void:

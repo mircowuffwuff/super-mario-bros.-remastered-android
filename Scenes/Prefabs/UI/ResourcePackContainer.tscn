@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://lggi3b4310yl"]
+[gd_scene format=3 uid="uid://lggi3b4310yl"]
 
 [ext_resource type="Script" uid="uid://cbc02k2pmw13p" path="res://Scripts/UI/ResourcePackContainer.gd" id="1_dm3ff"]
 [ext_resource type="Texture2D" uid="uid://3p2l7rec0gh5" path="res://Assets/Sprites/UI/Cursor.png" id="1_fcw43"]
 [ext_resource type="Texture2D" uid="uid://uh7uhdkv3e6s" path="res://Assets/Sprites/Blocks/QuestionBlock.png" id="2_7ke7c"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_fwtyy"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/Cursor.json" id="4_of2ay"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="5_fwtyy"]
 [ext_resource type="Script" uid="uid://d63p6qr5a748" path="res://Scripts/UI/AutoScrollContainer.gd" id="7_khoix"]
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="7_of2ay"]
@@ -17,7 +16,7 @@ region = Rect2(0, 0, 8, 8)
 atlas = ExtResource("2_7ke7c")
 region = Rect2(0, 0, 16, 16)
 
-[node name="ResourcePackContainer" type="HBoxContainer"]
+[node name="ResourcePackContainer" type="HBoxContainer" unique_id=817552973]
 custom_minimum_size = Vector2(0, 30)
 offset_left = 2.0
 offset_top = 2.0
@@ -26,49 +25,50 @@ offset_bottom = 34.0
 focus_mode = 2
 script = ExtResource("1_dm3ff")
 
-[node name="Cursor" type="TextureRect" parent="."]
+[node name="Cursor" type="TextureRect" parent="." unique_id=1681946309]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 texture = SubResource("AtlasTexture_fwtyy")
 stretch_mode = 3
 
-[node name="ResourceSetter" type="Node" parent="Cursor" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Cursor" unique_id=486707505 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_fwtyy")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_of2ay")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="ResourcePackContainer" type="PanelContainer" parent="."]
+[node name="ResourcePackContainer" type="PanelContainer" parent="." unique_id=1589883593]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("5_fwtyy")
 
-[node name="MarginContainer" type="MarginContainer" parent="ResourcePackContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ResourcePackContainer" unique_id=325249789]
 layout_mode = 2
 theme_override_constants/margin_left = -4
 theme_override_constants/margin_top = -4
 theme_override_constants/margin_right = -4
 theme_override_constants/margin_bottom = -4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ResourcePackContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ResourcePackContainer/MarginContainer" unique_id=644130252]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="ResourcePackContainer/MarginContainer/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="ResourcePackContainer/MarginContainer/HBoxContainer" unique_id=433435537]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 texture = SubResource("AtlasTexture_fcw43")
 stretch_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ResourcePackContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ResourcePackContainer/MarginContainer/HBoxContainer" unique_id=657279352]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="TitleScroll" type="ScrollContainer" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TitleScroll" type="ScrollContainer" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=125465186]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -78,15 +78,16 @@ vertical_scroll_mode = 3
 script = ExtResource("7_khoix")
 metadata/_custom_type_script = "uid://d63p6qr5a748"
 
-[node name="Title" type="Label" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer/TitleScroll"]
+[node name="Title" type="Label" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer/TitleScroll" unique_id=2097730761]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "TITLEAAAAAAAAAAAAAAAAAAAAAA"
+uppercase = true
 
-[node name="DescScroll" type="ScrollContainer" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="DescScroll" type="ScrollContainer" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1046549127]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
@@ -97,7 +98,7 @@ script = ExtResource("7_khoix")
 direction = 1
 metadata/_custom_type_script = "uid://d63p6qr5a748"
 
-[node name="Description" type="Label" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer/DescScroll"]
+[node name="Description" type="Label" parent="ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer/DescScroll" unique_id=107405411]
 unique_name_in_owner = true
 modulate = Color(0.603653, 0.603653, 0.603653, 1)
 custom_minimum_size = Vector2(0, 8)
@@ -108,21 +109,22 @@ text = "Replaces Blue Toad, with Yellow Toad"
 autowrap_mode = 2
 uppercase = true
 
-[node name="LoadedOrder" type="Label" parent="ResourcePackContainer/MarginContainer/HBoxContainer"]
+[node name="LoadedOrder" type="Label" parent="ResourcePackContainer/MarginContainer/HBoxContainer" unique_id=2029937336]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1"
+uppercase = true
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1285680142 node_paths=PackedStringArray("labels")]
 script = ExtResource("7_of2ay")
 labels = [NodePath("../ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer/TitleScroll/Title"), NodePath("../ResourcePackContainer/MarginContainer/HBoxContainer/VBoxContainer/DescScroll/Description"), NodePath("../ResourcePackContainer/MarginContainer/HBoxContainer/LoadedOrder")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="Edit" type="Control" parent="."]
+[node name="Edit" type="Control" parent="." unique_id=1075404874]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="EditLabel" type="Label" parent="Edit"]
+[node name="EditLabel" type="Label" parent="Edit" unique_id=547651930]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

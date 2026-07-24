@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bo3sr1fjh6pcq"]
+
+[ext_resource type="Script" uid="uid://d0nee6pslgrsd" path="res://Scripts/Classes/Gizmos/Repeater.gd" id="1_830em"]
+[ext_resource type="Texture2D" uid="uid://db8e2n65pq1ik" path="res://Assets/Sprites/Editor/Gizmos/Repeater.png" id="2_8lanu"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_rf2yg"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_8lanu"]
+[ext_resource type="PackedScene" uid="uid://dse5pwhodrqcr" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyIntRangeSpin.tscn" id="5_rf2yg"]
+[ext_resource type="PackedScene" uid="uid://cxrx8ogihsuad" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyFloatRangeSpin.tscn" id="6_rgj7j"]
+
+[node name="BaseOutput" type="Node2D" unique_id=515746201 groups=["Gizmos"]]
+process_mode = 3
+z_index = 500
+z_as_relative = false
+script = ExtResource("1_830em")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1224179792]
+texture = ExtResource("2_8lanu")
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1403115602]
+script = ExtResource("3_rf2yg")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1706999895]
+script = ExtResource("4_8lanu")
+properties = Array[String](["amount", "delay"])
+properties_force_selector = Dictionary[String, PackedScene]({
+"amount": ExtResource("5_rf2yg"),
+"delay": ExtResource("6_rgj7j")
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[connection signal="lost_power" from="SignalExposer" to="." method="lost_power"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="recieved_power"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="recieved_pulse"]

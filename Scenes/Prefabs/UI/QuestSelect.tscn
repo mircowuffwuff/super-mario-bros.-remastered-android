@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpx20uohhikd7"]
+[gd_scene format=3 uid="uid://bpx20uohhikd7"]
 
 [ext_resource type="Script" uid="uid://dwiic1tdol4wh" path="res://Scripts/UI/QuestSelect.gd" id="1_6lbpd"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_6lbpd"]
@@ -9,14 +9,14 @@
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_6lbpd"]
 color = Color(1, 1, 1, 1)
 
-[node name="CampaignSelect" type="Control"]
+[node name="CampaignSelect" type="Control" unique_id=2133626989]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 136.0
 offset_bottom = 77.0
 script = ExtResource("1_6lbpd")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1662963249]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,17 +25,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_6lbpd")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1130741279]
 layout_mode = 2
 theme_override_constants/margin_left = -4
 theme_override_constants/margin_top = -4
 theme_override_constants/margin_right = -4
 theme_override_constants/margin_bottom = -4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1303624210]
 layout_mode = 2
 
-[node name="SelectWorld" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SelectWorld" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1612606654]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -43,7 +43,7 @@ text = "MENU_QUEST_SELECT"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/SelectWorld"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/SelectWorld" unique_id=201322192]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -54,31 +54,31 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_6lbpd")
 
-[node name="FirstQuest" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="FirstQuest" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=590405519]
 visible = false
 layout_mode = 2
 text = "QUEST_FIRST"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="SecondQuest" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SecondQuest" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=770265926]
 visible = false
 layout_mode = 2
 text = "QUEST_SECOND"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=682404554]
 layout_mode = 2
 alignment = 1
 
-[node name="FirstQuest" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FirstQuest" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1519600646]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 focus_mode = 2
 
-[node name="FirstQuest" type="NinePatchRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/FirstQuest"]
+[node name="FirstQuest" type="NinePatchRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/FirstQuest" unique_id=1083231857]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_vertical = 9
@@ -87,19 +87,19 @@ region_rect = Rect2(0, 0, 48, 48)
 script = ExtResource("4_35576")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Cursor" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/FirstQuest"]
+[node name="Cursor" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/FirstQuest" unique_id=295280317]
 visible = false
 layout_mode = 2
 text = "^"
 horizontal_alignment = 1
 
-[node name="SecondQuest" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SecondQuest" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=301887041]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 focus_mode = 2
 
-[node name="SecondQuest" type="NinePatchRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SecondQuest"]
+[node name="SecondQuest" type="NinePatchRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SecondQuest" unique_id=2101893245]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_vertical = 9
@@ -108,13 +108,13 @@ region_rect = Rect2(48, 0, 48, 48)
 script = ExtResource("4_35576")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Cursor" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SecondQuest"]
+[node name="Cursor" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SecondQuest" unique_id=986808252]
 visible = false
 layout_mode = 2
 text = "^"
 horizontal_alignment = 1
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=372388648 node_paths=PackedStringArray("labels")]
 script = ExtResource("5_6lbpd")
 labels = [NodePath("../PanelContainer/MarginContainer/VBoxContainer/SelectWorld"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/FirstQuest"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/SecondQuest"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/FirstQuest/Cursor"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SecondQuest/Cursor")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"

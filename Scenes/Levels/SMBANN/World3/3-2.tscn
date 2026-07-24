@@ -1,27 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://41xkjwhhyr0l"]
-
+[gd_scene format=3 uid="uid://41xkjwhhyr0l"]
 [ext_resource type="PackedScene" uid="uid://bqcyeduto4ptj" path="res://Scenes/Levels/SMB1/World3/3-2.tscn" id="1_poxce"]
 [ext_resource type="Script" uid="uid://bjs5mlc3xrxud" path="res://Scripts/Parts/DiscoLevel.gd" id="2_b1xhe"]
-
-[node name="3-2" instance=ExtResource("1_poxce")]
+[node name="3-2" unique_id=1351966512 instance=ExtResource("1_poxce")]
 theme_time = "Night"
 campaign = "SMBANN"
-
-[node name="LevelBG" parent="." index="0"]
+[node name="LevelBG" parent="." index="0" unique_id=1701596539]
 time_of_day = 1
-
-[node name="DiscoLevel" type="Node" parent="." index="15"]
+[node name="DiscoLevel" type="Node" parent="." index="13" unique_id=1089384726]
 script = ExtResource("2_b1xhe")
 metadata/_custom_type_script = "uid://bjs5mlc3xrxud"
-
-[connection signal="player_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock" method="on_block_hit"]
-[connection signal="player_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock/BlockAnimations" method="bounce_block" unbinds=1]
-[connection signal="shell_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock" method="on_shell_block_hit"]
-[connection signal="shell_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock/BlockAnimations" method="bounce_block" unbinds=1]
-[connection signal="area_entered" from="Tiles/DeathPit" to="Tiles/DeathPit" method="area_entered"]
-[connection signal="area_entered" from="Tiles/@Area2D@46029" to="Tiles/@Area2D@46029" method="area_entered"]
-[connection signal="area_entered" from="Tiles/@Area2D@46030" to="Tiles/@Area2D@46030" method="area_entered"]
-[connection signal="area_entered" from="Tiles/@Area2D@46031" to="Tiles/@Area2D@46031" method="area_entered"]
-[connection signal="area_entered" from="Tiles/@Area2D@46032" to="Tiles/@Area2D@46032" method="area_entered"]
-[connection signal="area_entered" from="Tiles/@Area2D@46033" to="Tiles/@Area2D@46033" method="area_entered"]
 [connection signal="player_reached" from="EndFlagpole" to="DiscoLevel" method="give_score"]

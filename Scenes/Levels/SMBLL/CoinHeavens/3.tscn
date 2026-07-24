@@ -1,5 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://dm7ykg1n4xl0p"]
-
+[gd_scene format=4 uid="uid://dm7ykg1n4xl0p"]
 [ext_resource type="PackedScene" uid="uid://ci1065naoop7s" path="res://Scenes/Levels/SMBLL/CoinHeavens/2.tscn" id="1_6ov35"]
 [ext_resource type="PackedScene" uid="uid://c145qqkvy8pr5" path="res://Scenes/Parts/DecoTiles.tscn" id="2_gifkr"]
 [ext_resource type="Texture2D" uid="uid://dt0qtxu2l646n" path="res://Assets/Sprites/Tilesets/Terrain/Overworld.png" id="2_t5bib"]
@@ -28,31 +27,22 @@
 [ext_resource type="Texture2D" uid="uid://cntkcqc74qp50" path="res://Assets/Sprites/Tilesets/Deco/OverworldDeco.png" id="24_u4ttb"]
 [ext_resource type="Texture2D" uid="uid://cfk7rvu4in71u" path="res://Assets/Sprites/Blocks/ConveyorBelt.png" id="25_f7nlj"]
 [ext_resource type="Script" uid="uid://bp6q8n7x8lmbh" path="res://Scripts/Classes/Components/CoinHeavenDestinationSetter.gd" id="28_hfoh6"]
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_b6qiv"]
 tile_data = PackedInt32Array(0, 524288, 0, 1, 589824, 0)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_d4nyf"]
 tile_data = PackedInt32Array(0, 524288, 1, 1, 589824, 1)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_ls3wh"]
 tile_data = PackedInt32Array(0, 524288, 2, 1, 589824, 2)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_vt0hv"]
 tile_data = PackedInt32Array(0, 524288, 3, 1, 589824, 3)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_xj38k"]
 tile_data = PackedInt32Array(0, 524288, 4, 1, 589824, 4)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_o5705"]
 tile_data = PackedInt32Array(0, 524288, 5, 1, 589824, 5)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_ra18v"]
 tile_data = PackedInt32Array(0, 524288, 6, 1, 589824, 6)
-
 [sub_resource type="TileMapPattern" id="TileMapPattern_7cpm5"]
 tile_data = PackedInt32Array(0, 524288, 7, 1, 589824, 7)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5xrmm"]
 resource_name = "Terrain"
 texture = ExtResource("2_t5bib")
@@ -719,7 +709,6 @@ texture = ExtResource("2_t5bib")
 13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:10/0 = 0
 11:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_dntrs"]
 scenes/1/scene = ExtResource("3_hfoh6")
 scenes/2/scene = ExtResource("14_kby2p")
@@ -741,7 +730,6 @@ scenes/17/scene = ExtResource("11_sv16u")
 scenes/18/scene = ExtResource("12_fguh3")
 scenes/19/scene = ExtResource("13_mbatj")
 scenes/20/scene = ExtResource("15_5s5kp")
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p2lph"]
 texture = ExtResource("23_lp6vh")
 0:0/next_alternative_id = 2
@@ -838,7 +826,6 @@ texture = ExtResource("23_lp6vh")
 &"type": 14
 }
 0:7/1 = 1
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g8hb4"]
 texture = ExtResource("24_u4ttb")
 0:0/0 = 0
@@ -861,7 +848,6 @@ texture = ExtResource("24_u4ttb")
 3:0/0/z_index = -10
 4:0/0 = 0
 4:0/0/z_index = -10
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d57xd"]
 texture = ExtResource("25_f7nlj")
 0:0/next_alternative_id = 3
@@ -944,8 +930,7 @@ texture = ExtResource("25_f7nlj")
 8: [17],
 &"type": 17
 }
-
-[sub_resource type="TileSet" id="TileSet_v2lmo"]
+[sub_resource type="TileSet" id="TileSet_hfoh6"]
 resource_local_to_scene = true
 physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
@@ -1019,49 +1004,24 @@ metadata/_better_terrain = {
 }]],
 &"version": "0.2"
 }
-
-[node name="Level" instance=ExtResource("1_6ov35")]
+[node name="Level" unique_id=8090014 instance=ExtResource("1_6ov35")]
 theme = "Space"
 theme_time = "Night"
-
-[node name="CloudPlatform" parent="." index="0"]
+[node name="CloudPlatform" parent="." index="0" unique_id=1058582462]
 position = Vector2(32, 200)
-
-[node name="Tiles" parent="." index="1"]
+[node name="Tiles" parent="." index="1" unique_id=1674661667]
 tile_map_data = PackedByteArray("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AAAfAPb/AAAEAAEAAAAfAPf/AAAEAAEAAAAgAPX/AAAEAAEAAAAgAPb/AAAEAAEAAAAgAPf/AAAEAAEAAAAhAPX/AAAEAAEAAAAhAPb/AAAEAAEAAAAhAPf/AAAEAAEAAAAiAPX/AAAEAAEAAAAiAPb/AAAEAAEAAAAiAPf/AAAEAAEAAAAjAPX/AAAEAAEAAAAjAPb/AAAEAAEAAAAjAPf/AAAEAAEAAAAkAPX/AAAEAAEAAAAkAPb/AAAEAAEAAAAkAPf/AAAEAAEAAAAkAPj/AAAEAAEAAAAlAPX/AAAEAAEAAAAlAPb/AAAEAAEAAAAlAPj/AAAEAAEAAAAmAPX/AAAEAAEAAAAmAPb/AAAEAAEAAAAmAPj/AAAEAAEAAAAnAPX/AAAEAAEAAAAnAPb/AAAEAAEAAAAnAPj/AAAEAAEAAAAoAPX/AAAEAAEAAAAoAPb/AAAEAAEAAAAoAPf/AAAEAAEAAAAoAPj/AAAEAAEAAAApAPX/AAAEAAEAAAApAPb/AAAEAAEAAAApAPf/AAAEAAEAAAApAPj/AAAEAAEAAAAqAPX/AAAEAAEAAAAqAPb/AAAEAAEAAAAqAPf/AAAEAAEAAAAqAPj/AAAEAAEAAAArAPX/AAAEAAEAAAArAPb/AAAEAAEAAAArAPf/AAAEAAEAAAArAPj/AAAEAAEAAAAsAPX/AAAEAAEAAAAsAPb/AAAEAAEAAAAsAPf/AAAEAAEAAAAsAPj/AAAEAAEAAAARAPn/AAAEAAEAAAARAPr/AAAEAAEAAAARAPv/AAAEAAEAAAARAPz/AAAEAAEAAAASAPn/AAAEAAEAAAASAPr/AAAEAAEAAAASAPv/AAAEAAEAAAASAPz/AAAEAAEAAAATAPn/AAAEAAEAAAATAPr/AAAEAAEAAAATAPv/AAAEAAEAAAATAPz/AAAEAAEAAAAUAPn/AAAEAAEAAAAUAPr/AAAEAAEAAAAUAPv/AAAEAAEAAAAUAPz/AAAEAAEAAAAVAPn/AAAEAAEAAAAVAPr/AAAEAAEAAAAVAPv/AAAEAAEAAAAVAPz/AAAEAAEAAAAWAPn/AAAEAAEAAAAWAPr/AAAEAAEAAAAWAPv/AAAEAAEAAAAWAPz/AAAEAAEAAAAXAPn/AAAEAAEAAAAXAPr/AAAEAAEAAAAXAPv/AAAEAAEAAAAXAPz/AAAEAAEAAAAYAPn/AAAEAAEAAAAYAPr/AAAEAAEAAAAYAPv/AAAEAAEAAAAYAPz/AAAEAAEAAAAZAPn/AAAEAAEAAAAZAPr/AAAEAAEAAAAZAPv/AAAEAAEAAAAZAPz/AAAEAAEAAAAaAPn/AAAEAAEAAAAaAPr/AAAEAAEAAAAaAPv/AAAEAAEAAAAaAPz/AAAEAAEAAAAbAPn/AAAEAAEAAAAbAPr/AAAEAAEAAAAbAPv/AAAEAAEAAAAbAPz/AAAEAAEAAAAcAPn/AAAEAAEAAAAcAPr/AAAEAAEAAAAcAPv/AAAEAAEAAAAcAPz/AAAEAAEAAAAdAPn/AAAEAAEAAAAdAPr/AAAEAAEAAAAdAPv/AAAEAAEAAAAdAPz/AAAEAAEAAAAeAPn/AAAEAAEAAAAeAPr/AAAEAAEAAAAeAPv/AAAEAAEAAAAeAPz/AAAEAAEAAAAfAPn/AAAEAAEAAAAfAPr/AAAEAAEAAAAfAPv/AAAEAAEAAAAfAPz/AAAEAAEAAAA=")
-tile_set = SubResource("TileSet_v2lmo")
-
-[node name="CameraRightLimit" parent="." index="7"]
+tile_set = SubResource("TileSet_hfoh6")
+[node name="CameraRightLimit" parent="." index="7" unique_id=1562605601]
 position = Vector2(1024, -16)
-
-[node name="LevelBG" parent="." index="8"]
+[node name="LevelBG" parent="." index="8" unique_id=458182856]
 time_of_day = 1
 overlay_clouds = false
-
-[node name="DecoTiles" parent="." index="9" instance=ExtResource("2_gifkr")]
+[node name="DecoTiles" parent="." index="9" unique_id=841954983 instance=ExtResource("2_gifkr")]
 tile_map_data = PackedByteArray("AAD+////AAACAAEAAAD/////AAACAAEAAAAAAP//AAACAAEAAAABAP//AAACAAEAAAAWAP//AAACAAEAAAAXAP//AAACAAEAAAAZAP//AAACAAEAAAArAP7/AAADAAAAAAArAP//AAADAAEAAAAYAP7/AAADAAAAAAAYAP//AAADAAEAAAAHAP7/AAADAAAAAAAHAP//AAADAAEAAAAIAP7/AAADAAAAAAAIAP//AAADAAEAAAAbAP7/AAAEAAEAAAAbAP//AAAAAAEAAAAFAP7/AAAEAAEAAAAFAP//AAAAAAEAAAD9//7/AAAEAAEAAAD9////AAAAAAEAAAD7//7/AAADAAAAAAD7////AAADAAEAAAD9//3/AAAEAAAAAAAFAP3/AAAEAAAAAAAbAP3/AAAEAAAAAAA=")
-
-[node name="MoonGravity" type="Node" parent="." index="10"]
+[node name="MoonGravity" type="Node" parent="." index="10" unique_id=794336450]
 script = ExtResource("3_a5f8w")
 metadata/_custom_type_script = "uid://dhtqnyrj3ndnj"
-
-[node name="DestinationSetter" type="Node" parent="." index="12"]
+[node name="DestinationSetter" type="Node" parent="." index="12" unique_id=1043104169]
 script = ExtResource("28_hfoh6")
 destination_scene = "res://Scenes/Levels/SMBLL/World9/9-3.tscn"
-
-[connection signal="collected" from="Tiles/Coin" to="Tiles/Coin/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45828" to="Tiles/@Node2D@45828/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45829" to="Tiles/@Node2D@45829/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45830" to="Tiles/@Node2D@45830/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45831" to="Tiles/@Node2D@45831/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45832" to="Tiles/@Node2D@45832/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45833" to="Tiles/@Node2D@45833/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45834" to="Tiles/@Node2D@45834/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45835" to="Tiles/@Node2D@45835/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45836" to="Tiles/@Node2D@45836/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45837" to="Tiles/@Node2D@45837/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45838" to="Tiles/@Node2D@45838/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45839" to="Tiles/@Node2D@45839/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45840" to="Tiles/@Node2D@45840/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45841" to="Tiles/@Node2D@45841/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@45842" to="Tiles/@Node2D@45842/LevelPersistance" method="set_as_active"]

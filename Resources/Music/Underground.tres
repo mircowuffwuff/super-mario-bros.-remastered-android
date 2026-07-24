@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://dnfu3apgssfbn"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://dnfu3apgssfbn"]
 
-[ext_resource type="AudioStream" uid="uid://bdhjt4lgfbsc6" path="res://Assets/Audio/BGM/Underground.mp3" id="1_uua4u"]
-[ext_resource type="AudioStream" uid="uid://jk5jyndt4fgp" path="res://Assets/Audio/BGM/UndergroundHurry.mp3" id="2_66mfn"]
+[ext_resource type="AudioStream" uid="uid://c0vp4m6tlr2tx" path="res://Assets/Audio/BGM/Underground.mp3" id="1_uua4u"]
+[ext_resource type="AudioStream" uid="uid://brks34kmv7ih7" path="res://Assets/Audio/BGM/UndergroundHurry.mp3" id="2_66mfn"]
 
 [resource]
 clip_count = 2

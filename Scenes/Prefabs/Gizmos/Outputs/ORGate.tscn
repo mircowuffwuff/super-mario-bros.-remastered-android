@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ukg5xikl8n2i"]
+
+[ext_resource type="PackedScene" uid="uid://b5gs47nvw8q1k" path="res://Scenes/Prefabs/Gizmos/Outputs/ANDGate.tscn" id="1_p1oh5"]
+[ext_resource type="Texture2D" uid="uid://das61c03dnben" path="res://Assets/Sprites/Editor/Gizmos/OR.png" id="2_xfbfj"]
+
+[node name="ANDGate" unique_id=515746201 instance=ExtResource("1_p1oh5")]
+type = 1
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("2_xfbfj")

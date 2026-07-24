@@ -1,14 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://dekuqrdjmnr1m"]
+[gd_scene format=3 uid="uid://dekuqrdjmnr1m"]
 
 [ext_resource type="Script" uid="uid://by48a8oa5hefr" path="res://Scripts/UI/StoryPause.gd" id="1_nyd8q"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_owmu6"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_1ufde"]
 [ext_resource type="Texture2D" uid="uid://3p2l7rec0gh5" path="res://Assets/Sprites/UI/Cursor.png" id="4_owmu6"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/Cursor.json" id="5_k7wpt"]
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="7_38ivy"]
 [ext_resource type="PackedScene" uid="uid://dnksdgorle8su" path="res://Scenes/Prefabs/UI/SettingsMenu.tscn" id="11_k7wpt"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("options")]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2qqpf"]
+content_margin_top = 0.0
+color = Color(1, 1, 1, 1)
+grow_begin = 3.0
+grow_end = -2.0
+
+[node name="PauseMenu" type="Control" unique_id=1740910897 node_paths=PackedStringArray("options")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -19,7 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_nyd8q")
 options = [NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/Label"), NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/Label2"), NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/Label4"), NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/Label3")]
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=694382237]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,7 +38,7 @@ offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=354494500]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,38 +47,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_owmu6")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer" unique_id=1010310471]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer" unique_id=1254587209]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1881999045]
 layout_mode = 2
 size_flags_vertical = 7
 text = "PAUSE_RESUME"
 uppercase = true
 
-[node name="Label2" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1280773023]
 layout_mode = 2
 size_flags_vertical = 7
 text = "PAUSE_RESTART"
 uppercase = true
 
-[node name="Label4" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1632624489]
 layout_mode = 2
 size_flags_vertical = 7
 text = "MENU_SETTINGS"
 uppercase = true
 
-[node name="Label3" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=820573678]
 layout_mode = 2
 size_flags_vertical = 7
 text = "PAUSE_QUIT"
 uppercase = true
 
-[node name="Cursor" type="TextureRect" parent="Control"]
+[node name="Cursor" type="TextureRect" parent="Control" unique_id=1161725737]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 16.0
@@ -82,22 +87,81 @@ offset_bottom = 24.0
 texture = ExtResource("4_owmu6")
 stretch_mode = 2
 
-[node name="ResourceSetter" type="Node" parent="Control/Cursor" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Control/Cursor" unique_id=658794778 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_1ufde")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("5_k7wpt")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1548408928 node_paths=PackedStringArray("labels")]
 script = ExtResource("7_38ivy")
 labels = [NodePath("../Control/PanelContainer/MarginContainer/VBoxContainer/Label"), NodePath("../Control/PanelContainer/MarginContainer/VBoxContainer/Label2"), NodePath("../Control/PanelContainer/MarginContainer/VBoxContainer/Label3"), NodePath("../Control/PanelContainer/MarginContainer/VBoxContainer/Label4")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="SettingsMenu" parent="." node_paths=PackedStringArray("disabled_containers") instance=ExtResource("11_k7wpt")]
+[node name="SettingsMenu" parent="." unique_id=740137315 node_paths=PackedStringArray("disabled_containers") instance=ExtResource("11_k7wpt")]
 layout_mode = 1
-disabled_containers = [NodePath("PanelContainer/MarginContainer/VBoxContainer/Difficulty"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Data"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Controller"), NodePath("PanelContainer/MarginContainer/VBoxContainer/KeyboardControls"), NodePath("PanelContainer/MarginContainer/VBoxContainer/ResourcePacks")]
+disabled_containers = [NodePath("PanelContainer/MarginContainer/VBoxContainer/Data")]
+
+[node name="Gameplay" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(740137315, 1014393390) index="7" unique_id=1489558406 node_paths=PackedStringArray("options")]
+options = []
+
+[node name="Label" type="Label" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Gameplay" index="1" unique_id=1134931550]
+layout_mode = 2
+text = "ONLY ON THE TITLE SCREEN!"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Gameplay" index="2" unique_id=2028721094]
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_2qqpf")
+
+[node name="ScrollContainer" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Gameplay" index="3" unique_id=909412409]
+modulate = Color(0.4745098, 0.4745098, 0.4745098, 1)
+
+[node name="HSeparator" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Gameplay" index="4" unique_id=1702276510]
+visible = false
+
+[node name="Description" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Gameplay" index="5" unique_id=721453470]
+visible = false
+
+[node name="Difficulty" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(740137315, 1014393390) index="8" unique_id=508103354 node_paths=PackedStringArray("options")]
+options = []
+
+[node name="Label" type="Label" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Difficulty" index="1" unique_id=447880847]
+layout_mode = 2
+text = "ONLY ON THE TITLE SCREEN!"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Difficulty" index="2" unique_id=1017619831]
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_2qqpf")
+
+[node name="ScrollContainer" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Difficulty" index="3" unique_id=266847994]
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+
+[node name="HSeparator" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Difficulty" index="4" unique_id=863097764]
+visible = false
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+theme_override_styles/separator = SubResource("StyleBoxLine_2qqpf")
+
+[node name="Description" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Difficulty" index="5" unique_id=1562391460]
+visible = false
+modulate = Color(0.47397572, 0.47397572, 0.47397572, 1)
+
+[node name="LabelFontChanger" parent="SettingsMenu" index="1" unique_id=1797639177 node_paths=PackedStringArray("labels")]
+labels = [NodePath("../PanelContainer/MarginContainer/VBoxContainer/Title"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer/Category"), null, null, null, null, null, null, null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3/Value"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer/MarginContainer/Desc")]
 
 [connection signal="closed" from="." to="SettingsMenu" method="close"]
 [connection signal="option_3_selected" from="." to="." method="open_settings"]
+
+[editable path="SettingsMenu"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Video/Language"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3"]

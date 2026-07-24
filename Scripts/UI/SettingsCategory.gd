@@ -30,17 +30,20 @@ func _process(_delta: float) -> void:
 		selected_index = minimum_idx
 
 func handle_input() -> void:
-	if Input.is_action_just_pressed("ui_down"):
+	var old_idx := selected_index
+	if Global.multibind_action_just_pressed("ui_down"):
 		selected_index += 1
-		if Settings.file.audio.extra_sfx == 1:
-			AudioManager.play_global_sfx("menu_move")
-	if Input.is_action_just_pressed("ui_up"):
+	if Global.multibind_action_just_pressed("ui_up"):
 		selected_index -= 1
+	if scroll_container != null:
+		scroll_container.follow_focus = selected_index > minimum_idx
+		if selected_index <= minimum_idx:
+			scroll_container.scroll_vertical = 0
+	selected_index = clamp(selected_index, minimum_idx, options.size() - 1)
+	if old_idx != selected_index:
 		if Settings.file.audio.extra_sfx == 1:
 			AudioManager.play_global_sfx("menu_move")
-	if scroll_container != null:
-		scroll_container.scroll_vertical = float(lerpf(0.0, scroll_container.get_v_scroll_bar().max_value, inverse_lerp(0.0, options.size() - 1, selected_index - 2)))
-	selected_index = clamp(selected_index, minimum_idx, options.size() - 1)
+		options[selected_index].grab_focus()
 
 func auto_get_options() -> void:
 	options.clear()

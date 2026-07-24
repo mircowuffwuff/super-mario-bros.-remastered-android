@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://kmvo4u8e3h77"]
+
+[ext_resource type="Script" uid="uid://d3wnprr8r4yoo" path="res://addons/helper/HelperNode.gd" id="1_4xvsf"]
+
+[node name="Helper" type="Control" unique_id=2123838622]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4xvsf")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1357318655]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 2
+
+[node name="Localizations" type="TabBar" parent="TabContainer" unique_id=300424756]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Localizations" unique_id=302192287]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="TabContainer/Localizations/VBoxContainer" unique_id=789038007]
+layout_mode = 2
+text = "Sync Keys"
+
+[node name="Scenes" type="TabBar" parent="TabContainer" unique_id=1036774291]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Scenes" unique_id=1273662312]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="TabContainer/Scenes/VBoxContainer" unique_id=636041929]
+layout_mode = 2
+text = "REMOVE FUCKING ANNOYING TILE SIGNAL SHIT"
+
+[node name="Tools" type="TabBar" parent="TabContainer" unique_id=1966083733]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Tools" unique_id=2038620477]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Tools/VBoxContainer" unique_id=2066696580]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Tools/VBoxContainer/HBoxContainer" unique_id=798068375]
+visible = false
+layout_mode = 2
+text = "Value:"
+
+[node name="InitValue" type="LineEdit" parent="TabContainer/Tools/VBoxContainer/HBoxContainer" unique_id=1126875921]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "00000"
+
+[node name="ConvertedSubPixelToDecimal" type="Label" parent="TabContainer/Tools/VBoxContainer/HBoxContainer" unique_id=395196619]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Converted: 123.2"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Tools/VBoxContainer" unique_id=675344509]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Tools/VBoxContainer/HBoxContainer2" unique_id=1678990340]
+layout_mode = 2
+text = "Include Delta:"
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Tools/VBoxContainer/HBoxContainer2" unique_id=334287625]
+layout_mode = 2
+
+[connection signal="pressed" from="TabContainer/Localizations/VBoxContainer/Button" to="." method="update_locale_keys"]
+[connection signal="pressed" from="TabContainer/Scenes/VBoxContainer/Button" to="." method="remove_tile_signals"]
+[connection signal="text_changed" from="TabContainer/Tools/VBoxContainer/HBoxContainer/InitValue" to="." method="update_value"]
+[connection signal="toggled" from="TabContainer/Tools/VBoxContainer/HBoxContainer2/CheckBox" to="." method="toggle_delta"]

@@ -1,5 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://55lw62f6ol33"]
+[gd_scene format=3 uid="uid://55lw62f6ol33"]
 
 [ext_resource type="PackedScene" uid="uid://cyw7kk1em8h16" path="res://Scenes/Parts/Particles/BlockDestructionParticles.tscn" id="1_68g86"]
 
-[node name="BlockDestructionParticles" instance=ExtResource("1_68g86")]
+[node name="BlockDestructionParticles" unique_id=1898806162 instance=ExtResource("1_68g86")]

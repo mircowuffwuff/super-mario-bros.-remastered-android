@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://do28cwi8t6ptt"]
+[gd_scene format=3 uid="uid://do28cwi8t6ptt"]
 
 [ext_resource type="PackedScene" uid="uid://dekuqrdjmnr1m" path="res://Scenes/Prefabs/UI/BasePauseMenu.tscn" id="1_ywuni"]
 [ext_resource type="Texture2D" uid="uid://3p2l7rec0gh5" path="res://Assets/Sprites/UI/Cursor.png" id="2_r6hlk"]
@@ -33,18 +33,27 @@ func quit_to_menu() -> void:
 	$\"..\".close()
 "
 
-[node name="PauseMenu" instance=ExtResource("1_ywuni")]
+[node name="PauseMenu" unique_id=689641662 instance=ExtResource("1_ywuni")]
 
-[node name="Cursor" parent="Control" index="1"]
+[node name="Cursor" parent="Control" parent_id_path=PackedInt32Array(694382237) index="1" unique_id=1161725737]
 offset_left = 8.0
 offset_top = 4.0
 offset_right = 16.0
 offset_bottom = 12.0
 texture = SubResource("AtlasTexture_eud56")
 
-[node name="Handler" type="Node" parent="." index="2"]
+[node name="Handler" type="Node" parent="." index="2" unique_id=335594783]
 script = SubResource("GDScript_r6hlk")
+
+[node name="LabelFontChanger" parent="SettingsMenu" parent_id_path=PackedInt32Array(740137315) index="1" unique_id=1797639177 node_paths=PackedStringArray("labels")]
+labels = [NodePath("../PanelContainer/MarginContainer/VBoxContainer/Title"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer/Category"), null, null, null, null, null, null, null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3/Value"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer/MarginContainer/Desc")]
 
 [connection signal="option_1_selected" from="." to="." method="close"]
 [connection signal="option_2_selected" from="." to="Handler" method="restart_level"]
 [connection signal="option_4_selected" from="." to="Handler" method="quit_to_menu"]
+
+[editable path="SettingsMenu"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Video/Language"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3"]

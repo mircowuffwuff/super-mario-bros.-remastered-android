@@ -1,17 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://crl4v60uug4ho"]
+[gd_scene format=3 uid="uid://crl4v60uug4ho"]
 
 [ext_resource type="PackedScene" uid="uid://blv1d12smlibh" path="res://Scenes/Levels/ChallengeModeResults.tscn" id="1_vr3sy"]
 [ext_resource type="Texture2D" uid="uid://b650r4ep8ulqt" path="res://Assets/Sprites/Backgrounds/ChallengeModeResults/Castle3.png" id="2_h7wtw"]
 [ext_resource type="Texture2D" uid="uid://bikycdctjwtdi" path="res://Assets/Sprites/Backgrounds/ChallengeModeResults/Castle2.png" id="3_jg0i4"]
 [ext_resource type="Texture2D" uid="uid://c40dq5bj60ldb" path="res://Assets/Sprites/Backgrounds/ChallengeModeResults/Castle1.png" id="4_rtm16"]
 
-[node name="ChallengeModeResults" instance=ExtResource("1_vr3sy")]
+[node name="ChallengeModeResults" unique_id=1393486200 instance=ExtResource("1_vr3sy")]
 
-[node name="PackSprite3" parent="BG2" index="0"]
+[node name="LabelFontChanger" parent="." index="20" unique_id=1370610741 node_paths=PackedStringArray("labels")]
+labels = [NodePath("../Sprite2D/Sprite2D3/Score"), NodePath("../Sprite2D/Sprite2D3/Coins2"), NodePath("../Sprite2D/Sprite2D3/ScoreText"), NodePath("../Sprite2D/Sprite2D3/ScoreText/Target"), null, NodePath("../SpeechBubble/Your"), NodePath("../SpeechBubble/Your/Results"), NodePath("../SpeechBubble/Coins"), NodePath("../SpeechBubble/Score"), NodePath("../SpeechBubble/Score/ScoreLabel"), NodePath("../Label"), NodePath("../WorldLevel"), NodePath("../Label2")]
+
+[node name="PackSprite3" parent="BG2" parent_id_path=PackedInt32Array(2095273623) index="0" unique_id=986269619]
 texture = ExtResource("2_h7wtw")
 
-[node name="PackSprite2" parent="BG2" index="1"]
+[node name="PackSprite2" parent="BG2" parent_id_path=PackedInt32Array(2095273623) index="1" unique_id=1934819400]
 texture = ExtResource("3_jg0i4")
 
-[node name="PackSprite4" parent="BG2" index="2"]
+[node name="PackSprite4" parent="BG2" parent_id_path=PackedInt32Array(2095273623) index="2" unique_id=934123746]
 texture = ExtResource("4_rtm16")

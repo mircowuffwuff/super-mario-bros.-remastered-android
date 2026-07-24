@@ -24,9 +24,9 @@ func run_player_check(player: Player) -> void:
 		player.enter_pipe(self, false)
 		await get_tree().create_timer(1, false).timeout
 		$CanvasLayer.show()
+		get_tree().call_group("PiranhaPlants", "_ready")
 		await get_tree().create_timer(0.25, false).timeout
 		connecting_pipe.exit_pipe()
-		can_enter = true
 		for i in 2:
 			await get_tree().physics_frame
 		$CanvasLayer.hide()

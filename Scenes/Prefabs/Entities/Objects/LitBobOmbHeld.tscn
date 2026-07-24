@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b13d12fdho258"]
+[gd_scene format=3 uid="uid://b13d12fdho258"]
 
 [ext_resource type="PackedScene" uid="uid://d075e1520ngrv" path="res://Scenes/Prefabs/Entities/Objects/BobOmbHeld.tscn" id="1_grd3e"]
 
-[node name="BobOmbHeld" instance=ExtResource("1_grd3e")]
+[node name="BobOmbHeld" unique_id=1132845324 instance=ExtResource("1_grd3e")]
 timer = 1.0
 
-[node name="FlashAnimation" parent="ScaleJoint/Sprite" index="1"]
+[node name="FlashAnimation" parent="ScaleJoint/Sprite" parent_id_path=PackedInt32Array(727467419) index="1" unique_id=2023667887]
 speed_scale = 2.0

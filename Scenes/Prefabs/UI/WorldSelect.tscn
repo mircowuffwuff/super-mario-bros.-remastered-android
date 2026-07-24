@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dntk2js0tu3y2"]
+[gd_scene format=3 uid="uid://dntk2js0tu3y2"]
 
 [ext_resource type="Script" uid="uid://col2kvunpua7l" path="res://Scripts/UI/WorldSelect.gd" id="1_isg11"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_otmop"]
@@ -71,6 +71,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 180.0
 offset_bottom = 65.0
+mouse_filter = 2
 script = ExtResource("1_isg11")
 num_of_worlds = 12
 
@@ -81,10 +82,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_otmop")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1964473894]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = -8
 theme_override_constants/margin_top = -4
 theme_override_constants/margin_right = -8
@@ -92,6 +95,7 @@ theme_override_constants/margin_bottom = -4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1323027087]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Title" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=923934861]
@@ -110,10 +114,12 @@ anchor_bottom = 1.0
 offset_top = -4.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_d8v6d")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1085255846]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 4
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1428253935]
@@ -124,6 +130,7 @@ text = "◄"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 follow_focus = true
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
@@ -131,6 +138,7 @@ vertical_scroll_mode = 0
 [node name="SlotContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=181733477]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Slot1" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer" unique_id=1293243576]
 unique_name_in_owner = true
@@ -139,14 +147,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot1" unique_id=1958932130]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot1" unique_id=659677032]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot1/Icon" unique_id=1918539055]
 layout_mode = 1
@@ -294,7 +300,6 @@ texture = SubResource("AtlasTexture_n7c7e")
 script = ExtResource("5_6gt41")
 
 [node name="Cursor" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot1" unique_id=962917386]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = -4
@@ -310,14 +315,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot2" unique_id=1192750125]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot2" unique_id=1829488455]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(96, 96, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot2/Icon" unique_id=186166717]
 layout_mode = 1
@@ -480,14 +483,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot3" unique_id=1253139407]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot3" unique_id=1789238315]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot3/Icon" unique_id=1673823276]
 layout_mode = 1
@@ -650,14 +651,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot4" unique_id=74277425]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot4" unique_id=1755302206]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot4/Icon" unique_id=320388694]
 layout_mode = 1
@@ -820,14 +819,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot5" unique_id=427105743]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot5" unique_id=1370964193]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot5/Icon" unique_id=2046085610]
 layout_mode = 1
@@ -990,14 +987,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot6" unique_id=896202606]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot6" unique_id=107114972]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot6/Icon" unique_id=1483262202]
 layout_mode = 1
@@ -1160,14 +1155,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot7" unique_id=982228727]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot7" unique_id=136947285]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot7/Icon" unique_id=1510379970]
 layout_mode = 1
@@ -1331,14 +1324,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot8" unique_id=1960095985]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot8" unique_id=1142515623]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot8/Icon" unique_id=1001484543]
 layout_mode = 1
@@ -1371,6 +1362,7 @@ offset_right = 7.999998
 offset_bottom = 7.999998
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qti0y")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1421,6 +1413,7 @@ offset_right = 10.0
 offset_bottom = 32.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_gmk86")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1445,6 +1438,7 @@ offset_right = 21.0
 offset_bottom = 33.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qaid0")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1470,6 +1464,7 @@ offset_right = 37.0
 offset_bottom = 31.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_oxrsx")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1487,6 +1482,7 @@ script = ExtResource("5_6gt41")
 [node name="Cursor" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot8" unique_id=1581639456]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = -4
 
@@ -1502,14 +1498,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot9" unique_id=302204713]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot9" unique_id=1008022586]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot9/Icon" unique_id=1366937693]
 layout_mode = 1
@@ -1542,6 +1536,7 @@ offset_right = 7.999998
 offset_bottom = 7.999998
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qti0y")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1592,6 +1587,7 @@ offset_right = 10.0
 offset_bottom = 32.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_gmk86")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1616,6 +1612,7 @@ offset_right = 21.0
 offset_bottom = 33.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qaid0")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1641,6 +1638,7 @@ offset_right = 37.0
 offset_bottom = 31.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_oxrsx")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1658,6 +1656,7 @@ script = ExtResource("5_6gt41")
 [node name="Cursor" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot9" unique_id=1486201121]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = -4
 
@@ -1672,14 +1671,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot10" unique_id=1476103037]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot10" unique_id=1456354444]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot10/Icon" unique_id=1296578389]
 layout_mode = 1
@@ -1712,6 +1709,7 @@ offset_right = 7.999998
 offset_bottom = 7.999998
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qti0y")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1762,6 +1760,7 @@ offset_right = 10.0
 offset_bottom = 32.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_gmk86")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1786,6 +1785,7 @@ offset_right = 21.0
 offset_bottom = 33.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qaid0")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1811,6 +1811,7 @@ offset_right = 37.0
 offset_bottom = 31.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_oxrsx")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1828,6 +1829,7 @@ script = ExtResource("5_6gt41")
 [node name="Cursor" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot10" unique_id=1146334306]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = -4
 
@@ -1842,14 +1844,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot11" unique_id=311843485]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot11" unique_id=1838724476]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot11/Icon" unique_id=1913343380]
 layout_mode = 1
@@ -1882,6 +1882,7 @@ offset_right = 7.999998
 offset_bottom = 7.999998
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qti0y")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1932,6 +1933,7 @@ offset_right = 10.0
 offset_bottom = 32.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_gmk86")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1956,6 +1958,7 @@ offset_right = 21.0
 offset_bottom = 33.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qaid0")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1981,6 +1984,7 @@ offset_right = 37.0
 offset_bottom = 31.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_oxrsx")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -1998,6 +2002,7 @@ script = ExtResource("5_6gt41")
 [node name="Cursor" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot11" unique_id=1592167668]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = -4
 
@@ -2012,14 +2017,12 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot12" unique_id=1057329811]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot12" unique_id=445716909]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot12/Icon" unique_id=1891321671]
 layout_mode = 1
@@ -2052,6 +2055,7 @@ offset_right = 7.999998
 offset_bottom = 7.999998
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qti0y")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2102,6 +2106,7 @@ offset_right = 10.0
 offset_bottom = 32.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_gmk86")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2126,6 +2131,7 @@ offset_right = 21.0
 offset_bottom = 33.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qaid0")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2151,6 +2157,7 @@ offset_right = 37.0
 offset_bottom = 31.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_oxrsx")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2168,6 +2175,7 @@ script = ExtResource("5_6gt41")
 [node name="Cursor" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot12" unique_id=10585167]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = -4
 
@@ -2184,14 +2192,12 @@ focus_neighbor_right = NodePath("../Slot1")
 focus_mode = 2
 mouse_filter = 2
 
-[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot13" unique_id=1661211998]
+[node name="Icon" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot13" unique_id=458977732]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 10
 texture = ExtResource("3_ldq6u")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("5_6gt41")
-metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
 [node name="Number" type="NinePatchRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot13/Icon" unique_id=1798543807]
 layout_mode = 1
@@ -2224,6 +2230,7 @@ offset_right = 7.999998
 offset_bottom = 7.999998
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qti0y")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2274,6 +2281,7 @@ offset_right = 10.0
 offset_bottom = 32.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_gmk86")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2298,6 +2306,7 @@ offset_right = 21.0
 offset_bottom = 33.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_qaid0")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2323,6 +2332,7 @@ offset_right = 37.0
 offset_bottom = 31.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
+mouse_filter = 2
 texture = SubResource("AtlasTexture_oxrsx")
 stretch_mode = 3
 script = ExtResource("7_6uv8k")
@@ -2340,6 +2350,7 @@ script = ExtResource("5_6gt41")
 [node name="Cursor" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SlotContainer/Slot13" unique_id=399119636]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = -4
 

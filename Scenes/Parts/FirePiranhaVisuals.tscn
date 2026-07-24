@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://i18ohs6q5xbh"]
+
+[ext_resource type="PackedScene" uid="uid://cwqicj07wkd0n" path="res://Scenes/Parts/PiranhaPlantVisuals.tscn" id="1_bcek3"]
+[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_sa2nn"]
+[ext_resource type="Script" uid="uid://dw25p2gplfkx0" path="res://Scripts/Classes/Entities/Enemies/FirePiranha.gd" id="3_sa2nn"]
+[ext_resource type="PackedScene" uid="uid://dutrlpq47wguf" path="res://Scenes/Prefabs/Entities/Items/Fireball.tscn" id="4_tyk6w"]
+
+[node name="Visuals" unique_id=533885688 instance=ExtResource("1_bcek3")]
+
+[node name="Sprite" parent="." index="0" unique_id=211744012]
+script = ExtResource("2_sa2nn")
+
+[node name="ResourceSetterNew" parent="Sprite" index="0" unique_id=1028226469]
+json_path = "res://Assets/Sprites/Enemies/FirePiranhaPlant.json"
+
+[node name="FirePiranhaPlant" type="Node" parent="." index="2" unique_id=122564629]
+script = ExtResource("3_sa2nn")
+fireball_scene = ExtResource("4_tyk6w")

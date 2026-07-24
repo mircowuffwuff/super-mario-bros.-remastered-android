@@ -1,17 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://csngpd6px3dt4"]
+[gd_scene format=3 uid="uid://csngpd6px3dt4"]
 
 [ext_resource type="PackedScene" uid="uid://bn1kect7h2dlp" path="res://Scenes/Prefabs/LevelObjects/BulletBillGenerator.tscn" id="1_p6gmx"]
 [ext_resource type="Texture2D" uid="uid://cyohkov1cy2vb" path="res://Assets/Sprites/Editor/GeneratorStop.png" id="2_bd4qu"]
 
-[node name="EntityGeneratorStopper" instance=ExtResource("1_p6gmx")]
+[node name="EntityGeneratorStopper" unique_id=2006343968 instance=ExtResource("1_p6gmx")]
 threshold = 99999.0
 entity_scene = null
 
-[node name="Sprite" parent="LevelEditorVisibleNode" index="0"]
+[node name="Sprite" parent="LevelEditorVisibleNode" parent_id_path=PackedInt32Array(1819047736) index="0" unique_id=2086579252]
 texture = ExtResource("2_bd4qu")
 
-[node name="PlayerDetection" parent="." index="1"]
+[node name="PlayerDetection" parent="." index="1" unique_id=1599199670]
 visible = true
-priority = 1
 
 [connection signal="player_entered" from="PlayerDetection" to="." method="deactivate_all_generators" unbinds=1]
+[connection signal="recieved_power" from="SignalExposer" to="." method="deactivate_all_generators"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="deactivate_all_generators"]

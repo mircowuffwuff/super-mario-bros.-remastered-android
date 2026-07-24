@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyx8sm50s5kcu"]
+[gd_scene format=3 uid="uid://dyx8sm50s5kcu"]
 
 [ext_resource type="PackedScene" uid="uid://bjo3ghjnca7i5" path="res://Scenes/Levels/GameOver.tscn" id="1_fnhjq"]
 [ext_resource type="Script" uid="uid://cx10qj8eh8k8w" path="res://Scripts/Parts/TimeUp.gd" id="2_s8xim"]
 
-[node name="GameOver" instance=ExtResource("1_fnhjq")]
+[node name="GameOver" unique_id=760752817 instance=ExtResource("1_fnhjq")]
 script = ExtResource("2_s8xim")
 
-[node name="Label" parent="CanvasLayer" index="1"]
+[node name="Label" parent="CanvasLayer" parent_id_path=PackedInt32Array(922575584) index="1" unique_id=1354989011]
 text = "Time Up"
 
-[node name="Timer" parent="." index="2"]
+[node name="Timer" parent="." index="2" unique_id=1141993583]
 wait_time = 2.0

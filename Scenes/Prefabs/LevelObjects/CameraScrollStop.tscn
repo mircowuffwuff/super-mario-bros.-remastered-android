@@ -1,23 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://vgcgj3k2k8oy"]
+[gd_scene format=3 uid="uid://vgcgj3k2k8oy"]
 
 [ext_resource type="Script" uid="uid://bdq0373j5n5o0" path="res://Scripts/Parts/CameraRightLimit.gd" id="1_y3riq"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="2_y0tan"]
 [ext_resource type="Texture2D" uid="uid://c8ir37jmcm4f4" path="res://Assets/Sprites/Editor/CameraLock.png" id="3_c8trh"]
 [ext_resource type="Texture2D" uid="uid://dpdrrkqtcedgm" path="res://Assets/Sprites/Tilesets/DottedLine.png" id="4_ouaip"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="5_y0tan"]
 
-[node name="CameraRightLimit" type="Node2D"]
+[node name="CameraRightLimit" type="Node2D" unique_id=1215124643]
 script = ExtResource("1_y3riq")
 metadata/_custom_type_script = "uid://bdq0373j5n5o0"
 
-[node name="LevelEditorVisibleNode" type="Node2D" parent="."]
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." unique_id=1146750767]
 script = ExtResource("2_y0tan")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode"]
+[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=1295726312]
 position = Vector2(8, 0)
 texture = ExtResource("3_c8trh")
 
-[node name="Line2D" type="Line2D" parent="LevelEditorVisibleNode"]
+[node name="Line2D" type="Line2D" parent="LevelEditorVisibleNode" unique_id=1221408268]
 texture_repeat = 2
 position = Vector2(1, 0)
 points = PackedVector2Array(0, -512, 0, 512)
@@ -26,7 +27,14 @@ default_color = Color(0, 0, 0, 1)
 texture = ExtResource("4_ouaip")
 texture_mode = 1
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1616848292]
 position = Vector2(8, 0)
 
+[node name="SignalExposer" type="Node2D" parent="." unique_id=613520164]
+script = ExtResource("5_y0tan")
+can_output = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_enter_tree"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="return_camera_to_normal"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="return_camera_to_normal"]

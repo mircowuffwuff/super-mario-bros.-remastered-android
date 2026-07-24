@@ -2,6 +2,7 @@ extends PowerUpItem
 
 func on_area_entered(area: Area2D) -> void:
 	if area.owner is Player:
+		collected.emit()
 		AudioManager.play_global_sfx("power_up")
 		$ScoreNoteSpawner.spawn_note(1000)
 		DiscoLevel.combo_amount += 1

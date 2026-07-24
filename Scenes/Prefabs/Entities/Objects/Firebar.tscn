@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://iq86u4w60yee"]
+[gd_scene format=3 uid="uid://iq86u4w60yee"]
 
 [ext_resource type="Texture2D" uid="uid://b7n5kp30whnb3" path="res://Assets/Sprites/Blocks/FireBar.png" id="1_e2e05"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_kpo86"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_kpo86"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="3_p4n6u"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="4_vag0n"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/FireBarFireBall.json" id="4_ym371"]
 [ext_resource type="Texture2D" uid="uid://dsncqqhfsnq6s" path="res://Assets/Sprites/Editor/RotationIcon.png" id="5_ytedt"]
 [ext_resource type="Script" uid="uid://cq6f682453q6o" path="res://Scripts/Classes/Components/ResourceSetter.gd" id="6_m0plg"]
 [ext_resource type="Resource" uid="uid://c8ojbqg4q4qh6" path="res://Resources/ThemedResources/EditorRotationIcon.tres" id="7_3irkc"]
@@ -33,7 +32,7 @@ func _physics_process(delta: float) -> void:
 
 func on_area_entered(area: Area2D) -> void:
 	if area.owner is Player and area.name != \"HammerHitbox\":
-		area.owner.damage()
+		area.owner.damage(\"Fire\")
 "
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_p4n6u"]
@@ -83,525 +82,517 @@ _data = {
 script/source = "@tool
 extends Node
 
+var can_rotate := true
+
 func _ready() -> void:
 	await get_tree().physics_frame
+	owner.bar_rotation = owner.starting_angle
 	%RotationJoint.global_rotation_degrees = owner.starting_angle
 
 func _process(_delta: float) -> void:
 	var idx := 0
 	for i in $\"../Fireballs\".get_children():
 		i.visible = idx < owner.length
+		var animation: AnimationPlayer = i.get_node(\"Animation\")
+		if can_rotate:
+			animation.play(\"Spin\")
+		elif animation.is_playing():
+			animation.play(\"RESET\")
 		idx += 1
 	if Engine.is_editor_hint() == false:
 		if Global.current_game_mode == Global.GameMode.LEVEL_EDITOR and LevelEditor.playing_level == false:
 			%RotationJoint.global_rotation_degrees = owner.starting_angle
+			owner.bar_rotation = owner.starting_angle
 	else:
 		%RotationJoint.global_rotation_degrees = owner.starting_angle
 	$\"../RotationJoint/Hitbox/Shape\".shape.b = Vector2(0, -(owner.length - 1) * 8)
 	$\"../Node2D/Sprite2D\".scale.x = [-1, 1][owner.direction]
 "
 
-[node name="Firebar" type="Node2D"]
+[node name="Firebar" type="Node2D" unique_id=1402188992]
 physics_interpolation_mode = 2
 script = SubResource("GDScript_e2e05")
 
-[node name="FireBar" type="Sprite2D" parent="."]
+[node name="FireBar" type="Sprite2D" parent="." unique_id=1395900066]
 visible = false
 top_level = true
 z_index = -5
 texture = ExtResource("1_e2e05")
 
-[node name="RotationJoint" type="Node2D" parent="."]
+[node name="RotationJoint" type="Node2D" parent="." unique_id=978364892]
 unique_name_in_owner = true
 physics_interpolation_mode = 2
 z_index = 20
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RotationJoint" unique_id=1105423510]
 remote_path = NodePath("../../Fireballs/Fireball1")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="RotationJoint" unique_id=18630237]
 position = Vector2(0, -8)
 remote_path = NodePath("../../Fireballs/Fireball2")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D3" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D3" type="RemoteTransform2D" parent="RotationJoint" unique_id=901365162]
 position = Vector2(0, -16)
 remote_path = NodePath("../../Fireballs/Fireball3")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D4" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D4" type="RemoteTransform2D" parent="RotationJoint" unique_id=811291013]
 position = Vector2(0, -24)
 remote_path = NodePath("../../Fireballs/Fireball4")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D5" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D5" type="RemoteTransform2D" parent="RotationJoint" unique_id=1675557283]
 position = Vector2(0, -32)
 remote_path = NodePath("../../Fireballs/Fireball5")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D6" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D6" type="RemoteTransform2D" parent="RotationJoint" unique_id=980265820]
 position = Vector2(0, -40)
 remote_path = NodePath("../../Fireballs/Fireball6")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D7" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D7" type="RemoteTransform2D" parent="RotationJoint" unique_id=1863061834]
 position = Vector2(0, -48)
 remote_path = NodePath("../../Fireballs/Fireball7")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D8" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D8" type="RemoteTransform2D" parent="RotationJoint" unique_id=315996259]
 position = Vector2(0, -56)
 remote_path = NodePath("../../Fireballs/Fireball8")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D9" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D9" type="RemoteTransform2D" parent="RotationJoint" unique_id=1098225551]
 position = Vector2(0, -64)
 remote_path = NodePath("../../Fireballs/Fireball9")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D10" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D10" type="RemoteTransform2D" parent="RotationJoint" unique_id=78898313]
 position = Vector2(0, -72)
 remote_path = NodePath("../../Fireballs/Fireball10")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D11" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D11" type="RemoteTransform2D" parent="RotationJoint" unique_id=281005570]
 position = Vector2(0, -80)
 remote_path = NodePath("../../Fireballs/Fireball11")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D12" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D12" type="RemoteTransform2D" parent="RotationJoint" unique_id=1836334766]
 position = Vector2(0, -88)
 remote_path = NodePath("../../Fireballs/Fireball12")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D13" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D13" type="RemoteTransform2D" parent="RotationJoint" unique_id=2052359351]
 position = Vector2(0, -96)
 remote_path = NodePath("../../Fireballs/Fireball13")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D14" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D14" type="RemoteTransform2D" parent="RotationJoint" unique_id=136992775]
 position = Vector2(0, -104)
 remote_path = NodePath("../../Fireballs/Fireball14")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D15" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D15" type="RemoteTransform2D" parent="RotationJoint" unique_id=1695379292]
 position = Vector2(0, -112)
 remote_path = NodePath("../../Fireballs/Fireball15")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D16" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D16" type="RemoteTransform2D" parent="RotationJoint" unique_id=755868928]
 position = Vector2(0, -120)
 remote_path = NodePath("../../Fireballs/Fireball16")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D17" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D17" type="RemoteTransform2D" parent="RotationJoint" unique_id=1562115244]
 position = Vector2(0, -128)
 remote_path = NodePath("../../Fireballs/Fireball17")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D18" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D18" type="RemoteTransform2D" parent="RotationJoint" unique_id=1489048135]
 position = Vector2(0, -136)
 remote_path = NodePath("../../Fireballs/Fireball18")
 update_rotation = false
 update_scale = false
 
-[node name="Hitbox" type="Area2D" parent="RotationJoint"]
+[node name="Hitbox" type="Area2D" parent="RotationJoint" unique_id=1850480383]
 
-[node name="Shape" type="CollisionShape2D" parent="RotationJoint/Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="RotationJoint/Hitbox" unique_id=1076457726]
 shape = SubResource("SegmentShape2D_p4n6u")
 
-[node name="Fireballs" type="Node2D" parent="."]
+[node name="Fireballs" type="Node2D" parent="." unique_id=2087178996]
 unique_name_in_owner = true
 z_index = 20
 
-[node name="Fireball1" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball1" type="AnimatedSprite2D" parent="Fireballs" unique_id=411247008]
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball1"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball1" unique_id=2008692661]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball1" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball1" unique_id=745166207 node_paths=PackedStringArray("node_to_affect", "property_node")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
+property_node = NodePath("../../../FireballHandler")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball2" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball2" type="AnimatedSprite2D" parent="Fireballs" unique_id=1152679477]
 position = Vector2(0, -8)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball2"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball2" unique_id=1609711069]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball2" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball2" unique_id=323314887 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball3" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball3" type="AnimatedSprite2D" parent="Fireballs" unique_id=963778489]
 position = Vector2(0, -16)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball3"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball3" unique_id=1371803672]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball3" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball3" unique_id=1208242176 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball4" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball4" type="AnimatedSprite2D" parent="Fireballs" unique_id=751276366]
 position = Vector2(0, -24)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball4"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball4" unique_id=139371026]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball4" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball4" unique_id=451910668 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball5" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball5" type="AnimatedSprite2D" parent="Fireballs" unique_id=1777041166]
 position = Vector2(0, -32)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball5"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball5" unique_id=793462387]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball5" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball5" unique_id=2040520298 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball6" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball6" type="AnimatedSprite2D" parent="Fireballs" unique_id=1558074639]
 position = Vector2(0, -40)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball6"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball6" unique_id=7621543]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball6" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball6" unique_id=942118478 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball7" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball7" type="AnimatedSprite2D" parent="Fireballs" unique_id=1435697685]
 visible = false
 position = Vector2(0, -48)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball7"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball7" unique_id=1938494496]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball7" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball7" unique_id=1333085127 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball8" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball8" type="AnimatedSprite2D" parent="Fireballs" unique_id=1860025908]
 visible = false
 position = Vector2(0, -56)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball8"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball8" unique_id=51299967]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball8" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball8" unique_id=1020039322 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball9" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball9" type="AnimatedSprite2D" parent="Fireballs" unique_id=561753574]
 visible = false
 position = Vector2(0, -64)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball9"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball9" unique_id=1008757284]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball9" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball9" unique_id=1056263920 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball10" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball10" type="AnimatedSprite2D" parent="Fireballs" unique_id=1269472994]
 visible = false
 position = Vector2(0, -72)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball10"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball10" unique_id=873249760]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball10" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball10" unique_id=1179461711 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball11" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball11" type="AnimatedSprite2D" parent="Fireballs" unique_id=1267028039]
 visible = false
 position = Vector2(0, -80)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball11"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball11" unique_id=1963082607]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball11" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball11" unique_id=873826303 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball12" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball12" type="AnimatedSprite2D" parent="Fireballs" unique_id=1932719433]
 visible = false
 position = Vector2(0, -88)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball12"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball12" unique_id=1185841752]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball12" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball12" unique_id=558398335 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball13" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball13" type="AnimatedSprite2D" parent="Fireballs" unique_id=530409343]
 visible = false
 position = Vector2(0, -96)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball13"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball13" unique_id=679488103]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball13" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball13" unique_id=1805229981 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball14" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball14" type="AnimatedSprite2D" parent="Fireballs" unique_id=2088518663]
 visible = false
 position = Vector2(0, -104)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball14"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball14" unique_id=2082890334]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball14" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball14" unique_id=345182671 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball15" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball15" type="AnimatedSprite2D" parent="Fireballs" unique_id=2146089525]
 visible = false
 position = Vector2(0, -112)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball15"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball15" unique_id=1026622121]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball15" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball15" unique_id=509059337 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball16" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball16" type="AnimatedSprite2D" parent="Fireballs" unique_id=1608690157]
 visible = false
 position = Vector2(0, -120)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball16"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball16" unique_id=402723640]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball16" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball16" unique_id=867411557 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball17" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball17" type="AnimatedSprite2D" parent="Fireballs" unique_id=1353795235]
 visible = false
 position = Vector2(0, -128)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball17"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball17" unique_id=860798124]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball17" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball17" unique_id=1933128934 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Fireball18" type="AnimatedSprite2D" parent="Fireballs"]
+[node name="Fireball18" type="AnimatedSprite2D" parent="Fireballs" unique_id=269319152]
 visible = false
 position = Vector2(0, -136)
 script = ExtResource("2_kpo86")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball18"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation" type="AnimationPlayer" parent="Fireballs/Fireball18" unique_id=886109890]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball18" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Fireballs/Fireball18" unique_id=1596550400 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_kpo86")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_ym371")
+json_path = "res://Assets/Sprites/Enemies/FireBarFireBall.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=1612846314]
 remote_path = NodePath("../FireBar")
 update_rotation = false
 update_scale = false
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=2090124983]
 script = ExtResource("3_p4n6u")
 properties = Array[String](["length", "starting_angle", "direction"])
 
-[node name="FireballHandler" type="Node" parent="."]
+[node name="FireballHandler" type="Node" parent="." unique_id=1490318945]
 process_mode = 3
 script = SubResource("GDScript_p4n6u")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=458821810]
 script = ExtResource("4_vag0n")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=365325971]
 physics_interpolation_mode = 2
 z_index = 50
 z_as_relative = false
@@ -609,7 +600,7 @@ scale = Vector2(-1, 1)
 texture = ExtResource("5_ytedt")
 offset = Vector2(1, 0)
 
-[node name="ResourceSetter" type="Node" parent="Node2D/Sprite2D" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Node2D/Sprite2D" unique_id=1276462052 node_paths=PackedStringArray("node_to_affect")]
 script = ExtResource("6_m0plg")
 node_to_affect = NodePath("..")
 property_name = "texture"

@@ -1,135 +1,77 @@
-[gd_scene load_steps=12 format=3 uid="uid://da31n0jwfyjo0"]
+[gd_scene format=3 uid="uid://da31n0jwfyjo0"]
 
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="1_4di0c"]
 [ext_resource type="Script" uid="uid://omwcucf0uvvj" path="res://Scripts/Parts/PipeGenerator.gd" id="1_amwyv"]
 [ext_resource type="Texture2D" uid="uid://dtx6lbaom4qld" path="res://Assets/Sprites/Editor/PipeGenerator.png" id="2_amwyv"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_f1jdk"]
 [ext_resource type="Texture2D" uid="uid://dlldh5aks0wff" path="res://Assets/Sprites/Editor/GhostTile.png" id="4_xu70c"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="6_a0wqs"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="7_6pkd4"]
+[ext_resource type="Texture2D" uid="uid://d3w3ydebdoimy" path="res://Assets/Sprites/Editor/PipeOutline.png" id="8_uajdv"]
+[ext_resource type="Script" uid="uid://bbsgktlhfpqad" path="res://Scripts/Classes/Components/EntityRotator.gd" id="9_uir4n"]
 
-[sub_resource type="Animation" id="Animation_xu70c"]
-resource_name = "Down"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Joint:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 16), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_a0wqs"]
-resource_name = "Left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Joint:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-16, 8), Vector2(8, 8)]
-}
-
-[sub_resource type="Animation" id="Animation_f1jdk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Joint:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_6pkd4"]
-resource_name = "Right"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Joint:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(16, 8), Vector2(-8, 8)]
-}
-
-[sub_resource type="Animation" id="Animation_amwyv"]
-resource_name = "Up"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Joint:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -16), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6pkd4"]
-_data = {
-&"Down": SubResource("Animation_xu70c"),
-&"Left": SubResource("Animation_a0wqs"),
-&"RESET": SubResource("Animation_f1jdk"),
-&"Right": SubResource("Animation_6pkd4"),
-&"Up": SubResource("Animation_amwyv")
-}
-
-[node name="PipeGenerator" type="Node2D"]
+[node name="PipeGenerator" type="Node2D" unique_id=1592039539]
 script = ExtResource("1_amwyv")
 
-[node name="Icon" type="Node2D" parent="."]
+[node name="Icon" type="Node2D" parent="." unique_id=344532410]
 z_index = 50
 z_as_relative = false
 script = ExtResource("1_4di0c")
 
-[node name="Sprite2D" type="Sprite2D" parent="Icon"]
+[node name="Sprite2D" type="Sprite2D" parent="Icon" unique_id=2000599265]
 texture = ExtResource("2_amwyv")
 
-[node name="ColorRect" type="TextureRect" parent="Icon"]
+[node name="ColorRect" type="TextureRect" parent="Icon" unique_id=2052002703]
 offset_left = -16.0
 offset_bottom = 16.0
 texture = ExtResource("4_xu70c")
 
-[node name="Joint" type="RemoteTransform2D" parent="."]
+[node name="RotationJoint" type="Node2D" parent="Icon" unique_id=1311956937]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_6pkd4")
-}
+[node name="ColorRect" type="Sprite2D" parent="Icon/RotationJoint" unique_id=1950665845]
+show_behind_parent = true
+position = Vector2(0, 8)
+texture = ExtResource("8_uajdv")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1446265598]
 wait_time = 3.0
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=778580330]
 script = ExtResource("4_f1jdk")
 properties = Array[String](["item", "direction"])
 filters = Dictionary[String, String]({
 "item": "can_pipe_gen"
 })
 
-[node name="Check" type="RayCast2D" parent="."]
+[node name="Check" type="RayCast2D" parent="." unique_id=2015858037]
 target_position = Vector2(0, 16)
 collision_mask = 6
 hit_from_inside = true
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=202446052]
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1344562935]
+script = ExtResource("6_a0wqs")
+can_output = false
+do_animation = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=1117170392]
+script = ExtResource("7_6pkd4")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[node name="EntityRotator" type="Node" parent="." unique_id=1108309235 node_paths=PackedStringArray("rotation_joint")]
+script = ExtResource("9_uir4n")
+rotation_joint = NodePath("../Icon/RotationJoint")
+directions = {
+0: 0,
+1: 180,
+2: 270,
+3: 90
+}
+metadata/_custom_type_script = "uid://bbsgktlhfpqad"
 
 [connection signal="timeout" from="Timer" to="." method="on_timeout"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="on_timeout" flags=3]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="on_timeout" flags=3]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="start"]

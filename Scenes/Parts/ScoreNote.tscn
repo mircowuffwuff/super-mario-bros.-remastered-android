@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5feqg7nwyety"]
+[gd_scene format=3 uid="uid://b5feqg7nwyety"]
 
 [ext_resource type="FontVariation" uid="uid://cflgloiossd8a" path="res://Resources/ThemedResources/ScoreFont.tres" id="1_il157"]
 [ext_resource type="Script" uid="uid://dt2p68xl462v2" path="res://Scripts/Parts/TextShadowColourChanger.gd" id="2_il157"]
@@ -88,30 +88,28 @@ _data = {
 &"Rise": SubResource("Animation_il157")
 }
 
-[node name="ScoreNote" type="Node2D"]
+[node name="ScoreNote" type="Node2D" unique_id=703423484]
 process_mode = 3
 z_index = 50
 z_as_relative = false
 
-[node name="Container" type="CenterContainer" parent="."]
+[node name="Container" type="CenterContainer" parent="." unique_id=1802841653]
 use_top_left = true
 
-[node name="Label" type="Label" parent="Container"]
+[node name="Label" type="Label" parent="Container" unique_id=636342306]
 visibility_layer = 2
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_il157")
 text = "8"
 
-[node name="Animation" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=2015772439]
 root_node = NodePath("../Container")
-libraries = {
-&"": SubResource("AnimationLibrary_uog6q")
-}
-autoplay = "Rise"
+libraries/ = SubResource("AnimationLibrary_uog6q")
+autoplay = &"Rise"
 speed_scale = 0.7
 
-[node name="TextShadowColourChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="TextShadowColourChanger" type="Node" parent="." unique_id=402728311 node_paths=PackedStringArray("labels")]
 script = ExtResource("2_il157")
 labels = [NodePath("../Container/Label")]
 metadata/_custom_type_script = "uid://dt2p68xl462v2"

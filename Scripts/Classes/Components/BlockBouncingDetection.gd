@@ -24,6 +24,7 @@ func collision_detect() -> void:
 
 func hitbox_detect() -> void:
 	if is_instance_valid(hitbox) == false: return
+	hitbox.set_collision_mask_value(3, true)
 	for i in hitbox.get_overlapping_bodies():
 		if i is Block:
 			if i.bouncing:

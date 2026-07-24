@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://o3ya33lcbn7y"]
+[gd_scene format=3 uid="uid://o3ya33lcbn7y"]
 
 [ext_resource type="Script" uid="uid://b5jrj8u7cx8id" path="res://Scripts/Parts/TilePropertyValue.gd" id="1_q3buy"]
 
 [sub_resource type="FontFile" id="FontFile_wb64e"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -12,22 +24,22 @@ cache/0/16/0/scale = 1.0
 [sub_resource type="Theme" id="Theme_itros"]
 default_font = SubResource("FontFile_wb64e")
 
-[node name="TilePropertyColour" type="HBoxContainer"]
+[node name="TilePropertyColour" type="HBoxContainer" unique_id=169871081]
 script = ExtResource("1_q3buy")
 tile_property_name = "colour"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1755451636]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PROPERTY_NAME:"
 uppercase = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1027470205]
 layer = 2
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1993577981]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.69803923)
 
-[node name="ColorPicker" type="ColorPicker" parent="CanvasLayer"]
+[node name="ColorPicker" type="ColorPicker" parent="CanvasLayer" unique_id=677514012]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -55,15 +67,15 @@ color_modes_visible = false
 sliders_visible = false
 presets_visible = false
 
-[node name="Button" type="Button" parent="CanvasLayer/ColorPicker"]
+[node name="Button" type="Button" parent="CanvasLayer/ColorPicker" unique_id=1360814936]
 layout_mode = 2
 text = "CLOSE"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1468786556]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ColorRect"]
+[node name="Button" type="Button" parent="ColorRect" unique_id=1694659889]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

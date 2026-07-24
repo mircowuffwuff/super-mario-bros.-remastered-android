@@ -29,6 +29,8 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	if locked:
 		check_if_unlocked(false)
+	if exiting_door_id != -1:
+		run_door_check()
 
 func _physics_process(_delta: float) -> void:
 	for i in $PlayerDetection.get_overlapping_areas():
@@ -46,7 +48,6 @@ func _physics_process(_delta: float) -> void:
 
 func check_if_unlocked(do_animation := true) -> void:
 	if locked:
-		print(unlocked_doors)
 		if unlocked_doors.has(door_id):
 			locked = false
 			$Sprite.play("Idle")
@@ -92,13 +93,14 @@ func player_exit(player: Player) -> void:
 	same_scene_exiting_door = null
 	player.global_position = global_position
 	player.recenter_camera()
-	$Sprite.play("Close")
 	await get_tree().create_timer(0.2, false).timeout
 	$Sprite.play("Close")
 	player.state_machine.transition_to("Normal")
 	AudioManager.play_sfx("door_close", global_position)
 	can_enter = true
 	Global.p_switch_timer_paused = false
+	await $Sprite.animation_finished
+	$Sprite.play("Idle")
 
 func player_enter(player: Player) -> void:
 	Global.p_switch_timer_paused = true
@@ -110,7 +112,10 @@ func player_enter(player: Player) -> void:
 	LevelEditor.play_door_transition = true
 	AudioManager.play_sfx("door_open", global_position)
 	await get_tree().create_timer(0.5, false).timeout
-	if Global.level_editor.sub_level_id == sublevel_id:
+	var level_id = -1
+	if Global.current_level is CustomLevel:
+		level_id = Global.current_level.sublevel_id
+	if level_id == sublevel_id:
 		Global.do_fake_transition()
 		if Global.fade_transition:
 			await get_tree().create_timer(0.25, false).timeout
@@ -119,7 +124,10 @@ func player_enter(player: Player) -> void:
 			i.run_door_check()
 	else:
 		same_scene_exiting_door = null
-		Global.level_editor.transition_to_sublevel(sublevel_id)
+		if Global.level_editor != null:
+			Global.level_editor.transition_to_sublevel(sublevel_id)
+		else:
+			Global.transition_to_scene(LevelEditor.sub_areas[sublevel_id])
 	can_enter = true
 
 func freeze_player(player: Player) -> void:

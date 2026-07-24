@@ -3,8 +3,8 @@ extends Node
 var timer := 0.0
 var best_time := 0.0
 
-var marathon_best_any_time := 0.0
-var marathon_best_warpless_time := 0.0
+var marathon_best_any_time := -1.0
+var marathon_best_warpless_time := -1.0
 
 var timer_active := false
 
@@ -15,6 +15,9 @@ signal level_finished
 var paused_time := 0.0
 
 var start_time := 0.0
+
+var simulating_inputs := false
+var simulated_inputs := 0
 
 const GHOST_RECORDING_TEMPLATE := {
 	"position": Vector2.ZERO,
@@ -44,6 +47,11 @@ var ghost_path := []
 
 var best_time_campaign := ""
 
+var recording_inputs := false
+var inputs: PackedByteArray = []
+var input_idx := 0
+var loaded_inputs: PackedByteArray = []
+
 var best_level_any_times := {}
 
 var best_level_warpless_times := [
@@ -55,11 +63,6 @@ var best_level_warpless_times := [
 	[-1, -1, -1, -1],
 	[-1, -1, -1, -1],
 	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1]
 ]
 
 const GOLD_ANY_TIMES := {
@@ -98,14 +101,9 @@ const SMB1_LEVEL_GOLD_WARPLESS_TIMES := [
 	[23, 23, 17, 16],  # World 3
 	[24, 25, 16, 22],  # World 4
 	[22, 22, 17, 16],  # World 5
-	[21, 25, 18, 16],  # World 6
+	[21, 27, 18, 16],  # World 6
 	[20, 38, 25, 23],  # World 7
 	[40, 24, 24, 50],  # World 8
-	[-1, -1, -1, -1],  # World 9
-	[-1, -1, -1, -1],  # World A
-	[-1, -1, -1, -1],  # World B
-	[-1, -1, -1, -1],  # World C
-	[-1, -1, -1, -1]   # World D
 ]
 
 const SMBLL_LEVEL_GOLD_WARPLESS_TIMES := [
@@ -116,17 +114,12 @@ const SMBLL_LEVEL_GOLD_WARPLESS_TIMES := [
 	[43, 28, 25, 24],
 	[28, 39, 23, 29],
 	[21, 26, 32, 36],
-	[24, 27, 25, 60],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1]
+	[24, 27, 25, 60]
 ]
 
 const SMB1_LEVEL_GOLD_ANY_TIMES := {
 	"1-2": 25,
-	"4-2": 26
+	"4-2": 28
 }
 
 const SMBLL_LEVEL_GOLD_ANY_TIMES := {
@@ -147,14 +140,9 @@ const SMBS_LEVEL_GOLD_TIMES := [
 	[31, 11, 16, 20],
 	[26, 30, 25, 32],
 	[28, 26, 19, 19],
-	[24, 21, 23, 20],
+	[24, 25, 23, 20],
 	[24, 40, 30, 27],
-	[30, 35, 30, 43],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1],
-	[-1, -1, -1, -1]
+	[30, 35, 30, 43]
 ]
 
 const SMB1_WARP_LEVELS := ["1-2", "4-2"]
@@ -165,6 +153,8 @@ const SMBS_WARP_LEVELS := ["4-2"]
 
 const MEDAL_CONVERSIONS := [2, 1.5, 1]
 
+enum Inputs{LEFT=1, RIGHT=2, UP=4, DOWN=8, RUN=16, JUMP=32, ACTION=64}
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -172,20 +162,30 @@ func _physics_process(delta: float) -> void:
 	if timer_active:
 		if Global.game_paused and Global.current_game_mode != Global.GameMode.MARATHON:
 			paused_time += delta
-		else:
+		else: 
 			timer = (abs(start_time - Time.get_ticks_msec()) / 1000) - paused_time
-		if enable_recording:
-			if get_tree().get_first_node_in_group("Players") != null:
-				record_frame(get_tree().get_first_node_in_group("Players"))
+			if enable_recording:
+				if get_tree().get_first_node_in_group("Players") != null:
+					record_frame(get_tree().get_first_node_in_group("Players"))
 	else:
 		paused_time = 0
-	Global.player_ghost.visible = ghost_visible
 	if ghost_active and ghost_enabled:
-		ghost_idx += 1
+		if (Global.game_paused == false):
+			ghost_idx += 1
 		if ghost_idx >= ghost_path.size():
 			ghost_active = false
 			return
 		Global.player_ghost.apply_data(ghost_path[ghost_idx])
+	else:
+		Global.player_ghost.hide()
+	if get_tree().get_first_node_in_group("Players") != null:
+		if recording_inputs:
+			record_inputs()
+		if simulating_inputs:
+			apply_inputs(loaded_inputs[input_idx])
+			input_idx += 1
+			if input_idx >= loaded_inputs.size() - 1:
+				simulating_inputs = false
 
 func start_timer() -> void:
 	timer = 0
@@ -193,6 +193,19 @@ func start_timer() -> void:
 	timer_active = true
 	show_timer = true
 	start_time = Time.get_ticks_msec()
+
+func load_inputs(input_path := "") -> void:
+	var file = FileAccess.open(input_path, FileAccess.READ)
+	var buffer = file.get_buffer(file.get_length())
+	loaded_inputs = buffer.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP)
+	simulating_inputs = true
+	input_idx = 0
+	file.close()
+
+func save_inputs() -> void:
+	var input_file = FileAccess.open("user://inputs.tst", FileAccess.WRITE)
+	input_file.store_buffer(inputs.compress(FileAccess.COMPRESSION_GZIP))
+	input_file.close()
 
 func record_frame(player: Player) -> void:
 	var data := ""
@@ -217,7 +230,7 @@ func format_time(time_time := 0.0) -> Dictionary:
 	return {"mils": int(mils), "secs": int(secs), "mins": int(mins)}
 	
 func met_target_time(record_time := -1.0, target_time := 0.0) -> bool:
-	if record_time < 0.0:
+	if record_time <= 0.0:
 		return false
 	# Ignore units of time smaller than a centisecond, as they're not displayed.
 	# Matching time exactly counts as beating it.
@@ -229,15 +242,15 @@ func gen_time_string(timer_dict := {}) -> String:
 func save_recording() -> void:
 	var recording := [timer, current_recording, levels, str(["Mario", "Luigi", "Toad", "Toadette"].find(get_tree().get_first_node_in_group("Players").character)), anim_list]
 	var recording_dir = Global.config_path.path_join("marathon_recordings/" + Global.current_campaign)
+
 	DirAccess.make_dir_recursive_absolute(recording_dir)
-	var file = FileAccess.open(recording_dir + "/" + str(Global.world_num) + "-" + str(Global.level_num) + ("warp" if is_warp_run else "") + ".json", FileAccess.WRITE)
-	file.store_string(compress_recording(JSON.stringify(recording, "", false, true)))
+	var file_path = recording_dir + "/" + str(Global.world_num) + "-" + str(Global.level_num) + ("warp" if is_warp_run else "") + ".json"
+	JSONParser.save_to_file(compress_recording(JSON.stringify(recording, "", false, true)), file_path)
+	
 	current_recording = ""
-	file.close()
 	levels.clear()
 
 func compress_recording(recording := "") -> String:
-	print(recording)
 	var bytes = recording.to_ascii_buffer()
 	var compressed_bytes = bytes.compress(FileAccess.CompressionMode.COMPRESSION_DEFLATE)
 	var b64 = Marshalls.raw_to_base64(compressed_bytes)
@@ -269,7 +282,6 @@ func load_best_marathon() -> void:
 func load_recording(world_num := 0, level_num := 0, is_warpless := true, campaign := "SMB1") -> Array:
 	var recording_dir = Global.config_path.path_join("marathon_recordings/" + campaign)
 	var path = recording_dir + "/" + str(world_num) + "-" + str(level_num) + ("" if is_warpless else "warp") + ".json"
-	print(path)
 	if FileAccess.file_exists(path) == false:
 		return []
 	var file = FileAccess.open(path, FileAccess.READ)
@@ -282,7 +294,7 @@ func load_best_times(campaign = Global.current_campaign) -> void:
 		return
 	best_time_campaign = campaign
 	best_level_any_times.clear()
-	for world_num in 13:
+	for world_num in 8:
 		for level_num in 4:
 			var path = Global.config_path.path_join("marathon_recordings/" + campaign + "/" + str(world_num + 1) + "-" + str(level_num + 1) + ".json")
 			if FileAccess.file_exists(path):
@@ -300,6 +312,8 @@ func run_finished() -> void:
 	SpeedrunHandler.ghost_active = false
 	SpeedrunHandler.ghost_idx = -1
 	SpeedrunHandler.timer_active = false
+	if recording_inputs:
+		save_inputs()
 	if Global.current_game_mode == Global.GameMode.BOO_RACE:
 		pass
 	else:
@@ -346,6 +360,39 @@ func get_best_time() -> float:
 		else:
 			return marathon_best_warpless_time
 
+func record_inputs() -> void:
+	var input := 0
+	const map = {
+		"action": Inputs.ACTION,
+		"run": Inputs.RUN,
+		"jump": Inputs.JUMP,
+		"move_left": Inputs.LEFT,
+		"move_right": Inputs.RIGHT,
+		"move_up": Inputs.UP,
+		"move_down": Inputs.DOWN
+	}
+	for i in map.keys():
+		if Global.player_action_pressed(i, 0):
+			input |= map[i]
+	inputs.append(input)
+	
+
+func apply_inputs(input := 0) -> void:
+	const map = {
+		"action": Inputs.ACTION,
+		"run": Inputs.RUN,
+		"jump": Inputs.JUMP,
+		"move_left": Inputs.LEFT,
+		"move_right": Inputs.RIGHT,
+		"move_up": Inputs.UP,
+		"move_down": Inputs.DOWN
+	}
+	for i in map.keys():
+		if input & map[i]:
+			Input.action_press(i + "_s")
+		else:
+			Input.action_release(i + "_s")
+
 func check_for_medal_achievement() -> void:
 
 	var has_gold_levels_warpless := true
@@ -360,7 +407,7 @@ func check_for_medal_achievement() -> void:
 	var has_bronze_levels_any := true
 	var has_bronze_full := false
 	
-	if Global.current_campaign == "SMBANN":
+	if Global.current_game_mode == Global.GameMode.DISCO:
 		return
 	
 	
@@ -389,7 +436,7 @@ func check_for_medal_achievement() -> void:
 				has_bronze_levels_warpless = false
 			level += 1
 		world += 1
-	
+	 
 	if (met_target_time(marathon_best_any_time, GOLD_ANY_TIMES[Global.current_campaign]) and 
 		met_target_time(marathon_best_warpless_time, GOLD_WARPLESS_TIMES[Global.current_campaign])):
 		has_gold_full = true

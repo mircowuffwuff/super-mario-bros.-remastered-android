@@ -1,15 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dipap63c1nrnn"]
+[gd_scene format=3 uid="uid://dipap63c1nrnn"]
 
 [ext_resource type="Script" uid="uid://b5ejlbl0vp1gm" path="res://Scripts/Classes/Blocks/BlockClass.gd" id="1_c5ati"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="2_fuckyou"]
 [ext_resource type="PackedScene" uid="uid://bxxjd0qf60t5q" path="res://Scenes/Prefabs/Particles/EmptyBlockDestructionParticles.tscn" id="2_g8nyw"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_g8nyw"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Terrain/EmptyBlock.json" id="5_v5vjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74q7l"]
 size = Vector2(16, 16)
 
-[node name="EmptyBlock" type="AnimatableBody2D"]
+[node name="EmptyBlock" type="AnimatableBody2D" unique_id=1360912317]
 z_index = -1
 collision_layer = 6
 collision_mask = 0
@@ -18,18 +17,20 @@ script = ExtResource("1_c5ati")
 destruction_particle_scene = ExtResource("2_g8nyw")
 metadata/_custom_type_script = "uid://b5ejlbl0vp1gm"
 metadata/is_empty = true
+metadata/BlockType = "Default"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=852276475]
 script = ExtResource("3_g8nyw")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=108008644 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_fuckyou")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_v5vjc")
+json_path = "res://Assets/Sprites/Tilesets/Terrain/EmptyBlock.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=351399562]
 shape = SubResource("RectangleShape2D_74q7l")

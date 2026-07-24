@@ -1,30 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3mc7ptiywhvw"]
+[gd_scene format=3 uid="uid://c3mc7ptiywhvw"]
 
 [ext_resource type="Texture2D" uid="uid://dt0qtxu2l646n" path="res://Assets/Sprites/Tilesets/Terrain/Overworld.png" id="1_beitk"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="2_beitk"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json" id="3_ipntr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nqr4v"]
 size = Vector2(16, 16)
 
-[node name="CastleBridgeSegment" type="StaticBody2D"]
+[node name="CastleBridgeSegment" type="StaticBody2D" unique_id=811132610]
 process_mode = 1
 physics_interpolation_mode = 2
 collision_layer = 2
 collision_mask = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=422508466]
 texture = ExtResource("1_beitk")
 region_enabled = true
 region_rect = Rect2(64, 48, 16, 16)
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite2D" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite2D" unique_id=1246252033 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_beitk")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("3_ipntr")
+json_path = "res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=620052869]
 shape = SubResource("RectangleShape2D_nqr4v")

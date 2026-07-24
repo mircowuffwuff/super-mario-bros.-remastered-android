@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn8v1j5t12bpk"]
+[gd_scene format=3 uid="uid://bn8v1j5t12bpk"]
 
 [ext_resource type="Script" uid="uid://bg8681ssontei" path="res://Scripts/Parts/EntityTileContainer.gd" id="1_l30to"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ormaw"]
 size = Vector2(16, 16)
 
-[node name="EntityTileContainer" type="Node2D"]
+[node name="EntityTileContainer" type="Node2D" unique_id=707237503]
 script = ExtResource("1_l30to")
 
-[node name="MouseArea" type="Area2D" parent="."]
+[node name="MouseArea" type="Area2D" parent="." unique_id=264558558]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea" unique_id=1051249671]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_ormaw")

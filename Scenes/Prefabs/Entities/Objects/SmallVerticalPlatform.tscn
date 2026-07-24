@@ -1,23 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjkmd2yf3f84v"]
+[gd_scene format=3 uid="uid://cjkmd2yf3f84v"]
 
 [ext_resource type="PackedScene" uid="uid://c6x7gv2lqeu1x" path="res://Scenes/Prefabs/Entities/Objects/VerticalPlatform.tscn" id="1_wmghi"]
-[ext_resource type="Texture2D" uid="uid://bk0p52ttwojml" path="res://Assets/Sprites/Tilesets/Platform.png" id="2_kwmma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwmma"]
 size = Vector2(32, 8)
 
-[node name="SidewaysPlatform" instance=ExtResource("1_wmghi")]
+[node name="SidewaysPlatform" unique_id=867348071 instance=ExtResource("1_wmghi")]
 
-[node name="Sprite" parent="AnimatableBody2D" index="0"]
+[node name="Sprite" parent="AnimatableBody2D" parent_id_path=PackedInt32Array(1298238089) index="0" unique_id=1526890355]
 offset_left = -16.0
 offset_right = 16.0
-texture = ExtResource("2_kwmma")
-patch_margin_left = 8
-patch_margin_right = 8
 
-[node name="Collision" parent="AnimatableBody2D" index="1"]
-visible = true
+[node name="Collision" parent="AnimatableBody2D" parent_id_path=PackedInt32Array(1298238089) index="1" unique_id=661225405]
 shape = SubResource("RectangleShape2D_kwmma")
 
-[node name="SecondQuestReplacer" parent="." index="3"]
+[node name="SecondQuestReplacer" parent="." index="3" unique_id=706906189]
 new_scene = ""

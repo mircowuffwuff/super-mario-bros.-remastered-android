@@ -24,14 +24,18 @@ func _process(_delta: float) -> void:
 	cursor.global_position.x = options[selected_index].global_position.x - 10
 
 func handle_inputs() -> void:
-	if Input.is_action_just_pressed("ui_down"):
+	if Global.multibind_action_just_pressed("ui_down"):
 		selected_index += 1
-	if Input.is_action_just_pressed("ui_up"):
+		if Settings.file.audio.extra_sfx == 1:
+			AudioManager.play_global_sfx("menu_move")
+	if Global.multibind_action_just_pressed("ui_up"):
 		selected_index -= 1
+		if Settings.file.audio.extra_sfx == 1:
+			AudioManager.play_global_sfx("menu_move")
 	selected_index = clamp(selected_index, 0, options.size() - 1)
-	if Input.is_action_just_pressed("ui_accept"):
+	if Global.multibind_action_just_pressed("ui_accept"):
 		option_selected()
-	elif (Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_back")) and can_exit:
+	elif (Global.multibind_action_just_pressed("pause") or Global.multibind_action_just_pressed("ui_back")) and can_exit:
 		close()
 
 func option_selected() -> void:
@@ -57,6 +61,5 @@ func close() -> void:
 	selected_index = 0
 	hide()
 	closed.emit()
-	await get_tree().create_timer(0.1).timeout
 	Global.game_paused = false
 	get_tree().paused = false

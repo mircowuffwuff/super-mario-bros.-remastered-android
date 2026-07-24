@@ -16,25 +16,34 @@ const base_info_json := {
 	"version": "1.0"
 	}
 	
-const disallowed_files := ["bgm","ctex","json","fnt", "svg"]
+const disallowed_files := ["bgm","ctex","json", "fnt", "svg", "txt"]
+const extention_blacklist := ["txt"]
 
 func create_template() -> void:
 	await get_tree().process_frame
+	
 	get_directories("res://Assets", files, directories)
 	for i in directories:
 		DirAccess.make_dir_recursive_absolute(i.replace("res://Assets", Global.config_path.path_join("resource_packs/new_pack")))
 	for i in files:
+		if i.get_extension() in extention_blacklist:
+			continue
 		var destination = i
 		if destination.contains("res://"):
 			destination = i.replace("res://Assets", Global.config_path.path_join("resource_packs/new_pack"))
 		else:
 			destination = i.replace(Global.config_path.path_join("resource_packs/BaseAssets"), Global.config_path.path_join("resource_packs/new_pack"))
 		var data = []
-		if i.contains(".fnt") or i.contains("ScoreFont"):
-			data = await download_fnt_text(i) 
-			## Imagine being one of the best open source game engines, yet not able to get the FUCKING CONTENTS
-			## OF AN FNT FILE SO INSTEAD YOU HAVE TO WRITE THE MOST BULLSHIT CODE TO DOWNLOAD THE FUCKING FILE
-			## FROM THE FUCKING GITHUB REPO. WHY? BECAUSE GODOT IS SHIT. FUCK GODOT.
+		if i.contains(".fnt"):
+			print("Got fnt file")
+			var fnt_file = FileAccess.open(i.replace(".fnt", ".txt"), FileAccess.READ)
+			print(fnt_file)
+			data = fnt_file.get_buffer(fnt_file.get_length())
+			print(data)
+		elif i.ends_with("/ScoreFont.png"):
+			# For some reason, Godot's BMFont importer REALLY
+			# doesn't like ScoreFont when the PNG is saved at runtime
+			data = FileAccess.get_file_as_bytes(i + ".txt")
 		elif i.contains(".svg"):
 			## DON'T import SVGs
 			continue
@@ -78,34 +87,20 @@ func create_template() -> void:
 	
 	var pack_info_path = Global.config_path.path_join("resource_packs/new_pack/pack_info.json")
 	DirAccess.make_dir_recursive_absolute(pack_info_path.get_base_dir())
-	var file = FileAccess.open(pack_info_path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(base_info_json, "\t"))
-	file.close()
+	JSONParser.save_to_file(base_info_json, pack_info_path)
 	print("Done")
 	pack_created.emit()
 
-func download_fnt_text(file_path := "") -> PackedByteArray:
-	var http = HTTPRequest.new()
-	const GITHUB_URL = "https://raw.githubusercontent.com/JHDev2006/Super-Mario-Bros.-Remastered-Public/refs/heads/main/"
-	var url = GITHUB_URL + file_path.replace("res://", "")
-	add_child(http)
-	http.request_completed.connect(file_downloaded)
-	http.request(url, [], HTTPClient.METHOD_GET)
-	await fnt_file_downloaded
-	http.queue_free()
-	return downloaded_fnt_text
-
-func file_downloaded(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
-	downloaded_fnt_text = body
-	fnt_file_downloaded.emit(downloaded_fnt_text)
-
+@warning_ignore("shadowed_variable")
 func get_directories(base_dir := "", files := [], directories := []) -> void:
+	files.append("res://Assets/themes.json")
 	for i in DirAccess.get_directories_at(base_dir):
 		if base_dir.contains("LevelGuides") == false and base_dir.contains(".godot") == false:
 			directories.append(base_dir + "/" + i)
 			get_directories(base_dir + "/" + i, files, directories)
 			get_files(base_dir + "/" + i, files)
 
+@warning_ignore("shadowed_variable")
 func get_files(base_dir := "", files := []) -> void:
 	for i in DirAccess.get_files_at(base_dir):
 		if base_dir.contains("LevelGuides") == false:

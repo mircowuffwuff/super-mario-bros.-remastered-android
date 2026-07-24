@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d25r3nxm3p463"]
+[gd_scene format=3 uid="uid://d25r3nxm3p463"]
 
 [ext_resource type="Script" uid="uid://d1gpliy41d31n" path="res://Scripts/UI/EditorPopupMenu.gd" id="1_crqcj"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="1_do11r"]
@@ -8,7 +8,7 @@
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_crqcj"]
 color = Color(1, 1, 1, 1)
 
-[node name="EditorKeybindsView" type="Control"]
+[node name="EditorKeybindsView" type="Control" unique_id=509802348]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_crqcj")
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="ColorRect" parent="." unique_id=770307651]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.25)
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=2032250711]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,19 +41,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_do11r")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=423755947]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1682508692]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1328430096]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "KEYBINDS"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Label"]
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Label" unique_id=197101923]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -64,152 +64,152 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_crqcj")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1314231671]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1060261164]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Layers" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Layers" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1699995443]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers"]
+[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers" unique_id=2018150336]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers/ButtonIcons" unique_id=634816050 instance=ExtResource("2_kaxuh")]
 position = Vector2(4, 0)
 hframes = 1
 vframes = 2
 region_rect = Rect2(0, 46, 21, 46)
 
-[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers/ButtonIcons" unique_id=1567645265 instance=ExtResource("2_kaxuh")]
 position = Vector2(36, 0)
 hframes = 1
 vframes = 2
 region_rect = Rect2(21, 46, 21, 46)
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Layers" unique_id=386426791]
 modulate = Color(0.29219002, 0.29219005, 0.29219002, 1)
 layout_mode = 2
 text = "Layers"
 uppercase = true
 
-[node name="MovePlayer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="MovePlayer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=243623027]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer"]
+[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer" unique_id=3823965]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer/ButtonIcons" unique_id=982733328 instance=ExtResource("2_kaxuh")]
 
-[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer/ButtonIcons" unique_id=644890540 instance=ExtResource("2_kaxuh")]
 position = Vector2(43, 0)
 region_rect = Rect2(60, 92, 30, 23)
 
-[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer/ButtonIcons"]
+[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer/ButtonIcons" unique_id=127339086]
 position = Vector2(36, 11)
 texture = ExtResource("3_kaxuh")
 region_enabled = true
 region_rect = Rect2(90, 92, 10, 11)
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MovePlayer" unique_id=1514196607]
 modulate = Color(0.29219002, 0.29219005, 0.29219002, 1)
 layout_mode = 2
 text = "Move Player"
 uppercase = true
 
-[node name="PickBlock" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PickBlock" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1839325058]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PickBlock"]
+[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PickBlock" unique_id=1353290811]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PickBlock/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PickBlock/ButtonIcons" unique_id=86913432 instance=ExtResource("2_kaxuh")]
 position = Vector2(22, 0)
 region_rect = Rect2(60, 92, 30, 23)
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PickBlock"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PickBlock" unique_id=888826942]
 modulate = Color(0.29219002, 0.29219005, 0.29219002, 1)
 layout_mode = 2
 text = "PICK TILE"
 uppercase = true
 
-[node name="TestLevel" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TestLevel" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1042001691]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/TestLevel"]
+[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/TestLevel" unique_id=1763568799]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/TestLevel/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/TestLevel/ButtonIcons" unique_id=853452961 instance=ExtResource("2_kaxuh")]
 position = Vector2(16, 0)
 region_rect = Rect2(58, 0, 58, 23)
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/TestLevel"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/TestLevel" unique_id=1804043387]
 modulate = Color(0.29219002, 0.29219005, 0.29219002, 1)
 layout_mode = 2
 text = "Test Level"
 uppercase = true
 
-[node name="InspectTile" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="InspectTile" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=2134836230]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile"]
+[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile" unique_id=1162281733]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile/ButtonIcons" unique_id=1316943249 instance=ExtResource("2_kaxuh")]
 
-[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile/ButtonIcons" unique_id=1786649830 instance=ExtResource("2_kaxuh")]
 position = Vector2(43, 0)
 region_rect = Rect2(0, 92, 30, 23)
 
-[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile/ButtonIcons"]
+[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile/ButtonIcons" unique_id=969814960]
 position = Vector2(36, 11)
 texture = ExtResource("3_kaxuh")
 region_enabled = true
 region_rect = Rect2(90, 92, 10, 11)
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/InspectTile" unique_id=1624099039]
 modulate = Color(0.29219002, 0.29219005, 0.29219002, 1)
 layout_mode = 2
 text = "Inspect tile"
 uppercase = true
 
-[node name="PlaceArea" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PlaceArea" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=803942982]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea"]
+[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea" unique_id=1271147555]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea/ButtonIcons" unique_id=1389265805 instance=ExtResource("2_kaxuh")]
 position = Vector2(2, 0)
 region_rect = Rect2(0, 23, 50, 23)
 
-[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea/ButtonIcons" unique_id=418716195 instance=ExtResource("2_kaxuh")]
 position = Vector2(44, 0)
 region_rect = Rect2(0, 92, 30, 23)
 
-[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea/ButtonIcons"]
+[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea/ButtonIcons" unique_id=2084543115]
 position = Vector2(36, 11)
 texture = ExtResource("3_kaxuh")
 region_enabled = true
 region_rect = Rect2(90, 92, 10, 11)
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea" unique_id=1602823078]
 modulate = Color(0.29219002, 0.29219005, 0.29219002, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -217,29 +217,29 @@ text = "PLACE / REMOVE AREA"
 autowrap_mode = 2
 uppercase = true
 
-[node name="PlaceArea2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PlaceArea2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=364263778]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2"]
+[node name="ButtonIcons" type="Control" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2" unique_id=774082617]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind2" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2/ButtonIcons" unique_id=786426926 instance=ExtResource("2_kaxuh")]
 position = Vector2(5, 0)
 region_rect = Rect2(50, 23, 30, 23)
 
-[node name="LevelEditorKeybind3" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2/ButtonIcons" instance=ExtResource("2_kaxuh")]
+[node name="LevelEditorKeybind3" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2/ButtonIcons" unique_id=1788198712 instance=ExtResource("2_kaxuh")]
 position = Vector2(42, 0)
 region_rect = Rect2(80, 23, 30, 23)
 
-[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2/ButtonIcons"]
+[node name="Sprite2D" type="Sprite2D" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2/ButtonIcons" unique_id=385941557]
 position = Vector2(31, 11)
 texture = ExtResource("3_kaxuh")
 region_enabled = true
 region_rect = Rect2(102, 97, 12, 18)
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PlaceArea2" unique_id=740174526]
 modulate = Color(0.29219002, 0.29219005, 0.29219002, 1)
 layout_mode = 2
 size_flags_horizontal = 3

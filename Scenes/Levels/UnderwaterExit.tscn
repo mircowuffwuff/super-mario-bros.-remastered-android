@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgejr6nyhwxlg"]
+[gd_scene format=3 uid="uid://bgejr6nyhwxlg"]
 
 [ext_resource type="PackedScene" uid="uid://bgbkyhmcfa8l6" path="res://Scenes/Levels/UndergroundExit.tscn" id="1_u86kc"]
 
-[node name="UndergroundExit" instance=ExtResource("1_u86kc")]
+[node name="UndergroundExit" unique_id=1647808806 instance=ExtResource("1_u86kc")]
 
-[node name="LevelBG" parent="." index="0"]
+[node name="LevelBG" parent="." index="0" unique_id=708437318]
 liquid_layer = 1

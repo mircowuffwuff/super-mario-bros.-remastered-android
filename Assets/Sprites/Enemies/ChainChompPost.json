@@ -1,0 +1,58 @@
+{
+	"variations": {
+		"default": {
+			"source": "ChainChompPost.png",
+			"rect": [0, 0, 16, 16]
+		},
+		"Underground": {
+			"source": "ChainChompPost.png",
+			"rect": [16, 0, 16, 16]
+		},
+		"GhostHouse": {"link": "Underground"},
+		"Castle": {
+			"source": "ChainChompPost.png",
+			"rect": [32, 0, 16, 16]
+		},
+		"Underwater": {
+			"source": "ChainChompPost.png",
+			"rect": [48, 0, 16, 16]
+		},
+		"CastleWater": {"link": "Underwater"},
+		"Desert": {
+			"source": "ChainChompPost.png",
+			"rect": [0, 16, 16, 16]
+		},
+		"Jungle": {
+			"source": "ChainChompPost.png",
+			"rect": [16, 16, 16, 16]
+		},
+		"Snow": {
+			"source": "ChainChompPost.png",
+			"rect": [32, 16, 16, 16]
+		},
+		"Volcano": {
+			"source": "ChainChompPost.png",
+			"rect": [48, 16, 16, 16]
+		},
+		"Autumn": {
+			"source": "ChainChompPost.png",
+			"rect": [0, 32, 16, 16]
+		},
+		"Beach": {
+			"source": "ChainChompPost.png",
+			"rect": [16, 32, 16, 16]
+		},
+		"Mountain": {
+			"source": "ChainChompPost.png",
+			"rect": [32, 32, 16, 16]
+		},
+		"Space": {
+			"source": "ChainChompPost.png",
+			"rect": [48, 32, 16, 16]
+		},
+		"Bonus": {
+			"source": "ChainChompPost.png",
+			"rect": [0, 48, 16, 16]
+		}
+	}
+}

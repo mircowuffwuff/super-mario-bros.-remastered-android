@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dinpjmg0q23rv"]
+[gd_scene format=3 uid="uid://dinpjmg0q23rv"]
 
 [ext_resource type="Script" uid="uid://bds7rntb0btee" path="res://Scripts/Classes/Entities/Enemies/Spiny.gd" id="1_u8w4p"]
 [ext_resource type="Texture2D" uid="uid://diemx33h3bxa2" path="res://Assets/Sprites/Enemies/Spiny.png" id="2_u8w4p"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_m3lgl"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_velug"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/Spiny.json" id="4_a74i7"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="4_qcd6q"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="5_f6841"]
 [ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="6_velug"]
@@ -65,7 +64,7 @@ size = Vector2(10, 8)
 custom_solver_bias = 1.0
 size = Vector2(10, 10)
 
-[node name="Spiny" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="Spiny" type="CharacterBody2D" unique_id=560761779 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 collision_layer = 16
 collision_mask = 50
 script = ExtResource("1_u8w4p")
@@ -73,7 +72,7 @@ on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1940628511]
 position = Vector2(0, -8)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_evl61")
@@ -84,78 +83,79 @@ flip_h = true
 script = ExtResource("3_m3lgl")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1774904843 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_velug")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_a74i7")
+json_path = "res://Assets/Sprites/Enemies/Spiny.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=253522398]
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=618306804]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_s2w10")
 
-[node name="RCollision" type="CollisionShape2D" parent="."]
+[node name="RCollision" type="CollisionShape2D" parent="." unique_id=1975019289]
 visible = false
 position = Vector2(0, -5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_f6841")
 one_way_collision = true
 
-[node name="LCollision" type="CollisionShape2D" parent="."]
+[node name="LCollision" type="CollisionShape2D" parent="." unique_id=380122194]
 visible = false
 position = Vector2(0, -5)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_f6841")
 one_way_collision = true
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=1390900626 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("4_qcd6q")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=486148942]
 position = Vector2(0, -8)
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=498718349 node_paths=PackedStringArray("visuals")]
 script = ExtResource("5_f6841")
 visuals = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=910779998 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("6_velug")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=70384481 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_a74i7")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="BlockBouncingDetection" type="Node" parent="."]
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=1259140795]
 script = ExtResource("8_j3bt6")
 metadata/_custom_type_script = "uid://cmg61722ktg2m"
 
-[node name="BasicEnemyMovement" type="Node" parent="."]
+[node name="BasicEnemyMovement" type="Node" parent="." unique_id=1306939178]
 script = ExtResource("10_a74i7")
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=552017365 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("11_yhsi8")
 hitbox = NodePath("../Hitbox")
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1542692463]
 script = ExtResource("12_7f13k")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="TrackJoint" type="Node" parent="." node_paths=PackedStringArray("movement_node")]
+[node name="TrackJoint" type="Node" parent="." unique_id=994473027 node_paths=PackedStringArray("movement_node")]
 script = ExtResource("13_7f13k")
 movement_node = NodePath("../BasicEnemyMovement")
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
 
-[node name="OffScreenDespawner" type="Node" parent="."]
+[node name="OffScreenDespawner" type="Node" parent="." unique_id=1274802177]
 script = ExtResource("14_878x2")
 metadata/_custom_type_script = "uid://33no4mylhh1r"
 
@@ -165,12 +165,11 @@ metadata/_custom_type_script = "uid://33no4mylhh1r"
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="stomped"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="OffScreenDespawner" method="on_screen_exited"]
 [connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
 [connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]
 [connection signal="fireball_hit" from="FireballDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
-[connection signal="block_bounced" from="BlockBouncingDetection" to="." method="die_from_object"]
-[connection signal="block_bounced" from="BlockBouncingDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
 [connection signal="explosion_entered" from="ExplosionDetection" to="." method="die_from_object"]
 [connection signal="explosion_entered" from="ExplosionDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]

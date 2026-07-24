@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://dk2f45a0382vn"]
+
+[ext_resource type="Script" uid="uid://djwcuxm87xfrq" path="res://Scripts/Classes/Entities/Enemies/Wiggler.gd" id="1_h7jtn"]
+[ext_resource type="Script" uid="uid://dlq6o2rg1x7in" path="res://Scripts/Classes/Components/BasicEnemyMovement.gd" id="2_sf3o5"]
+[ext_resource type="PackedScene" uid="uid://cq34maj2rf5iv" path="res://Scenes/Parts/WigglerPiece.tscn" id="3_0grne"]
+[ext_resource type="Texture2D" uid="uid://dwwbqh56ht2fw" path="res://Assets/Sprites/Enemies/WigglerBody.png" id="3_r77rc"]
+[ext_resource type="Texture2D" uid="uid://bb2d3i3i01fkj" path="res://Assets/Sprites/Enemies/WigglerHead.png" id="5_volwr"]
+[ext_resource type="Texture2D" uid="uid://bqra7e5xsdg5r" path="res://Assets/Sprites/Particles/SkidParticles.png" id="6_2c5fb"]
+[ext_resource type="Script" uid="uid://blfnd65xcx78c" path="res://Scripts/Classes/Components/LedgeDetectionCast.gd" id="9_h7jtn"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="9_volwr"]
+[ext_resource type="Script" uid="uid://maqpreddu5kg" path="res://Scripts/Classes/Components/LevelPersistance.gd" id="10_volwr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n20q3"]
+atlas = ExtResource("3_r77rc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14fhn"]
+atlas = ExtResource("3_r77rc")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iurar"]
+atlas = ExtResource("5_volwr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c4iu3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n20q3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14fhn")
+}],
+"loop": true,
+"name": &"Angry",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iurar")
+}],
+"loop": true,
+"name": &"Normal",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7jtn"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf3o5"]
+atlas = ExtResource("6_2c5fb")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r77rc"]
+atlas = ExtResource("6_2c5fb")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7jtn"]
+atlas = ExtResource("6_2c5fb")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_volwr"]
+atlas = ExtResource("6_2c5fb")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyxj6"]
+atlas = ExtResource("6_2c5fb")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n20q3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf3o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r77rc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7jtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_volwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyxj6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_volwr"]
+script/source = "extends Node
+
+@export var parts: Array[Node2D] = []
+
+func _process(delta: float) -> void:
+	for i in parts:
+		i.modulate = owner.get_parent().modulate
+"
+
+[node name="Wiggler" type="CharacterBody2D" unique_id=601622491 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+collision_layer = 16
+collision_mask = 18
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_block_on_wall = false
+floor_max_angle = 1.3962634
+floor_snap_length = 4.0
+script = ExtResource("1_h7jtn")
+on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
+score_note_adder = NodePath("ScoreNoteSpawner")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="BasicEnemyMovement" type="Node" parent="." unique_id=1301769216 node_paths=PackedStringArray("ledge_detection_cast")]
+script = ExtResource("2_sf3o5")
+ledge_detection_cast = NodePath("../LedgeDetectionCast")
+auto_call = false
+metadata/_custom_type_script = "uid://dlq6o2rg1x7in"
+
+[node name="Parts" type="Node" parent="." unique_id=1948478502]
+
+[node name="Body4" parent="Parts" unique_id=1504230147 instance=ExtResource("3_0grne")]
+position = Vector2(32, 0)
+
+[node name="Body3" parent="Parts" unique_id=1877164420 instance=ExtResource("3_0grne")]
+position = Vector2(24, 0)
+
+[node name="Body2" parent="Parts" unique_id=1031707851 instance=ExtResource("3_0grne")]
+position = Vector2(16, 0)
+
+[node name="Body1" parent="Parts" unique_id=1171997030 instance=ExtResource("3_0grne")]
+position = Vector2(8, 0)
+
+[node name="Head" parent="Parts" unique_id=1352796773 instance=ExtResource("3_0grne")]
+
+[node name="Sprite" parent="Parts/Head" index="0" unique_id=1106356999]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_c4iu3")
+frame_progress = 0.0
+
+[node name="ResourceSetterNew" parent="Parts/Head/Sprite" index="0" unique_id=1164057203]
+json_path = "res://Assets/Sprites/Enemies/WigglerHead.json"
+
+[node name="LedgeDetectionCast" type="RayCast2D" parent="." unique_id=1863642363]
+position = Vector2(-4, -5)
+target_position = Vector2(0, 8)
+collision_mask = 2
+script = ExtResource("9_h7jtn")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1867799206]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_h7jtn")
+
+[node name="Timer" type="Timer" parent="." unique_id=1721336106]
+
+[node name="FlowerPoof" type="AnimatedSprite2D" parent="." unique_id=1850175411]
+position = Vector2(4, -20)
+sprite_frames = SubResource("SpriteFrames_n20q3")
+frame = 4
+frame_progress = 1.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=880844047]
+rect = Rect2(-24, -32, 48, 48)
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=612499821]
+script = ExtResource("9_volwr")
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="LevelPersistance" type="Node" parent="." unique_id=1900883525]
+script = ExtResource("10_volwr")
+metadata/_custom_type_script = "uid://maqpreddu5kg"
+
+[node name="Node" type="Node" parent="." unique_id=1056981878 node_paths=PackedStringArray("parts")]
+process_mode = 3
+script = SubResource("GDScript_volwr")
+parts = [NodePath("../Parts/Body4"), NodePath("../Parts/Body3"), NodePath("../Parts/Body2"), NodePath("../Parts/Body1"), NodePath("../Parts/Head")]
+
+[connection signal="killed" from="." to="LevelPersistance" method="set_as_active"]
+[connection signal="killed" from="." to="." method="do_death_animation" unbinds=1]
+[connection signal="moving_shell_entered" from="Parts/Body4/ShellDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body4/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body4/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="invincible_player_hit" from="Parts/Body4/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="invincible_player_hit" from="Parts/Body4/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="player_hit" from="Parts/Body4/EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="Parts/Body4/EnemyPlayerDetection" to="." method="player_stomped_on"]
+[connection signal="block_bounced" from="Parts/Body4/BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="moving_shell_entered" from="Parts/Body3/ShellDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body3/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body3/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="invincible_player_hit" from="Parts/Body3/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="invincible_player_hit" from="Parts/Body3/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="player_hit" from="Parts/Body3/EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="Parts/Body3/EnemyPlayerDetection" to="." method="player_stomped_on"]
+[connection signal="block_bounced" from="Parts/Body3/BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="Parts/Body3/BlockBouncingDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="moving_shell_entered" from="Parts/Body2/ShellDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body2/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body2/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="invincible_player_hit" from="Parts/Body2/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="invincible_player_hit" from="Parts/Body2/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="player_hit" from="Parts/Body2/EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="Parts/Body2/EnemyPlayerDetection" to="." method="player_stomped_on"]
+[connection signal="block_bounced" from="Parts/Body2/BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="Parts/Body2/BlockBouncingDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="moving_shell_entered" from="Parts/Body1/ShellDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body1/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Body1/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="invincible_player_hit" from="Parts/Body1/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="invincible_player_hit" from="Parts/Body1/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="player_hit" from="Parts/Body1/EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="Parts/Body1/EnemyPlayerDetection" to="." method="player_stomped_on"]
+[connection signal="block_bounced" from="Parts/Body1/BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="Parts/Body1/BlockBouncingDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="moving_shell_entered" from="Parts/Head/ShellDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Head/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="hammer_player_hit" from="Parts/Head/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="invincible_player_hit" from="Parts/Head/EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="invincible_player_hit" from="Parts/Head/EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="player_hit" from="Parts/Head/EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="Parts/Head/EnemyPlayerDetection" to="." method="player_stomped_on"]
+[connection signal="block_bounced" from="Parts/Head/BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="Parts/Head/BlockBouncingDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [1000]]
+[connection signal="timeout" from="Timer" to="BasicEnemyMovement" method="player_direction_check"]
+[connection signal="enabled" from="LevelPersistance" to="." method="queue_free"]
+
+[editable path="Parts/Body4"]
+[editable path="Parts/Body3"]
+[editable path="Parts/Body2"]
+[editable path="Parts/Body1"]
+[editable path="Parts/Head"]

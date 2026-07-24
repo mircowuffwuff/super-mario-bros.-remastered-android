@@ -1,43 +1,54 @@
 {
 	"name": "CHAR_LUIGI",
 	"physics": {
-		"JUMP_GRAVITY": 11.0,
-		"JUMP_HEIGHT": 300.0,
-		"JUMP_INCR": 8.0,
-		"JUMP_CANCEL_DIVIDE": 1.5,
-		"JUMP_HOLD_SPEED_THRESHOLD": 0.0,
-
-		"BOUNCE_HEIGHT": 200.0,
-		"BOUNCE_JUMP_HEIGHT": 300.0,
-
-		"FALL_GRAVITY": 25.0,
-		"MAX_FALL_SPEED": 280.0,
-		"CEILING_BUMP_SPEED": 45.0,
-
-		"WALK_SPEED": 96.0,
-		"GROUND_WALK_ACCEL": 4.0,
-		"WALK_SKID": 8.0,
-
-		"RUN_SPEED": 160.0,
-		"GROUND_RUN_ACCEL": 1.25,
-		"RUN_SKID": 8.0,
-
-		"DECEL": 3.0,
-		"AIR_ACCEL": 3.0,
-		"AIR_SKID": 1.5,
-
-		"SWIM_SPEED": 95.0,
-		"SWIM_GROUND_SPEED": 45.0,
-		"SWIM_HEIGHT": 100.0,
-		"SWIM_GRAVITY": 2.5,
-		"MAX_SWIM_FALL_SPEED": 200.0,
-
-		"DEATH_JUMP_HEIGHT": 300.0,
-		
-		"can_air_turn": false
-	},
-	"small_hitbox_scale": [1.0, 1.0],
-	"small_crouch_scale": 0.75,
-	"big_hitbox_scale": [1.0, 1.0],
-	"big_crouch_scale": 0.5
+		"PHYSICS_PARAMETERS": {
+			"Default": {},
+			"Small": {},
+			"Big": {},
+			"Fire": {}
+		},
+		"CLASSIC_PARAMETERS": {
+			"Default": {
+				"GROUND_WALK_ACCEL": 1.52,
+				"GROUND_RUN_ACCEL": 2.67,
+				"GROUND_WALK_DECEL": 1.52,
+				"GROUND_RUN_DECEL": 2.34,
+				"VARIABLE_DECEL": true,
+				"WALK_SKID": 2.34,
+				"RUN_SKID": 2.34,
+				"MINIMUM_SPEED": 3.04,
+				"AIR_WALK_ACCEL": 1.52,
+				"AIR_RUN_ACCEL": 2.64,
+				"AIR_WALK_SKID_ACCEL": 2.34,
+				"AIR_RUN_SKID_ACCEL": 2.64,
+				"AIR_BACKWARDS_ACCEL": 1.52,
+				"AIR_BACKWARDS_SKID_ACCEL": 1.52,
+				"JUMP_GRAVITY_IDLE": 5.625,
+				"JUMP_GRAVITY_WALK": 5.625,
+				"JUMP_GRAVITY_RUN": 7.97, 
+				
+				"FALL_GRAVITY_IDLE": 15.47,
+				"FALL_GRAVITY_WALK": 14.53,
+				"FALL_GRAVITY_RUN": 21.8
+			},
+			"Small": {},
+			"Big": {},
+			"Fire": {}
+		},
+		"ENDING_PARAMETERS": {
+			"Default": {},
+			"Small": {},
+			"Big": {},
+			"Fire": {}
+		},
+		"DEATH_PARAMETERS": {
+			"Default": {}
+		},
+		"COSMETIC_PARAMETERS": {
+			"Default": {},
+			"Small": {},
+			"Big": {},
+			"Fire": {}
+		}
+	}
 }

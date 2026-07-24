@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cb7ydcmetjs8d"]
+
+[ext_resource type="Script" uid="uid://gq1qmk3xaf8k" path="res://Scripts/Classes/Gizmos/Lamp.gd" id="1_0525o"]
+[ext_resource type="Texture2D" uid="uid://bcns43fy5y3n7" path="res://Assets/Sprites/Editor/Gizmos/Lamp.png" id="2_tnn7x"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_8swfn"]
+
+[node name="Lamp" type="Node2D" unique_id=515746201]
+process_mode = 3
+script = ExtResource("1_0525o")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1224179792]
+texture = ExtResource("2_tnn7x")
+hframes = 5
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1403115602]
+script = ExtResource("3_8swfn")
+do_animation = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[connection signal="lost_power" from="SignalExposer" to="." method="turn_off"]
+[connection signal="lost_power" from="SignalExposer" to="SignalExposer" method="turn_off"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="turn_on"]
+[connection signal="recieved_power" from="SignalExposer" to="SignalExposer" method="turn_on"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="pulse"]
+[connection signal="recieved_pulse" from="SignalExposer" to="SignalExposer" method="emit_pulse"]

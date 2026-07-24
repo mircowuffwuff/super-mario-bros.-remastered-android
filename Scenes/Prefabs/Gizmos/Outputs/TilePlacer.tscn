@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://wn8d6mt61hag"]
+
+[ext_resource type="Script" uid="uid://dv2mxvww1xn8b" path="res://Scripts/Classes/Gizmos/TilePlacer.gd" id="2_dlm7x"]
+[ext_resource type="Texture2D" uid="uid://dleyxhhngy3r5" path="res://Assets/Sprites/Editor/Gizmos/TilePlacer.png" id="3_doxrd"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_mqx1m"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_dlm7x"]
+[ext_resource type="PackedScene" uid="uid://clfxxcxk3fobh" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertySceneRef.tscn" id="5_doxrd"]
+[ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="6_mqx1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqx1m"]
+size = Vector2(16, 16)
+
+[node name="TilePlacer" type="Node2D" unique_id=1317617032]
+z_index = -5
+script = ExtResource("2_dlm7x")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=317190519 groups=["Gizmos"]]
+texture = ExtResource("3_doxrd")
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=659242020]
+script = ExtResource("3_mqx1m")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=719743650]
+script = ExtResource("4_dlm7x")
+properties = Array[String](["tile_to_place", "show_smoke"])
+filters = Dictionary[String, String]({
+"tile_to_place": ""
+})
+properties_force_selector = Dictionary[String, PackedScene]({
+"tile_to_place": ExtResource("5_doxrd")
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="TrackJoint" type="Node" parent="." unique_id=227187511]
+script = ExtResource("6_mqx1m")
+offset = Vector2(0, 0)
+disable_physics = false
+metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=945438543]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1770135114]
+shape = SubResource("RectangleShape2D_mqx1m")
+
+[connection signal="recieved_power" from="SignalExposer" to="." method="place_tile"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="place_tile"]

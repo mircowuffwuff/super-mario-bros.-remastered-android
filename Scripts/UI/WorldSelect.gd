@@ -27,7 +27,10 @@ const NUMBER_Y := [
 	"Volcano"
 ]
 
+@onready var resource_getter := ResourceGetter.new()
+
 func _ready() -> void:
+	add_child(resource_getter)
 	for i in %SlotContainer.get_children():
 		i.focus_entered.connect(slot_focused.bind(i.get_index()))
 	for i in get_tree().get_nodes_in_group("Particles"):
@@ -35,7 +38,8 @@ func _ready() -> void:
 
 func start_particle(particle: GPUParticles2D) -> void:
 	await get_tree().create_timer(randf_range(0, 5)).timeout
-	particle.emitting = true
+	if is_instance_valid(particle):
+		particle.emitting = true
 
 func _process(_delta: float) -> void:
 	if active:
@@ -72,9 +76,10 @@ func setup_visuals() -> void:
 		var world_visited = (SaveManager.visited_levels.substr((idx + world_offset) * 4, 4) != "0000" or Global.debug_mode or idx == 0)
 		if world_visited == false:
 			level_theme = "Mystery"
-		var resource_getter = ResourceGetter.new() #Is it safe to be making a new one of these per icon?
+		var campaign_idx := 0
+		if ((idx >= 4 and idx <= 8) or Global.current_campaign == "SMBANN"): campaign_idx = 1
 		i.get_node("Icon").region_rect = CustomLevelContainer.THEME_RECTS[level_theme]
-		i.get_node("Icon").texture = resource_getter.get_resource(CustomLevelContainer.ICON_TEXTURES[0 if (idx <= 3 or idx >= 8) and Global.current_campaign != "SMBANN" else 1])
+		i.get_node("Icon").texture = resource_getter.get_resource(load(CustomLevelContainer.ICON_TEXTURES[campaign_idx]), false)
 		i.get_node("Icon/Number").position.y = 10 if has_challenge_stuff else 17
 		i.get_node("Icon/Number").region_rect.position.y = clamp(NUMBER_Y.find(level_theme) * 12, 0, 9999)
 		i.get_node("Icon/Number").region_rect.position.x = (idx + world_offset) * 12
@@ -133,6 +138,9 @@ func setup_disco_bits(medal_outline: TextureRect, medal: NinePatchRect, s_rank_p
 	var lowest_rank = -1
 	for i in 4:
 		saved_rank_ids.append(DiscoLevel.level_ranks[SaveManager.get_level_idx(world_num + 1, i + 1)])
+		if saved_rank_ids[i] == "Z":
+			lowest_rank = -1
+			break
 		for rank in DiscoLevel.RANK_IDs.size():
 			if DiscoLevel.RANK_IDs[rank] == saved_rank_ids[i] and (lowest_rank > rank + 1 or lowest_rank < 0):
 				lowest_rank = rank + 1
@@ -144,12 +152,12 @@ func setup_disco_bits(medal_outline: TextureRect, medal: NinePatchRect, s_rank_p
 	p_rank_pfx.visible = lowest_rank == 7
 
 func handle_input() -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	if Global.multibind_action_just_pressed("ui_accept"):
 		if SaveManager.visited_levels.substr((selected_world + world_offset) * 4, 4) == "0000" and not Global.debug_mode and selected_world != 0:
 			AudioManager.play_sfx("bump")
 		else:
 			select_world()
-	elif Input.is_action_just_pressed("ui_back"):
+	elif Global.multibind_action_just_pressed("ui_back"):
 		close()
 		cleanup()
 		cancelled.emit()

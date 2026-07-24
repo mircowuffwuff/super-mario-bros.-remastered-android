@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://8knyq6ymmps1"]
+
+[ext_resource type="PackedScene" uid="uid://b2r255cb4tt7t" path="res://Scenes/Prefabs/Gizmos/Inputs/BaseInput.tscn" id="1_g4xrq"]
+[ext_resource type="Script" uid="uid://bqk028rofbp5x" path="res://Scripts/Classes/Gizmos/InputDetection.gd" id="2_g4xrq"]
+[ext_resource type="Texture2D" uid="uid://xpyvr8u3dn1y" path="res://Assets/Sprites/Editor/Gizmos/InputDetection.png" id="3_voy3x"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_7pb71"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="5_3wv11"]
+
+[node name="PlayerEventDetection" unique_id=515746201 instance=ExtResource("1_g4xrq")]
+process_mode = 0
+process_priority = 1
+process_physics_priority = 1
+script = ExtResource("2_g4xrq")
+action = 0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("3_voy3x")
+
+[node name="EditorPropertyExposer" type="Node" parent="." index="2" unique_id=1585908060]
+script = ExtResource("4_7pb71")
+properties = Array[String](["action"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." index="3" unique_id=1477479217]
+script = ExtResource("5_3wv11")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="held" from="." to="SignalExposer" method="turn_on"]
+[connection signal="release" from="." to="SignalExposer" method="turn_off"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="connect_signals"]

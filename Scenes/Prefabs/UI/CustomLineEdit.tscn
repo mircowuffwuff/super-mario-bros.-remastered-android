@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ufyrhwdt81u5"]
+
+[ext_resource type="Script" uid="uid://bkkq8ocwdrls5" path="res://Scripts/Classes/UI/CustomLineEdit.gd" id="1_bhslb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhslb"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ci15d"]
+color = Color(1, 1, 1, 1)
+
+[node name="CustomLineEdit" type="Label" unique_id=1033507793]
+offset_right = 8.0
+offset_bottom = 16.0
+focus_mode = 2
+mouse_filter = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bhslb")
+uppercase = true
+script = ExtResource("1_bhslb")
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=451246772]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_ci15d")
+
+[connection signal="focus_entered" from="." to="." method="on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="grab_focus"]

@@ -1,14 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://5ua3p0lfl1bf"]
+[gd_scene format=3 uid="uid://5ua3p0lfl1bf"]
 
-[ext_resource type="Script" uid="uid://bm72ggve5kda5" path="res://Scripts/Classes/Blocks/BooOnOffSwitch.gd" id="1_ldgc7"]
+[ext_resource type="Script" uid="uid://b5ejlbl0vp1gm" path="res://Scripts/Classes/Blocks/BlockClass.gd" id="1_bllja"]
 [ext_resource type="Texture2D" uid="uid://b00h2ocjft42e" path="res://Assets/Sprites/Blocks/BooOnOffSwitch.png" id="2_b0kgh"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_afw5n"]
 [ext_resource type="PackedScene" uid="uid://cijkvfkthetn5" path="res://Scenes/Parts/BlockAnimations.tscn" id="3_b0kgh"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/BooOnOffSwitch.json" id="4_bllja"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yh77s"]
-atlas = ExtResource("2_b0kgh")
-region = Rect2(0, 0, 16, 16)
+[ext_resource type="Script" uid="uid://q45b31h6356r" path="res://Scripts/Classes/Components/OnOffSwitcher.gd" id="6_bllja"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldgc7"]
 atlas = ExtResource("2_b0kgh")
@@ -54,14 +50,6 @@ region = Rect2(0, 16, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yh77s")
-}],
-"loop": true,
-"name": &"Default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ldgc7")
 }, {
 "duration": 1.0,
@@ -104,30 +92,34 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwq65"]
 size = Vector2(16, 16)
 
-[node name="BooOnOffSwitch" type="AnimatableBody2D" node_paths=PackedStringArray("visuals") groups=["BooBlocks", "BooSwitchBlocks"]]
+[node name="BooOnOffSwitch" type="AnimatableBody2D" unique_id=796678308 node_paths=PackedStringArray("visuals")]
 collision_layer = 6
 collision_mask = 0
-script = ExtResource("1_ldgc7")
+script = ExtResource("1_bllja")
 visuals = NodePath("Sprite")
 metadata/_custom_type_script = "uid://b5ejlbl0vp1gm"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1926452593]
 sprite_frames = SubResource("SpriteFrames_yh77s")
 animation = &"On"
-autoplay = "Default"
 
-[node name="ResourceSetter" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Sprite" unique_id=398479575 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_afw5n")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_bllja")
+json_path = "res://Assets/Sprites/Blocks/BooOnOffSwitch.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=803922983]
 visible = false
 shape = SubResource("RectangleShape2D_uwq65")
 
-[node name="BlockAnimations" parent="." instance=ExtResource("3_b0kgh")]
+[node name="BlockAnimations" parent="." unique_id=962435901 instance=ExtResource("3_b0kgh")]
 
-[connection signal="player_block_hit" from="." to="." method="on_block_hit" unbinds=1]
+[node name="OnOffSwitcher" type="Node" parent="." unique_id=1652728914 node_paths=PackedStringArray("sprite") groups=["BooSwitches"]]
+script = ExtResource("6_bllja")
+sprite = NodePath("../Sprite")
+
 [connection signal="player_block_hit" from="." to="BlockAnimations" method="bounce_block" unbinds=1]
+[connection signal="player_block_hit" from="." to="OnOffSwitcher" method="switch" unbinds=1]

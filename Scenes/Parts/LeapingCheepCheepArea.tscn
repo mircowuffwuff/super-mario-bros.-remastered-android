@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdxd6shyk8duj"]
+[gd_scene format=3 uid="uid://bdxd6shyk8duj"]
 
 [ext_resource type="Script" uid="uid://dxt4s20sjndph" path="res://Scripts/Parts/LeapingCheepCheepArea.gd" id="1_jinga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjkhe"]
 size = Vector2(16, 16)
 
-[node name="LeapingCheepCheepArea" type="Area2D"]
+[node name="LeapingCheepCheepArea" type="Area2D" unique_id=123232332]
 script = ExtResource("1_jinga")
 
-[node name="Shape" type="CollisionShape2D" parent="."]
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=225316124]
 shape = SubResource("RectangleShape2D_bjkhe")
 debug_color = Color(1, 0.6, 0, 0.419608)

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c1plxbl04na5g"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ku7qa"]
+blend_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_ku7qa"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.99224806)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tqk6g"]
+gradient = SubResource("Gradient_ku7qa")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[node name="Light" type="Sprite2D" unique_id=2085158705]
+light_mask = 3
+visibility_layer = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ku7qa")
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_tqk6g")

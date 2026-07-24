@@ -1,8 +1,9 @@
+class_name RedCoin
 extends Node2D
 
 @export var id := 0
 var already_collected := false
-const COLLECTION_SFXS := [preload("uid://drr1qqeuhmv6m"), preload("uid://de1tktivtggdv"), preload("uid://cdtlca36qsba5"), preload("uid://dd47k4c5sypwp"), preload("uid://chi2nogc2op4i")]
+const COLLECTION_SFXS := ["red_coin_1", "red_coin_2", "red_coin_3", "red_coin_4", "red_coin_5"]
 const SPINNING_RED_COIN = preload("res://Scenes/Prefabs/Entities/Items/SpinningRedCoin.tscn")
 var can_spawn_particles := false
 
@@ -11,6 +12,9 @@ var can_spawn_particles := false
 signal collected
 
 func _ready() -> void:
+	if Global.current_game_mode != Global.GameMode.CHALLENGE:
+		queue_free()
+		return
 	if ChallengeModeHandler.is_coin_collected(id) or ChallengeModeHandler.is_coin_permanently_collected(id):
 		already_collected = true
 		$Sprite.play("Collected")

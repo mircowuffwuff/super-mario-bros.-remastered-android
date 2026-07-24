@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://csmgewjk06lkj"]
+
+[ext_resource type="Script" uid="uid://bmgyaho01qb1u" path="res://Scripts/Classes/Entities/Enemies/HomingBill.gd" id="1_ulw4f"]
+[ext_resource type="Texture2D" uid="uid://ckjjqcfoutqyp" path="res://Assets/Sprites/Enemies/HomingBill.png" id="2_d4aew"]
+[ext_resource type="PackedScene" uid="uid://clbvyne1cr8gp" path="res://Scenes/Prefabs/Entities/Explosion.tscn" id="2_wwst8"]
+[ext_resource type="Texture2D" uid="uid://byy3k1pdrp77" path="res://Assets/Sprites/Particles/Smoke.png" id="3_bv21p"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_bv21p"]
+[ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="4_wwst8"]
+[ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="5_8r3gq"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="6_uhwd6"]
+[ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="7_t33q4"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="8_pcobt"]
+[ext_resource type="Script" uid="uid://ba18grqjixded" path="res://Scripts/Classes/Components/ExplosionDetection.gd" id="9_lcy5e"]
+[ext_resource type="Script" uid="uid://33no4mylhh1r" path="res://Scripts/Classes/Components/OffScreenDespawner.gd" id="10_16ltl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ssstl"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkkmh"]
+atlas = ExtResource("2_d4aew")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnfbj"]
+atlas = ExtResource("2_d4aew")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qd5mn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkkmh")
+}],
+"loop": true,
+"name": &"Diagonal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnfbj")
+}],
+"loop": true,
+"name": &"Normal",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwst8"]
+size = Vector2(12, 12)
+
+[node name="HomingBill" type="CharacterBody2D" unique_id=1363697095 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+collision_layer = 16
+collision_mask = 6
+motion_mode = 1
+script = ExtResource("1_ulw4f")
+explosion_scene = ExtResource("2_wwst8")
+on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
+score_note_adder = NodePath("ScoreNoteSpawner")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="ParticlesRotation" type="Node2D" parent="." unique_id=1743374772]
+visible = false
+
+[node name="Particles" type="CPUParticles2D" parent="ParticlesRotation" unique_id=944100894]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ssstl")
+position = Vector2(-8, 0)
+amount = 2
+texture = ExtResource("3_bv21p")
+lifetime = 0.5
+gravity = Vector2(0, 0)
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1394012695]
+physics_interpolation_mode = 2
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_qd5mn")
+animation = &"Normal"
+autoplay = "Normal"
+
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1702804011 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("4_bv21p")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Enemies/HomingBill.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1483912271]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=203111523]
+shape = SubResource("RectangleShape2D_wwst8")
+
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=1229523225 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_wwst8")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://chj8hu207lrh"
+
+[node name="GibSpawner" type="Node" parent="." unique_id=113125133 node_paths=PackedStringArray("visuals")]
+script = ExtResource("5_8r3gq")
+visuals = NodePath("../Sprite")
+metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1921401736]
+script = ExtResource("6_uhwd6")
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="ShellDetection" type="Node" parent="." unique_id=232346196 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("7_t33q4")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://bbww34oiexbx2"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=1846417809]
+script = ExtResource("8_pcobt")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[node name="ExplosionDetection" type="Node" parent="." unique_id=71717490 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("9_lcy5e")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://ba18grqjixded"
+
+[node name="OffScreenDespawner" type="Node" parent="." unique_id=1677828540]
+script = ExtResource("10_16ltl")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=974955505]
+
+[node name="Timer" type="Timer" parent="." unique_id=346849636]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="OffScreenDespawner" method="on_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="on_timeout"]

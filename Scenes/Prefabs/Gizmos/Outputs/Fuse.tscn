@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dsfyv4ulvul6q"]
+
+[ext_resource type="PackedScene" uid="uid://cllscucqyd033" path="res://Scenes/Prefabs/Gizmos/Outputs/BaseOutput.tscn" id="1_ns0me"]
+[ext_resource type="Texture2D" uid="uid://bv0430aufafeh" path="res://Assets/Sprites/Editor/Gizmos/Fuse.png" id="2_36gan"]
+
+[node name="Fuse" unique_id=515746201 instance=ExtResource("1_ns0me")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("2_36gan")
+hframes = 1
+
+[connection signal="recieved_power" from="SignalExposer" to="." method="queue_free"]
+[connection signal="recieved_power" from="SignalExposer" to="SignalExposer" method="turn_on" flags=6]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="queue_free"]
+[connection signal="recieved_pulse" from="SignalExposer" to="SignalExposer" method="emit_pulse" flags=6]

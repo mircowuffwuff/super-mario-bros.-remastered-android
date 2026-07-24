@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://k1krjice0kia"]
+[gd_scene format=3 uid="uid://k1krjice0kia"]
 
 [ext_resource type="Script" uid="uid://d23r1hm6jbgox" path="res://Scripts/Parts/LostLevelsEndingDoor.gd" id="1_nwrya"]
 [ext_resource type="Texture2D" uid="uid://dhpa5y7jlbyia" path="res://Assets/Sprites/Items/LostLevelsDoor.png" id="2_jriqu"]
@@ -10,30 +10,30 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d5sl2"]
 normal = Vector2(-1, 0)
 
-[node name="LostLevelsEndingDoor" type="Node2D"]
+[node name="LostLevelsEndingDoor" type="Node2D" unique_id=2013578331]
 script = ExtResource("1_nwrya")
 scene = "uid://b0omfelsiothx"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1570044229]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=510166554]
 shape = SubResource("RectangleShape2D_an0bx")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=617019757]
 position = Vector2(40, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1257431407]
 shape = SubResource("RectangleShape2D_an0bx")
 
-[node name="CameraRightLimit" type="Node2D" parent="."]
+[node name="CameraRightLimit" type="Node2D" parent="." unique_id=1634177122]
 position = Vector2(128, -80)
 script = ExtResource("4_b0byr")
 metadata/_custom_type_script = "uid://bdq0373j5n5o0"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraRightLimit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraRightLimit" unique_id=2059596490]
 shape = SubResource("WorldBoundaryShape2D_d5sl2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2129395111]
 position = Vector2(24, -13)
 texture = ExtResource("2_jriqu")
 script = ExtResource("4_jriqu")

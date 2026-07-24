@@ -24,13 +24,18 @@ func explode() -> void:
 
 func kick(object: Node2D) -> void:
 	AudioManager.play_sfx("kick", global_position)
-	object.kick_anim()
+	if object is Player:
+		object.kick_anim()
 	var kick_dir = sign(global_position.x - object.global_position.x)
-	velocity.x = 150 * kick_dir
+	var kick_amount = 150
+	if object is not Player:
+		kick_amount = 100
+	velocity.x = kick_amount * kick_dir
 	direction = kick_dir
 	velocity.y = -100
 
 func summon_explosion() -> void:
 	var node = EXPLOSION.instantiate()
 	node.global_position = global_position + Vector2(0, -8)
+	AudioManager.play_sfx("explode", node.global_position)
 	add_sibling(node)

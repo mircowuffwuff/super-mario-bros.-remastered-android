@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c0nxxed8e4sg5"]
+
+[ext_resource type="Texture2D" uid="uid://d2x6hms8qycyd" path="res://Assets/Sprites/Editor/PitWarpOutput.png" id="1_163s8"]
+[ext_resource type="Script" uid="uid://1u8683yg7eyj" path="res://Scripts/Classes/Entities/Objects/PitWarpReturn.gd" id="1_jwvas"]
+[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="2_jwvas"]
+
+[node name="PitWarpReturn" type="Node2D" unique_id=1777303874]
+script = ExtResource("1_jwvas")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=307458461]
+texture = ExtResource("1_163s8")
+script = ExtResource("2_jwvas")

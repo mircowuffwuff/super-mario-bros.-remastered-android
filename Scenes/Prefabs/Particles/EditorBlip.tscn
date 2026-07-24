@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://btuv0dcfc8u7x"]
+
+[ext_resource type="Texture2D" uid="uid://ba2qk7svwdolv" path="res://Assets/Sprites/Editor/EditorBlip.png" id="1_fv2ky"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_im88n"]
+atlas = ExtResource("1_fv2ky")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8lj0"]
+atlas = ExtResource("1_fv2ky")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1o86"]
+atlas = ExtResource("1_fv2ky")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dcfj"]
+atlas = ExtResource("1_fv2ky")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_avskf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_im88n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8lj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1o86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dcfj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=1875096684]
+sprite_frames = SubResource("SpriteFrames_avskf")
+autoplay = "default"
+centered = false

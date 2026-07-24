@@ -137,8 +137,9 @@ func _update_ml_options_from_options_resource(ml_options_path := "res://addons/m
 	# Get user options for ModLoader
 	if not _ModLoaderFile.file_exists(ml_options_path) and not ResourceLoader.exists(ml_options_path):
 		ModLoaderLog.fatal(str("A critical file is missing: ", ml_options_path), LOG_NAME)
-
+	
 	var options_resource: ModLoaderCurrentOptions = load(ml_options_path)
+	
 	if options_resource.current_options == null:
 		ModLoaderLog.warning(str(
 			"No current options are set. Falling back to defaults. ",
@@ -153,7 +154,7 @@ func _update_ml_options_from_options_resource(ml_options_path := "res://addons/m
 			), LOG_NAME)
 		# Update from the options in the resource
 		ml_options = current_options
-
+	
 	# Get options overrides by feature tags
 	# An override is saved as Dictionary[String: ModLoaderOptionsProfile]
 	for feature_tag in options_resource.feature_override_options.keys():
@@ -227,9 +228,4 @@ func _update_ml_options_from_cli_args() -> void:
 func _configure_logger() -> void:
 	ModLoaderLog.verbosity = ml_options.log_level
 	ModLoaderLog.ignored_mods = ml_options.ignored_mod_names_in_log
-	ModLoaderLog.warning_color = ml_options.warning_color
-	ModLoaderLog.success_color = ml_options.success_color
-	ModLoaderLog.info_color = ml_options.info_color
 	ModLoaderLog.hint_color = ml_options.hint_color
-	ModLoaderLog.debug_color = ml_options.debug_color
-	ModLoaderLog.debug_bold = ml_options.debug_bold

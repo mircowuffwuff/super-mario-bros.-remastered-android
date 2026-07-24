@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b85i7uni0twpe"]
+[gd_scene format=3 uid="uid://b85i7uni0twpe"]
 
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="1_nfk08"]
 [ext_resource type="Script" uid="uid://b5u7ht2124lfs" path="res://Scripts/UI/DiscoResults.gd" id="1_up7vl"]
@@ -156,6 +156,7 @@ offset_right = 128.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+has_disco_stuff = true
 
 [connection signal="focus_entered" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/Continue" to="." method="set_index" binds= [0]]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/Continue" to="." method="continue_to_next_level"]
@@ -165,8 +166,8 @@ grow_vertical = 2
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/LevelSelect" to="WorldSelect" method="open"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/LevelSelect" to="." method="set_focus" binds= [false]]
 [connection signal="focus_entered" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ReturnMenu" to="." method="set_index" binds= [3]]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ReturnMenu" to="." method="close"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ReturnMenu" to="." method="go_to_menu"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/ReturnMenu" to="." method="close"]
 [connection signal="cancelled" from="WorldSelect" to="." method="open"]
 [connection signal="cancelled" from="WorldSelect" to="." method="set_focus" binds= [true]]
 [connection signal="world_selected" from="WorldSelect" to="LevelSelect" method="open"]

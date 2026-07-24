@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b5t8elthymt1s"]
+
+[ext_resource type="PackedScene" uid="uid://b2r255cb4tt7t" path="res://Scenes/Prefabs/Gizmos/Inputs/BaseInput.tscn" id="1_rvpyc"]
+[ext_resource type="Script" uid="uid://c8ep164peeoou" path="res://Scripts/Classes/Gizmos/ItemCollectDetect.gd" id="2_uad1m"]
+[ext_resource type="Texture2D" uid="uid://bgtom1x1jmc06" path="res://Assets/Sprites/Editor/Gizmos/ItemCollectDetection.png" id="2_xciw7"]
+
+[node name="BaseInput" unique_id=515746201 instance=ExtResource("1_rvpyc")]
+script = ExtResource("2_uad1m")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("2_xciw7")

@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://b3dxe7or4ahgn"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://b3dxe7or4ahgn"]
 
-[ext_resource type="AudioStream" uid="uid://ddff40dciw6v2" path="res://Assets/Audio/BGM/Underwater.mp3" id="1_ppn62"]
-[ext_resource type="AudioStream" uid="uid://20ecxp6tbyov" path="res://Assets/Audio/BGM/UnderwaterHurry.mp3" id="2_uldv7"]
+[ext_resource type="AudioStream" uid="uid://b4gvqqwwc34s4" path="res://Assets/Audio/BGM/Underwater.mp3" id="1_ppn62"]
+[ext_resource type="AudioStream" uid="uid://dlc3y64i5lkks" path="res://Assets/Audio/BGM/UnderwaterHurry.mp3" id="2_uldv7"]
 
 [resource]
 clip_count = 2

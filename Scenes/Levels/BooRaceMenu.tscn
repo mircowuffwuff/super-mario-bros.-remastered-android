@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b7no88iaujhh3"]
+[gd_scene format=3 uid="uid://b7no88iaujhh3"]
 
 [ext_resource type="Script" uid="uid://b08qfwj5jk6g1" path="res://Scripts/Parts/PlayerSprite.gd" id="1_0b6w1"]
 [ext_resource type="Script" uid="uid://b3ol0iyjcb5n1" path="res://Scripts/UI/BooRaceMenu.gd" id="1_nk4wu"]
@@ -13,16 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://3ai0ggxah360" path="res://Assets/Sprites/UI/MenuBorder.png" id="4_vpste"]
 [ext_resource type="SpriteFrames" uid="uid://cjblhx4flkqva" path="res://Resources/SpriteFrames/Player/Mario/Big.tres" id="5_nhs2i"]
 [ext_resource type="Script" uid="uid://364rywt44hy6" path="res://Scripts/Classes/UI/PackSprite.gd" id="5_tgnw3"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/Cursor.json" id="8_2t6wu"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="8_jl8ul"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/MenuBorder.json" id="8_vpste"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/MenuBG.json" id="8_wunmb"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="8_xx8pl"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="9_mm3k3"]
 [ext_resource type="Texture2D" uid="uid://3p2l7rec0gh5" path="res://Assets/Sprites/UI/Cursor.png" id="10_nk4wu"]
-[ext_resource type="JSON" path="res://Assets/Audio/BGM/BooMenu.json" id="11_kqv8e"]
 [ext_resource type="PackedScene" uid="uid://bxp1l23w1kq41" path="res://Scenes/Prefabs/UI/BooSelect.tscn" id="12_pinst"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/RaceBoo.json" id="12_tgnw3"]
 [ext_resource type="PackedScene" uid="uid://ci678koo0peoa" path="res://Scenes/Prefabs/UI/CharacterSelect.tscn" id="13_u5tsp"]
 [ext_resource type="Script" uid="uid://cqif1li7otvpl" path="res://Scripts/Parts/SpriteFramesToJsonConverter.gd" id="16_e7l5x"]
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="17_e7l5x"]
@@ -212,16 +207,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BooRaceMenu" type="Node"]
+[node name="BooRaceMenu" type="Node" unique_id=1446287605]
 script = ExtResource("1_nk4wu")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1629439412]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BG" type="NinePatchRect" parent="."]
+[node name="BG" type="NinePatchRect" parent="." unique_id=257171774]
 texture_repeat = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -234,7 +229,7 @@ region_rect = Rect2(0, 0, 16, 16)
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="Border" type="NinePatchRect" parent="BG"]
+[node name="Border" type="NinePatchRect" parent="BG" unique_id=1195561672]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -253,7 +248,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="BG" type="TextureRect" parent="BG/Border"]
+[node name="BG" type="TextureRect" parent="BG/Border" unique_id=1199500797]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_nk4wu")
 layout_mode = 1
@@ -269,35 +264,38 @@ stretch_mode = 1
 script = ExtResource("3_dwawm")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="ResourceSetterNew" type="Node" parent="BG/Border" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="BG/Border" unique_id=505597117 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_vpste")
+json_path = "res://Assets/Sprites/UI/MenuBorder.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="ResourceSetterNew" type="Node" parent="BG" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="BG" unique_id=556738426 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_wunmb")
+json_path = "res://Assets/Sprites/UI/MenuBG.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1434766974]
 stream = ExtResource("1_uucdm")
 bus = &"Music"
 
-[node name="ResourceSetterNew" type="Node" parent="Music" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Music" unique_id=1222120859 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "stream"
 mode = 2
-resource_json = ExtResource("11_kqv8e")
+json_path = "res://Assets/Audio/BGM/BooMenu.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1457511798]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -311,34 +309,34 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("9_mm3k3")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1360630220]
 layout_mode = 2
 theme_override_constants/margin_left = -2
 theme_override_constants/margin_top = -2
 theme_override_constants/margin_right = -2
 theme_override_constants/margin_bottom = -2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1950263882]
 layout_mode = 2
 
-[node name="LevelLabels" type="VFlowContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LevelLabels" type="VFlowContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=460237218]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/v_separation = 0
 
-[node name="1-1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="1-1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=627657489]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1" unique_id=1630767500]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1/Cursor" unique_id=481330270]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -346,40 +344,41 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1/Cursor/Texture" unique_id=1586396585 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1" unique_id=11609689]
 layout_mode = 2
 text = "1-1"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1" unique_id=1621637578]
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1/Control" unique_id=1375975665]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="1-2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="1-2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=664123695]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2" unique_id=1173827980]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2/Cursor" unique_id=1332744888]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -387,41 +386,42 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2/Cursor/Texture" unique_id=1177737988 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2" unique_id=1846751115]
 layout_mode = 2
 text = "1-2"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2" unique_id=419225489]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-2/Control" unique_id=270207791]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="1-3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="1-3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=888798227]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3" unique_id=195680302]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3/Cursor" unique_id=411030707]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -429,41 +429,42 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3/Cursor/Texture" unique_id=2015001686 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3" unique_id=1225472151]
 layout_mode = 2
 text = "1-3"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3" unique_id=1059767144]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-3/Control" unique_id=637605859]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="1-4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="1-4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=61599380]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4" unique_id=1508483650]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4/Cursor" unique_id=1794667959]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -471,41 +472,42 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4/Cursor/Texture" unique_id=26088653 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4" unique_id=1883564670]
 layout_mode = 2
 text = "1-4"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4" unique_id=1178417535]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-4/Control" unique_id=208546948]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="2-1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="2-1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=1318238646]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1" unique_id=907053835]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1/Cursor" unique_id=1874693123]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -513,41 +515,42 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1/Cursor/Texture" unique_id=2145471647 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1" unique_id=1119358163]
 layout_mode = 2
 text = "2-1"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1" unique_id=1398721411]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-1/Control" unique_id=1582680011]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="2-2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="2-2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=2014943630]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2" unique_id=937925932]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2/Cursor" unique_id=2013367904]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -555,41 +558,42 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2/Cursor/Texture" unique_id=1794112451 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2" unique_id=1866479327]
 layout_mode = 2
 text = "2-2"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2" unique_id=460233102]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-2/Control" unique_id=856726413]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="2-3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="2-3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=49574809]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3" unique_id=1763879787]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3/Cursor" unique_id=1935206071]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -597,41 +601,42 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3/Cursor/Texture" unique_id=1438331116 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3" unique_id=1208961057]
 layout_mode = 2
 text = "2-3"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3" unique_id=511039947]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-3/Control" unique_id=1427628895]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="2-4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels"]
+[node name="2-4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels" unique_id=247931041]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -2
 
-[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4"]
+[node name="Cursor" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4" unique_id=267885559]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4/Cursor"]
+[node name="Texture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4/Cursor" unique_id=1265898911]
 visible = false
 layout_mode = 0
 offset_right = 8.0
@@ -639,45 +644,46 @@ offset_bottom = 16.0
 texture = SubResource("AtlasTexture_hpo87")
 stretch_mode = 3
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4/Cursor/Texture" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4/Cursor/Texture" unique_id=1899813655 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_2t6wu")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4" unique_id=31454068]
 layout_mode = 2
 text = "2-4"
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4" unique_id=1347234122]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/2-4/Control" unique_id=2071890048]
 texture = ExtResource("21_vpste")
 centered = false
 hframes = 5
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1566863958]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_vpste")
 
-[node name="PB" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PB" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1823478184]
 unique_name_in_owner = true
 layout_mode = 2
 text = "PB: 00:00:00"
 
-[node name="Logo" type="Sprite2D" parent="PanelContainer"]
+[node name="Logo" type="Sprite2D" parent="PanelContainer" unique_id=1961394865]
 position = Vector2(60, -27)
 texture = ExtResource("4_nhs2i")
 script = ExtResource("5_tgnw3")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="PanelContainer" node_paths=PackedStringArray("resource_setter")]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="PanelContainer" unique_id=545070208 node_paths=PackedStringArray("resource_setter")]
 position = Vector2(17, -34)
 sprite_frames = ExtResource("5_nhs2i")
 animation = &"Idle"
@@ -687,107 +693,111 @@ force_power_state = "Small"
 resource_setter = NodePath("ResourceSetterNew")
 metadata/_custom_type_script = "uid://b08qfwj5jk6g1"
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/PlayerSprite"]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/PlayerSprite" unique_id=1771073159]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Boos" type="Node2D" parent="PanelContainer"]
+[node name="Boos" type="Node2D" parent="PanelContainer" unique_id=2053153331]
 unique_name_in_owner = true
 position = Vector2(172, 96)
 
-[node name="WaveAnimation" type="AnimationPlayer" parent="PanelContainer/Boos"]
+[node name="WaveAnimation" type="AnimationPlayer" parent="PanelContainer/Boos" unique_id=195580067]
 root_node = NodePath("../0")
-libraries = {
-&"": SubResource("AnimationLibrary_nk4wu")
-}
-autoplay = "Wave"
+libraries/ = SubResource("AnimationLibrary_nk4wu")
+autoplay = &"Wave"
 
-[node name="0" type="AnimatedSprite2D" parent="PanelContainer/Boos"]
+[node name="0" type="AnimatedSprite2D" parent="PanelContainer/Boos" unique_id=1878361704]
 sprite_frames = SubResource("SpriteFrames_d3w3b")
 animation = &"GreenIdle"
 script = ExtResource("8_jl8ul")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/0" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/0" unique_id=454904469 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("12_tgnw3")
+json_path = "res://Assets/Sprites/Enemies/RaceBoo.json"
 force_properties = {
 "RaceBoo": 0
 }
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="1" type="AnimatedSprite2D" parent="PanelContainer/Boos"]
+[node name="1" type="AnimatedSprite2D" parent="PanelContainer/Boos" unique_id=1247684928]
 sprite_frames = SubResource("SpriteFrames_d3w3b")
 animation = &"GreenIdle"
 script = ExtResource("8_jl8ul")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/1" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/1" unique_id=1166852376 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("12_tgnw3")
+json_path = "res://Assets/Sprites/Enemies/RaceBoo.json"
 force_properties = {
 "RaceBoo": 1
 }
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="2" type="AnimatedSprite2D" parent="PanelContainer/Boos"]
+[node name="2" type="AnimatedSprite2D" parent="PanelContainer/Boos" unique_id=1989097483]
 sprite_frames = SubResource("SpriteFrames_d3w3b")
 animation = &"GreenIdle"
 script = ExtResource("8_jl8ul")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/2" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/2" unique_id=298138757 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("12_tgnw3")
+json_path = "res://Assets/Sprites/Enemies/RaceBoo.json"
 force_properties = {
 "RaceBoo": 2
 }
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="3" type="AnimatedSprite2D" parent="PanelContainer/Boos"]
+[node name="3" type="AnimatedSprite2D" parent="PanelContainer/Boos" unique_id=549088941]
 sprite_frames = SubResource("SpriteFrames_d3w3b")
 animation = &"GreenIdle"
 script = ExtResource("8_jl8ul")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/3" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/3" unique_id=1382260237 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("12_tgnw3")
+json_path = "res://Assets/Sprites/Enemies/RaceBoo.json"
 force_properties = {
 "RaceBoo": 3
 }
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="4" type="AnimatedSprite2D" parent="PanelContainer/Boos"]
+[node name="4" type="AnimatedSprite2D" parent="PanelContainer/Boos" unique_id=529414044]
 sprite_frames = SubResource("SpriteFrames_d3w3b")
 animation = &"GreenIdle"
 script = ExtResource("8_jl8ul")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/4" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="PanelContainer/Boos/4" unique_id=886686063 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_xx8pl")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("12_tgnw3")
+json_path = "res://Assets/Sprites/Enemies/RaceBoo.json"
 force_properties = {
 "RaceBoo": 4
 }
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="BooSelect" parent="." instance=ExtResource("12_pinst")]
+[node name="BooSelect" parent="." unique_id=751775939 instance=ExtResource("12_pinst")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -801,7 +811,7 @@ offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CharacterSelect" parent="." instance=ExtResource("13_u5tsp")]
+[node name="CharacterSelect" parent="." unique_id=296247256 instance=ExtResource("13_u5tsp")]
 visible = false
 z_as_relative = false
 offset_left = 0.0
@@ -809,16 +819,16 @@ offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="ThemedToJSONConverter" type="Node" parent="."]
+[node name="ThemedToJSONConverter" type="Node" parent="." unique_id=656845092]
 script = ExtResource("16_e7l5x")
 metadata/_custom_type_script = "uid://cqif1li7otvpl"
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1041473066 node_paths=PackedStringArray("labels")]
 script = ExtResource("17_e7l5x")
 labels = [null, null, null, null, null, null, null, null]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="DropShadow" parent="." instance=ExtResource("4_idhu2")]
+[node name="DropShadow" parent="." unique_id=1041096539 instance=ExtResource("4_idhu2")]
 position = Vector2(0, -40)
 
 [connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1" to="PanelContainer/MarginContainer/VBoxContainer/LevelLabels/1-1/Cursor/Texture" method="show"]

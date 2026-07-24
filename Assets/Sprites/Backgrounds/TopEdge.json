@@ -1,0 +1,10 @@
+{
+	"animations": {
+		"default": {
+			"frames": [[0, 0, 256, 32]],
+			"speed": 5,
+			"loop": false
+		}
+	},
+	"variations": {"source": "TopEdge.png"}
+}

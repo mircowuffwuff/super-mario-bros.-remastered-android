@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cllscucqyd033"]
+
+[ext_resource type="Script" uid="uid://dtp713kj1agoh" path="res://Scripts/Classes/Gizmos/Gizmo.gd" id="1_fux1g"]
+[ext_resource type="Texture2D" uid="uid://bcns43fy5y3n7" path="res://Assets/Sprites/Editor/Gizmos/Lamp.png" id="2_e5lq3"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="3_brvdk"]
+
+[node name="BaseOutput" type="Node2D" unique_id=515746201 groups=["Gizmos"]]
+process_mode = 3
+z_index = -5
+z_as_relative = false
+script = ExtResource("1_fux1g")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1224179792]
+texture = ExtResource("2_e5lq3")
+hframes = 2
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1403115602]
+script = ExtResource("3_brvdk")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"

@@ -1,22 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3or4h5ke6lni"]
+[gd_scene format=3 uid="uid://b3or4h5ke6lni"]
 
 [ext_resource type="PackedScene" uid="uid://c8m8455b6ikrn" path="res://Scenes/Prefabs/Entities/Objects/SidewaysPlatform.tscn" id="1_nuvyr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dspyy"]
 size = Vector2(32, 8)
 
-[node name="SmallSidewaysPlatform" instance=ExtResource("1_nuvyr")]
+[node name="SmallSidewaysPlatform" unique_id=260259577 instance=ExtResource("1_nuvyr")]
 
-[node name="Sprite" parent="AnimatableBody2D" index="0"]
+[node name="Sprite" parent="AnimatableBody2D" parent_id_path=PackedInt32Array(497869728) index="0" unique_id=2119390451]
 offset_left = -16.0
 offset_right = 16.0
 
-[node name="ResourceSetter" parent="AnimatableBody2D/Sprite" index="0"]
+[node name="ResourceSetter" parent="AnimatableBody2D/Sprite" index="0" unique_id=675104811]
 metadata/_custom_type_script = "uid://cq6f682453q6o"
 
-[node name="Collision" parent="AnimatableBody2D" index="1"]
-visible = true
+[node name="Collision" parent="AnimatableBody2D" parent_id_path=PackedInt32Array(497869728) index="1" unique_id=486455362]
 shape = SubResource("RectangleShape2D_dspyy")
 
-[node name="SecondQuestReplacer" parent="." index="3"]
+[node name="SecondQuestReplacer" parent="." index="3" unique_id=341495906]
 new_scene = ""

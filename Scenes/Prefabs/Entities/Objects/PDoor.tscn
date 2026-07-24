@@ -1,20 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmsecpiv7yllv"]
+[gd_scene format=3 uid="uid://bmsecpiv7yllv"]
 
 [ext_resource type="PackedScene" uid="uid://u3t1k5j28yap" path="res://Scenes/Prefabs/Entities/Objects/Door.tscn" id="1_ovd7t"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/PDoors.json" id="2_fprkw"]
 [ext_resource type="Script" uid="uid://bul1nbd2in1gn" path="res://Scripts/Classes/Components/PSwitcher.gd" id="3_fprkw"]
 
-[node name="Door" instance=ExtResource("1_ovd7t")]
+[node name="Door" unique_id=1201846047 instance=ExtResource("1_ovd7t")]
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="1" unique_id=2013555801]
 animation = &"Idle"
 frame = 0
 frame_progress = 0.0
 
-[node name="ResourceSetterNew" parent="Sprite" index="0"]
-resource_json = ExtResource("2_fprkw")
+[node name="ResourceSetterNew" parent="Sprite" index="0" unique_id=1666477828]
+json_path = "res://Assets/Sprites/Tilesets/PDoors.json"
 
-[node name="PSwitcher" type="Node" parent="." index="6"]
+[node name="PSwitcher" type="Node" parent="." index="6" unique_id=48010562]
 script = ExtResource("3_fprkw")
 new_scene = "uid://c4wvocqpy0w66"
 metadata/_custom_type_script = "uid://bul1nbd2in1gn"

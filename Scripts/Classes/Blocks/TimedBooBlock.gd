@@ -4,6 +4,10 @@ extends Block
 var time := 3
 var active := false
 
+signal switched
+
+var can_change_animation := false
+
 static var main_block = null
 
 static var can_tick := true:
@@ -12,42 +16,53 @@ static var can_tick := true:
 
 func _ready() -> void:
 	main_block = self
+	can_change_animation = true
+
+func level_start() -> void:
 	$Timer.start()
 
 func on_timeout() -> void:
-	if can_tick == false or BooRaceHandler.countdown_active: return
+	if can_tick == false or BooRaceHandler.countdown_active or Global.level_editor_is_editing(): return
 	time = clamp(time - 1, 0, 3)
 	if main_block == self:
 		if time <= 0:
-			get_tree().call_group("BooBlocks", "on_switch_hit")
+			switched.emit()
+			return
 		elif time < 3:
 			AudioManager.play_global_sfx("timer_beep")
+	update_sprite()
+
+func update_sprite() -> void:
 	if active:
 		$Sprite.play("On" + str(time))
 	else:
 		$Sprite.play("Off" + str(time))
 
-func block_hit() -> void:
+func on_block_hit() -> void:
 	if not can_hit:
 		return
 	can_hit = false
-	get_tree().call_group("BooBlocks", "on_switch_hit")
+	switched.emit()
 	await get_tree().create_timer(0.25, false).timeout
 	can_hit = true
 
 func _exit_tree() -> void:
 	can_tick = true
 
-func on_switch_hit() -> void:
-	AudioManager.play_global_sfx("switch")
+func set_active(is_active := false) -> void:
+	if Global.level_editor_is_editing():
+		return
 	$Timer.stop()
 	time = 4
-	active = not active
-	if active:
-		$Sprite.play("BlueToRed")
-	else:
-		$Sprite.play("RedToBlue")
-	await $Sprite.animation_finished
+	active = is_active
+	if can_change_animation:
+		if active:
+			$Sprite.play("BlueToRed")
+		else:
+			$Sprite.play("RedToBlue")
+		await $Sprite.animation_finished
+	time = 3
+	update_sprite()
 	$Timer.start()
 	time = 4
 	on_timeout()

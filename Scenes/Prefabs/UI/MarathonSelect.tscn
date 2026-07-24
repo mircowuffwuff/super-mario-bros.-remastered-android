@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://60t5mugrgvlt"]
+[gd_scene format=3 uid="uid://60t5mugrgvlt"]
 
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="1_14lst"]
 [ext_resource type="Script" uid="uid://bpqtkfuv6a2sx" path="res://Scripts/UI/MarathonSelect.gd" id="1_huaf4"]
@@ -33,7 +33,7 @@ region = Rect2(104, 16, 8, 8)
 atlas = ExtResource("2_huaf4")
 region = Rect2(112, 16, 8, 8)
 
-[node name="MarathonSelect" type="Control"]
+[node name="MarathonSelect" type="Control" unique_id=897860980]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_huaf4")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=983839075]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,16 +57,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_14lst")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=718342896]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=141954541]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "MARATHON_SELECT"
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/Label"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/Label" unique_id=836106911]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -77,81 +77,81 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_c8ql0")
 
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/VBoxContainer" unique_id=1947583259]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="MarathonName" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="MarathonName" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1172243406]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "MARATHON_FULL"
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=518041278]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Full" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Full" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1187090699]
 layout_mode = 2
 theme_override_constants/separation = -5
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/Full"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/Full" unique_id=1430691335]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 texture = SubResource("AtlasTexture_7rxod")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/Full"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/Full" unique_id=1837613113]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "^"
 
-[node name="Level" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Level" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1361501613]
 layout_mode = 2
 theme_override_constants/separation = -5
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/Level"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/Level" unique_id=1031276205]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 texture = SubResource("AtlasTexture_b42rw")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/Level"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/Level" unique_id=1120156107]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "^"
 
-[node name="Control2" type="Control" parent="PanelContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="PanelContainer/VBoxContainer" unique_id=1227396815]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=310396430]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1735955805]
 layout_mode = 2
 theme_override_constants/margin_top = -3
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer" unique_id=225630406]
 layout_mode = 2
 size_flags_vertical = 0
 text = "PB:"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1696677183]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="TextureRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="TextureRect" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=545171059]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_vertical = 0
@@ -160,7 +160,7 @@ region_rect = Rect2(112, 32, 8, 8)
 script = ExtResource("4_7rxod")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="TextureRect2" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="TextureRect2" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1658660875]
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_vertical = 0
@@ -169,41 +169,41 @@ region_rect = Rect2(104, 32, 8, 8)
 script = ExtResource("4_7rxod")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1348650760]
 layout_mode = 2
 theme_override_constants/margin_top = -4
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2" unique_id=15714437]
 layout_mode = 2
 
-[node name="FullRunPB" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer2"]
+[node name="FullRunPB" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer2" unique_id=1544659706]
 unique_name_in_owner = true
 layout_mode = 2
 text = "00:00:00"
 
-[node name="WarpedRunPB" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer2"]
+[node name="WarpedRunPB" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/MarginContainer2/VBoxContainer2" unique_id=1861055641]
 unique_name_in_owner = true
 layout_mode = 2
 text = "00:00:00"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1303889720]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="FullMedals" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2"]
+[node name="FullMedals" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=1833013157]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Bronze" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals"]
+[node name="Bronze" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals" unique_id=820171997]
 layout_mode = 2
 texture = SubResource("AtlasTexture_w8vyo")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals/Bronze"]
+[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals/Bronze" unique_id=1893587769]
 layout_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
@@ -211,13 +211,13 @@ texture = SubResource("AtlasTexture_p1jo0")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Silver" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals"]
+[node name="Silver" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals" unique_id=1110006244]
 layout_mode = 2
 texture = SubResource("AtlasTexture_w8vyo")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals/Silver"]
+[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals/Silver" unique_id=930447894]
 layout_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
@@ -225,13 +225,13 @@ texture = SubResource("AtlasTexture_t6es3")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Gold" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals"]
+[node name="Gold" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals" unique_id=397125492]
 layout_mode = 2
 texture = SubResource("AtlasTexture_w8vyo")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals/Gold"]
+[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/FullMedals/Gold" unique_id=678549809]
 layout_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
@@ -239,19 +239,19 @@ texture = SubResource("AtlasTexture_27pna")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="WarpedMedals" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2"]
+[node name="WarpedMedals" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2" unique_id=195632748]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Bronze" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals"]
+[node name="Bronze" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals" unique_id=1139454662]
 layout_mode = 2
 texture = SubResource("AtlasTexture_w8vyo")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals/Bronze"]
+[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals/Bronze" unique_id=612428356]
 layout_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
@@ -259,13 +259,13 @@ texture = SubResource("AtlasTexture_p1jo0")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Silver" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals"]
+[node name="Silver" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals" unique_id=1066768446]
 layout_mode = 2
 texture = SubResource("AtlasTexture_w8vyo")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals/Silver"]
+[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals/Silver" unique_id=1158950662]
 layout_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0
@@ -273,13 +273,13 @@ texture = SubResource("AtlasTexture_t6es3")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Gold" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals"]
+[node name="Gold" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals" unique_id=261667692]
 layout_mode = 2
 texture = SubResource("AtlasTexture_w8vyo")
 script = ExtResource("5_b42rw")
 metadata/_custom_type_script = "uid://ca3bew33g45eq"
 
-[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals/Gold"]
+[node name="Full" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/WarpedMedals/Gold" unique_id=1086398317]
 layout_mode = 1
 offset_right = 8.0
 offset_bottom = 8.0

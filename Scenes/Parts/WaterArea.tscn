@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://e3wkbwtm7sh"]
+[gd_scene format=3 uid="uid://e3wkbwtm7sh"]
 
 [ext_resource type="Script" uid="uid://crsejaxbaluhf" path="res://Scripts/Parts/WaterArea.gd" id="1_u0i0t"]
 
@@ -6,11 +6,11 @@
 resource_local_to_scene = true
 size = Vector2(16, 16)
 
-[node name="WaterArea" type="Area2D"]
+[node name="WaterArea" type="Area2D" unique_id=1731195511]
 z_index = 4096
 z_as_relative = false
 script = ExtResource("1_u0i0t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=42652536]
 shape = SubResource("RectangleShape2D_rn8yh")
 debug_color = Color(0, 0.6, 0.701961, 1)

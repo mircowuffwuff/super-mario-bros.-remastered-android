@@ -9,9 +9,11 @@ func on_area_entered(area: Area2D) -> void:
 	if area.owner is Player:
 		if has_meta("is_poison"):
 			area.owner.damage()
+			collected.emit()
 			queue_free()
 		elif has_meta("is_oneup"):
 			give_life(area.owner)
+			collected.emit()
 		else:
 			collect_item(area.owner)
 

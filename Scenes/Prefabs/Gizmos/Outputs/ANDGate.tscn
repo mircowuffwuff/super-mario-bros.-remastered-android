@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b5gs47nvw8q1k"]
+
+[ext_resource type="PackedScene" uid="uid://cllscucqyd033" path="res://Scenes/Prefabs/Gizmos/Outputs/BaseOutput.tscn" id="1_slj37"]
+[ext_resource type="Script" uid="uid://dxm6yroq7u6sv" path="res://Scripts/Classes/Gizmos/ANDGate.gd" id="2_qa5b7"]
+[ext_resource type="Texture2D" uid="uid://dpnrj1ue5s16f" path="res://Assets/Sprites/Editor/Gizmos/AND.png" id="3_qa5b7"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="4_5huf4"]
+
+[node name="ANDGate" unique_id=515746201 instance=ExtResource("1_slj37")]
+script = ExtResource("2_qa5b7")
+type = 0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("3_qa5b7")
+hframes = 1
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." index="2" unique_id=518864667]
+script = ExtResource("4_5huf4")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="condition_lost" from="." to="SignalExposer" method="turn_off"]
+[connection signal="condition_met" from="." to="SignalExposer" method="turn_on"]
+[connection signal="positive_pulse" from="." to="SignalExposer" method="emit_pulse"]
+[connection signal="visibility_changed" from="." to="." method="on_visibility_changed"]
+[connection signal="lost_power" from="SignalExposer" to="." method="input_lost"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="input_added"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="pulse_recieved"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="update" flags=3]

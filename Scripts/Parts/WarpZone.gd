@@ -18,6 +18,7 @@ func _ready() -> void:
 		idx += 1
 
 func activate() -> void:
+	Global.current_level.can_backscroll = false
 	for i in get_tree().get_nodes_in_group("Labels"):
 		i.show()
 	for i in get_tree().get_nodes_in_group("Plants"):

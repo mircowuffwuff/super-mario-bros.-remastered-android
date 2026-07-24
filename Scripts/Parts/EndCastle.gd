@@ -10,15 +10,17 @@ var music_finished := false
 var tree = null
 var show_walls := false
 var doing_sequence := false
-
+var use_sprite := false
 var can_transition := false
 
 static var is_transitioning := false
 
 func _ready() -> void:
+	Global.level_sequence_captured = false
 	await Global.level_complete_begin
-	$Overlay.show()
-	$OverlaySprite.show()
+	Global.level_sequence_captured = true
+	$Overlay.visible = not use_sprite
+	$OverlaySprite.visible = use_sprite
 	$Overlay/PlayerDetection.set_collision_layer_value(1, true)
 	Global.score_tally_finished.connect(on_tally_finished)
 	if Global.current_game_mode == Global.GameMode.BOO_RACE:
@@ -28,7 +30,8 @@ func _ready() -> void:
 	time_save = Global.time
 
 func update_cam_limit() -> void:
-	$CameraRightLimit._enter_tree()
+	if Player.camera_right_limit > $CameraRightLimit.global_position.x:
+		$CameraRightLimit._enter_tree()
 
 func _process(_delta: float) -> void:
 	$Overlay.modulate.a = int($SmallCastleVisual.use_sprite == false)
@@ -39,19 +42,6 @@ func _process(_delta: float) -> void:
 	if get_node_or_null("Wall") != null:
 		%Wall.visible = show_walls
 
-func _physics_process(_delta: float) -> void:
-	for i: Player in get_tree().get_nodes_in_group("Players"):
-		if i.state_machine.get_state() == "LevelExit" and i.can_pose and $PlayerDetection.is_player_in_area() and i.global_position >= global_position and i.sprite.sprite_frames.has_animation("PoseDoor"):
-			i.is_posing = true; i.can_pose = false
-			i.global_position = global_position
-			i.play_animation("PoseDoor")
-			i.sprite.animation_finished.connect(on_pose_finished.bind(i))
-			i.sprite.animation_looped.connect(on_pose_finished.bind(i))
-
-func on_pose_finished(player: Player) -> void:
-	player.is_posing = false
-	player.z_index = -2
-
 func on_music_finished() -> void:
 	do_sequence()
 
@@ -59,6 +49,8 @@ func on_tally_finished() -> void:
 	$FlagJoint/Flag/AnimationPlayer.play("Raise")
 
 func do_sequence() -> void:
+	if Global.tallying_score:
+		await Global.score_tally_finished
 	if Global.current_game_mode != Global.GameMode.BOO_RACE:
 		await get_tree().create_timer(1, false).timeout
 		if Global.current_campaign == "SMBLL":
@@ -128,7 +120,7 @@ func exit_level() -> void:
 		Global.GameMode.LEVEL_EDITOR:
 			Global.level_editor.stop_testing()
 		_:
-			if Global.current_campaign == "SMBANN":
+			if Global.current_game_mode == Global.GameMode.DISCO:
 				Global.open_disco_results()
 			else:
 				Global.current_level.transition_to_next_level()

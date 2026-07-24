@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvpfo3flk1efm"]
+[gd_scene format=3 uid="uid://dvpfo3flk1efm"]
 
 [ext_resource type="Script" uid="uid://b41sx3mmdq1pi" path="res://Scripts/Parts/MinusWorldBlock.gd" id="1_b4qvh"]
 
@@ -7,14 +7,14 @@ size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b4qvh"]
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="StaticBody2D" type="StaticBody2D" unique_id=1899662709]
 collision_mask = 0
 script = ExtResource("1_b4qvh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=846628600]
 shape = SubResource("RectangleShape2D_06uwf")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1345925003]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2048857349]
 shape = SubResource("RectangleShape2D_b4qvh")

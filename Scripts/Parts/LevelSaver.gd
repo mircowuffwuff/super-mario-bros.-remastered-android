@@ -10,53 +10,67 @@ static var level_file := {"Info": {}, "Levels": [{}, {}, {}, {}, {}]}
 const chunk_template := {"Tiles": "", "Entities": ""}
 
 const base64_charset := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-@onready var level: Level = $"../Level"
-@onready var level_bg: LevelBG = $"../Level/LevelBG"
-
-var entity_map := {}
 
 const tile_blacklist := []
 
-func _ready() -> void:
-	load_entity_map()
-
 func save_level(level_name := "Unnamed Level", level_author := "You", level_desc := "No Desc", difficulty := 0) -> Dictionary:
-	level_file = editor.level_file
-	sub_level_file = {"Layers": [{}, {}, {}, {}, {}], "Data": "", "BG": ""}
-	get_tiles()
-	get_entities()
+	level_file = LevelEditor.BLANK_FILE.duplicate_deep()
 	
-	save_bg_data()
-	save_level_data()
-	level_file["Levels"][editor.sub_level_id] = sub_level_file.duplicate()
+	var idx := 0
+	for i in LevelEditor.sub_areas:
+		if i != null:
+			if (i is PackedScene):
+				i = i.instantiate()
+			level_file["Levels"][idx] = save_subarea(i)
+		idx += 1
 	level_file["Info"] = {"Name": level_name, "Author": level_author, "Description": level_desc, "Difficulty": difficulty}
 	level_file["Version"] = Global.version_number
 	return level_file
 
+func save_subarea(level: CustomLevel = null) -> Dictionary:
+	sub_level_file = {"Layers": [{}, {}, {}, {}, {}], "Data": "", "BG": ""}
+	get_tiles(level)
+	get_entities(level)
+	
+	save_bg_data(level)
+	save_level_data(level)
+	return sub_level_file
+
 func write_file(json := {}, lvl_file_name := "") -> void:
 	for i in "<>:?!/":
 		lvl_file_name = lvl_file_name.replace(i, "")
-	var file = FileAccess.open(Global.config_path.path_join("custom_levels/" + lvl_file_name), FileAccess.WRITE)
-	file.store_string(JSON.stringify(json, "", false))
-	file.close()
-	print("saved")
+	
+	var path = Global.config_path.path_join("custom_levels/" + lvl_file_name)
+	
+	JSONParser.save_to_file(json, path)
+	print("Saved Level: " + path)
 
-func load_entity_map() -> void:
-	entity_map = JSON.parse_string(FileAccess.open(EntityIDMapper.MAP_PATH, FileAccess.READ).get_as_text())
+func write_temp_file(level_name := "", json := {}, lvl_file_name := "", save_time := "") -> void:
+	var path = Global.config_path.path_join("custom_levels/autosaves/" + level_name)
+	for i in "<>:?!/":
+		lvl_file_name = lvl_file_name.replace(i, "")
+	
+	json["Info"]["SaveTime"] = save_time
+	
+	if !DirAccess.dir_exists_absolute(path):
+		DirAccess.make_dir_absolute(path)
+	JSONParser.save_to_file(json, path + "/" + lvl_file_name)
+	print("Saved Level: " + path + "/" + lvl_file_name)
 
-func get_tiles() -> void:
+func get_tiles(level: CustomLevel = null) -> void:
 	for layer in 5:
-		for tile in editor.tile_layer_nodes[layer].get_used_cells():
-			if tile_blacklist.has(editor.tile_layer_nodes[layer].get_cell_atlas_coords(tile)) or editor.tile_layer_nodes[layer].get_cell_source_id(tile) == 6:
+		var layer_node = level.get_node("TileLayer" + str(layer + 1))
+		for tile in layer_node.get_used_cells():
+			if tile_blacklist.has(layer_node.get_cell_atlas_coords(tile)) or layer_node.get_cell_source_id(tile) == 6:
 				continue
 			var tile_string := ""
 			var chunk_tile = Vector2i(wrap(tile.x, 0, 32), wrap(tile.y + 30, -1, 32))
 			tile_string += base64_charset[chunk_tile.x]
 			tile_string += base64_charset[chunk_tile.y]
 			tile_string += ""
-			tile_string += base64_charset[editor.tile_layer_nodes[layer].get_cell_atlas_coords(tile).x]
-			tile_string += base64_charset[editor.tile_layer_nodes[layer].get_cell_atlas_coords(tile).y]
-			tile_string += base64_charset[editor.tile_layer_nodes[layer].get_cell_source_id(tile)]
+			tile_string += base64_charset[layer_node.get_cell_atlas_coords(tile).x]
+			tile_string += base64_charset[layer_node.get_cell_atlas_coords(tile).y]
+			tile_string += base64_charset[layer_node.get_cell_source_id(tile)]
 			var tile_chunk_idx = tile_to_chunk_idx(tile)
 			var tile_chunk := {}
 			if sub_level_file["Layers"][layer].has(tile_chunk_idx):
@@ -86,9 +100,10 @@ static func decompress_string(buffer := "") -> String:
 	var ret = decompressed.get_string_from_ascii()
 	return ret
 
-func get_entities() -> void:
+func get_entities(level: CustomLevel) -> void:
 	for layer in 5:
-		for entity in editor.entity_layer_nodes[layer].get_children():
+		var layer_node = level.get_node("EntityLayer" + str(layer + 1))
+		for entity in layer_node.get_children():
 			if entity.has_meta("tile_position") == false:
 				continue
 			var entity_string := ""
@@ -100,6 +115,8 @@ func get_entities() -> void:
 			entity_string += EntityIDMapper.get_map_id(entity.scene_file_path)
 			if entity.has_node("EditorPropertyExposer"):
 				entity_string += entity.get_node("EditorPropertyExposer").get_string()
+			if entity.has_node("SignalExposer"):
+				entity_string += entity.get_node("SignalExposer").get_string()
 			var entity_chunk_idx = tile_to_chunk_idx(entity.get_meta("tile_position"))
 			var tile_chunk := {}
 			if sub_level_file["Layers"][layer].has(entity_chunk_idx):
@@ -111,6 +128,9 @@ func get_entities() -> void:
 		for i in sub_level_file["Layers"][layer]:
 			sub_level_file["Layers"][layer][i]["Entities"] = compress_string(sub_level_file["Layers"][layer][i]["Entities"])
 
+func get_signals() -> void:
+	pass
+
 func encode_to_base64_2char(value: int) -> String:
 	if value < 0 or value >= 4096:
 		push_error("Value out of range for 2-char base64 encoding.")
@@ -121,20 +141,26 @@ func encode_to_base64_2char(value: int) -> String:
 
 	return char1 + char2
 
-func save_level_data() -> void:
+func save_level_data(level: CustomLevel) -> void:
 	var string := ""
-	for i in [Level.THEME_IDXS.find(level.theme), ["Day", "Night"].find(level.theme_time), editor.bgm_id, ["SMB1", "SMBLL", "SMBS", "SMBANN"].find(level.campaign), level.can_backscroll, abs(level.vertical_height), level.time_limit]:
+	for i in [Level.THEME_IDXS.find(level.theme), ["Day", "Night"].find(level.theme_time), level.music, ["SMB1", "SMBLL", "SMBS", "SMBANN"].find(level.campaign), level.can_backscroll, abs(level.vertical_height), level.time_limit, level.enforce_resolution]:
 		var key := ""
-		if int(i) >= 64:
+		if i is JSON:
+			var id = editor.music_track_list.find(level.music.resource_path)
+			key = base64_charset[id]
+		elif i is Vector2:
+			key = encode_to_base64_2char(i.x) + "=" + encode_to_base64_2char(i.y)
+		elif int(i) >= 64:
 			key = encode_to_base64_2char(int(i))
 		else:
 			key = base64_charset[int(i)]
 		string += key + "="
 	sub_level_file["Data"] = string
 
-func save_bg_data() -> void:
+func save_bg_data(level: Level) -> void:
 	var string := ""
-	for i in [level_bg.primary_layer, level_bg.second_layer, level_bg.second_layer_offset.y, level_bg.time_of_day, level_bg.particles, level_bg.liquid_layer, level_bg.overlay_clouds]:
+	var level_bg: LevelBG = level.get_node("LevelBG")
+	for i in [level_bg.primary_layer, level_bg.second_layer, level_bg.second_layer_offset.y, level_bg.time_of_day, level_bg.particles, level_bg.liquid_layer, level_bg.overlay_clouds, level_bg.second_layer_order]:
 		var key := ""
 		i = int(i)
 		if abs(i) >= 64:

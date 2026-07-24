@@ -1,178 +1,21 @@
-[gd_scene load_steps=22 format=3 uid="uid://doo8617qiyp77"]
+[gd_scene format=3 uid="uid://doo8617qiyp77"]
 
-[ext_resource type="Script" uid="uid://q8gx0l64pcjh" path="res://Scripts/Classes/Entities/Enemies/KoopaTroopa.gd" id="1_ua110"]
-[ext_resource type="Texture2D" uid="uid://bs5aslhhgk8bv" path="res://Assets/Sprites/Enemies/BuzzyBeetle.png" id="2_5xvna"]
-[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_obcjq"]
-[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_eu017"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/BuzzyBeetle.json" id="4_316n2"]
-[ext_resource type="PackedScene" uid="uid://bupy7th8ln45c" path="res://Scenes/Parts/Wing.tscn" id="5_0ayui"]
-[ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="5_eu017"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/BuzzyBeetleShell.json" id="5_obcjq"]
-[ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="6_316n2"]
-[ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="7_5xvna"]
-[ext_resource type="Script" uid="uid://cmg61722ktg2m" path="res://Scripts/Classes/Components/BlockBouncingDetection.gd" id="8_n5sq7"]
-[ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="9_2w4oo"]
-[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="10_8v4fy"]
-[ext_resource type="Script" uid="uid://dq860i312isk" path="res://Scripts/Classes/Components/IcicleDetection.gd" id="11_bxryo"]
-[ext_resource type="Script" uid="uid://dlq6o2rg1x7in" path="res://Scripts/Classes/Components/BasicEnemyMovement.gd" id="14_eu017"]
-[ext_resource type="Script" uid="uid://ba18grqjixded" path="res://Scripts/Classes/Components/ExplosionDetection.gd" id="15_316n2"]
-[ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="17_n5sq7"]
+[ext_resource type="PackedScene" uid="uid://r6dlmokkdyar" path="res://Scenes/Prefabs/Entities/Enemies/GreenKoopaTroopa.tscn" id="1_rps11"]
+[ext_resource type="Script" uid="uid://by2qbddawq4yv" path="res://Scripts/Classes/Components/SignalDisconnector.gd" id="2_lavm2"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n5sq7"]
-atlas = ExtResource("2_5xvna")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2w4oo"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n5sq7")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fop3r"]
-size = Vector2(12, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8bq4"]
-size = Vector2(12, 12)
-
-[node name="BuzzyBeetle" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
-disable_mode = 1
-collision_layer = 16
-collision_mask = 50
-script = ExtResource("1_ua110")
+[node name="BuzzyBeetle" unique_id=1280362122 instance=ExtResource("1_rps11")]
 shell_scene = "uid://csdbt4vd14fsg"
-on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
-score_note_adder = NodePath("ScoreNoteSpawner")
-metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
-scale = Vector2(-1, 1)
-sprite_frames = SubResource("SpriteFrames_2w4oo")
-offset = Vector2(0, 1)
-flip_h = true
-script = ExtResource("2_obcjq")
-metadata/_custom_type_script = "uid://caq1qiwmy0mox"
+[node name="SpriteSetter" parent="Sprite" parent_id_path=PackedInt32Array(1845041467) index="0" unique_id=1746108447]
+json_path = "res://Assets/Sprites/Enemies/BuzzyBeetle.json"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
-script = ExtResource("3_eu017")
-node_to_affect = NodePath("..")
-property_name = "sprite_frames"
-resource_json = ExtResource("4_316n2")
-metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+[node name="ShellSetter" parent="DeathSprite" parent_id_path=PackedInt32Array(81522450) index="0" unique_id=393858697]
+json_path = "res://Assets/Sprites/Enemies/BuzzyBeetleShell.json"
 
-[node name="Wing" parent="Sprite" instance=ExtResource("5_0ayui")]
-unique_name_in_owner = true
-visible = false
-position = Vector2(-9, 1)
-frame_progress = 0.539258
-flip_h = true
-
-[node name="DeathSprite" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(0, -7)
-script = ExtResource("2_obcjq")
-metadata/_custom_type_script = "uid://caq1qiwmy0mox"
-
-[node name="ResourceSetterNew" type="Node" parent="DeathSprite" node_paths=PackedStringArray("node_to_affect")]
-script = ExtResource("3_eu017")
-node_to_affect = NodePath("..")
-property_name = "sprite_frames"
-resource_json = ExtResource("5_obcjq")
-metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
-
-[node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -6)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_fop3r")
-one_way_collision = true
-
-[node name="Collision2" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -6)
-rotation = -1.5708
-shape = SubResource("RectangleShape2D_fop3r")
-one_way_collision = true
-
-[node name="Hitbox" type="Area2D" parent="."]
-visible = false
-
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_y8bq4")
-
-[node name="LedgeDetectionCast" type="RayCast2D" parent="."]
-position = Vector2(-8, -2)
-target_position = Vector2(0, 3)
-collision_mask = 2
-
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -11)
-scale = Vector2(1, 1.3)
-
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
-script = ExtResource("5_eu017")
-hitbox = NodePath("../Hitbox")
-metadata/_custom_type_script = "uid://chj8hu207lrh"
-
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
-script = ExtResource("6_316n2")
-hitbox = NodePath("../Hitbox")
+[node name="FireballDetection" parent="." index="8" unique_id=1490339431]
 play_sfx_on_hit = true
-metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
-script = ExtResource("7_5xvna")
-visuals = NodePath("../DeathSprite")
-metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
-
-[node name="BlockBouncingDetection" type="Node" parent="."]
-script = ExtResource("8_n5sq7")
-metadata/_custom_type_script = "uid://cmg61722ktg2m"
-
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
-script = ExtResource("9_2w4oo")
-hitbox = NodePath("../Hitbox")
-
-[node name="ScoreNoteSpawner" type="Node" parent="."]
-script = ExtResource("10_8v4fy")
-add_score = true
-metadata/_custom_type_script = "uid://5octqlf4ohel"
-
-[node name="IcicleDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
-script = ExtResource("11_bxryo")
-hitbox = NodePath("../Hitbox")
-metadata/_custom_type_script = "uid://dq860i312isk"
-
-[node name="BasicEnemyMovement" type="Node" parent="."]
-script = ExtResource("14_eu017")
-auto_call = false
-
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
-script = ExtResource("15_316n2")
-hitbox = NodePath("../Hitbox")
-
-[node name="TrackJoint" type="Node" parent="." node_paths=PackedStringArray("movement_node")]
-script = ExtResource("17_n5sq7")
-movement_node = NodePath("../BasicEnemyMovement")
-metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
-
-[connection signal="killed" from="." to="GibSpawner" method="summon_gib"]
-[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
-[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
-[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
-[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
-[connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
-[connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="stomped_on"]
-[connection signal="block_bounced" from="BlockBouncingDetection" to="." method="block_bounced" unbinds=1]
-[connection signal="block_bounced" from="BlockBouncingDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
-[connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
-[connection signal="icicle_detected" from="IcicleDetection" to="." method="die_from_object"]
-[connection signal="explosion_entered" from="ExplosionDetection" to="." method="die_from_object"]
-[connection signal="explosion_entered" from="ExplosionDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
+[node name="SignalDisconnector" type="Node" parent="FireballDetection" index="0" unique_id=2042940744 node_paths=PackedStringArray("node")]
+script = ExtResource("2_lavm2")
+node = NodePath("..")
+signal_name = "fireball_hit"

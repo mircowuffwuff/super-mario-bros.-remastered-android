@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dw4til11bai1h"]
+
+[ext_resource type="PackedScene" uid="uid://cllscucqyd033" path="res://Scenes/Prefabs/Gizmos/Outputs/BaseOutput.tscn" id="1_v3orh"]
+[ext_resource type="Script" uid="uid://d31os0pwf8c2e" path="res://Scripts/Classes/Gizmos/MusicPlayer.gd" id="2_lh1kc"]
+[ext_resource type="Texture2D" uid="uid://ubdnbge6xo3s" path="res://Assets/Sprites/Editor/Gizmos/MusicSetter.png" id="2_u63ov"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_lh1kc"]
+[ext_resource type="PackedScene" uid="uid://h2xlvyfa0ri2" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertySong.tscn" id="5_hcygs"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="6_ieuo4"]
+
+[sub_resource type="Animation" id="Animation_hcygs"]
+resource_name = "Playing"
+length = 0.4615
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4615),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1.25, 1.25)]
+}
+
+[sub_resource type="Animation" id="Animation_ieuo4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6c3q"]
+_data = {
+&"Playing": SubResource("Animation_hcygs"),
+&"RESET": SubResource("Animation_ieuo4")
+}
+
+[node name="MusicPlayer" unique_id=515746201 instance=ExtResource("1_v3orh")]
+script = ExtResource("2_lh1kc")
+song_to_play = 0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("2_u63ov")
+hframes = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" index="0" unique_id=65671592]
+libraries/ = SubResource("AnimationLibrary_w6c3q")
+
+[node name="EditorPropertyExposer" type="Node" parent="." index="2" unique_id=1130002375]
+script = ExtResource("4_lh1kc")
+properties = Array[String](["song_to_play"])
+properties_force_selector = Dictionary[String, PackedScene]({
+"song_to_play": ExtResource("5_hcygs")
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." index="3" unique_id=1207293776]
+script = ExtResource("6_ieuo4")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="lost_power" from="SignalExposer" to="." method="stop_song"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="play_song"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="toggle"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="on_level_start"]

@@ -1,20 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccwil8rmgvund"]
+[gd_scene format=3 uid="uid://ccwil8rmgvund"]
 
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="1_jxnhn"]
 [ext_resource type="Script" uid="uid://dt2p68xl462v2" path="res://Scripts/Parts/TextShadowColourChanger.gd" id="3_8hggr"]
 
-[node name="TextLabel" type="Label"]
+[node name="TextLabel" type="Label" unique_id=1335154393]
 visibility_layer = 2
 offset_right = 40.0
 offset_bottom = 16.0
 uppercase = true
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1461731013 node_paths=PackedStringArray("labels")]
 script = ExtResource("1_jxnhn")
 labels = [NodePath("..")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="TextShadowColourChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="TextShadowColourChanger" type="Node" parent="." unique_id=1867854306 node_paths=PackedStringArray("labels")]
 script = ExtResource("3_8hggr")
 labels = [NodePath("..")]
 metadata/_custom_type_script = "uid://dt2p68xl462v2"

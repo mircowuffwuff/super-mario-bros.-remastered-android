@@ -1,0 +1,282 @@
+[gd_scene format=3 uid="uid://c6tkq2iq7h0fp"]
+
+[ext_resource type="Script" uid="uid://bevv8nl7j1g12" path="res://Scripts/Classes/Entities/Enemies/BowserJr.gd" id="1_1afx3"]
+[ext_resource type="Texture2D" uid="uid://ut3rh6i17fwg" path="res://Assets/Sprites/Enemies/BowserJr.png" id="2_1afx3"]
+[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_6tdax"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_1afx3"]
+[ext_resource type="Script" uid="uid://uribh0f1jttq" path="res://Scripts/Classes/States/StateMachine.gd" id="6_2tcuk"]
+[ext_resource type="Script" uid="uid://dn07g2yvk1unf" path="res://Scripts/Classes/States/State.gd" id="7_i31gk"]
+[ext_resource type="Script" uid="uid://c8q1hojob800c" path="res://Scripts/Classes/States/BowserJr/Idle.gd" id="7_ydwtc"]
+[ext_resource type="Script" uid="uid://dy82kbxn523w3" path="res://Scripts/Classes/States/BowserJr/Fire.gd" id="8_27q2o"]
+[ext_resource type="Script" uid="uid://bx6r8sjar6cwr" path="res://Scripts/Classes/Components/BasicStaticMovement.gd" id="8_ydwtc"]
+[ext_resource type="Script" uid="uid://bogdees66i75k" path="res://Scripts/Classes/States/BowserJr/Hop.gd" id="9_x0mw1"]
+[ext_resource type="Script" uid="uid://ble7fw6hbyshv" path="res://Scripts/Classes/States/BowserJr/GroundPound.gd" id="10_2ye24"]
+[ext_resource type="Script" uid="uid://bhihkla3qx6bt" path="res://Scripts/Classes/States/BowserJr/Damage.gd" id="10_lfy2w"]
+[ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="11_t6f3r"]
+[ext_resource type="Script" uid="uid://cu2b132ltfspm" path="res://Scripts/Classes/States/BowserJr/Shell.gd" id="11_u4ob4"]
+[ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="14_lxgr8"]
+[ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="16_lti7v"]
+[ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="17_pb3hb"]
+[ext_resource type="Script" uid="uid://ba18grqjixded" path="res://Scripts/Classes/Components/ExplosionDetection.gd" id="18_skp4o"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="19_5tta2"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="21_6vsdc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hxd7"]
+atlas = ExtResource("2_1afx3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6tdax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hxd7")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_t6f3r"]
+resource_name = "DamageFlash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite/..:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.75000006), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lfy2w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite/..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4ob4"]
+_data = {
+&"DamageFlash": SubResource("Animation_t6f3r"),
+&"RESET": SubResource("Animation_lfy2w")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ye24"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tdax"]
+size = Vector2(16, 17)
+
+[node name="BowserJr" type="CharacterBody2D" unique_id=632148227 groups=["Enemies"]]
+collision_layer = 16
+collision_mask = 22
+script = ExtResource("1_1afx3")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="ScaleJoint" type="Node2D" parent="." unique_id=2000909962]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="ScaleJoint" unique_id=493695674]
+unique_name_in_owner = true
+clip_children = 2
+position = Vector2(0, -16)
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_6tdax")
+animation = &"Idle"
+autoplay = "Idle"
+offset = Vector2(0, 1)
+flip_h = true
+script = ExtResource("2_6tdax")
+metadata/_custom_type_script = "uid://caq1qiwmy0mox"
+
+[node name="ResourceSetterNew" type="Node" parent="ScaleJoint/Sprite" unique_id=341400098 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_1afx3")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Enemies/BowserJr.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="ColorRect" type="ColorRect" parent="ScaleJoint/Sprite" unique_id=945516851]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -16.0
+offset_right = -18.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="ScaleJoint" unique_id=1652153026]
+unique_name_in_owner = true
+root_node = NodePath("../Sprite")
+libraries/ = SubResource("AnimationLibrary_u4ob4")
+
+[node name="CollisionL" type="CollisionShape2D" parent="." unique_id=585397973]
+position = Vector2(0, -6)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_2ye24")
+one_way_collision = true
+
+[node name="CollisionR" type="CollisionShape2D" parent="." unique_id=1463773233]
+position = Vector2(0, -6)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_2ye24")
+one_way_collision = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=642840846]
+unique_name_in_owner = true
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=167914820]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_6tdax")
+
+[node name="States" type="Node" parent="." unique_id=2100203079 node_paths=PackedStringArray("state")]
+script = ExtResource("6_2tcuk")
+state = NodePath("Spawn")
+metadata/_custom_type_script = "uid://uribh0f1jttq"
+
+[node name="Spawn" type="Node" parent="States" unique_id=990344137]
+script = ExtResource("7_i31gk")
+metadata/_custom_type_script = "uid://dn07g2yvk1unf"
+
+[node name="Idle" type="Node" parent="States" unique_id=1556314933]
+script = ExtResource("7_ydwtc")
+metadata/_custom_type_script = "uid://dn07g2yvk1unf"
+
+[node name="Fire" type="Node" parent="States" unique_id=1899427754]
+script = ExtResource("8_27q2o")
+metadata/_custom_type_script = "uid://dn07g2yvk1unf"
+
+[node name="Hop" type="Node" parent="States" unique_id=1064651228]
+script = ExtResource("9_x0mw1")
+metadata/_custom_type_script = "uid://dn07g2yvk1unf"
+
+[node name="GroundPound" type="Node" parent="States" unique_id=1359085237]
+script = ExtResource("10_2ye24")
+metadata/_custom_type_script = "uid://dn07g2yvk1unf"
+
+[node name="Damage" type="Node" parent="States" unique_id=1321334314]
+script = ExtResource("10_lfy2w")
+metadata/_custom_type_script = "uid://dn07g2yvk1unf"
+
+[node name="Shell" type="Node" parent="States" unique_id=753895446]
+script = ExtResource("11_u4ob4")
+metadata/_custom_type_script = "uid://dn07g2yvk1unf"
+
+[node name="Movement" type="Node" parent="." unique_id=1059038765]
+unique_name_in_owner = true
+script = ExtResource("8_ydwtc")
+auto_call = false
+metadata/_custom_type_script = "uid://bx6r8sjar6cwr"
+
+[node name="LeftCheck" type="RayCast2D" parent="." unique_id=717958056]
+unique_name_in_owner = true
+position = Vector2(-32, -8)
+target_position = Vector2(0, 16)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="FloorCheck" type="RayCast2D" parent="." unique_id=1816603363]
+unique_name_in_owner = true
+position = Vector2(-4, -8)
+target_position = Vector2(0, 16)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="RightCheck" type="RayCast2D" parent="." unique_id=415799518]
+unique_name_in_owner = true
+position = Vector2(32, -8)
+target_position = Vector2(0, 16)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=1477446694 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("11_t6f3r")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://chj8hu207lrh"
+
+[node name="GibSpawner" type="Node" parent="." unique_id=2116167538 node_paths=PackedStringArray("visuals")]
+script = ExtResource("14_lxgr8")
+visuals = NodePath("../ScaleJoint/Sprite")
+metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=48545517]
+unique_name_in_owner = true
+position = Vector2(0, -10)
+rect = Rect2(-16, -16, 32, 32)
+
+[node name="ShellDetection" type="Node" parent="." unique_id=1611452021 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("16_lti7v")
+hitbox = NodePath("../Hitbox")
+add_combo = false
+metadata/_custom_type_script = "uid://bbww34oiexbx2"
+
+[node name="FireballDetection" type="Node" parent="." unique_id=1356549921 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("17_pb3hb")
+hitbox = NodePath("../Hitbox")
+play_sfx_on_hit = true
+metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
+
+[node name="ExplosionDetection" type="Node" parent="." unique_id=58420440]
+script = ExtResource("18_skp4o")
+metadata/_custom_type_script = "uid://ba18grqjixded"
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=2029397389]
+script = ExtResource("19_5tta2")
+add_score = true
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=704295158]
+script = ExtResource("21_6vsdc")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="killed" from="." to="GibSpawner" method="summon_gib"]
+[connection signal="killed" from="." to="ScoreNoteSpawner" method="spawn_note" binds= [4000]]
+[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="player_stomped_on"]
+[connection signal="moving_shell_entered" from="ShellDetection" to="ShellDetection" method="destroy_shell"]
+[connection signal="moving_shell_entered" from="ShellDetection" to="." method="damage" unbinds=1]
+[connection signal="fireball_hit" from="FireballDetection" to="." method="fireball_hit" unbinds=1]
+[connection signal="explosion_entered" from="ExplosionDetection" to="." method="damage" unbinds=1]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="start"]

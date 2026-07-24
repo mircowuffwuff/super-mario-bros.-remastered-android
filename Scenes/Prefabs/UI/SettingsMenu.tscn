@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dnksdgorle8su"]
+[gd_scene format=3 uid="uid://dnksdgorle8su"]
 
 [ext_resource type="Script" uid="uid://cj6858gmexp11" path="res://Scripts/UI/SettingsMenu.gd" id="1_hnwhb"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_t6b48"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dcmjifllvi3qd" path="res://Scripts/UI/SettingsCategory.gd" id="4_avtty"]
 [ext_resource type="Script" uid="uid://dogw674i1q4yq" path="res://Scripts/UI/WindowChanger.gd" id="5_hnwhb"]
 [ext_resource type="Texture2D" uid="uid://deooy8040yx2u" path="res://Assets/Sprites/UI/LocaleFlags.png" id="5_q6iis"]
+[ext_resource type="Script" uid="uid://xem6lai3ufyj" path="res://Scripts/Classes/UI/PackNinePatch.gd" id="6_yvj4y"]
 [ext_resource type="PackedScene" uid="uid://dtiqcfrw110kd" path="res://Scenes/Parts/SelectableSliderNode.tscn" id="7_om3lc"]
 [ext_resource type="Script" uid="uid://bdgvsycico544" path="res://Scripts/UI/AudioAdjuster.gd" id="8_yclde"]
 [ext_resource type="Script" uid="uid://idiqu54si1n4" path="res://Scripts/Parts/ResourcePackLoader.gd" id="9_2qqpf"]
@@ -27,6 +28,9 @@ color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_oh4w7"]
 color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yjhhu"]
+color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_2qqpf"]
 content_margin_top = 0.0
 color = Color(1, 1, 1, 1)
@@ -45,6 +49,8 @@ var input_nodes := []
 
 var actions := [\"jump\", \"run\", \"action\", \"move_left\", \"move_right\", \"move_up\", \"move_down\", \"ui_accept\", \"ui_back\", \"pause\"]
 
+static var deadzone := 0.5
+
 @export_enum(\"Keyboard\", \"Controller\") var type := 0
 
 func _ready() -> void:
@@ -58,7 +64,7 @@ func get_input_nodes() -> void:
 			input_nodes.append(i)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed(\"ui_reset_keybindings\"):
+	if Global.multibind_action_just_pressed(\"ui_reset_keybindings\"):
 		InputMap.load_from_project_settings()
 		save_inputs()
 		Settings.save_settings()
@@ -131,6 +137,13 @@ func get_str_for_event(event: InputEvent):
 	elif event is InputEventJoypadMotion:
 		rep = str(event.axis) + \",\" + str(event.axis_value)
 	return rep
+
+func set_deadzone(new_idx := 0) -> void:
+	deadzone = new_idx / 10.0
+	deadzone = min(deadzone, 0.95)
+	for action in InputMap.get_actions():
+		InputMap.action_set_deadzone(action, deadzone)
+	Settings.file.controller.deadzone = int(new_idx)
 "
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_k6yev"]
@@ -199,7 +212,10 @@ func regen_rom() -> void:
 	Global.transition_to_scene(\"res://Scenes/Levels/RomVerifier.tscn\")
 "
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("containers")]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yvj4y"]
+color = Color(1, 1, 1, 1)
+
+[node name="SettingsMenu" type="Control" unique_id=540914940 node_paths=PackedStringArray("containers")]
 process_mode = 4
 visible = false
 custom_minimum_size = Vector2(250, 0)
@@ -213,9 +229,9 @@ offset_right = 22.600006
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hnwhb")
-containers = [NodePath("PanelContainer/MarginContainer/VBoxContainer/Video"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Audio"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Visuals"), NodePath("PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Difficulty"), NodePath("PanelContainer/MarginContainer/VBoxContainer/OnScreenControls"), NodePath("PanelContainer/MarginContainer/VBoxContainer/KeyboardControls"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Controller"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Data")]
+containers = [NodePath("PanelContainer/MarginContainer/VBoxContainer/Video"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Audio"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Visuals"), NodePath("PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Gameplay"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Difficulty"), NodePath("PanelContainer/MarginContainer/VBoxContainer/OnScreenControls"), NodePath("PanelContainer/MarginContainer/VBoxContainer/KeyboardControls"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Controller"), NodePath("PanelContainer/MarginContainer/VBoxContainer/Data")]
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=589057530]
 custom_minimum_size = Vector2(222, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -225,14 +241,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_t6b48")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=810954177]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1014393390]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1702817466]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -240,7 +256,7 @@ text = "MENU_SETTINGS"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Title"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Title" unique_id=1163795185]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -251,25 +267,25 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_ksnto")
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=643748915]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="CategorySelect" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="CategorySelect" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2112850684]
 layout_mode = 2
 theme_override_constants/separation = -4
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect" unique_id=2068122351]
 layout_mode = 2
 theme_override_constants/separation = -8
 
-[node name="LeftArrow" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer"]
+[node name="LeftArrow" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer" unique_id=1010547990]
 unique_name_in_owner = true
 layout_mode = 2
 text = "◄"
 
-[node name="Category" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer"]
+[node name="Category" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer" unique_id=1885102238]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -277,7 +293,7 @@ text = "video"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer/Category"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer/Category" unique_id=1241338341]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -288,12 +304,12 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_oh4w7")
 
-[node name="RightArrow" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer"]
+[node name="RightArrow" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer" unique_id=321476992]
 unique_name_in_owner = true
 layout_mode = 2
 text = "►"
 
-[node name="Video" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="Video" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=612198584 node_paths=PackedStringArray("options")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -302,78 +318,80 @@ script = ExtResource("4_avtty")
 category_name = "SETTINGS_VIDEO"
 options = [NodePath("Language"), NodePath("WindowMode"), NodePath("Size"), NodePath("Visuals"), NodePath("Scaling"), NodePath("VSync"), NodePath("DropShadows"), NodePath("HudStyle"), NodePath("FrameLimit")]
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Video"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=777382522]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Language" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="Language" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=1089169309 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "lang"
 title = "SETTINGS_LANGUAGE"
 values = ["LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME", "LANGUAGE_NAME"]
 settings_category = "game"
 
-[node name="Flag" type="NinePatchRect" parent="PanelContainer/MarginContainer/VBoxContainer/Video/Language/HBoxContainer" index="0"]
+[node name="Flag" type="NinePatchRect" parent="PanelContainer/MarginContainer/VBoxContainer/Video/Language/HBoxContainer" parent_id_path=PackedInt32Array(1089169309, 1680938547) index="0" unique_id=2139547146]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("5_q6iis")
 region_rect = Rect2(0, 0, 16, 16)
+script = ExtResource("6_yvj4y")
+metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="WindowMode" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="WindowMode" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=1187590105 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "mode"
 title = "VIDEO_MODE"
 values = ["VIDEO_MODE_WINDOWED", "VIDEO_MODE_FULLSCREEN"]
 
-[node name="Size" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="Size" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=432969620 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "size"
 title = "VIDEO_SIZE"
-values = ["VIDEO_ASPECT_OG", "VIDEO_ASPECT_16_10", "VIDEO_ASPECT_FILL"]
+values = ["VIDEO_ASPECT_NES", "VIDEO_ASPECT_SP", "VIDEO_ASPECT_16_10", "VIDEO_ASPECT_WIDESCREEN", "VIDEO_ASPECT_UNLOCKED"]
 selected = true
 
-[node name="Visuals" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="Visuals" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=295796466 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "visuals"
 title = "VIDEO_RENDER"
 values = ["VIDEO_VISUALS_PIXEL", "VIDEO_VISUALS_SMOOTH"]
 
-[node name="Scaling" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="Scaling" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=1139460193 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "scaling"
 title = "VIDEO_SCALING"
 values = ["VIDEO_SCALING_INT", "VIDEO_SCALING_FRACT"]
 
-[node name="VSync" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="VSync" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=1885594450 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "vsync"
 title = "VIDEO_VSYNC"
 values = ["SETTING_OFF", "SETTING_ON"]
 
-[node name="DropShadows" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="DropShadows" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=1981740174 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "drop_shadows"
 title = "VIDEO_SHADOWS"
 values = ["SETTING_OFF", "SETTING_ON"]
 
-[node name="HudStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Video" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="HudStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=1739789635 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "hud_scaling"
 title = "VIDEO_HUD_SCALING"
 values = ["VIDEO_HUD_STRETCHED", "VIDEO_HUD_CENTER"]
 
-[node name="FrameLimit" parent="PanelContainer/MarginContainer/VBoxContainer/Video" instance=ExtResource("3_dl6kk")]
+[node name="FrameLimit" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=2105009171 instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "frame_limit"
-title = "FRAME LIMIT"
-values = ["Unlimited", "60fps", "120fps", "144fps", "240fps"]
+title = "VIDEO_FRAMELIMIT"
+values = ["VIDEO_FPS_UNLIMITED", "60fps", "120fps", "144fps", "240fps"]
 
-[node name="WindowChanger" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Video"]
+[node name="WindowChanger" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Video" unique_id=332900191]
 script = ExtResource("5_hnwhb")
 
-[node name="Audio" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="Audio" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1369733439 node_paths=PackedStringArray("options")]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = -4
@@ -381,185 +399,191 @@ script = ExtResource("4_avtty")
 category_name = "SETTINGS_AUDIO"
 options = [NodePath("SelectableOptionNode"), NodePath("SelectableOptionNode2"), NodePath("SelectableOptionNode3"), NodePath("AthleticMusic"), NodePath("SkidSFX"), NodePath("ExtraSFX"), NodePath("PauseBGM"), NodePath("MenuBGM")]
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Audio"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=968502541]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="SelectableOptionNode" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("7_om3lc")]
+[node name="SelectableOptionNode" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=1391735750 groups=["Options"] instance=ExtResource("7_om3lc")]
 layout_mode = 2
 option_key = "master"
 title = "AUDIO_MASTER"
 
-[node name="SFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode" index="3"]
+[node name="SFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode" index="3" unique_id=1955555485]
 bus = &"Master"
 
-[node name="SelectableOptionNode2" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("7_om3lc")]
+[node name="SelectableOptionNode2" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=2003326082 groups=["Options"] instance=ExtResource("7_om3lc")]
 layout_mode = 2
 option_key = "music"
 title = "AUDIO_MUSIC"
 
-[node name="SFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2" index="3"]
+[node name="SFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2" index="3" unique_id=1955555485]
 bus = &"Music"
 
-[node name="SelectableOptionNode3" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("7_om3lc")]
+[node name="SelectableOptionNode3" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=1425922571 groups=["Options"] instance=ExtResource("7_om3lc")]
 layout_mode = 2
 option_key = "sfx"
 title = "AUDIO_SFX"
 
-[node name="AthleticMusic" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="AthleticMusic" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=212288745 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "extra_bgm"
 title = "AUDIO_EXTRA_BGM"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "audio"
 
-[node name="SkidSFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="SkidSFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=1738387355 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "skid_sfx"
 title = "AUDIO_SKID_SFX"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "audio"
 
-[node name="ExtraSFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="ExtraSFX" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=2099010673 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "extra_sfx"
 title = "AUDIO_EXTRA_SFX"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "audio"
 
-[node name="PauseBGM" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="PauseBGM" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=646872263 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "pause_bgm"
 title = "AUDIO_PAUSE_BGM"
-values = ["SETTING_OFF", "SETTING_MUFFLED", "SETTING_ON"]
+values = ["SETTING_OFF", "AUDIO_PAUSEBGM_MUFFLED", "SETTING_ON"]
 settings_category = "audio"
 
-[node name="MenuBGM" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="MenuBGM" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=2135905088 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "menu_bgm"
 title = "AUDIO_MENU_BGM"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "audio"
 
-[node name="AudioAdjuster" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Audio"]
+[node name="AudioAdjuster" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Audio" unique_id=1580736642]
 script = ExtResource("8_yclde")
 
-[node name="Visuals" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="Visuals" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1711283484 node_paths=PackedStringArray("options", "scroll_container")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = -4
 script = ExtResource("4_avtty")
 category_name = "SETTINGS_VISUALS"
-options = [NodePath("ParallaxStyle"), NodePath("BGParticles"), NodePath("HUDStyle"), NodePath("RainbowEffect"), NodePath("TransformationEffect"), NodePath("TextShadows"), NodePath("BridgeDestructionAnimation"), NodePath("VisibleTimers"), NodePath("TransitionAnimation"), NodePath("ColourfulPipes"), NodePath("FirebarStyle"), NodePath("ExtraParticles")]
+options = [NodePath("ScrollContainer/VBoxContainer/ParallaxStyle"), NodePath("ScrollContainer/VBoxContainer/BGParticles"), NodePath("ScrollContainer/VBoxContainer/HUDStyle"), NodePath("ScrollContainer/VBoxContainer/RainbowEffect"), NodePath("ScrollContainer/VBoxContainer/TransformationEffect"), NodePath("ScrollContainer/VBoxContainer/TextShadows"), NodePath("ScrollContainer/VBoxContainer/BridgeDestructionAnimation"), NodePath("ScrollContainer/VBoxContainer/VisibleTimers"), NodePath("ScrollContainer/VBoxContainer/TransitionAnimation"), NodePath("ScrollContainer/VBoxContainer/ColourfulPipes"), NodePath("ScrollContainer/VBoxContainer/FirebarStyle"), NodePath("ScrollContainer/VBoxContainer/ExtraParticles")]
+scroll_container = NodePath("ScrollContainer")
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" unique_id=935709450]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="ParallaxStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" unique_id=1382682199]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer" unique_id=480911627]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+
+[node name="ParallaxStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1438341136 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "parallax_style"
 title = "VISUALS_PARALLAX"
 values = ["VISUAL_PARALLAX_NONE", "VISUAL_PARALLAX_BASIC", "VISUAL_PARALLAX_DETAIL"]
 settings_category = "visuals"
 
-[node name="BGParticles" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="BGParticles" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1553021834 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "bg_particles"
 title = "VISUAL_PARTICLES"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "visuals"
 
-[node name="HUDStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="HUDStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=534696896 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "modern_hud"
 title = "VISUAL_HUD_STYLE"
 values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
 settings_category = "visuals"
 
-[node name="RainbowEffect" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="RainbowEffect" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1166512935 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "rainbow_style"
 title = "VISUAL_RAINBOW"
 values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
 settings_category = "visuals"
 
-[node name="TransformationEffect" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="TransformationEffect" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=95271833 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "transform_style"
 title = "VISUAL_TRANSFORM"
 values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
 settings_category = "visuals"
 
-[node name="TextShadows" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="TextShadows" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=2025239341 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "text_shadows"
 title = "VISUAL_TEXT_SHADOWS"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "visuals"
 
-[node name="BridgeDestructionAnimation" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="BridgeDestructionAnimation" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1031268764 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "bridge_animation"
 title = "VISUAL_BRIDGE_ANIMATION"
 values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
 settings_category = "visuals"
 
-[node name="VisibleTimers" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="VisibleTimers" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1653709606 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "visible_timers"
 title = "VISUAL_VISIBLE_TIMERS"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "visuals"
 
-[node name="TransitionAnimation" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="TransitionAnimation" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1050307503 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "transition_animation"
 title = "VISUAL_TRANSITION_EFFECT"
 values = ["VISUAL_TRANSITION_CLASSIC", "VISUAL_TRANSITION_SMOOTH"]
 settings_category = "visuals"
 
-[node name="ColourfulPipes" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="ColourfulPipes" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1821028896 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "colour_pipes"
 title = "VISUAL_COLOURFUL_PIPES"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "visuals"
 
-[node name="FirebarStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="FirebarStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=1085803096 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "firebar_style"
-title = "FIREBAR STYLE"
-values = ["Classic", "Modern"]
+title = "VISUAL_FIREBAR_STYLE"
+values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
 settings_category = "visuals"
 
-[node name="ExtraParticles" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="ExtraParticles" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer" unique_id=998350056 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "extra_particles"
-title = "EXTRA EFFECTS"
+title = "VISUAL_EXTRA_EFFECTS"
 values = ["SETTING_OFF", "SETTING_ON"]
 settings_category = "visuals"
 
-[node name="VisualsSetter" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals"]
+[node name="VisualsSetter" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Visuals" unique_id=545409959]
 script = ExtResource("9_kfq5n")
 
-[node name="ResourcePacks" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
-visible = false
-custom_minimum_size = Vector2(0, 171)
+[node name="ResourcePacks" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1947474697 node_paths=PackedStringArray("options")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = -4
 script = ExtResource("4_avtty")
 category_name = "SETTINGS_RESOURCE_PACK"
-options = [NodePath("SelectableOptionNode2")]
+options = [NodePath("VBoxContainer/SelectableOptionNode"), NodePath("VBoxContainer/SelectableOptionNode2"), NodePath("VBoxContainer/SelectableOptionNode3")]
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"]
-visible = false
-modulate = Color(1, 1, 0, 1)
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" unique_id=1232588624]
 layout_mode = 2
-text = "RESOURCE_PACK_WARNING"
-autowrap_mode = 2
+theme_override_constants/separation = -8
 
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"]
 modulate = Color(1, 1, 0, 1)
@@ -567,147 +591,136 @@ layout_mode = 2
 text = "RESOURCE_PACK_WARNING_LOCATION"
 autowrap_mode = 2
 
-[node name="SelectableOptionNode" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" groups=["Options"] instance=ExtResource("9_t6b48")]
-visible = false
+[node name="SelectableOptionNode" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer" unique_id=1129427645 groups=["Options"] instance=ExtResource("9_t6b48")]
 layout_mode = 2
 title = "RESOURCE_OPEN_FOLDER"
 
-[node name="SelectableOptionNode2" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" groups=["Options"] instance=ExtResource("9_t6b48")]
+[node name="SelectableOptionNode2" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer" unique_id=637045987 groups=["Options"] instance=ExtResource("9_t6b48")]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 title = "RESOURCE_REFRESH"
 
-[node name="SelectableOptionNode3" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" instance=ExtResource("9_t6b48")]
-visible = false
+[node name="SelectableOptionNode3" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer" unique_id=729432640 instance=ExtResource("9_t6b48")]
 layout_mode = 2
 title = "RESOURCE_PACK_CREATE"
 press_sfx = ""
 
-[node name="ResourcePackLoader" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"]
+[node name="ResourcePackLoader" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" unique_id=1249240363]
 script = ExtResource("9_2qqpf")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" unique_id=807575092]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_yjhhu")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" unique_id=1054794413]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
-vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/ScrollContainer" unique_id=48098530]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 1
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" unique_id=1960857365]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="Difficulty" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options", "description_node")]
+[node name="Gameplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1489558406 node_paths=PackedStringArray("options", "description_node", "scroll_container")]
 visible = false
 custom_minimum_size = Vector2(0, 134)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = -4
 script = ExtResource("4_avtty")
-category_name = "SETTINGS_DIFFICULTY"
-options = [NodePath("DamageStyle"), NodePath("Checkpoints"), NodePath("ExtraCheckpoints"), NodePath("Lives"), NodePath("FlagpoleLives"), NodePath("GameOverStyle"), NodePath("LevelDesign"), NodePath("BackScroll"), NodePath("TimeLimit"), NodePath("LakituStyle")]
+category_name = "SETTINGS_GAMEPLAY"
+options = [NodePath("ScrollContainer/VBoxContainer/PhysicsStyle"), NodePath("ScrollContainer/VBoxContainer/Checkpoints"), NodePath("ScrollContainer/VBoxContainer/BackScroll"), NodePath("ScrollContainer/VBoxContainer/BowserBehaviour"), NodePath("ScrollContainer/VBoxContainer/HammerBroBehaviour"), NodePath("ScrollContainer/VBoxContainer/LakituBehaviour"), NodePath("ScrollContainer/VBoxContainer/SpinyBehaviour")]
 description_node = NodePath("Description/AutoScrollContainer/MarginContainer/Desc")
+scroll_container = NodePath("ScrollContainer")
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay" unique_id=1706093137]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="DamageStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay" unique_id=909412409]
 layout_mode = 2
-option_key = "damage_style"
-title = "DIFFI_DAMAGE_STYLE"
-value_descs = Array[String](["DESC_DMG_STYLE_0", "DESC_DMG_STYLE_1"])
-values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
-settings_category = "difficulty"
+size_flags_vertical = 3
+follow_focus = true
 
-[node name="Checkpoints" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer" unique_id=554028918]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+
+[node name="PhysicsStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer" unique_id=540048908 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "physics_style"
+title = "DIFFI_PHYSICS_STYLE"
+value_descs = Array[String](["DESC_PHYSICS_0", "DESC_PHYSICS_1"])
+values = ["SETTINGS_CLASSIC", "SETTINGS_REMASTERED"]
+settings_category = "gameplay"
+
+[node name="Checkpoints" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer" unique_id=998939456 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "checkpoint_style"
 title = "DIFFI_CHECKPOINT"
 value_descs = Array[String](["DESC_FLAG_0", "DESC_FLAG_1", "DESC_FLAG_2"])
 values = ["DIFFI_CHECK_NO_FLAG", "DIFFI_CHECK_FLAG", "DIFFI_CHECK_FLAG+"]
-settings_category = "difficulty"
+settings_category = "gameplay"
 
-[node name="ExtraCheckpoints" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
-layout_mode = 2
-option_key = "extra_checkpoints"
-title = "DIFFI_EXTRA_CHECK"
-value_descs = Array[String](["DESC_EXTRA_CHECK_0", "DESC_EXTRA_CHECK_1"])
-values = ["SETTING_OFF", "SETTING_ON"]
-settings_category = "difficulty"
-
-[node name="Lives" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
-layout_mode = 2
-option_key = "inf_lives"
-title = "DIFFI_INF_LIVES"
-value_descs = Array[String](["DESC_INF_LIVES_0", "DESC_INF_LIVES_1"])
-values = ["SETTING_OFF", "SETTING_ON"]
-settings_category = "difficulty"
-
-[node name="FlagpoleLives" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
-layout_mode = 2
-option_key = "flagpole_lives"
-title = "DIFFI_FLAG_LIVES"
-value_descs = Array[String](["DESC_FLAG_LIVES_0", "DESC_FLAG_LIVES_1"])
-values = ["SETTING_OFF", "SETTING_ON"]
-settings_category = "difficulty"
-
-[node name="GameOverStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
-layout_mode = 2
-option_key = "game_over_behaviour"
-title = "DIFFI_GAME_OVER"
-value_descs = Array[String](["DESC_GAME_OVER_0", "DESC_GAME_OVER_1", "DESC_GAME_OVER_2"])
-values = ["DIFFI_GAME_OVER_WLD", "DIFFI_GAME_OVER_LVL", "DIFFI_GAME_OVER_GME"]
-settings_category = "difficulty"
-
-[node name="LevelDesign" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
-layout_mode = 2
-option_key = "level_design"
-title = "DIFFI_LEVEL_DESIGN"
-value_descs = Array[String](["DESC_LEVEL_DESIGN_0", "DESC_LEVEL_DESIGN_1"])
-values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
-settings_category = "difficulty"
-
-[node name="BackScroll" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="BackScroll" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer" unique_id=229262358 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "back_scroll"
 title = "DIFFI_BACKSCROLL"
 value_descs = Array[String](["DESC_BACKSCROLL_0", "DESC_BACKSCROLL_1"])
 values = ["SETTING_OFF", "SETTING_ON"]
-settings_category = "difficulty"
+settings_category = "gameplay"
 
-[node name="TimeLimit" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="BowserBehaviour" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer" unique_id=574282363 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
-option_key = "time_limit"
-title = "DIFFI_TIME"
-value_descs = Array[String](["DESC_TIME_0", "DESC_TIME_1", "DESC_TIME_2"])
-values = ["SETTING_OFF", "SETTINGS_CLASSIC", "SETTINGS_MODERN"]
-settings_category = "difficulty"
+option_key = "bowser_style"
+title = "DIFFI_BOWSER"
+value_descs = Array[String](["DESC_BOWSER_0", "DESC_BOWSER_1"])
+values = ["SETTINGS_CLASSIC", "SETTINGS_REMASTERED"]
+settings_category = "gameplay"
 
-[node name="LakituStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="HammerBroBehaviour" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer" unique_id=785749135 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "hammer_bro_style"
+title = "DIFFI_HAMMER_BRO"
+value_descs = Array[String](["DESC_HAMMER_BRO_0", "DESC_HAMMER_BRO_1"])
+values = ["SETTINGS_CLASSIC", "SETTINGS_REMASTERED"]
+settings_category = "gameplay"
+
+[node name="LakituBehaviour" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer" unique_id=1627108422 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "lakitu_style"
 title = "DIFFI_LAKITU"
 value_descs = Array[String](["DESC_LAKITU_0", "DESC_LAKITU_1"])
 values = ["DIFFI_LAKITU_0", "DIFFI_LAKITU_1"]
-settings_category = "difficulty"
+settings_category = "gameplay"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty"]
+[node name="SpinyBehaviour" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer" unique_id=439411456 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "spiny_style"
+title = "DIFFI_SPINY"
+value_descs = Array[String](["DESC_SPINY_0", "DESC_SPINY_1"])
+values = ["SETTINGS_CLASSIC", "SETTINGS_REMASTERED"]
+settings_category = "gameplay"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay" unique_id=1702276510]
 custom_minimum_size = Vector2(0, 11)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_2qqpf")
 
-[node name="Description" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty"]
+[node name="Description" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay" unique_id=721453470]
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ksnto")
 
-[node name="AutoScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description"]
+[node name="AutoScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/Description" unique_id=340902307]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 horizontal_scroll_mode = 0
@@ -718,19 +731,137 @@ is_active = true
 auto_connect_focus = false
 metadata/_custom_type_script = "uid://d63p6qr5a748"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/Description/AutoScrollContainer" unique_id=420042330]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_bottom = -4
 
-[node name="Desc" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer/MarginContainer"]
+[node name="Desc" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay/Description/AutoScrollContainer/MarginContainer" unique_id=790077771]
 layout_mode = 2
 size_flags_vertical = 0
 autowrap_mode = 2
 uppercase = true
 
-[node name="DifficultySetter" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty"]
+[node name="DifficultySetter" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Gameplay" unique_id=1130465909]
+script = ExtResource("10_2qqpf")
+
+[node name="Difficulty" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=508103354 node_paths=PackedStringArray("options", "description_node", "scroll_container")]
+visible = false
+custom_minimum_size = Vector2(0, 134)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+script = ExtResource("4_avtty")
+category_name = "SETTINGS_DIFFICULTY"
+options = [NodePath("ScrollContainer/VBoxContainer/DamageStyle"), NodePath("ScrollContainer/VBoxContainer/ExtraCheckpoints"), NodePath("ScrollContainer/VBoxContainer/Lives"), NodePath("ScrollContainer/VBoxContainer/FlagpoleLives"), NodePath("ScrollContainer/VBoxContainer/GameOverStyle"), NodePath("ScrollContainer/VBoxContainer/LevelDesign"), NodePath("ScrollContainer/VBoxContainer/TimeLimit")]
+description_node = NodePath("Description/AutoScrollContainer/MarginContainer/Desc")
+scroll_container = NodePath("ScrollContainer")
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" unique_id=1972778838]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" unique_id=266847994]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer" unique_id=1559772825]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+
+[node name="DamageStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer" unique_id=57378041 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "damage_style"
+title = "DIFFI_DAMAGE_STYLE"
+value_descs = Array[String](["DESC_DMG_STYLE_0", "DESC_DMG_STYLE_1"])
+values = ["SETTINGS_CLASSIC", "SETTINGS_MODERN"]
+settings_category = "difficulty"
+
+[node name="ExtraCheckpoints" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer" unique_id=529456615 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "extra_checkpoints"
+title = "DIFFI_EXTRA_CHECK"
+value_descs = Array[String](["DESC_EXTRA_CHECK_0", "DESC_EXTRA_CHECK_1"])
+values = ["SETTING_OFF", "SETTING_ON"]
+settings_category = "difficulty"
+
+[node name="Lives" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer" unique_id=624458010 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "inf_lives"
+title = "DIFFI_INF_LIVES"
+value_descs = Array[String](["DESC_INF_LIVES_0", "DESC_INF_LIVES_1"])
+values = ["SETTING_OFF", "SETTING_ON"]
+settings_category = "difficulty"
+
+[node name="FlagpoleLives" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer" unique_id=78984090 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "flagpole_lives"
+title = "DIFFI_FLAG_LIVES"
+value_descs = Array[String](["DESC_FLAG_LIVES_0", "DESC_FLAG_LIVES_1"])
+values = ["SETTING_OFF", "SETTING_ON"]
+settings_category = "difficulty"
+
+[node name="GameOverStyle" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer" unique_id=913859596 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "game_over_behaviour"
+title = "DIFFI_GAME_OVER"
+value_descs = Array[String](["DESC_GAME_OVER_0", "DESC_GAME_OVER_1", "DESC_GAME_OVER_2"])
+values = ["DIFFI_GAME_OVER_WLD", "DIFFI_GAME_OVER_LVL", "DIFFI_GAME_OVER_GME"]
+settings_category = "difficulty"
+
+[node name="LevelDesign" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer" unique_id=1530759401 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "level_design"
+title = "DIFFI_LEVEL_DESIGN"
+value_descs = Array[String](["DESC_LEVEL_DESIGN_0", "DESC_LEVEL_DESIGN_1"])
+values = ["SETTINGS_CLASSIC", "SETTINGS_TWEAKED"]
+settings_category = "difficulty"
+
+[node name="TimeLimit" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer" unique_id=684614334 groups=["Options"] instance=ExtResource("3_dl6kk")]
+layout_mode = 2
+option_key = "time_limit"
+title = "DIFFI_TIME"
+value_descs = Array[String](["DESC_TIME_0", "DESC_TIME_1", "DESC_TIME_2"])
+values = ["SETTING_OFF", "SETTINGS_CLASSIC", "SETTINGS_MODERN"]
+settings_category = "difficulty"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" unique_id=863097764]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_2qqpf")
+
+[node name="Description" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" unique_id=1562391460]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ksnto")
+
+[node name="AutoScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description" unique_id=680778405]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("12_oh4w7")
+direction = 1
+is_active = true
+auto_connect_focus = false
+metadata/_custom_type_script = "uid://d63p6qr5a748"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer" unique_id=1042439333]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = -4
+
+[node name="Desc" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer/MarginContainer" unique_id=1124336194]
+layout_mode = 2
+size_flags_vertical = 0
+autowrap_mode = 2
+uppercase = true
+
+[node name="DifficultySetter" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" unique_id=1509049297]
 script = ExtResource("10_2qqpf")
 
 [node name="OnScreenControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
@@ -780,7 +911,7 @@ z_index = 4000
 position = Vector2(110, 128)
 shape = SubResource("RectangleShape2D_k6yev")
 
-[node name="KeyboardControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="KeyboardControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=458097214 node_paths=PackedStringArray("options")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -789,158 +920,164 @@ script = ExtResource("4_avtty")
 category_name = "SETTINGS_KEYBOARD"
 options = [NodePath("Jump"), NodePath("Run"), NodePath("Action"), NodePath("Left"), NodePath("Right"), NodePath("Up"), NodePath("Down"), NodePath("Accept"), NodePath("Back"), NodePath("Pause")]
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=415842357]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Jump" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Jump" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1891226481 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["jump"]
 title = "ACTION_JUMP"
 
-[node name="Run" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Run" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=207402182 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["run"]
 title = "ACTION_RUN"
 
-[node name="Action" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Action" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=33460155 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["action"]
 title = "ACTION_ACTION"
 
-[node name="Left" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Left" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=462908559 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["move_left", "ui_left"]
 title = "ACTION_LEFT"
 
-[node name="Right" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Right" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1927828576 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["move_right", "ui_right"]
 title = "ACTION_RIGHT"
 
-[node name="Up" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Up" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1522221587 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["move_up", "ui_up"]
 title = "ACTION_UP"
 
-[node name="Down" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Down" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1135692591 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["move_down", "ui_down"]
 title = "ACTION_DOWN"
 
-[node name="Accept" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Accept" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1468594018 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["ui_accept"]
-title = "ACCEPT"
+title = "ACTION_ACCEPT"
 
-[node name="Back" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Back" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1594400469 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["ui_back"]
-title = "BACK"
+title = "ACTION_BACK"
 
-[node name="Pause" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Pause" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=954449538 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 action_names = ["pause"]
-title = "PAUSE"
+title = "ACTION_PAUSE"
 
-[node name="InputMapSaving" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" groups=["Options"]]
+[node name="InputMapSaving" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1659597281 groups=["Options"]]
 process_mode = 3
 script = SubResource("GDScript_ksnto")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls" unique_id=1334471349]
 layout_mode = 2
 size_flags_vertical = 10
-text = "PRESS F5 TO RESET BINDINGS."
+text = "SETTINGS_INPUT_RESET"
 uppercase = true
 
-[node name="Controller" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="Controller" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1141401155 node_paths=PackedStringArray("options")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = -4
 script = ExtResource("4_avtty")
 category_name = "SETTINGS_CONTROLLER"
-options = [NodePath("Jump"), NodePath("Run"), NodePath("Action"), NodePath("Left"), NodePath("Right"), NodePath("Up"), NodePath("Down"), NodePath("Accept"), NodePath("Back"), NodePath("Pause")]
+options = [NodePath("Deadzone"), NodePath("Jump"), NodePath("Run"), NodePath("Action"), NodePath("Left"), NodePath("Right"), NodePath("Up"), NodePath("Down"), NodePath("Accept"), NodePath("Back"), NodePath("Pause")]
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Controller"]
+[node name="Deadzone" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1191660399 groups=["Options"] instance=ExtResource("7_om3lc")]
+layout_mode = 2
+settings_key = "controller"
+option_key = "deadzone"
+title = "Deadzone"
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1430586928]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Jump" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Jump" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1393611242 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["jump"]
 title = "ACTION_JUMP"
 type = 1
 
-[node name="Run" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Run" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1985367240 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["run"]
 title = "ACTION_RUN"
 type = 1
 
-[node name="Action" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Action" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1028563316 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["action"]
 title = "ACTION_ACTION"
 type = 1
 
-[node name="Left" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Left" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1304857299 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["move_left", "ui_left"]
 title = "ACTION_LEFT"
 type = 1
 
-[node name="Right" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Right" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=835561740 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["move_right", "ui_right"]
 title = "ACTION_RIGHT"
 type = 1
 
-[node name="Up" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Up" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1499533474 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["move_up", "ui_up"]
 title = "ACTION_UP"
 type = 1
 
-[node name="Down" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Down" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=948140637 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["move_down", "ui_down"]
 title = "ACTION_DOWN"
 type = 1
 
-[node name="Accept" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Accept" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=865558204 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["ui_accept"]
-title = "ACCEPT"
+title = "ACTION_ACCEPT"
 type = 1
 
-[node name="Back" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Back" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=511083773 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["ui_back"]
-title = "BACK"
+title = "ACTION_BACK"
 type = 1
 
-[node name="Pause" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"] instance=ExtResource("9_ksnto")]
+[node name="Pause" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=415481594 groups=["Options"] instance=ExtResource("9_ksnto")]
 layout_mode = 2
 settings_category = "controller"
 action_names = ["pause"]
-title = "PAUSE"
+title = "ACTION_PAUSE"
 type = 1
 
-[node name="InputMapSaving" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" groups=["Options"]]
+[node name="InputMapSaving" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1957718330 groups=["Options"]]
 script = SubResource("GDScript_ksnto")
 type = 1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Controller"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=2039855002]
 layout_mode = 2
 size_flags_vertical = 10
 text = "TAP AND HOLD HERE TO RESET."
@@ -951,7 +1088,7 @@ z_index = 4000
 position = Vector2(110, 128)
 shape = SubResource("RectangleShape2D_k6yev")
 
-[node name="Data" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="Data" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=320183905 node_paths=PackedStringArray("options")]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = -4
@@ -959,72 +1096,72 @@ script = ExtResource("4_avtty")
 category_name = "SETTINGS_DATA"
 options = [NodePath("CampaignData"), NodePath("ChallengeModeData"), NodePath("BooRaceData"), NodePath("MarathonData"), NodePath("AchievementData"), NodePath("Everything"), NodePath("RegenROM")]
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Data"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=554363197]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Data/MarginContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Data/MarginContainer" unique_id=1829354394]
 modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 text = "DELETION_WARNING"
 autowrap_mode = 2
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Data"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=1244252273]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_k6yev")
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Data"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=1879066392]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="CampaignData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" instance=ExtResource("15_oh4w7")]
+[node name="CampaignData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=502586940 instance=ExtResource("15_oh4w7")]
 layout_mode = 2
 title = "DELETION_CAMPAIGN"
 
-[node name="ChallengeModeData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" instance=ExtResource("15_oh4w7")]
+[node name="ChallengeModeData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=1365130774 instance=ExtResource("15_oh4w7")]
 layout_mode = 2
 title = "DELETION_CHALLENGE"
 campaigns = Array[String](["SMB1", "SMBLL", "SMBS"])
 
-[node name="BooRaceData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" instance=ExtResource("15_oh4w7")]
+[node name="BooRaceData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=2095451872 instance=ExtResource("15_oh4w7")]
 layout_mode = 2
 title = "DELETION_BOO"
 campaigns = Array[String](["SMB1", "SMBLL", "SMBS"])
 
-[node name="MarathonData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" instance=ExtResource("15_oh4w7")]
+[node name="MarathonData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=790486002 instance=ExtResource("15_oh4w7")]
 layout_mode = 2
 title = "DELETION_MARATHON"
 campaigns = Array[String](["SMB1", "SMBLL", "SMBS"])
 
-[node name="AchievementData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" instance=ExtResource("15_oh4w7")]
+[node name="AchievementData" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=123230239 instance=ExtResource("15_oh4w7")]
 layout_mode = 2
 title = "DELETION_ACHIEVEMENT"
 campaigns = Array[String](["EDITOR_MAIN_LEVEL_DELETE"])
 
-[node name="Everything" parent="PanelContainer/MarginContainer/VBoxContainer/Data" instance=ExtResource("15_oh4w7")]
+[node name="Everything" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=409066210 instance=ExtResource("15_oh4w7")]
 layout_mode = 2
 title = "DELETION_ALL"
 extra_confirm = true
 
-[node name="DataDeletion" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Data"]
+[node name="DataDeletion" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=455444923]
 script = SubResource("GDScript_oh4w7")
 
-[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Data"]
+[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=960460892]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="RegenROM" parent="PanelContainer/MarginContainer/VBoxContainer/Data" instance=ExtResource("9_t6b48")]
+[node name="RegenROM" parent="PanelContainer/MarginContainer/VBoxContainer/Data" unique_id=1130591797 instance=ExtResource("9_t6b48")]
 layout_mode = 2
-title = "Reverify ROM"
+title = "DATA_ROM_REVERIFY"
 
-[node name="Control" type="Control" parent="PanelContainer"]
+[node name="Control" type="Control" parent="PanelContainer" unique_id=2141427129]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="Icon" type="NinePatchRect" parent="PanelContainer/Control"]
+[node name="Icon" type="NinePatchRect" parent="PanelContainer/Control" unique_id=711348978]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 23)
 layout_mode = 1
@@ -1039,14 +1176,16 @@ offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_7l5ko")
-region_rect = Rect2(0, 0, 24, 23)
+region_rect = Rect2(24, 0, 24, 23)
+script = ExtResource("6_yvj4y")
+metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1797639177 node_paths=PackedStringArray("labels")]
 script = ExtResource("13_iwu7d")
 labels = [NodePath("../PanelContainer/MarginContainer/VBoxContainer/Title"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer/Category"), null, null, null, null, null, null, null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3/Value"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer/MarginContainer/Desc")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="ResourcePackConfigMenu" parent="." instance=ExtResource("16_78q3k")]
+[node name="ResourcePackConfigMenu" parent="." unique_id=254294265 instance=ExtResource("16_78q3k")]
 visible = false
 layout_mode = 1
 anchor_left = 0.05
@@ -1054,8 +1193,56 @@ anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
 
-[node name="ResourcePackTemplateCreator" type="Node" parent="."]
+[node name="ResourcePackTemplateCreator" type="Node" parent="." unique_id=479645518]
 script = ExtResource("19_k6yev")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1052541210]
+layer = 999
+visible = false
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer" unique_id=383732120]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -72.0
+offset_right = 122.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_t6b48")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel" unique_id=1535374695]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/VBoxContainer" unique_id=725078764]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "WARNING!!"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Panel/VBoxContainer/Label" unique_id=303129681]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_yvj4y")
+
+[node name="Label2" type="Label" parent="CanvasLayer/Panel/VBoxContainer" unique_id=165644100]
+layout_mode = 2
+text = "This game was designed with the modern physics style, in mind. Some levels and challenges may be harder, or even impossible with the classic physics.
+
+you have been warned."
+horizontal_alignment = 1
+autowrap_mode = 2
+uppercase = true
 
 [connection signal="closed" from="." to="PanelContainer/MarginContainer/VBoxContainer/KeyboardControls/InputMapSaving" method="save_inputs"]
 [connection signal="closed" from="." to="PanelContainer/MarginContainer/VBoxContainer/Controller/InputMapSaving" method="save_inputs"]
@@ -1076,32 +1263,38 @@ script = ExtResource("19_k6yev")
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Audio/ExtraSFX" to="PanelContainer/MarginContainer/VBoxContainer/Audio/AudioAdjuster" method="extra_sfx_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Audio/PauseBGM" to="PanelContainer/MarginContainer/VBoxContainer/Audio/AudioAdjuster" method="pause_bgm_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Audio/MenuBGM" to="PanelContainer/MarginContainer/VBoxContainer/Audio/AudioAdjuster" method="menu_bgm_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ParallaxStyle" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="parallax_style_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/BGParticles" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="bg_particles_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/HUDStyle" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="hud_style_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/RainbowEffect" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="rainbow_style_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/TransformationEffect" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="transform_style_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/TextShadows" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="text_shadows_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/BridgeDestructionAnimation" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="bridge_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisibleTimers" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="visible_timers_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/TransitionAnimation" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="transition_style_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ColourfulPipes" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="colourful_pipes_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/FirebarStyle" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="firebar_style_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ExtraParticles" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="extra_particles"]
-[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/SelectableOptionNode" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/ResourcePackLoader" method="open_folder"]
-[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/SelectableOptionNode2" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/ResourcePackLoader" method="get_resource_packs"]
-[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/SelectableOptionNode3" to="ResourcePackTemplateCreator" method="create_template"]
-[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/SelectableOptionNode3" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/SelectableOptionNode3" method="set_title" binds= ["Creating Resource Pack..."]]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DamageStyle" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="damage_style_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Checkpoints" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="checkpoint_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ExtraCheckpoints" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="extra_checkpoints_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/Lives" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="inf_lives_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/FlagpoleLives" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="flag_lives_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/GameOverStyle" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="game_over_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/LevelDesign" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="level_design_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/BackScroll" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="backscroll_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/TimeLimit" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="time_limit_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/LakituStyle" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="lakitu_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/ParallaxStyle" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="parallax_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/BGParticles" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="bg_particles_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/HUDStyle" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="hud_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/RainbowEffect" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="rainbow_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/TransformationEffect" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="transform_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/TextShadows" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="text_shadows_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/BridgeDestructionAnimation" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="bridge_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/VisibleTimers" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="visible_timers_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/TransitionAnimation" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="transition_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/ColourfulPipes" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="colourful_pipes_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/FirebarStyle" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="firebar_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Visuals/ScrollContainer/VBoxContainer/ExtraParticles" to="PanelContainer/MarginContainer/VBoxContainer/Visuals/VisualsSetter" method="extra_particles"]
+[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer/SelectableOptionNode" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/ResourcePackLoader" method="open_folder"]
+[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer/SelectableOptionNode2" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/ResourcePackLoader" method="get_resource_packs"]
+[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer/SelectableOptionNode3" to="ResourcePackTemplateCreator" method="create_template"]
+[connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer/SelectableOptionNode3" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer/SelectableOptionNode3" method="set_title" binds= ["RESOURCE_PACK_CREATE_PROGRESS"]]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/PhysicsStyle" to="." method="show_physics_warning"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/PhysicsStyle" to="PanelContainer/MarginContainer/VBoxContainer/Gameplay/DifficultySetter" method="physics_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/Checkpoints" to="PanelContainer/MarginContainer/VBoxContainer/Gameplay/DifficultySetter" method="checkpoint_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/BackScroll" to="PanelContainer/MarginContainer/VBoxContainer/Gameplay/DifficultySetter" method="backscroll_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/BowserBehaviour" to="PanelContainer/MarginContainer/VBoxContainer/Gameplay/DifficultySetter" method="bowser_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/HammerBroBehaviour" to="PanelContainer/MarginContainer/VBoxContainer/Gameplay/DifficultySetter" method="hammer_bro_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/LakituBehaviour" to="PanelContainer/MarginContainer/VBoxContainer/Gameplay/DifficultySetter" method="lakitu_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Gameplay/ScrollContainer/VBoxContainer/SpinyBehaviour" to="PanelContainer/MarginContainer/VBoxContainer/Gameplay/DifficultySetter" method="spiny_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/DamageStyle" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="damage_style_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/ExtraCheckpoints" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="extra_checkpoints_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/Lives" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="inf_lives_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/FlagpoleLives" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="flag_lives_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/GameOverStyle" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="game_over_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/LevelDesign" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="level_design_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/TimeLimit" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="time_limit_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Controller/Deadzone" to="PanelContainer/MarginContainer/VBoxContainer/Controller/InputMapSaving" method="set_deadzone"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/Visibility" to="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/OSCAdjuster" method="visibility_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/TransitionVisibility" to="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/OSCAdjuster" method="transition_visibility_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/HapticFeedback" to="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/OSCAdjuster" method="haptic_feedback_changed"]
@@ -1116,8 +1309,8 @@ script = ExtResource("19_k6yev")
 [connection signal="deleted" from="PanelContainer/MarginContainer/VBoxContainer/Data/AchievementData" to="PanelContainer/MarginContainer/VBoxContainer/Data/DataDeletion" method="delete_achievement"]
 [connection signal="deleted" from="PanelContainer/MarginContainer/VBoxContainer/Data/Everything" to="PanelContainer/MarginContainer/VBoxContainer/Data/DataDeletion" method="delete_everything"]
 [connection signal="button_pressed" from="PanelContainer/MarginContainer/VBoxContainer/Data/RegenROM" to="PanelContainer/MarginContainer/VBoxContainer/Data/DataDeletion" method="regen_rom"]
-[connection signal="pack_created" from="ResourcePackTemplateCreator" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/SelectableOptionNode3" method="set_title" binds= ["RESOURCE_PACK_CREATE"]]
-[connection signal="pack_created" from="ResourcePackTemplateCreator" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/SelectableOptionNode3" method="play_sfx" binds= ["correct"]]
+[connection signal="pack_created" from="ResourcePackTemplateCreator" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer/SelectableOptionNode3" method="set_title" binds= ["RESOURCE_PACK_CREATE"]]
+[connection signal="pack_created" from="ResourcePackTemplateCreator" to="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer/SelectableOptionNode3" method="play_sfx" binds= ["correct"]]
 
 [editable path="PanelContainer/MarginContainer/VBoxContainer/Video/Language"]
 [editable path="PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode"]

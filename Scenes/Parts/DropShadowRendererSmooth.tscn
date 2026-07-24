@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2c5ut4rtjf3p"]
+[gd_scene format=3 uid="uid://d2c5ut4rtjf3p"]
 
 [ext_resource type="Script" uid="uid://cit6racuc8c60" path="res://Scripts/Parts/DropShadowRendererSmooth.gd" id="1_sh8t5"]
 
@@ -67,18 +67,18 @@ func _on_resized() -> void:
 	_dont_recurse = false
 "
 
-[node name="DropShadowRenderer" type="Node"]
+[node name="DropShadowRenderer" type="Node" unique_id=708033634]
 physics_interpolation_mode = 1
 script = ExtResource("1_sh8t5")
 
-[node name="Point" type="Node2D" parent="."]
+[node name="Point" type="Node2D" parent="." unique_id=2093840334]
 unique_name_in_owner = true
 physics_interpolation_mode = 1
 visibility_layer = 2
 z_index = -45
 position = Vector2(4, 0)
 
-[node name="Container" type="SubViewportContainer" parent="Point"]
+[node name="Container" type="SubViewportContainer" parent="Point" unique_id=1758778865]
 unique_name_in_owner = true
 physics_interpolation_mode = 1
 visibility_layer = 2
@@ -93,7 +93,7 @@ script = SubResource("GDScript_tdilq")
 stretch_without_bug_77149 = true
 metadata/_edit_use_anchors_ = true
 
-[node name="SubViewport" type="SubViewport" parent="Point/Container"]
+[node name="SubViewport" type="SubViewport" parent="Point/Container" unique_id=301067379]
 unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
@@ -103,7 +103,7 @@ size = Vector2i(480, 270)
 size_2d_override = Vector2i(1440, 810)
 render_target_update_mode = 4
 
-[node name="Camera" type="Camera2D" parent="Point/Container/SubViewport"]
+[node name="Camera" type="Camera2D" parent="Point/Container/SubViewport" unique_id=1419853680]
 unique_name_in_owner = true
 offset = Vector2(-3, -3)
 zoom = Vector2(3, 3)

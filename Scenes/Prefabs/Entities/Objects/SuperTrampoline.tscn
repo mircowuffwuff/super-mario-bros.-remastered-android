@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://qaldmcid6jm5"]
+[gd_scene format=3 uid="uid://qaldmcid6jm5"]
 
 [ext_resource type="PackedScene" uid="uid://cdrgm3154qxxy" path="res://Scenes/Prefabs/Entities/Objects/Trampoline.tscn" id="1_6t2fx"]
 [ext_resource type="Texture2D" uid="uid://dg3rrr0n878nm" path="res://Assets/Sprites/Blocks/SuperTrampoline.png" id="2_dij8c"]
@@ -13,11 +13,11 @@ script = ExtResource("3_6t2fx")
 Overworld = ExtResource("2_dij8c")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="SuperTrampoline" instance=ExtResource("1_6t2fx")]
-bounce_height = -1200
+[node name="SuperTrampoline" unique_id=1489413708 instance=ExtResource("1_6t2fx")]
+trampoline_type = "SUPER_TRAMPOLINE"
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" unique_id=1821197216]
 texture = SubResource("AtlasTexture_p1ygu")
 
-[node name="ResourceSetter" parent="Sprite" index="1"]
+[node name="ResourceSetter" parent="Sprite" index="1" unique_id=1235787959]
 themed_resource = SubResource("Resource_dij8c")

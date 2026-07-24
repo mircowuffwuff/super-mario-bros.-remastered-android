@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://g31fmkesdbuy"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://g31fmkesdbuy"]
 
 [ext_resource type="Texture2D" uid="uid://bmqjbvwrtu06g" path="res://Assets/Sprites/Players/Toad/Fire.png" id="1_ercvf"]
 [ext_resource type="Texture2D" uid="uid://c2l5suku4ux4j" path="res://Assets/Sprites/Players/Toad/Small.png" id="2_7vcgr"]

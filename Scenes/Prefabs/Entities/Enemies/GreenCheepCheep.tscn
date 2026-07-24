@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdirphnfabey8"]
+[gd_scene format=3 uid="uid://bdirphnfabey8"]
 
 [ext_resource type="Texture2D" uid="uid://dbq7oso3fo4n6" path="res://Assets/Sprites/Enemies/CheepCheep.png" id="1_123qd"]
 [ext_resource type="Script" uid="uid://b475vfhcp2f30" path="res://Scripts/Classes/Entities/Enemies/SwimmingCheepCheep.gd" id="1_a3qb1"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="3_a5qfu"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_1gkhc"]
 [ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="4_cd02n"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/GreenCheepCheep.json" id="5_8m1k0"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="5_qwki7"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="6_qwki7"]
 [ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="10_8m1k0"]
@@ -38,45 +37,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cd02n"]
 size = Vector2(10, 10)
-
-[sub_resource type="Animation" id="Animation_a3qb1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_iib8n"]
-resource_name = "Swim"
-length = 0.4
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5qfu"]
-_data = {
-&"RESET": SubResource("Animation_a3qb1"),
-&"Swim": SubResource("Animation_iib8n")
-}
 
 [sub_resource type="Animation" id="Animation_b7un4"]
 length = 0.001
@@ -116,85 +76,80 @@ _data = {
 &"Wave": SubResource("Animation_qwki7")
 }
 
-[node name="CheepCheep" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="CheepCheep" type="CharacterBody2D" unique_id=390140115 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+disable_mode = 1
 script = ExtResource("1_a3qb1")
 on_screen_enabler = NodePath("Sprite/VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1759577947]
 position = Vector2(0, -8)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_pyihc")
+autoplay = "default"
 flip_h = true
 script = ExtResource("3_1gkhc")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Hitbox" type="Area2D" parent="Sprite"]
+[node name="Hitbox" type="Area2D" parent="Sprite" unique_id=182279406]
 position = Vector2(0, 8)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
-[node name="Collision" type="CollisionShape2D" parent="Sprite/Hitbox"]
+[node name="Collision" type="CollisionShape2D" parent="Sprite/Hitbox" unique_id=526860432]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_cd02n")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Sprite"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Sprite" unique_id=1575154938]
 rotation = 3.14159
 scale = Vector2(1, -1)
 enable_node_path = NodePath("../..")
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=998124050 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_1gkhc")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_8m1k0")
+json_path = "res://Assets/Sprites/Enemies/GreenCheepCheep.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Animations" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_a5qfu")
-}
-autoplay = "Swim"
-
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=158974708 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("3_a5qfu")
 hitbox = NodePath("../Sprite/Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="WaveAnimations" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_reflr")
-}
+[node name="WaveAnimations" type="AnimationPlayer" parent="." unique_id=1758554296]
+libraries/ = SubResource("AnimationLibrary_reflr")
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=2076017409 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("4_cd02n")
 hitbox = NodePath("../Sprite/Hitbox")
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=1877954345 node_paths=PackedStringArray("visuals")]
 script = ExtResource("5_qwki7")
 visuals = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1589615007]
 script = ExtResource("6_qwki7")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="TrackJoint" type="Node" parent="."]
+[node name="TrackJoint" type="Node" parent="." unique_id=291285977]
 script = ExtResource("10_8m1k0")
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
 
-[node name="PropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=2105827423]
 script = ExtResource("11_21r3x")
 properties = Array[String](["movement_type"])
 metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
-[node name="LevelEditorToggleDetection" type="Node" parent="."]
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=830859465]
 script = ExtResource("12_si7cd")
 metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=1212143236 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("13_m2mkg")
 hitbox = NodePath("../Sprite/Hitbox")
 metadata/_custom_type_script = "uid://ba18grqjixded"
@@ -203,6 +158,7 @@ metadata/_custom_type_script = "uid://ba18grqjixded"
 [connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
 [connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]
 [connection signal="fireball_hit" from="FireballDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]

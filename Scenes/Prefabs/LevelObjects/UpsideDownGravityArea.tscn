@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dryg466fybrd3"]
+[gd_scene format=3 uid="uid://dryg466fybrd3"]
 
 [ext_resource type="Script" uid="uid://h7ook78uoctx" path="res://Scripts/Parts/UpsideDownGravityArea.gd" id="1_005jx"]
 
-[node name="UpsideDownGravityArea" type="Area2D"]
+[node name="UpsideDownGravityArea" type="Area2D" unique_id=26282328]
 script = ExtResource("1_005jx")

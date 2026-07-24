@@ -1,14 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhqyp8mia3mo3"]
+[gd_scene format=3 uid="uid://bhqyp8mia3mo3"]
 
 [ext_resource type="Script" uid="uid://duxduhxe8vqdo" path="res://Scripts/Classes/Entities/Objects/EditorLinkedElevator.gd" id="1_0yjq3"]
 [ext_resource type="Texture2D" uid="uid://dt0qtxu2l646n" path="res://Assets/Sprites/Tilesets/Terrain/Overworld.png" id="2_lcqnt"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_5tm0t"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json" id="4_ohybb"]
 [ext_resource type="PackedScene" uid="uid://6rp3wgax4i51" path="res://Scenes/Prefabs/Entities/Objects/RopeElevatorPlatform.tscn" id="5_5qwbh"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="6_lcqnt"]
 
 [sub_resource type="GDScript" id="GDScript_0yjq3"]
 script/source = "extends Node
+
+func _ready() -> void:
+	update()
 
 func _process(_delta: float) -> void:
 	if LevelEditor.playing_level == false:
@@ -25,23 +27,24 @@ func update() -> void:
 	%LPlatform._process(-1)
 "
 
-[node name="EditorLinkedElevator" type="Node2D"]
+[node name="EditorLinkedElevator" type="Node2D" unique_id=1412513806]
 script = ExtResource("1_0yjq3")
 
-[node name="CornerL" type="Sprite2D" parent="."]
+[node name="CornerL" type="Sprite2D" parent="." unique_id=1054020067]
 texture = ExtResource("2_lcqnt")
 region_enabled = true
 region_rect = Rect2(160, 128, 16, 16)
 
-[node name="ResourceSetterNew" type="Node" parent="CornerL" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="CornerL" unique_id=2063634915 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_5tm0t")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_ohybb")
+json_path = "res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Middle" type="NinePatchRect" parent="."]
+[node name="Middle" type="NinePatchRect" parent="." unique_id=596877453]
 offset_left = 8.0
 offset_top = -8.0
 offset_right = 48.0
@@ -50,44 +53,47 @@ texture = ExtResource("2_lcqnt")
 region_rect = Rect2(176, 128, 16, 16)
 axis_stretch_horizontal = 1
 
-[node name="ResourceSetterNew" type="Node" parent="Middle" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Middle" unique_id=873720073 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_5tm0t")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_ohybb")
+json_path = "res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="CornerR" type="Sprite2D" parent="."]
+[node name="CornerR" type="Sprite2D" parent="." unique_id=1811570415]
 position = Vector2(56, 0)
 texture = ExtResource("2_lcqnt")
 region_enabled = true
 region_rect = Rect2(192, 128, 16, 16)
 
-[node name="ResourceSetterNew" type="Node" parent="CornerR" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="CornerR" unique_id=443664553 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_5tm0t")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_ohybb")
+json_path = "res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="RPlatform" parent="CornerR" node_paths=PackedStringArray("linked_platform") instance=ExtResource("5_5qwbh")]
+[node name="RPlatform" parent="CornerR" unique_id=1016031752 node_paths=PackedStringArray("linked_platform") instance=ExtResource("5_5qwbh")]
 unique_name_in_owner = true
 position = Vector2(0, 16)
 linked_platform = NodePath("../../LPlatform")
 
-[node name="LPlatform" parent="." node_paths=PackedStringArray("linked_platform") instance=ExtResource("5_5qwbh")]
+[node name="LPlatform" parent="." unique_id=1973596100 node_paths=PackedStringArray("linked_platform") instance=ExtResource("5_5qwbh")]
 unique_name_in_owner = true
 position = Vector2(0, 64)
 linked_platform = NodePath("../CornerR/RPlatform")
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1858502840]
 script = ExtResource("6_lcqnt")
 properties = Array[String](["width", "left_height", "right_height"])
+animate_change = false
 metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
-[node name="Node" type="Node" parent="."]
+[node name="Node" type="Node" parent="." unique_id=1998864420]
 process_mode = 3
 script = SubResource("GDScript_0yjq3")
 

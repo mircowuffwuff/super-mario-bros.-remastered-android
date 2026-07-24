@@ -5,7 +5,8 @@ const BUZZY_BEETLE = preload("res://Scenes/Prefabs/Entities/Enemies/BuzzyBeetle.
 var jump_meter := 0.0
 
 func _physics_process(delta: float) -> void:
-	jump_meter += delta
+	if is_on_floor():
+		jump_meter += delta
 	
 	$Sprite.play(["Fly", "Idle"][int(is_on_floor())])
 	

@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://bch3ww1n42g7v"]
+[gd_scene format=4 uid="uid://bch3ww1n42g7v"]
 
 [ext_resource type="Texture2D" uid="uid://cnexuteg5rvye" path="res://Assets/Sprites/Tilesets/Deco/DecoTemplate.png" id="1_fb4vb"]
 [ext_resource type="Script" uid="uid://73oviwf6bbys" path="res://Scripts/Classes/Components/TilesetTextureSetter.gd" id="2_fb4vb"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_fb4vb"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Deco/DecoTiles.json" id="4_07uk3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3eywr"]
 texture = ExtResource("1_fb4vb")
@@ -21,20 +20,21 @@ texture = ExtResource("1_fb4vb")
 [sub_resource type="TileSet" id="TileSet_b50pv"]
 sources/0 = SubResource("TileSetAtlasSource_3eywr")
 
-[node name="DecoTiles" type="TileMapLayer"]
+[node name="DecoTiles" type="TileMapLayer" unique_id=2094135017]
 z_index = -10
 tile_map_data = PackedByteArray("AAD+////AAABAAEAAAD/////AAABAAEAAAAAAP//AAABAAEAAAABAP//AAABAAEAAAAZAP//AAABAAEAAAAuAP//AAABAAEAAAAvAP//AAABAAEAAAAwAP//AAABAAEAAAAxAP//AAABAAEAAABeAP//AAABAAEAAABfAP//AAABAAEAAABgAP//AAABAAEAAABhAP//AAABAAEAAAB2AP//AAABAAEAAAB3AP//AAABAAEAAACOAP//AAABAAEAAACPAP//AAABAAEAAACQAP//AAABAAEAAACRAP//AAABAAEAAACmAP//AAABAAEAAADBAP//AAABAAEAAAD7//7/AAADAAAAAAD7////AAADAAEAAAAHAP7/AAADAAAAAAAHAP//AAADAAEAAAAIAP7/AAADAAAAAAAIAP//AAADAAEAAAAYAP7/AAADAAAAAAAYAP//AAADAAEAAAArAP7/AAADAAAAAAArAP//AAADAAEAAAA3AP7/AAADAAAAAAA3AP//AAADAAEAAAA4AP7/AAADAAAAAAA4AP//AAADAAEAAABbAP7/AAADAAAAAABbAP//AAADAAEAAABnAP7/AAADAAAAAABnAP//AAADAAEAAABoAP7/AAADAAAAAABoAP//AAADAAEAAAB4AP7/AAADAAAAAACLAP7/AAADAAAAAACLAP//AAADAAEAAACXAP7/AAADAAAAAACXAP//AAADAAEAAACYAP7/AAADAAAAAACYAP//AAADAAEAAAC7AP7/AAADAAAAAAC7AP//AAADAAEAAACVAP//AAAAAAEAAACVAP3/AAAEAAAAAACVAP7/AAAEAAEAAACNAP3/AAAEAAAAAACNAP7/AAAEAAEAAACNAP//AAAAAAEAAABlAP3/AAAEAAAAAABlAP7/AAAEAAEAAABlAP//AAAAAAEAAABdAP3/AAAEAAAAAABdAP7/AAAEAAEAAABdAP//AAAAAAEAAABLAP3/AAAEAAAAAABLAP7/AAAEAAEAAABLAP//AAAAAAEAAAA1AP3/AAAEAAAAAAA1AP7/AAAEAAEAAAA1AP//AAAAAAEAAAAtAP3/AAAEAAAAAAAtAP7/AAAEAAEAAAAtAP//AAAAAAEAAAAbAP3/AAAEAAAAAAAbAP7/AAAEAAEAAAAbAP//AAAAAAEAAAAFAP3/AAAEAAAAAAAFAP7/AAAEAAEAAAAFAP//AAAAAAEAAAD9//3/AAAEAAAAAAD9//7/AAAEAAEAAAD9////AAAAAAEAAAB4AP//AAADAAEAAAA=")
 tile_set = SubResource("TileSet_b50pv")
 
-[node name="TilesetTextureSetter" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="TilesetTextureSetter" type="Node" parent="." unique_id=126293290 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("2_fb4vb")
 tile_map = NodePath("..")
 metadata/_custom_type_script = "uid://73oviwf6bbys"
 
-[node name="ResourceSetter" type="Node" parent="." node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="." unique_id=1703523584 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_fb4vb")
 node_to_affect = NodePath("../TilesetTextureSetter")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_07uk3")
+json_path = "res://Assets/Sprites/Tilesets/Deco/DecoTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"

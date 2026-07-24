@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://boce75y04igqf"]
+[gd_scene format=3 uid="uid://boce75y04igqf"]
 
 [ext_resource type="PackedScene" uid="uid://bvwo8snk5ixaa" path="res://Scenes/Prefabs/LevelObjects/CloudPlatform.tscn" id="1_dv323"]
 [ext_resource type="Texture2D" uid="uid://bk0p52ttwojml" path="res://Assets/Sprites/Tilesets/Platform.png" id="2_c263f"]
@@ -9,15 +9,15 @@ size = Vector2(32, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ch841"]
 size = Vector2(32, 8)
 
-[node name="CloudPlatform" instance=ExtResource("1_dv323")]
+[node name="CloudPlatform" unique_id=721403253 instance=ExtResource("1_dv323")]
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" unique_id=1940420156]
 offset_left = -16.0
 offset_right = 16.0
 texture = ExtResource("2_c263f")
 
-[node name="Collision" parent="." index="1"]
+[node name="Collision" parent="." index="1" unique_id=357597138]
 shape = SubResource("RectangleShape2D_kdp6m")
 
-[node name="CollisionShape2D" parent="PlayerDetection" index="0"]
+[node name="CollisionShape2D" parent="PlayerDetection" parent_id_path=PackedInt32Array(176998100) index="0" unique_id=1960536538]
 shape = SubResource("RectangleShape2D_ch841")

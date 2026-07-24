@@ -3,11 +3,14 @@ extends Node2D
 
 static var total_collected := 0
 const SMOKE_PARTICLE = preload("uid://d08nv4qtfouv1")
+signal collected
+
 func _ready() -> void:
 	$AnimationPlayer.play("Float")
 
 func on_area_entered(area: Area2D) -> void:
 	if area.owner is Player:
+		collected.emit()
 		total_collected += 1
 		AudioManager.play_sfx("key_collect", global_position)
 		summon_smoke_particle()

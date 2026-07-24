@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://d2yhfwijex5i5"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://d2yhfwijex5i5"]
 
-[ext_resource type="AudioStream" uid="uid://ckyt53ee6q276" path="res://Assets/Audio/BGM/Beach.mp3" id="1_c6ipg"]
-[ext_resource type="AudioStream" uid="uid://8klfwp7by1lb" path="res://Assets/Audio/BGM/BeachHurry.mp3" id="2_ta5d4"]
+[ext_resource type="AudioStream" uid="uid://bn8f1fkllrpgr" path="res://Assets/Audio/BGM/Beach.mp3" id="1_c6ipg"]
+[ext_resource type="AudioStream" uid="uid://dabsh1dq7cbhj" path="res://Assets/Audio/BGM/BeachHurry.mp3" id="2_ta5d4"]
 
 [resource]
 clip_count = 2

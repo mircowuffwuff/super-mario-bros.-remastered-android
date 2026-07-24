@@ -31,35 +31,44 @@ func handle_idle(delta: float) -> void:
 		current_state = States.FALLING
 		$TrackJoint.detach()
 	elif x_distance < 48:
-		%Sprite.play("Look")
+		play_animation("Look")
 	else:
-		%Sprite.play("Idle")
+		play_animation("Idle")
 
 func handle_falling(delta: float) -> void:
-	%Sprite.play("Fall")
+	play_animation("Fall")
 	velocity.y += (15 / delta) * delta
 	velocity.y = clamp(velocity.y, -INF, Global.entity_max_fall_speed)
 	handle_block_breaking()
-	if is_on_floor():
+	if is_on_floor() and velocity.y > 0:
 		land()
 
 func handle_block_breaking() -> void:
 	for i in %BlockBreakingHitbox.get_overlapping_bodies():
 		if i is Block and i.get("destructable") == true:
 			i.destroy()
+			land()
+		if i is Crate:
+			i.destroy(false)
+			velocity.y = 0
 
 func land() -> void:
-	AudioManager.play_sfx("cannon", global_position)
+	AudioManager.play_sfx("thwomp_land", global_position)
 	current_state = States.LANDED
+	Global.screen_shaker.shake_screen(8.0, 0.05)
 	await get_tree().create_timer(1, false).timeout
 	current_state = States.RISING
 
 func handle_rising(delta: float) -> void:
 	velocity.y = -50
-	%Sprite.play("Idle")
+	play_animation("Idle")
 	if global_position.y <= starting_y:
 		global_position.y = starting_y
 	if global_position.y <= starting_y or is_on_ceiling():
 		current_state = States.IDLE
 		await get_tree().create_timer(0.5, false).timeout
 		can_fall = true
+
+func play_animation(animation_name := "") -> void:
+	if %Sprite.animation != animation_name:
+		%Sprite.play(animation_name)

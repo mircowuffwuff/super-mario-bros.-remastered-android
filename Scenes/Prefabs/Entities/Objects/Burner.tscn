@@ -1,16 +1,16 @@
-[gd_scene load_steps=33 format=3 uid="uid://cbs645wiwmaxq"]
+[gd_scene format=3 uid="uid://cbs645wiwmaxq"]
 
 [ext_resource type="Script" uid="uid://clareynx710qb" path="res://Scripts/Classes/Entities/Objects/Burner.gd" id="1_4fveq"]
 [ext_resource type="Texture2D" uid="uid://dhk5jdqjqo77p" path="res://Assets/Sprites/Blocks/BurnerFlame.png" id="1_vrk50"]
 [ext_resource type="Texture2D" uid="uid://4l2medldwrwh" path="res://Assets/Sprites/Blocks/Burner.png" id="2_4fveq"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_fsldu"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/BurnerFlame.json" id="4_m4qew"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="5_sqxap"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/BurnerBlock.json" id="5_w52fl"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="7_m4qew"]
 [ext_resource type="Script" uid="uid://cqif1li7otvpl" path="res://Scripts/Parts/SpriteFramesToJsonConverter.gd" id="7_w52fl"]
 [ext_resource type="Script" uid="uid://cmvlgsjmsk0v5" path="res://Scripts/Classes/Resources/ThemedResource.gd" id="8_oeevx"]
 [ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="10_oeevx"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="12_je1ke"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="13_liwv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amjrr"]
 size = Vector2(16, 16)
@@ -161,89 +161,109 @@ script = ExtResource("8_oeevx")
 Overworld = SubResource("SpriteFrames_8axu6")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="Burner" type="AnimatableBody2D"]
+[node name="Burner" type="AnimatableBody2D" unique_id=891945298]
 collision_layer = 6
 collision_mask = 0
 sync_to_physics = false
 script = ExtResource("1_4fveq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1034609611]
 shape = SubResource("RectangleShape2D_amjrr")
 
-[node name="RotationJoint" type="Node2D" parent="."]
+[node name="RotationJoint" type="Node2D" parent="." unique_id=1029404504]
 physics_interpolation_mode = 2
 
-[node name="Flame" type="AnimatedSprite2D" parent="RotationJoint"]
+[node name="Flame" type="AnimatedSprite2D" parent="RotationJoint" unique_id=1474458580]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_8axu6")
-animation = &"Rise"
-frame = 5
-frame_progress = 1.0
+animation = &"Loop"
+frame_progress = 0.19739561
 
-[node name="ResourceSetterNew" type="Node" parent="RotationJoint/Flame" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="RotationJoint/Flame" unique_id=719039732 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_fsldu")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_m4qew")
+json_path = "res://Assets/Sprites/Blocks/BurnerFlame.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RotationJoint"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RotationJoint" unique_id=459609564]
 remote_path = NodePath("../Block")
 update_rotation = false
 update_scale = false
 
-[node name="Block" type="Sprite2D" parent="RotationJoint"]
+[node name="Block" type="Sprite2D" parent="RotationJoint" unique_id=1985303503]
 texture = SubResource("AtlasTexture_5jhml")
 
-[node name="ResourceSetterNew" type="Node" parent="RotationJoint/Block" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="RotationJoint/Block" unique_id=734406874 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_fsldu")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("5_w52fl")
+json_path = "res://Assets/Sprites/Blocks/BurnerBlock.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="RotationJoint"]
+[node name="Hitbox" type="Area2D" parent="RotationJoint" unique_id=728145003]
+collision_layer = 1025
 
-[node name="Shape" type="CollisionShape2D" parent="RotationJoint/Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="RotationJoint/Hitbox" unique_id=1962030586]
 unique_name_in_owner = true
 position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_jssei")
 disabled = true
 
-[node name="EnemyPlayerDetection" type="Node" parent="RotationJoint" node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="RotationJoint" unique_id=1943955136 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_m4qew")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=482688959]
 wait_time = 3.0
 one_shot = true
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+[node name="Node" type="Node" parent="." unique_id=681044308 node_paths=PackedStringArray("sprite")]
 process_mode = 3
 script = SubResource("GDScript_4fveq")
 sprite = NodePath("../RotationJoint/Block")
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=491857878]
 script = ExtResource("5_sqxap")
 properties = Array[String](["direction"])
 metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
-[node name="ThemedToJSONConverter" type="Node" parent="."]
+[node name="ThemedToJSONConverter" type="Node" parent="." unique_id=664160616]
 script = ExtResource("7_w52fl")
 resource = SubResource("Resource_m4qew")
 json_file_path = "res://Assets/Sprites/Blocks/BurnerFlame.json"
 metadata/_custom_type_script = "uid://cqif1li7otvpl"
 
-[node name="TrackJoint" type="Node" parent="."]
+[node name="TrackJoint" type="Node" parent="." unique_id=786710093]
 script = ExtResource("10_oeevx")
 offset = Vector2(0, 0)
 disable_physics = false
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
 
-[connection signal="player_hit" from="RotationJoint/EnemyPlayerDetection" to="." method="damage_player"]
-[connection signal="player_stomped_on" from="RotationJoint/EnemyPlayerDetection" to="." method="damage_player"]
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=1938610660]
+rect = Rect2(-64, -64, 128, 128)
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1543179752]
+script = ExtResource("12_je1ke")
+can_output = false
+do_animation = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=1278851659]
+script = ExtResource("13_liwv0")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="player_hit" from="RotationJoint/EnemyPlayerDetection" to="." method="damage_player" binds= ["Fire"]]
+[connection signal="player_stomped_below" from="RotationJoint/EnemyPlayerDetection" to="." method="damage_player" binds= ["Fire"]]
+[connection signal="player_stomped_on" from="RotationJoint/EnemyPlayerDetection" to="." method="damage_player" binds= ["Fire"]]
 [connection signal="timeout" from="Timer" to="." method="do_cycle"]
+[connection signal="lost_power" from="SignalExposer" to="." method="turn_off"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="turn_on"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="do_cycle"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="start"]

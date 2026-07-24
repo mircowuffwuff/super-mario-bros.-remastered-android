@@ -4,11 +4,21 @@ var target_player: Player = null
 const MOVE_SPEED := 30
 const SMOKE_PARTICLE = preload("uid://d08nv4qtfouv1")
 
+var can_turn := true
+
+@onready var old_position := global_position
+
 func _physics_process(delta: float) -> void:
 	target_player = get_tree().get_first_node_in_group("Players")
 	if $TrackJoint.is_attached == false:
 		handle_movement(delta)
-	$Sprite.scale.x = -direction
+	else:
+		old_position = global_position
+		await get_tree().physics_frame
+		direction = sign(global_position.x - old_position.x)
+		$Sprite.play("Move")
+	if direction != 0 and can_turn:
+		$Sprite.scale.x = -direction
 
 func handle_movement(delta: float) -> void:
 	var target_direction = sign(target_player.global_position.x - global_position.x)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://h7ys3yw5jvx3"]
+[gd_scene format=3 uid="uid://h7ys3yw5jvx3"]
 
 [ext_resource type="Texture2D" uid="uid://dq58glgwf2l3" path="res://Assets/Sprites/UI/CheckpointIcon.png" id="1_r4dhm"]
 [ext_resource type="Script" uid="uid://dtdc4oaygllfa" path="res://Scripts/Parts/Checkpoint.gd" id="1_vrjdu"]
@@ -6,17 +6,17 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_r4dhm"]
 normal = Vector2(-1, 0)
 
-[node name="Checkpoint" type="Node2D"]
+[node name="Checkpoint" type="Node2D" unique_id=2032959577]
 script = ExtResource("1_vrjdu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1879559587]
 position = Vector2(0, -8)
 texture = ExtResource("1_r4dhm")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=104065894]
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=533846756]
 visible = false
 shape = SubResource("WorldBoundaryShape2D_r4dhm")
 

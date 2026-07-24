@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbl8l51osppso"]
+[gd_scene format=3 uid="uid://cbl8l51osppso"]
 
-[ext_resource type="PackedScene" uid="uid://bikdod5ra10ra" path="res://Scenes/Parts/LargeCastleVisual.tscn" id="2_lpq2f"]
+[ext_resource type="PackedScene" uid="uid://13td5gfryp7k" path="res://Scenes/Parts/LargeStartCastleVisual.tscn" id="1_lxjw8"]
 
-[node name="LargeCastleDeco" type="Sprite2D"]
+[node name="LargeCastleDeco" type="Sprite2D" unique_id=1423333120]
 region_enabled = true
 region_rect = Rect2(0, 0, 144, 176)
 region_filter_clip_enabled = true
 
-[node name="SmallCastleVisual" parent="." instance=ExtResource("2_lpq2f")]
+[node name="SmallCastleVisual" parent="." unique_id=671792054 instance=ExtResource("1_lxjw8")]
 position = Vector2(0, 48)

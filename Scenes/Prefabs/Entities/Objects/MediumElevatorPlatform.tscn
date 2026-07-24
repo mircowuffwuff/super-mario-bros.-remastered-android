@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c36sl1w3qo8k1"]
+[gd_scene format=3 uid="uid://c36sl1w3qo8k1"]
 
 [ext_resource type="PackedScene" uid="uid://f48a0jmx334d" path="res://Scenes/Prefabs/Entities/Objects/SmallElevatorPlatform.tscn" id="1_uynsq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uynsq"]
 size = Vector2(32, 8)
 
-[node name="ElevatorPlatform" instance=ExtResource("1_uynsq")]
+[node name="ElevatorPlatform" unique_id=431416578 instance=ExtResource("1_uynsq")]
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" unique_id=756329120]
 offset_left = -16.0
 offset_right = 16.0
 
-[node name="Collision" parent="." index="1"]
+[node name="Collision" parent="." index="1" unique_id=747923764]
 shape = SubResource("RectangleShape2D_uynsq")

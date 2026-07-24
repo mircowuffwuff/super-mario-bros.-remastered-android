@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://6n4m3cwyuea1"]
+[gd_scene format=3 uid="uid://6n4m3cwyuea1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8t45o"]
 bg_color = Color(1, 1, 1, 1)
@@ -10,16 +10,16 @@ border_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_04v64"]
 
-[node name="DeathPit" type="Area2D"]
+[node name="DeathPit" type="Area2D" unique_id=1921423061]
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=899455176]
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_8t45o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1590362355]
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_04v64")
 

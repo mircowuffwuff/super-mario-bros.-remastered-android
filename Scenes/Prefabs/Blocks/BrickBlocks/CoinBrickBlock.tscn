@@ -1,24 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqvr7a6e84oti"]
+[gd_scene format=3 uid="uid://cqvr7a6e84oti"]
 
 [ext_resource type="PackedScene" uid="uid://dsa8lpl7n8ge0" path="res://Scenes/Prefabs/Blocks/BrickBlocks/BrickBlock.tscn" id="1_ihag5"]
 [ext_resource type="PackedScene" uid="uid://clxssds8sj8pf" path="res://Scenes/Prefabs/Entities/Items/SpinningCoin.tscn" id="2_1q8s7"]
 [ext_resource type="Texture2D" uid="uid://b6o28xa83npb1" path="res://Assets/Sprites/Items/StaticCoin.png" id="3_cjcdh"]
 
-[node name="BrickBlock" instance=ExtResource("1_ihag5")]
+[node name="BrickBlock" unique_id=500887585 instance=ExtResource("1_ihag5")]
 item = ExtResource("2_1q8s7")
 item_amount = 99
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="4" unique_id=347668111]
 texture = ExtResource("3_cjcdh")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 region_filter_clip_enabled = true
 
-[node name="Timer" type="Timer" parent="Sprite2D" index="0"]
+[node name="Timer" type="Timer" parent="Sprite2D" index="0" unique_id=20631353]
 wait_time = 0.001
 autostart = true
 
-[node name="Timer" type="Timer" parent="." index="6"]
+[node name="Timer" type="Timer" parent="." index="6" unique_id=365579369]
 process_callback = 0
 wait_time = 3.85
 one_shot = true

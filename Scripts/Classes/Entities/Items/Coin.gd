@@ -11,8 +11,12 @@ signal collected
 func area_entered(area: Area2D) -> void:
 	if area.owner is Player:
 		collect()
+	elif area.owner is Projectile:
+		if area.owner.COLLECT_COINS:
+			collect()
 
 func collect() -> void:
+	$PSwitcher.queue_free()
 	remove_from_group("Coins")
 	collected.emit()
 	$Hitbox.area_entered.disconnect(area_entered)
@@ -31,6 +35,8 @@ func collect() -> void:
 func summon_block_coin() -> void:
 	var node = spinning_coin_scene.instantiate()
 	node.global_position = global_position
+	%ResourceSetter.copy_meta(node.get_node("%ResourceSetter"))
+	collected.emit()
 	add_sibling(node)
 	queue_free()
 	if get_parent() is TileMapLayer:

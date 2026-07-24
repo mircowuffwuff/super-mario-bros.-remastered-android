@@ -1,13 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://ciddq8ctlj453"]
+[gd_scene format=3 uid="uid://ciddq8ctlj453"]
 
 [ext_resource type="Script" uid="uid://df20kjawaoqcl" path="res://Scripts/Classes/Entities/Objects/PSwitch.gd" id="1_v4mdn"]
 [ext_resource type="Texture2D" uid="uid://y81rhybgt7kb" path="res://Assets/Sprites/Items/PSwitch.png" id="1_x602l"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_6jgcs"]
 [ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="3_05vv4"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_mnfbm"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/PSwitch.json" id="4_1w7q1"]
 [ext_resource type="Script" uid="uid://bx6r8sjar6cwr" path="res://Scripts/Classes/Components/BasicStaticMovement.gd" id="4_6jgcs"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="7_1w7q1"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="9_i4nd2"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="10_eeyhw"]
+[ext_resource type="Script" uid="uid://cmg61722ktg2m" path="res://Scripts/Classes/Components/BlockBouncingDetection.gd" id="11_12hsl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mnfbm"]
 atlas = ExtResource("1_x602l")
@@ -93,12 +95,9 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -107,40 +106,9 @@ tracks/3/path = NodePath("GibSpawner")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"summon_poof"
-}]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("LCollision")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("RCollision")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_i4nd2"]
@@ -155,12 +123,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4mdn"]
 size = Vector2(12, 12)
 
-[node name="PSwitch" type="CharacterBody2D"]
+[node name="PSwitch" type="CharacterBody2D" unique_id=1279299375]
 collision_layer = 33
 collision_mask = 6
 script = ExtResource("1_v4mdn")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=949971211]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_eeyhw")
 animation = &"Idle"
@@ -169,53 +137,70 @@ offset = Vector2(0, 1)
 script = ExtResource("2_6jgcs")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1133385787 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_mnfbm")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_1w7q1")
+json_path = "res://Assets/Sprites/Items/PSwitch.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="PressedCollision" type="CollisionShape2D" parent="."]
+[node name="PressedCollision" type="CollisionShape2D" parent="." unique_id=53196333]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_12hsl")
 one_way_collision = true
 
-[node name="PlayerDetection" type="Area2D" parent="."]
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=311460949]
 script = ExtResource("3_05vv4")
 metadata/_custom_type_script = "uid://cnheej0sxmoxg"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=1895878029]
 position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_ofd0i")
 
-[node name="BasicStaticMovement" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="BasicStaticMovement" type="Node" parent="." unique_id=443429655]
 script = ExtResource("4_6jgcs")
-visuals = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://bx6r8sjar6cwr"
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=392910910 node_paths=PackedStringArray("visuals")]
 script = ExtResource("7_1w7q1")
 visuals = NodePath("../Sprite")
 gib_type = 2
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_eeyhw")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1620868009]
+libraries/ = SubResource("AnimationLibrary_eeyhw")
 
-[node name="LCollision" type="CollisionShape2D" parent="."]
+[node name="LCollision" type="CollisionShape2D" parent="." unique_id=1654539811]
 position = Vector2(0, -6)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_v4mdn")
 one_way_collision = true
 
-[node name="RCollision" type="CollisionShape2D" parent="."]
+[node name="RCollision" type="CollisionShape2D" parent="." unique_id=1866253382]
 position = Vector2(0, -6)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_v4mdn")
 one_way_collision = true
 
+[node name="SignalExposer" type="Node2D" parent="." unique_id=200280199]
+position = Vector2(0, -8)
+script = ExtResource("9_i4nd2")
+do_animation = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=853085131]
+script = ExtResource("10_eeyhw")
+properties = Array[String](["one_time"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=45239333]
+script = ExtResource("11_12hsl")
+metadata/_custom_type_script = "uid://cmg61722ktg2m"
+
+[connection signal="switch_pressed" from="." to="SignalExposer" method="emit_pulse"]
 [connection signal="player_entered" from="PlayerDetection" to="." method="on_player_entered"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="pressed" binds= [false]]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="pressed" binds= [false]]
+[connection signal="block_bounced" from="BlockBouncingDetection" to="." method="bump_up" unbinds=1]

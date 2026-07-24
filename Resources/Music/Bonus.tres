@@ -1,6 +1,6 @@
-[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://chaditr12xw2t"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://chaditr12xw2t"]
 
-[ext_resource type="AudioStream" uid="uid://bgxg2pmh4fi1h" path="res://Assets/Audio/BGM/Bonus.mp3" id="1_6xnkf"]
+[ext_resource type="AudioStream" uid="uid://mjtrn2b1wbld" path="res://Assets/Audio/BGM/Bonus.mp3" id="1_6xnkf"]
 
 [resource]
 clip_count = 1

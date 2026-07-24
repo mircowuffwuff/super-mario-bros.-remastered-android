@@ -1,16 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://dy0tkfsy4wg8"]
+[gd_scene format=3 uid="uid://dy0tkfsy4wg8"]
 
 [ext_resource type="Script" uid="uid://dhtqnyrj3ndnj" path="res://Scripts/Parts/MoonGravity.gd" id="1_ewtau"]
-[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="1_xeodu"]
+[ext_resource type="Script" uid="uid://ccffqvv55f48i" path="res://Scripts/Classes/Gizmos/MoonGravityObj.gd" id="1_lemkj"]
 [ext_resource type="Texture2D" uid="uid://dfurem6jj7gso" path="res://Assets/Sprites/Editor/MoonGravity.png" id="3_7t04y"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="4_7t04y"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="5_lemkj"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="6_0tndk"]
 
-[node name="MoonGravityOBJ" type="Node2D"]
-script = ExtResource("1_xeodu")
+[node name="MoonGravityOBJ" type="Node2D" unique_id=1655843848]
+script = ExtResource("1_lemkj")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="MoonGravity" type="Node" parent="."]
+[node name="MoonGravity" type="Node" parent="." unique_id=1638037622]
 script = ExtResource("1_ewtau")
 metadata/_custom_type_script = "uid://dhtqnyrj3ndnj"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1355508647]
 texture = ExtResource("3_7t04y")
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=2030775072]
+unique_name_in_owner = true
+script = ExtResource("4_7t04y")
+can_output = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1731191707]
+script = ExtResource("5_lemkj")
+properties = Array[String](["effect_player", "effect_entities"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=244232659]
+script = ExtResource("6_0tndk")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="lost_power" from="SignalExposer" to="MoonGravity" method="deactivate"]
+[connection signal="recieved_power" from="SignalExposer" to="MoonGravity" method="activate"]
+[connection signal="recieved_pulse" from="SignalExposer" to="MoonGravity" method="toggle"]
+[connection signal="modifier_applied" from="EditorPropertyExposer" to="." method="update_vals"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="MoonGravity" method="start"]

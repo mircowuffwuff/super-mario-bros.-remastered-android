@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://drxot73c7kksb"]
+
+[ext_resource type="Script" uid="uid://bmmtdr6wiweyh" path="res://Scripts/Classes/Entities/Objects/Crate.gd" id="1_a5r2x"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="2_2yyer"]
+[ext_resource type="Texture2D" uid="uid://xwve5sbltedg" path="res://Assets/Sprites/Blocks/Crate.png" id="2_a5r2x"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="5_a5r2x"]
+[ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="6_2era1"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="7_jo3g1"]
+[ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="8_suce4"]
+[ext_resource type="Script" uid="uid://ba18grqjixded" path="res://Scripts/Classes/Components/ExplosionDetection.gd" id="9_550b4"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="10_550b4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2era1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a5r2x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_550b4"]
+size = Vector2(15, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5r2x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suce4"]
+size = Vector2(24, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2era1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahjun"]
+size = Vector2(12, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jo3g1"]
+size = Vector2(15, 4)
+
+[node name="Crate" type="CharacterBody2D" unique_id=1168061937]
+collision_layer = 2
+collision_mask = 4098
+script = ExtResource("1_a5r2x")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2017983629]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_2era1")
+
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1653462153 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("2_2yyer")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Blocks/Crate.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=416127186]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_550b4")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1828896169]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=63545074]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_a5r2x")
+
+[node name="ShellHitbox" type="Area2D" parent="." unique_id=246751423]
+
+[node name="Shape" type="CollisionShape2D" parent="ShellHitbox" unique_id=40015471]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_suce4")
+
+[node name="WaterHitbox" type="Area2D" parent="." unique_id=947135366]
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterHitbox" unique_id=882329400]
+shape = SubResource("RectangleShape2D_2era1")
+
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=1339672973]
+script = ExtResource("5_a5r2x")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=899808146]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ahjun")
+
+[node name="FireballDetection" type="Node" parent="." unique_id=1500927149 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("6_2era1")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=348727385]
+script = ExtResource("7_jo3g1")
+properties = Array[String](["item"])
+filters = Dictionary[String, String]({
+"item": "can_crate_store"
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="ShellDetection" type="Node" parent="." unique_id=1885002953 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("8_suce4")
+hitbox = NodePath("../ShellHitbox")
+add_combo = false
+metadata/_custom_type_script = "uid://bbww34oiexbx2"
+
+[node name="ExplosionDetection" type="Node" parent="." unique_id=1011396860 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("9_550b4")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://ba18grqjixded"
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1218186697]
+collision_layer = 4096
+collision_mask = 0
+sync_to_physics = false
+
+[node name="Collision" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=2068932905]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_jo3g1")
+one_way_collision = true
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=424836887]
+script = ExtResource("10_550b4")
+can_output = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1684431449]
+position = Vector2(0, -6)
+target_position = Vector2(0, 8)
+collision_mask = 512
+
+[connection signal="area_entered" from="WaterHitbox" to="." method="splash" unbinds=1]
+[connection signal="body_entered" from="WaterHitbox" to="." method="splash" unbinds=1]
+[connection signal="player_entered" from="PlayerDetection" to="." method="on_player_entered"]
+[connection signal="fireball_hit" from="FireballDetection" to="." method="destroy" unbinds=1]
+[connection signal="moving_shell_entered" from="ShellDetection" to="." method="destroy" unbinds=1]
+[connection signal="explosion_entered" from="ExplosionDetection" to="." method="destroy" unbinds=1]
+[connection signal="recieved_power" from="SignalExposer" to="." method="destroy"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="destroy"]

@@ -10,6 +10,11 @@ var active := false
 
 signal activated
 
+func check() -> void:
+
+	if $SignalExposer.total_inputs > 0:
+		$PlayerDetection.queue_free()
+
 func _physics_process(delta: float) -> void:
 	if active:
 		spawn_meter += delta
@@ -28,9 +33,10 @@ func deactivate_all_generators() -> void:
 	for i in get_tree().get_nodes_in_group("EntityGenerators"):
 		i.active = false
 		i.deactivate()
+	get_tree().call_group("Enemies", "start_retreat") # Lakitus
 
 func deactivate() -> void:
-	pass
+	active = false
 
 func spawn_entity() -> void:
 	if entity_scene == null: return
@@ -48,3 +54,11 @@ func spawn_entity() -> void:
 		get_parent().add_sibling(node)
 	else:
 		add_sibling(node)
+
+
+func on_recieved_pulse() -> void:
+	if active:
+		deactivate()
+		active = false
+	else:
+		activate()

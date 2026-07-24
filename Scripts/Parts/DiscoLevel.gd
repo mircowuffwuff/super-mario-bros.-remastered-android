@@ -36,7 +36,7 @@ const S_RANK_SCORES := [
 	[45000, 45000, 25000, 12000],
 	[45000, 45000, 25000, 12000],
 	
-	[45000, 40000, 30000, 12000],
+	[30000, 40000, 30000, 12000],
 	[30000, 45000, 20000, 12000],
 	[45000, 25000, 30000, 12000],
 	[45000, 45000, 45000, 12000]
@@ -47,6 +47,9 @@ static var level_ranks := "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 const RANK_IDs := ["F", "D", "C", "B", "A", "S", "P"]
 
 func _ready() -> void:
+	if Global.current_game_mode != Global.GameMode.DISCO:
+		queue_free()
+		return
 	active = true
 	Global.current_campaign = "SMBANN"
 	if get_parent().get_node_or_null("EndFlagpole") != null:
@@ -65,7 +68,7 @@ static func reset_values() -> void:
 	combo_amount = 0
 	combo_meter = 0
 	first_load = false
-	if Global.current_campaign == "SMBANN":
+	if Global.current_game_mode == Global.GameMode.DISCO:
 		Global.score = 0
 	combo_breaks = 0
 	current_rank = "F"
@@ -112,7 +115,7 @@ func _exit_tree() -> void:
 	AudioManager.kill_sfx("score")
 
 func level_finished() -> void:
-	if Global.world_num != 8 && Global.level_num != 4:
+	if !(Global.world_num == 8 && Global.level_num == 4):
 		SaveManager.visited_levels[SaveManager.get_level_idx(Global.world_num, Global.level_num) + 1] = "1"
 	Global.score += (combo_amount * 500)
 	combo_meter = 100

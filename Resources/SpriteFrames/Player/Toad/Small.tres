@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=23 format=3 uid="uid://d2f5cir67f1l0"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://d2f5cir67f1l0"]
 
 [ext_resource type="Texture2D" uid="uid://c2l5suku4ux4j" path="res://Assets/Sprites/Players/Toad/Small.png" id="1_uvjv4"]
 

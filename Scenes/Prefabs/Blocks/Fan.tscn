@@ -1,12 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://svkvxdk8fsyj"]
+[gd_scene format=3 uid="uid://svkvxdk8fsyj"]
 
 [ext_resource type="Script" uid="uid://bvplls3ae0oqr" path="res://Scripts/Classes/Entities/Objects/OnOffFanRed.gd" id="1_lggcr"]
 [ext_resource type="Texture2D" uid="uid://dkwk6x3je28oi" path="res://Assets/Sprites/Blocks/Fan.png" id="2_lggcr"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_shbxw"]
 [ext_resource type="Texture2D" uid="uid://dy3p03djelkb3" path="res://Assets/Sprites/Particles/Leaves.png" id="4_3g67n"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="5_254o8"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/Fan.json" id="5_lkjwe"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Particles/WindParticles.json" id="6_vnvew"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="7_cdvdi"]
 [ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="8_yp1rr"]
 
@@ -90,16 +88,16 @@ func _process(_delta: float) -> void:
 	sprite.flip_h = owner.direction == 1 or owner.direction == 2
 "
 
-[node name="Fan" type="AnimatableBody2D"]
+[node name="Fan" type="AnimatableBody2D" unique_id=456576135]
 collision_layer = 6
 collision_mask = 0
 sync_to_physics = false
 script = ExtResource("1_lggcr")
 active = true
 
-[node name="RotationJoint" type="Node2D" parent="."]
+[node name="RotationJoint" type="Node2D" parent="." unique_id=1377752456]
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=725875060]
 sprite_frames = SubResource("SpriteFrames_vnvew")
 animation = &"On"
 autoplay = "On"
@@ -108,24 +106,25 @@ script = ExtResource("3_shbxw")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=612634857 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("5_254o8")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_lkjwe")
+json_path = "res://Assets/Sprites/Blocks/Fan.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1448762016]
 shape = SubResource("RectangleShape2D_wvrj8")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=867482290]
 monitorable = false
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=1684669496]
 position = Vector2(128, 0)
 shape = SubResource("RectangleShape2D_4qr7a")
 
-[node name="Particles" type="GPUParticles2D" parent="."]
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=415711923]
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_wo6ri")
 emitting = false
@@ -133,31 +132,32 @@ texture = ExtResource("4_3g67n")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_ixtv2")
 
-[node name="ResourceSetterNew" type="Node" parent="Particles" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Particles" unique_id=497412814 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("5_254o8")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("6_vnvew")
+json_path = "res://Assets/Sprites/Particles/WindParticles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+[node name="Node" type="Node" parent="." unique_id=1074427073 node_paths=PackedStringArray("sprite")]
 process_mode = 3
 script = SubResource("GDScript_gfuw1")
 sprite = NodePath("../Sprite")
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1357404776]
 script = ExtResource("7_cdvdi")
 properties = Array[String](["direction", "strength"])
 metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
 
-[node name="TrackJoint" type="Node" parent="."]
+[node name="TrackJoint" type="Node" parent="." unique_id=1157907092]
 script = ExtResource("8_yp1rr")
 offset = Vector2(0, 0)
 disable_physics = false
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=1899838502]
 remote_path = NodePath("../Sprite")
 update_rotation = false
 update_scale = false

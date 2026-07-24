@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds5iugeocqd6a"]
+[gd_scene format=3 uid="uid://ds5iugeocqd6a"]
 
 [ext_resource type="Script" uid="uid://bdq0373j5n5o0" path="res://Scripts/Parts/CameraRightLimit.gd" id="1_f6lpd"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="2_gtkaw"]
@@ -8,24 +8,24 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bdd7a"]
 normal = Vector2(-1, 0)
 
-[node name="HardCameraRightLimit" type="Node2D" groups=["CameraLimits"]]
+[node name="HardCameraRightLimit" type="Node2D" unique_id=1600640635 groups=["CameraLimits"]]
 script = ExtResource("1_f6lpd")
 metadata/_custom_type_script = "uid://bdq0373j5n5o0"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=131458968]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1787521056]
 shape = SubResource("WorldBoundaryShape2D_bdd7a")
 
-[node name="LevelEditorVisibleNode" type="Node2D" parent="."]
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." unique_id=671935701]
 script = ExtResource("2_gtkaw")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode"]
+[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=1071663527]
 position = Vector2(8, 0)
 texture = ExtResource("3_qhm6g")
 
-[node name="Line2D" type="Line2D" parent="LevelEditorVisibleNode"]
+[node name="Line2D" type="Line2D" parent="LevelEditorVisibleNode" unique_id=1446049913]
 texture_repeat = 2
 position = Vector2(1, 0)
 points = PackedVector2Array(0, -512, 0, 512)

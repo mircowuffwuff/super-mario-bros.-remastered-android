@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://ct5rrpa7uehkk"]
+[gd_scene format=3 uid="uid://ct5rrpa7uehkk"]
 
 [ext_resource type="Texture2D" uid="uid://y0c3ajq7uoei" path="res://Assets/Sprites/Tilesets/Terrain/TerrainTemplate.png" id="1_vdakf"]
 [ext_resource type="PackedScene" uid="uid://dsa8lpl7n8ge0" path="res://Scenes/Prefabs/Blocks/BrickBlocks/BrickBlock.tscn" id="2_5enc8"]
@@ -28,17 +28,13 @@
 [ext_resource type="PackedScene" uid="uid://rjs2k335jmb5" path="res://Scenes/Prefabs/Entities/Items/BlueCoinInactive.tscn" id="18_hqc4a"]
 [ext_resource type="PackedScene" uid="uid://0q874wkbxcrr" path="res://Scenes/Prefabs/Blocks/SwitchSpikeBlockAlt.tscn" id="19_hqc4a"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="22_ls3wh"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json" id="23_vt0hv"]
 [ext_resource type="Script" uid="uid://73oviwf6bbys" path="res://Scripts/Classes/Components/TilesetTextureSetter.gd" id="24_5xtcs"]
 [ext_resource type="Texture2D" uid="uid://cfk7rvu4in71u" path="res://Assets/Sprites/Blocks/ConveyorBelt.png" id="24_vt0hv"]
 [ext_resource type="Texture2D" uid="uid://cnexuteg5rvye" path="res://Assets/Sprites/Tilesets/Deco/DecoTemplate.png" id="25_vdakf"]
 [ext_resource type="Texture2D" uid="uid://dwkcm4q32drtf" path="res://Assets/Sprites/Blocks/OnOffConveyorBelt.png" id="25_vt0hv"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Deco/DecoTiles.json" id="27_b6qiv"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Liquid.json" id="28_ls3wh"]
 [ext_resource type="Texture2D" uid="uid://cays8e2m7oj1l" path="res://Assets/Sprites/Tilesets/EdgeConnectionTile.png" id="28_t3ju0"]
 [ext_resource type="Texture2D" uid="uid://dquurvxoax6p8" path="res://Assets/Sprites/Tilesets/Terrain/Desert.png" id="30_vdakf"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/ConveyorBelt.json" id="33_ra18v"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/OnOffConveyor.json" id="34_7cpm5"]
+[ext_resource type="Script" uid="uid://q45b31h6356r" path="res://Scripts/Classes/Components/OnOffSwitcher.gd" id="40_gg00r"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_b6qiv"]
 tile_data = PackedInt32Array(0, 524288, 0, 1, 589824, 0)
@@ -79,7 +75,7 @@ texture = ExtResource("1_vdakf")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0/metadata/_better_terrain = {
 0: [17, 0, 30],
-3: [17, 0, 30],
+3: [17, 30],
 4: [17, 0, 30],
 &"type": 0
 }
@@ -87,9 +83,9 @@ texture = ExtResource("1_vdakf")
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0/metadata/_better_terrain = {
 0: [17, 0, 30],
-3: [17, 0, 30],
+3: [17, 30],
 4: [17, 0, 30],
-7: [17, 0, 30],
+7: [17, 30],
 8: [17, 0, 30],
 &"type": 0
 }
@@ -97,7 +93,7 @@ texture = ExtResource("1_vdakf")
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0/metadata/_better_terrain = {
 4: [17, 0, 30],
-7: [17, 0, 30],
+7: [17, 30],
 8: [17, 0, 30],
 &"type": 0
 }
@@ -131,10 +127,10 @@ texture = ExtResource("1_vdakf")
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0/metadata/_better_terrain = {
 0: [17, 0, 30],
-3: [17, 0, 30],
+3: [17, 30],
 4: [17, 0, 30],
 12: [17, 0, 30],
-15: [17, 0, 30],
+15: [17, 30],
 &"symmetry": 0,
 &"type": 0
 }
@@ -156,13 +152,14 @@ texture = ExtResource("1_vdakf")
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:1/0/metadata/_better_terrain = {
 4: [17, 0, 30],
-7: [17, 0, 30],
+7: [17, 30],
 8: [17, 0, 30],
-11: [17, 0, 30],
+11: [17, 30],
 12: [17, 0, 30],
 &"type": 0
 }
 4:1/0 = 0
+4:1/0/z_index = -10
 4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:1/0 = 0
 5:1/0/z_index = -10
@@ -189,7 +186,7 @@ texture = ExtResource("1_vdakf")
 1:2/0/metadata/_better_terrain = {
 0: [17, 0, 30],
 12: [17, 0, 30],
-15: [17, 0, 30],
+15: [17, 30, 0],
 &"symmetry": 0,
 &"type": 0
 }
@@ -198,9 +195,9 @@ texture = ExtResource("1_vdakf")
 2:2/0/metadata/_better_terrain = {
 0: [17, 0, 30],
 8: [17, 0, 30],
-11: [17, 0, 30],
+11: [17, 30],
 12: [17, 0, 30],
-15: [17, 0, 30],
+15: [17, 30],
 &"symmetry": 0,
 &"type": 0
 }
@@ -208,7 +205,7 @@ texture = ExtResource("1_vdakf")
 3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0/metadata/_better_terrain = {
 8: [17, 0, 30],
-11: [17, 0, 30],
+11: [17, 30],
 12: [17, 0, 30],
 &"symmetry": 0,
 &"type": 0
@@ -679,25 +676,25 @@ texture = ExtResource("1_vdakf")
 8:9/0 = 0
 8:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:9/0/metadata/_better_terrain = {
-0: [17],
+0: [17, 0],
 3: [17],
 4: [26],
-8: [17],
-11: [17],
-12: [17],
-15: [17],
+8: [17, 0],
+11: [17, 0],
+12: [17, 0],
+15: [17, 0],
 &"type": 0
 }
 9:9/0 = 0
 9:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:9/0/metadata/_better_terrain = {
-0: [17],
+0: [17, 0],
 4: [28],
 7: [17],
-8: [17],
-11: [17],
-12: [17],
-15: [17],
+8: [17, 0],
+11: [17, 0],
+12: [17, 0],
+15: [17, 0],
 &"type": 0
 }
 10:9/0 = 0
@@ -709,11 +706,11 @@ texture = ExtResource("1_vdakf")
 9:8/0 = 0
 9:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:8/0/metadata/_better_terrain = {
-0: [17],
-3: [17],
-4: [17],
-7: [17],
-8: [17],
+0: [17, 0],
+3: [17, 0],
+4: [17, 0],
+7: [17, 0],
+8: [17, 0],
 11: [17],
 12: [24],
 &"type": 0
@@ -823,11 +820,11 @@ texture = ExtResource("1_vdakf")
 8:8/0 = 0
 8:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:8/0/metadata/_better_terrain = {
-0: [17],
-3: [17],
-4: [17],
-7: [17],
-8: [17],
+0: [17, 0],
+3: [17, 0],
+4: [17, 0],
+7: [17, 0],
+8: [17, 0],
 12: [22],
 15: [17],
 &"type": 0
@@ -881,11 +878,11 @@ texture = ExtResource("1_vdakf")
 7:10/0 = 0
 7:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:10/0/metadata/_better_terrain = {
-0: [17],
-3: [17],
-4: [17],
-7: [17],
-8: [17],
+0: [17, 0],
+3: [17, 0],
+4: [17, 0],
+7: [17, 0],
+8: [17, 0],
 11: [22],
 12: [23],
 15: [0, 17],
@@ -894,37 +891,37 @@ texture = ExtResource("1_vdakf")
 8:10/0 = 0
 8:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:10/0/metadata/_better_terrain = {
-0: [17],
+0: [17, 0],
 3: [17, 0],
 4: [27],
 7: [26],
-8: [17],
-11: [17],
-12: [17],
-15: [17],
+8: [17, 0],
+11: [17, 0],
+12: [17, 0],
+15: [17, 0],
 &"type": 0
 }
 9:10/0 = 0
 9:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:10/0/metadata/_better_terrain = {
-0: [17],
+0: [17, 0],
 3: [28],
 4: [29],
 7: [17, 0],
-8: [17],
-11: [17],
-12: [17],
-15: [17],
+8: [17, 0],
+11: [17, 0],
+12: [17, 0],
+15: [17, 0],
 &"type": 0
 }
 10:10/0 = 0
 10:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:10/0/metadata/_better_terrain = {
-0: [17],
-3: [17],
-4: [17],
-7: [17],
-8: [17],
+0: [17, 0],
+3: [17, 0],
+4: [17, 0],
+7: [17, 0],
+8: [17, 0],
 11: [0, 17],
 12: [25],
 15: [24],
@@ -933,26 +930,26 @@ texture = ExtResource("1_vdakf")
 10:11/0 = 0
 10:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:11/0/metadata/_better_terrain = {
-4: [17, 30],
+4: [17, 30, 0],
 7: [17, 30],
-8: [17, 30],
-12: [17, 30],
+8: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 9:11/0 = 0
 9:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:11/0/metadata/_better_terrain = {
-0: [17, 30],
+0: [17, 30, 0],
 3: [17, 30],
-4: [17, 30],
-12: [17, 30],
+4: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 8:11/0 = 0
 8:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:11/0/metadata/_better_terrain = {
-0: [17, 30],
-4: [17, 30],
+0: [17, 30, 0],
+4: [17, 30, 0],
 7: [17, 30],
 8: [17, 30],
 &"type": 0
@@ -962,18 +959,18 @@ texture = ExtResource("1_vdakf")
 7:11/0/metadata/_better_terrain = {
 0: [17, 30],
 3: [17, 30],
-4: [17, 30],
-8: [17, 30],
+4: [17, 30, 0],
+8: [17, 30, 0],
 &"type": 0
 }
 6:11/0 = 0
 6:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:11/0/metadata/_better_terrain = {
-0: [17, 30],
+0: [17, 30, 0],
 4: [17, 30],
 7: [17, 30],
 8: [17, 30],
-12: [17, 30],
+12: [17, 30, 0],
 &"type": 0
 }
 5:11/0 = 0
@@ -982,14 +979,14 @@ texture = ExtResource("1_vdakf")
 0: [17, 30],
 3: [17, 30],
 4: [17, 30],
-8: [17, 30],
-12: [17, 30],
+8: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 4:11/0 = 0
 4:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:11/0/metadata/_better_terrain = {
-0: [17, 30],
+0: [17, 30, 0],
 4: [17, 30],
 7: [17, 30],
 8: [17, 30],
@@ -1005,17 +1002,17 @@ texture = ExtResource("1_vdakf")
 4: [17, 30],
 7: [17, 30],
 8: [17, 30],
-12: [17, 30],
+12: [17, 30, 0],
 &"type": 0
 }
 2:11/0 = 0
 2:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:11/0/metadata/_better_terrain = {
 0: [17, 30],
-4: [17, 30],
+4: [17, 30, 0],
 7: [17, 30],
 8: [17, 30],
-12: [17, 30],
+12: [17, 30, 0],
 15: [17, 30],
 &"type": 0
 }
@@ -1072,10 +1069,10 @@ texture = ExtResource("1_vdakf")
 2:12/0/metadata/_better_terrain = {
 0: [17, 30],
 3: [17, 30],
-4: [17, 30],
+4: [17, 30, 0],
 8: [17, 30],
 11: [17, 30],
-12: [17, 30],
+12: [17, 30, 0],
 &"type": 0
 }
 3:12/0 = 0
@@ -1084,7 +1081,7 @@ texture = ExtResource("1_vdakf")
 0: [17, 30],
 3: [17, 30],
 4: [17, 30],
-8: [17, 30],
+8: [17, 30, 0],
 12: [17, 30],
 15: [17, 30],
 &"type": 0
@@ -1093,7 +1090,7 @@ texture = ExtResource("1_vdakf")
 4:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:12/0/metadata/_better_terrain = {
 0: [17, 30],
-4: [17, 30],
+4: [17, 30, 0],
 8: [17, 30],
 11: [17, 30],
 12: [17, 30],
@@ -1104,7 +1101,7 @@ texture = ExtResource("1_vdakf")
 5:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:12/0/metadata/_better_terrain = {
 0: [17, 30],
-4: [17, 30],
+4: [17, 30, 0],
 8: [17, 30],
 12: [17, 30],
 15: [17, 30],
@@ -1113,8 +1110,8 @@ texture = ExtResource("1_vdakf")
 6:12/0 = 0
 6:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:12/0/metadata/_better_terrain = {
-0: [17, 30],
-4: [17, 30],
+0: [17, 30, 0],
+4: [17, 30, 0],
 8: [17, 30],
 11: [17, 30],
 12: [17, 30],
@@ -1124,15 +1121,15 @@ texture = ExtResource("1_vdakf")
 7:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:12/0/metadata/_better_terrain = {
 0: [17, 30],
-8: [17, 30],
-12: [17, 30],
+8: [17, 30, 0],
+12: [17, 30, 0],
 15: [17, 30],
 &"type": 0
 }
 8:12/0 = 0
 8:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:12/0/metadata/_better_terrain = {
-0: [17, 30],
+0: [17, 30, 0],
 8: [17, 30],
 11: [17, 30],
 12: [0, 17, 30],
@@ -1141,88 +1138,88 @@ texture = ExtResource("1_vdakf")
 9:12/0 = 0
 9:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:12/0/metadata/_better_terrain = {
-0: [17, 30],
-4: [17, 30],
-12: [17, 30],
+0: [17, 30, 0],
+4: [17, 30, 0],
+12: [17, 30, 0],
 15: [17, 30],
 &"type": 0
 }
 10:12/0 = 0
 10:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:12/0/metadata/_better_terrain = {
-4: [17, 30],
-8: [17, 30],
+4: [17, 30, 0],
+8: [17, 30, 0],
 11: [17, 30],
-12: [17, 30],
+12: [17, 30, 0],
 &"type": 0
 }
 11:12/0 = 0
 11:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:12/0/metadata/_better_terrain = {
-0: [17, 30],
-12: [17, 30],
+0: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 12:12/0 = 0
 12:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:12/0/metadata/_better_terrain = {
-8: [17, 30],
-12: [17, 30],
+8: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 13:12/0 = 0
 13:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:12/0/metadata/_better_terrain = {
-0: [17, 30],
-8: [17, 30],
-12: [17, 30],
+0: [17, 30, 0],
+8: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 14:12/0 = 0
 14:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:12/0/metadata/_better_terrain = {
-4: [17, 30],
-8: [17, 30],
-12: [17, 30],
+4: [17, 30, 0],
+8: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 15:11/0 = 0
 15:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:11/0/metadata/_better_terrain = {
-0: [17, 30],
-4: [17, 30],
-8: [17, 30],
-12: [17, 30],
+0: [17, 30, 0],
+4: [17, 30, 0],
+8: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 14:11/0 = 0
 14:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:11/0/metadata/_better_terrain = {
-0: [17, 30],
-4: [17, 30],
-8: [17, 30],
+0: [17, 30, 0],
+4: [17, 30, 0],
+8: [17, 30, 0],
 &"type": 0
 }
 13:11/0 = 0
 13:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:11/0/metadata/_better_terrain = {
-0: [17, 30],
-4: [17, 30],
-12: [17, 30],
+0: [17, 30, 0],
+4: [17, 30, 0],
+12: [17, 30, 0],
 &"type": 0
 }
 12:11/0 = 0
 12:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:11/0/metadata/_better_terrain = {
-4: [17, 30],
-8: [17, 30],
+4: [17, 30, 0],
+8: [17, 30, 0],
 &"type": 0
 }
 11:11/0 = 0
 11:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:11/0/metadata/_better_terrain = {
-0: [17, 30],
-4: [17, 30],
+0: [17, 30, 0],
+4: [17, 30, 0],
 &"type": 0
 }
 5:14/0 = 0
@@ -1301,6 +1298,8 @@ texture = ExtResource("1_vdakf")
 4:10/0 = 0
 5:10/0 = 0
 6:10/0 = 0
+14:8/0 = 0
+15:8/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_y8xxb"]
 scenes/1/scene = ExtResource("2_5enc8")
@@ -1635,6 +1634,8 @@ physics_layer_2/collision_layer = 128
 physics_layer_2/collision_mask = 0
 physics_layer_3/collision_layer = 256
 physics_layer_3/collision_mask = 0
+physics_layer_4/collision_layer = 512
+physics_layer_4/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Ground"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
@@ -1694,7 +1695,7 @@ metadata/_better_terrain = {
 &"path": ""
 }], ["OnOffConveyorR", Color(0.6458518, 0.49463975, 0.4241487, 1), 0, [], {
 &"path": ""
-}], ["Terrain", Color(0.54969203, 0.636939, 0.09403645, 1), 2, [], {
+}], ["Terrain", Color(0.8409091, 1, 0, 1), 2, [], {
 &"path": ""
 }], ["SteepSlopeTL", Color(0.0027723156, 0.6224138, 0.13507082, 1), 0, [17], {
 &"path": ""
@@ -1743,6 +1744,8 @@ func on_switch_hit() -> void:
 	update_tiles()
 
 func update_tiles() -> void:
+	if is_instance_valid(tile_map) == false:
+		return
 	for i in tile_map.get_used_cells_by_id(5):
 		var y_coord = tile_map.get_cell_atlas_coords(i)
 		if y_coord.y > 2:
@@ -1763,7 +1766,7 @@ script/source = "extends Node
 @onready var tiles: TileMapLayer = get_parent()
 
 func _ready() -> void:
-	if Global.level_editor == null and Settings.file.visuals.colour_pipes == 0:
+	if Global.current_level != null and Global.current_level is not CustomLevel and Settings.file.visuals.colour_pipes == 0:
 		replace_pipes()
 
 func replace_pipes() -> void:
@@ -1786,85 +1789,95 @@ func _ready() -> void:
 		add_child(node)
 "
 
-[node name="Tiles" type="TileMapLayer"]
+[node name="Tiles" type="TileMapLayer" unique_id=1722190602]
 z_index = -1
 tile_set = SubResource("TileSet_g81ue")
 physics_quadrant_size = 2
 
-[node name="MainTilesetTextureSetter" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="MainTilesetTextureSetter" type="Node" parent="." unique_id=1474113207 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("24_5xtcs")
 tile_map = NodePath("..")
 texture = ExtResource("30_vdakf")
 
-[node name="ResourceSetterNew" type="Node" parent="MainTilesetTextureSetter" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="MainTilesetTextureSetter" unique_id=155864555 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("22_ls3wh")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("23_vt0hv")
+json_path = "res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="LiquidTextureSetter" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="LiquidTextureSetter" type="Node" parent="." unique_id=1830483692 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("24_5xtcs")
 tile_map = NodePath("..")
 atlas_id = 2
 
-[node name="ResourceSetterNew" type="Node" parent="LiquidTextureSetter" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="LiquidTextureSetter" unique_id=1364274198 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("22_ls3wh")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("28_ls3wh")
+json_path = "res://Assets/Sprites/Tilesets/Liquid.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="DecoTileTextureSetter" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="DecoTileTextureSetter" type="Node" parent="." unique_id=2007165853 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("24_5xtcs")
 tile_map = NodePath("..")
 atlas_id = 3
 
-[node name="ResourceSetterNew" type="Node" parent="DecoTileTextureSetter" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="DecoTileTextureSetter" unique_id=226971325 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("22_ls3wh")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("27_b6qiv")
+json_path = "res://Assets/Sprites/Tilesets/Deco/DecoTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="ConveyorTextureSetter" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="ConveyorTextureSetter" type="Node" parent="." unique_id=1480608045 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("24_5xtcs")
 tile_map = NodePath("..")
 texture = ExtResource("24_vt0hv")
 atlas_id = 4
 
-[node name="ResourceSetterNew" type="Node" parent="ConveyorTextureSetter" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="ConveyorTextureSetter" unique_id=368331622 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("22_ls3wh")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("33_ra18v")
+json_path = "res://Assets/Sprites/Blocks/ConveyorBelt.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="OnOffConveyorTextureSetter" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="OnOffConveyorTextureSetter" type="Node" parent="." unique_id=758230177 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("24_5xtcs")
 tile_map = NodePath("..")
 texture = ExtResource("25_vt0hv")
 atlas_id = 5
 
-[node name="ResourceSetterNew" type="Node" parent="OnOffConveyorTextureSetter" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="OnOffConveyorTextureSetter" unique_id=1832547189 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("22_ls3wh")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("34_7cpm5")
+json_path = "res://Assets/Sprites/Blocks/OnOffConveyor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="OnOffConveyorHandler" type="Node" parent="." groups=["BooBlocks"]]
+[node name="OnOffConveyorHandler" type="Node" parent="." unique_id=590121252]
 script = SubResource("GDScript_vt0hv")
 
-[node name="PipeReplacer" type="Node" parent="."]
+[node name="OnOffSwitcher" type="Node" parent="OnOffConveyorHandler" unique_id=1323877787]
+script = ExtResource("40_gg00r")
+metadata/_custom_type_script = "uid://q45b31h6356r"
+
+[node name="PipeReplacer" type="Node" parent="." unique_id=388259230]
 script = SubResource("GDScript_vdakf")
 
-[node name="BrickBlockSpawner" type="Node" parent="."]
+[node name="BrickBlockSpawner" type="Node" parent="." unique_id=1141289151]
 script = SubResource("GDScript_hqc4a")
 
 [connection signal="child_entered_tree" from="." to="." method="on_child_entered_tree"]
+[connection signal="switched" from="OnOffConveyorHandler/OnOffSwitcher" to="OnOffConveyorHandler" method="on_switch_hit"]

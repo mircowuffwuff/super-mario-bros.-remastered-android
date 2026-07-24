@@ -1,0 +1,341 @@
+[gd_scene format=3 uid="uid://vax1sabjimuj"]
+
+[ext_resource type="PackedScene" uid="uid://cllscucqyd033" path="res://Scenes/Prefabs/Gizmos/Outputs/BaseOutput.tscn" id="1_srjh2"]
+[ext_resource type="Script" uid="uid://c21dyd6ackh38" path="res://Scripts/Classes/Gizmos/ConditionalClear.gd" id="2_1cpyg"]
+[ext_resource type="Texture2D" uid="uid://dgamrlgy76d3a" path="res://Assets/Sprites/Editor/Gizmos/ConditionalClearer.png" id="2_268d0"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="4_1cpyg"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="5_lprr3"]
+[ext_resource type="PackedScene" uid="uid://l0lulnbn7v6b" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyString.tscn" id="6_x8x8j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8x8j"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="Animation" id="Animation_ed4dd"]
+resource_name = "Cleared"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cleared:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666669, 2.1666667, 2.6666667),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Failed:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Description:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_37bcb"]
+resource_name = "Fail"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Failed:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 2.2666667, 2.7666667),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cleared:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Description:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x8x8j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Description:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cleared:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Failed:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hvein"]
+resource_name = "Show"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Description:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ed4dd"]
+_data = {
+&"Cleared": SubResource("Animation_ed4dd"),
+&"Fail": SubResource("Animation_37bcb"),
+&"RESET": SubResource("Animation_x8x8j"),
+&"Show": SubResource("Animation_hvein")
+}
+
+[node name="ConditionalClear" unique_id=515746201 instance=ExtResource("1_srjh2")]
+script = ExtResource("2_1cpyg")
+on_power = 0
+statement = ""
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("2_268d0")
+hframes = 1
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." index="2" unique_id=1972157966]
+script = ExtResource("4_1cpyg")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[node name="EditorPropertyExposer" type="Node" parent="." index="3" unique_id=280249416]
+script = ExtResource("5_lprr3")
+properties = Array[String](["on_power", "statement"])
+properties_force_selector = Dictionary[String, PackedScene]({
+"statement": ExtResource("6_x8x8j")
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4" unique_id=916210764]
+process_mode = 3
+
+[node name="Description" type="PanelContainer" parent="CanvasLayer" index="0" unique_id=770409289]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -29.0
+offset_right = 90.5
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8x8j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Description" index="0" unique_id=1580358224]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/Description/VBoxContainer" index="0" unique_id=1601564586]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "CLEAR CONDITION"
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Description/VBoxContainer/Title" index="0" unique_id=237955602]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Description" type="Label" parent="CanvasLayer/Description/VBoxContainer" index="1" unique_id=121596812]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Beat the level, without jumping"
+horizontal_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="PauseDisplay" type="PanelContainer" parent="CanvasLayer" index="1" unique_id=836549772]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.5
+offset_top = 28.0
+offset_right = 90.5
+offset_bottom = 72.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8x8j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseDisplay" index="0" unique_id=356950949]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/PauseDisplay/VBoxContainer" index="0" unique_id=209593778]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "CLEAR CONDITION"
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PauseDisplay/VBoxContainer/Title" index="0" unique_id=1658935218]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Description" type="Label" parent="CanvasLayer/PauseDisplay/VBoxContainer" index="1" unique_id=1993459268]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Beat the level, without jumping"
+horizontal_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Cleared" type="PanelContainer" parent="CanvasLayer" index="2" unique_id=1513620002]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -11.0
+offset_right = 76.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8x8j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Cleared" index="0" unique_id=1685196124]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/Cleared/VBoxContainer" index="0" unique_id=1929775464]
+modulate = Color(0.41687015, 1, 0.38260242, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CONDITION CLEARED!"
+uppercase = true
+
+[node name="Failed" type="PanelContainer" parent="CanvasLayer" index="3" unique_id=2040638785]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -11.0
+offset_right = 76.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8x8j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Failed" index="0" unique_id=240941450]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/Failed/VBoxContainer" index="0" unique_id=10085180]
+modulate = Color(1, 0.33183005, 0.38260242, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CONDITION FAILED."
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" index="4" unique_id=1089556272]
+libraries/ = SubResource("AnimationLibrary_ed4dd")
+
+[connection signal="recieved_power" from="SignalExposer" to="." method="powered"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="powered"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="on_level_start"]

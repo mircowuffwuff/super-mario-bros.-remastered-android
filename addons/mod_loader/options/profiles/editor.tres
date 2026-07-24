@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ModLoaderOptionsProfile" load_steps=2 format=3 uid="uid://4jrko8vmemnn"]
+[gd_resource type="Resource" script_class="ModLoaderOptionsProfile" format=3 uid="uid://covm7df0lupv3"]
 
-[ext_resource type="Script" uid="uid://f46uvi5y8oqi" path="res://addons/mod_loader/resources/options_profile.gd" id="1"]
+[ext_resource type="Script" uid="uid://dsbicisgihjet" path="res://addons/mod_loader/resources/options_profile.gd" id="1"]
 
 [resource]
 script = ExtResource("1")

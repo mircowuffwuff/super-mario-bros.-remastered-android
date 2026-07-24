@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://l8qvjfxryj6m"]
+
+[ext_resource type="Script" uid="uid://dncadgefbc4c0" path="res://Scripts/Parts/TilePropertySignal.gd" id="1_vwolr"]
+[ext_resource type="Texture2D" uid="uid://bnv2ocqgws3p7" path="res://Assets/Sprites/UI/Panel.png" id="2_vy2or"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v8h6y"]
+texture = ExtResource("2_vy2or")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p4kuk"]
+
+[node name="SignalDisplay" type="HBoxContainer" unique_id=1676529677]
+process_mode = 3
+script = ExtResource("1_vwolr")
+
+[node name="Connections" type="Label" parent="." unique_id=1494380738]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "CONNECTIONS: 0"
+uppercase = true
+
+[node name="Button" type="Button" parent="." unique_id=1756367561]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_v8h6y")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_v8h6y")
+theme_override_styles/hover = SubResource("StyleBoxTexture_v8h6y")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_v8h6y")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p4kuk")
+text = "+"
+
+[connection signal="pressed" from="Button" to="." method="start_connection"]

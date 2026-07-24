@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjo3ghjnca7i5"]
+[gd_scene format=3 uid="uid://bjo3ghjnca7i5"]
 
 [ext_resource type="AudioStream" uid="uid://c4mviyo5ldto5" path="res://Assets/Audio/BGM/GameOver.mp3" id="1_644yi"]
 [ext_resource type="Script" uid="uid://b1dc01fk1eomt" path="res://Scripts/Parts/GameOver.gd" id="1_chlux"]
@@ -13,26 +13,26 @@ script = ExtResource("4_xsy50")
 Overworld = ExtResource("1_644yi")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="GameOver" type="Node"]
+[node name="GameOver" type="Node" unique_id=531065328]
 process_mode = 3
 script = ExtResource("1_chlux")
 has_menu = true
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1419335797]
 stream = ExtResource("1_644yi")
 bus = &"Music"
 
-[node name="ResourceSetter" type="Node" parent="Music" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Music" unique_id=1572840031 node_paths=PackedStringArray("node_to_affect")]
 script = ExtResource("3_buq0o")
 node_to_affect = NodePath("..")
 property_name = "stream"
 themed_resource = SubResource("Resource_ykrvu")
 metadata/_custom_type_script = "uid://cq6f682453q6o"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=922575584]
 layer = 0
 
-[node name="BG" type="ColorRect" parent="CanvasLayer"]
+[node name="BG" type="ColorRect" parent="CanvasLayer" unique_id=183492273]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,7 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1354989011]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -51,7 +51,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1538966158]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -65,11 +65,11 @@ offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer" unique_id=2146617017]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="SelectableLabel" parent="CanvasLayer/VBoxContainer" instance=ExtResource("5_l878x")]
+[node name="SelectableLabel" parent="CanvasLayer/VBoxContainer" unique_id=611963437 instance=ExtResource("5_l878x")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
@@ -79,7 +79,7 @@ focus_neighbor_right = NodePath("../Control")
 focus_neighbor_bottom = NodePath("../SelectableLabel2")
 text = "MENU_CONTINUE"
 
-[node name="SelectableLabel2" parent="CanvasLayer/VBoxContainer" instance=ExtResource("5_l878x")]
+[node name="SelectableLabel2" parent="CanvasLayer/VBoxContainer" unique_id=977140483 instance=ExtResource("5_l878x")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
@@ -89,17 +89,17 @@ focus_neighbor_right = NodePath("../Control")
 focus_neighbor_bottom = NodePath("../SelectableLabel")
 text = "PAUSE_QUIT"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1141993583]
 wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1300917906 node_paths=PackedStringArray("labels")]
 script = ExtResource("5_ykrvu")
 labels = [NodePath("../CanvasLayer/Label"), NodePath("../CanvasLayer/VBoxContainer/SelectableLabel"), NodePath("../CanvasLayer/VBoxContainer/SelectableLabel2")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="TextShadowColourChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="TextShadowColourChanger" type="Node" parent="." unique_id=1493738638 node_paths=PackedStringArray("labels")]
 script = ExtResource("7_2uo6v")
 labels = [NodePath("../CanvasLayer/Label"), NodePath("../CanvasLayer/VBoxContainer/SelectableLabel"), NodePath("../CanvasLayer/VBoxContainer/SelectableLabel2")]
 metadata/_custom_type_script = "uid://dt2p68xl462v2"

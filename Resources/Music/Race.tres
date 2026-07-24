@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://d2xfr70cpxnhp"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://d2xfr70cpxnhp"]
 
-[ext_resource type="AudioStream" uid="uid://cqvlnj5ycwybf" path="res://Assets/Audio/BGM/BooRace.mp3" id="1_acs2e"]
-[ext_resource type="AudioStream" uid="uid://b865lxccqc8fw" path="res://Assets/Audio/BGM/BooRaceHurry.mp3" id="2_cdpsb"]
+[ext_resource type="AudioStream" uid="uid://c3dl4b3oo1wlx" path="res://Assets/Audio/BGM/BooRace.mp3" id="1_acs2e"]
+[ext_resource type="AudioStream" uid="uid://b6otra38haxj1" path="res://Assets/Audio/BGM/BooRaceHurry.mp3" id="2_cdpsb"]
 
 [resource]
 clip_count = 2

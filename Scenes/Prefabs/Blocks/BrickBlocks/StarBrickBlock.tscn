@@ -1,11 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpukj2ja3i3qj"]
+[gd_scene format=3 uid="uid://dpukj2ja3i3qj"]
 
 [ext_resource type="PackedScene" uid="uid://cor5javglnirw" path="res://Scenes/Prefabs/Blocks/BrickBlocks/PowerUpBrickBlock.tscn" id="1_5t0h4"]
 [ext_resource type="PackedScene" uid="uid://5qg8po86pew4" path="res://Scenes/Prefabs/Entities/Items/SuperStar.tscn" id="2_6m2bg"]
 
-[node name="BrickBlock" instance=ExtResource("1_5t0h4")]
+[node name="BrickBlock" unique_id=1052390856 instance=ExtResource("1_5t0h4")]
 item = ExtResource("2_6m2bg")
 mushroom_if_small = false
-
-[node name="Sprite2D" parent="EditorVisibleNode" index="0"]
-region_rect = Rect2(0, 32, 16, 16)

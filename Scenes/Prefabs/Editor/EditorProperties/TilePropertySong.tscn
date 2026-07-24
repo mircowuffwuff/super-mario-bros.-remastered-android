@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://h2xlvyfa0ri2"]
+
+[ext_resource type="Script" uid="uid://codql1f5eca56" path="res://Scripts/Classes/Editor/OptionButtonThatIsntFuckingBlurry.gd" id="1_ebhu0"]
+
+[sub_resource type="GDScript" id="GDScript_ebhu0"]
+script/source = "extends TilePropertyContainer
+
+func _ready() -> void:
+	for i in Global.level_editor.music_track_names:
+		$OptionButton.add_item(tr(i).to_upper())
+"
+
+[node name="TilePropertyEnum" type="HBoxContainer" unique_id=1027774900]
+custom_minimum_size = Vector2(0, 24)
+offset_right = 145.0
+offset_bottom = 24.0
+script = SubResource("GDScript_ebhu0")
+
+[node name="Label" type="Label" parent="." unique_id=908325602]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PROPERTY_NAME:"
+uppercase = true
+
+[node name="OptionButton" type="OptionButton" parent="." unique_id=536896318]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_ebhu0")
+metadata/_custom_type_script = "uid://codql1f5eca56"
+
+[connection signal="start_value_changed" from="." to="OptionButton" method="select"]
+[connection signal="item_selected" from="OptionButton" to="." method="set_value"]

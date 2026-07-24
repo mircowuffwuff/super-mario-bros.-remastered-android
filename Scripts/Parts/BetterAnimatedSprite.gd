@@ -3,6 +3,10 @@ extends AnimatedSprite2D
 
 @export var do_offset := true
 
+func _ready() -> void:
+	if do_offset:
+		on_frame_changed()
+
 func _process(_delta: float) -> void:
 	if do_offset:
 		on_frame_changed()

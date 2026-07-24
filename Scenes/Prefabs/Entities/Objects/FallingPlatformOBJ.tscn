@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://khqcht24nms3"]
+
+[ext_resource type="PackedScene" uid="uid://cx2310jyd3fnv" path="res://Scenes/Prefabs/Entities/Objects/MovingPlatform.tscn" id="1_lmc3g"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="2_wuhh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wuhh6"]
+resource_local_to_scene = true
+size = Vector2(32, 8)
+
+[node name="MovingPlatform" unique_id=285771311 instance=ExtResource("1_lmc3g")]
+type = 2
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1046612248]
+shape = SubResource("RectangleShape2D_wuhh6")
+
+[node name="EditorPropertyExposer" parent="." index="2" unique_id=1975160876]
+properties = Array[String]([])
+
+[node name="Line" parent="." index="3" unique_id=531388326]
+visible = false
+
+[node name="Projection" parent="." index="4" unique_id=1165185292]
+visible = false
+
+[node name="PlayerDetection" type="Area2D" parent="." index="7" unique_id=1773908213]
+unique_name_in_owner = true
+script = ExtResource("2_wuhh6")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" index="0" unique_id=1506541737]
+shape = SubResource("RectangleShape2D_wuhh6")

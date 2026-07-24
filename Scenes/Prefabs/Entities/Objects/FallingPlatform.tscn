@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bm8obwlkm56wb"]
+[gd_scene format=3 uid="uid://bm8obwlkm56wb"]
 
 [ext_resource type="Script" uid="uid://c4m157i8p54cf" path="res://Scripts/Classes/Entities/Objects/FallingPlatform.gd" id="1_krw4p"]
 [ext_resource type="Texture2D" uid="uid://bk0p52ttwojml" path="res://Assets/Sprites/Tilesets/Platform.png" id="2_p76vr"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_r8wfm"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Platform.json" id="4_odngu"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="5_c36tx"]
 [ext_resource type="Texture2D" uid="uid://cke2nve5v64am" path="res://Assets/Sprites/Editor/PlatformIcons/Falling.png" id="6_klq8y"]
 
@@ -13,10 +12,10 @@ size = Vector2(32, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c36tx"]
 size = Vector2(36, 10)
 
-[node name="FallingPlatform" type="AnimatableBody2D"]
+[node name="FallingPlatform" type="AnimatableBody2D" unique_id=475612898]
 script = ExtResource("1_krw4p")
 
-[node name="TextureRect" type="NinePatchRect" parent="."]
+[node name="TextureRect" type="NinePatchRect" parent="." unique_id=1038958970]
 offset_left = -16.0
 offset_right = 16.0
 offset_bottom = 8.0
@@ -25,30 +24,31 @@ patch_margin_left = 8
 patch_margin_right = 8
 axis_stretch_horizontal = 1
 
-[node name="ResourceSetter" type="Node" parent="TextureRect" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="TextureRect" unique_id=1763919982 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_r8wfm")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_odngu")
+json_path = "res://Assets/Sprites/Tilesets/Platform.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809571846]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_r8wfm")
 
-[node name="PlayerDetect" type="Area2D" parent="."]
+[node name="PlayerDetect" type="Area2D" parent="." unique_id=784976500]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect" unique_id=863753777]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_c36tx")
 one_way_collision = true
 
-[node name="LevelEditorVisibleNode" type="Node2D" parent="."]
+[node name="LevelEditorVisibleNode" type="Node2D" parent="." unique_id=1729151420]
 visibility_layer = 2
 script = ExtResource("5_c36tx")
 metadata/_custom_type_script = "uid://cpwloakvp672a"
 
-[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode"]
+[node name="Sprite2D" type="Sprite2D" parent="LevelEditorVisibleNode" unique_id=222341848]
 position = Vector2(8, 8)
 texture = ExtResource("6_klq8y")

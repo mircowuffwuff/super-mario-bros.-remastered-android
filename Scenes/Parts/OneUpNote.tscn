@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dopxwjj37gu0l"]
+[gd_scene format=3 uid="uid://dopxwjj37gu0l"]
 
 [ext_resource type="PackedScene" uid="uid://b5feqg7nwyety" path="res://Scenes/Parts/ScoreNote.tscn" id="1_t77qk"]
 [ext_resource type="Texture2D" uid="uid://b2674tr54wqw7" path="res://Assets/Sprites/UI/OneUpNote.png" id="2_btd7m"]
@@ -16,17 +16,17 @@ script = ExtResource("4_xovp3")
 Overworld = ExtResource("2_btd7m")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="ScoreNote" instance=ExtResource("1_t77qk")]
+[node name="ScoreNote" unique_id=1623327547 instance=ExtResource("1_t77qk")]
 visibility_layer = 2
 
-[node name="Label" parent="Container" index="0"]
+[node name="Label" parent="Container" parent_id_path=PackedInt32Array(1802841653) index="0" unique_id=636342306]
 visible = false
 
-[node name="TextureRect" type="TextureRect" parent="Container" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Container" parent_id_path=PackedInt32Array(1802841653) index="1" unique_id=154065164]
 layout_mode = 2
 texture = ExtResource("2_btd7m")
 
-[node name="TextureRect2" type="TextureRect" parent="Container/TextureRect" index="0"]
+[node name="TextureRect2" type="TextureRect" parent="Container/TextureRect" index="0" unique_id=1078447608]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_q33f0")
 layout_mode = 0
@@ -36,19 +36,19 @@ offset_right = 17.0
 offset_bottom = 9.0
 texture = ExtResource("2_btd7m")
 
-[node name="ResourceSetter" type="Node" parent="Container/TextureRect/TextureRect2" index="0" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Container/TextureRect/TextureRect2" index="0" unique_id=1652082089 node_paths=PackedStringArray("node_to_affect")]
 script = ExtResource("3_inlc1")
 node_to_affect = NodePath("..")
 property_name = "texture"
 themed_resource = SubResource("Resource_q33f0")
 metadata/_custom_type_script = "uid://cq6f682453q6o"
 
-[node name="ResourceSetter" type="Node" parent="Container/TextureRect" index="1" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Container/TextureRect" index="1" unique_id=173503644 node_paths=PackedStringArray("node_to_affect")]
 script = ExtResource("3_inlc1")
 node_to_affect = NodePath("..")
 property_name = "texture"
 themed_resource = SubResource("Resource_q33f0")
 metadata/_custom_type_script = "uid://cq6f682453q6o"
 
-[node name="TextShadowColourChanger" parent="." index="2" node_paths=PackedStringArray("shadow_node")]
+[node name="TextShadowColourChanger" parent="." index="2" unique_id=402728311 node_paths=PackedStringArray("shadow_node")]
 shadow_node = NodePath("../Container/TextureRect/TextureRect2")

@@ -1,40 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://bij088rfbprdk"]
-
+[gd_scene format=3 uid="uid://bij088rfbprdk"]
 [ext_resource type="PackedScene" uid="uid://ojlyl3tabp2p" path="res://Scenes/Levels/SMBLL/World8/8-4.tscn" id="1_2usat"]
 [ext_resource type="PackedScene" uid="uid://1rxw4k4wq3ni" path="res://Scenes/Prefabs/Entities/Enemies/PiranhaPlant.tscn" id="2_hlpec"]
 [ext_resource type="Script" uid="uid://bjs5mlc3xrxud" path="res://Scripts/Parts/DiscoLevel.gd" id="2_swkpk"]
-
-[node name="8-4" instance=ExtResource("1_2usat")]
+[ext_resource type="PackedScene" uid="uid://dbjqtjhb2t4cn" path="res://Scenes/Prefabs/Entities/Items/FireFlower.tscn" id="3_hlpec"]
+[node name="8-4" unique_id=821819504 instance=ExtResource("1_2usat")]
 campaign = "SMBANN"
-
-[node name="RedPirannhaPlant" parent="Enemies" index="2"]
+[node name="RedPirannhaPlant" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="2" unique_id=1500445874]
 position = Vector2(512, 336)
-
-[node name="RedPirannhaPlant2" parent="Enemies" index="3"]
+[node name="RedPirannhaPlant2" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="3" unique_id=2085557546]
 position = Vector2(576, 336)
-
-[node name="RedPirannhaPlant3" parent="Enemies" index="4"]
+[node name="RedPirannhaPlant3" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="4" unique_id=1728084065]
 position = Vector2(704, 272)
-
-[node name="RedPirannhaPlant4" parent="Enemies" index="5"]
+[node name="RedPirannhaPlant4" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="5" unique_id=1012767965]
 position = Vector2(832, 336)
-
-[node name="PirannhaPlant" parent="Enemies" index="6" instance=ExtResource("2_hlpec")]
+[node name="PirannhaPlant" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="6" unique_id=1843836231 instance=ExtResource("2_hlpec")]
 position = Vector2(512, -32)
-
-[node name="PirannhaPlant2" parent="Enemies" index="7" instance=ExtResource("2_hlpec")]
+[node name="PirannhaPlant2" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="7" unique_id=521872892 instance=ExtResource("2_hlpec")]
 position = Vector2(576, -32)
-
-[node name="PirannhaPlant3" parent="Enemies" index="8" instance=ExtResource("2_hlpec")]
+[node name="PirannhaPlant3" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="8" unique_id=1443608930 instance=ExtResource("2_hlpec")]
 position = Vector2(704, -96)
-
-[node name="PirannhaPlant4" parent="Enemies" index="9" instance=ExtResource("2_hlpec")]
+[node name="PirannhaPlant4" parent="Enemies" parent_id_path=PackedInt32Array(1066408415) index="9" unique_id=424386378 instance=ExtResource("2_hlpec")]
 position = Vector2(832, -32)
-
-[node name="PipeArea" parent="." index="11"]
+[node name="InvisibleQuestionBlock" parent="." index="7" unique_id=1092737962]
+item = ExtResource("3_hlpec")
+mushroom_if_small = true
+[node name="PipeArea" parent="." index="11" unique_id=755281997]
 target_level = "uid://bq355ycinib3p"
-
-[node name="DiscoLevel" type="Node" parent="." index="16"]
+[node name="DiscoLevel" type="Node" parent="." index="16" unique_id=998295912]
 script = ExtResource("2_swkpk")
 combo_meter_rate = 0.25
 max_combo = 10

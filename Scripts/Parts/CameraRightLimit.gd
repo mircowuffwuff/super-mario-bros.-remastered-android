@@ -3,10 +3,12 @@ extends Node2D
 
 @export var reset_on_delete := true
 @export var lock_camera := false
+@export var set_on_load := true
 
 func _enter_tree() -> void:
 	add_to_group("CameraLimits")
-	Player.camera_right_limit = int(global_position.x)
+	if set_on_load or is_node_ready():
+		Player.camera_right_limit = int(global_position.x)
 
 func _exit_tree() -> void:
 	if reset_on_delete:

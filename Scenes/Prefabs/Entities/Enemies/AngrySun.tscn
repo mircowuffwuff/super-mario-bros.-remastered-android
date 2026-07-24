@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://13vxk381k4gt"]
+
+[ext_resource type="Script" uid="uid://cxtekxsaprq8c" path="res://Scripts/Classes/Entities/Enemies/AngrySun.gd" id="1_b44wu"]
+[ext_resource type="Texture2D" uid="uid://dki2sbbbcsje0" path="res://Assets/Sprites/Enemies/AngrySun.png" id="2_4q5i4"]
+[ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="3_4q5i4"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_yfrhs"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="6_2ut7f"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="7_q5u7b"]
+[ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="8_sri10"]
+[ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="9_sgfee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ut7f"]
+atlas = ExtResource("2_4q5i4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfrhs"]
+atlas = ExtResource("2_4q5i4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwhva"]
+atlas = ExtResource("2_4q5i4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5u7b"]
+atlas = ExtResource("2_4q5i4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjcmn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ut7f")
+}],
+"loop": true,
+"name": &"Charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfrhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwhva")
+}],
+"loop": true,
+"name": &"Dive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5u7b")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfrhs"]
+radius = 8.0
+
+[node name="AngrySun" type="CharacterBody2D" unique_id=797123896 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+process_physics_priority = 1
+visibility_layer = 2
+script = ExtResource("1_b44wu")
+on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
+score_note_adder = NodePath("ScoreNoteSpawner")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2107662186]
+unique_name_in_owner = true
+visibility_layer = 2
+sprite_frames = SubResource("SpriteFrames_cjcmn")
+animation = &"Dive"
+autoplay = "Idle"
+
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=365299931 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_yfrhs")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Enemies/AngrySun.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="IdleMeter" type="Timer" parent="." unique_id=19465843]
+wait_time = 3.0
+one_shot = true
+
+[node name="ChargeMeter" type="Timer" parent="." unique_id=2077975415]
+wait_time = 2.0
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1629195984]
+collision_layer = 1025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=650607471]
+shape = SubResource("CircleShape2D_yfrhs")
+
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=2030817261 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("3_4q5i4")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://chj8hu207lrh"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1830383080]
+rect = Rect2(-16, -16, 32, 32)
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1503551797]
+script = ExtResource("6_2ut7f")
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1486714035]
+script = ExtResource("7_q5u7b")
+can_output = false
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[node name="ShellDetection" type="Node" parent="." unique_id=965785671 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("8_sri10")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://bbww34oiexbx2"
+
+[node name="GibSpawner" type="Node" parent="." unique_id=1838979363 node_paths=PackedStringArray("visuals")]
+script = ExtResource("9_sgfee")
+visuals = NodePath("../Sprite")
+gib_type = 2
+metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
+
+[connection signal="timeout" from="IdleMeter" to="." method="start_charging"]
+[connection signal="timeout" from="ChargeMeter" to="." method="start_diving"]
+[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="start_idle"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="start_idle"]
+[connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]

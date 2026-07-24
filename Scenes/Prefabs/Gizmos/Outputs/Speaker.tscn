@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://u41lttcbojr6"]
+
+[ext_resource type="PackedScene" uid="uid://cllscucqyd033" path="res://Scenes/Prefabs/Gizmos/Outputs/BaseOutput.tscn" id="1_wbbe5"]
+[ext_resource type="Texture2D" uid="uid://ba1s5nfrmpd5a" path="res://Assets/Sprites/Editor/Gizmos/Speaker.png" id="2_k3ibs"]
+[ext_resource type="Script" uid="uid://osdlwkufjpac" path="res://Scripts/Classes/Gizmos/Speaker.gd" id="2_q50v2"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_11ukq"]
+[ext_resource type="PackedScene" uid="uid://c7rm3gsfo5067" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertySFX.tscn" id="5_xyrgi"]
+
+[node name="BaseOutput" unique_id=515746201 instance=ExtResource("1_wbbe5")]
+script = ExtResource("2_q50v2")
+sfx = 0
+pitch = 1.0
+global = false
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("2_k3ibs")
+hframes = 1
+
+[node name="SignalExposer" parent="." index="1" unique_id=1403115602]
+can_output = false
+
+[node name="EditorPropertyExposer" type="Node" parent="." index="2" unique_id=1367816059]
+script = ExtResource("4_11ukq")
+properties = Array[String](["sfx", "pitch", "global"])
+properties_force_selector = Dictionary[String, PackedScene]({
+"sfx": ExtResource("5_xyrgi")
+})
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[connection signal="recieved_power" from="SignalExposer" to="." method="play_sfx"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="play_sfx"]

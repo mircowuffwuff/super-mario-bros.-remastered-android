@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://1a8j44cmswcj"]
+[gd_scene format=3 uid="uid://1a8j44cmswcj"]
 
 [ext_resource type="Script" uid="uid://bbeh6dsp1hpan" path="res://Scripts/Classes/Entities/Items/ReserveItem.gd" id="1_ik5mc"]
 
@@ -42,26 +42,24 @@ _data = {
 &"RESET": SubResource("Animation_8acg5")
 }
 
-[node name="ReserveItem" type="CharacterBody2D"]
+[node name="ReserveItem" type="CharacterBody2D" unique_id=1790365560]
 script = ExtResource("1_ik5mc")
 metadata/_custom_type_script = "uid://cjkurwybsaywm"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=863631159]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=945156945]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1235302453]
 shape = SubResource("CircleShape2D_flkw7")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1283309870]
 wait_time = 8.0
 autostart = true
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_flkw7")
-}
-autoplay = "Flash"
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=712200808]
+libraries/ = SubResource("AnimationLibrary_flkw7")
+autoplay = &"Flash"
 speed_scale = 2.0
 
 [connection signal="area_entered" from="Area2D" to="." method="on_area_entered"]

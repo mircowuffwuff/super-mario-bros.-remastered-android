@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwyxi1uihf35y"]
+[gd_scene format=3 uid="uid://cwyxi1uihf35y"]
 
 [ext_resource type="Script" uid="uid://mshpvsyuw15j" path="res://Scripts/Classes/Entities/Enemies/LeapingCheepCheep.gd" id="1_pbhdk"]
 [ext_resource type="Texture2D" uid="uid://dbq7oso3fo4n6" path="res://Assets/Sprites/Enemies/CheepCheep.png" id="2_pbhdk"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_11skd"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/RedCheepCheep.json" id="4_hwpvb"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="4_w3x8m"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="5_upc6k"]
 [ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="6_l756v"]
@@ -36,13 +35,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ojki6"]
 size = Vector2(12, 12)
 
-[node name="LeapingCheepCheep" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="LeapingCheepCheep" type="CharacterBody2D" unique_id=949779772 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 script = ExtResource("1_pbhdk")
 on_screen_enabler = NodePath("VisibleOnScreenNotifier2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1561833291]
 position = Vector2(0, -8)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_upc6k")
@@ -50,48 +49,49 @@ autoplay = "default"
 frame_progress = 0.0672909
 flip_h = true
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=2002123104 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_11skd")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_hwpvb")
+json_path = "res://Assets/Sprites/Enemies/RedCheepCheep.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1307632770]
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=195900210]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_ojki6")
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=342035463 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("4_w3x8m")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=604842320 node_paths=PackedStringArray("visuals")]
 script = ExtResource("5_upc6k")
 visuals = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=495556335]
 position = Vector2(0, -8)
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=2006210371]
 script = ExtResource("6_upc6k")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=1916568692 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("6_l756v")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=955763791 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_813ad")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=1449232240]
 visible = false
 top_level = true
 visibility_layer = 2
@@ -99,7 +99,7 @@ texture_repeat = 2
 width = 1.0
 texture_mode = 1
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=1872320838 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("10_hwpvb")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://ba18grqjixded"
@@ -108,6 +108,7 @@ metadata/_custom_type_script = "uid://ba18grqjixded"
 [connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]
 [connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]

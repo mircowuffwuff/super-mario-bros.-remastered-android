@@ -1,7 +1,25 @@
 {
+	"animations": {
+		"Idle": {
+			"frames": [[0, 0, 16, 32]],
+			"speed": 5,
+			"loop": false
+		},
+		"Await": {"link": "Idle"},
+		"Talk": {"link": "Idle"}
+	},
 	"variations": {
-		"SMB1": {"source": "Peach.png", "rect": [16, 0, 16, 32]},
-		"SMBLL": {"source": "Peach.png", "rect": [0, 0, 16, 32]},
-		"SMBANN": {"source": "DiscoNPCs.png", "rect": [128, 0, 16, 32]}
+		"SMB1": {
+			"source": "Peach.png",
+			"rect": [0, 0, 16, 32]
+		},
+		"SMBLL": {
+			"source": "Peach.png",
+			"rect": [16, 0, 16, 32]
+		},
+		"SMBANN": {
+			"source": "Peach.png",
+			"rect": [32, 0, 16, 32]
+		}
 	}
 }

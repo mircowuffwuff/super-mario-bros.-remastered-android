@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://ls5wkt0y8nbg"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://ls5wkt0y8nbg"]
 
-[ext_resource type="AudioStream" uid="uid://bg2437fggnfue" path="res://Assets/Audio/BGM/Jungle.mp3" id="1_bp4hc"]
-[ext_resource type="AudioStream" uid="uid://bg66fu4ojseh1" path="res://Assets/Audio/BGM/JungleHurry.mp3" id="2_l8ll3"]
+[ext_resource type="AudioStream" uid="uid://co11dbcjxnxle" path="res://Assets/Audio/BGM/Jungle.mp3" id="1_bp4hc"]
+[ext_resource type="AudioStream" uid="uid://d2xixymsmx2s4" path="res://Assets/Audio/BGM/JungleHurry.mp3" id="2_l8ll3"]
 
 [resource]
 clip_count = 2

@@ -3,7 +3,7 @@ extends CanvasLayer
 
 var current_chara := 0
 
-static var character_icons := [preload("res://Assets/Sprites/Players/Mario/LifeIcon.json"),preload("res://Assets/Sprites/Players/Luigi/LifeIcon.json"), preload("res://Assets/Sprites/Players/Toad/LifeIcon.json"), preload("res://Assets/Sprites/Players/Toadette/LifeIcon.json")]
+static var character_icons := [("res://Assets/Sprites/Players/Mario/LifeIcon.json"),("res://Assets/Sprites/Players/Luigi/LifeIcon.json"), ("res://Assets/Sprites/Players/Toad/LifeIcon.json"), ("res://Assets/Sprites/Players/Toadette/LifeIcon.json")]
 
 const RANK_COLOURS := {"F": Color.DIM_GRAY, "D": Color.WEB_MAROON, "C": Color.PALE_GREEN, "B": Color.DODGER_BLUE, "A": Color.RED, "S": Color.GOLD, "P": Color.PURPLE}
 
@@ -41,20 +41,18 @@ func handle_main_hud() -> void:
 	if current_chara != Global.player_characters[0]:
 		update_character_info()
 	%CharacterIcon.get_node("Shadow").texture = %CharacterIcon.texture
-	%ModernLifeCount.text = "*" + (str(Global.lives).pad_zeros(2) if Settings.file.difficulty.inf_lives == 0 else "∞")
-	%CharacterIcon.visible = Global.current_game_mode != Global.GameMode.BOO_RACE
+	# DawnLR: This can at the same time fallback to the Mario icon, it kinda does when it's still visible but yeah.
+	%CharacterIcon.visible = Global.current_game_mode != Global.GameMode.BOO_RACE && character_icons[int(current_chara)] != null
 	%ModernLifeCount.visible = Global.current_game_mode != Global.GameMode.BOO_RACE
 	var world_num := str(Global.world_num)
 	if int(world_num) >= 10:
 		world_num = ["A", "B", "C", "D"][int(world_num) % 10]
 	elif int(world_num) < 1:
 		world_num = " "
-#	else:
-#		print(Global.world_num)
 	%LevelNum.text = world_num + "-" + str(Global.level_num)
 	%Crown.visible = Global.second_quest
 	%Time.text = " " + str(Global.time).pad_zeros(3)
-	if Settings.file.difficulty.time_limit == 0:
+	if Settings.file.difficulty.time_limit == 0 or Global.inf_time:
 		%Time.text = " ---"
 	%Time.visible = get_tree().get_first_node_in_group("Players") != null
 	handle_modern_hud()
@@ -68,21 +66,30 @@ func handle_main_hud() -> void:
 		handle_speedrun_timer()
 
 func update_character_info() -> void:
-	%CharacterName.text = tr(Player.CHARACTER_NAMES[int(Global.player_characters[0])])
-	%CharacterIcon.get_node("ResourceSetterNew").resource_json = (character_icons[int(Global.player_characters[0])])
 	current_chara = Global.player_characters[0]
+	%CharacterName.text = tr(Player.CHARACTER_NAMES[int(current_chara)])
+	if (character_icons[int(current_chara)] != null):
+		%CharacterIcon.get_node("ResourceSetterNew").json_path = character_icons[int(current_chara)]
 
 func handle_modern_hud() -> void:
 	$ModernHUD/TopLeft/RedCoins.hide()
 	$ModernHUD/TopLeft/CoinCount.show()
 	%ModernPB.hide()
-	%ModernIGT.hide()
+	%ModernStopwatch.hide()
 	%ModernCoinCount.text = "*" + str(Global.coins).pad_zeros(2)
 	%ModernScore.text = str(Global.score).pad_zeros(9)
 	%ModernTime.text = "⏲" + str(Global.time).pad_zeros(3)
 	%ModernKeyCount.visible = KeyItem.total_collected > 0
 	%ModernKeyAmount.text = "*" + str(KeyItem.total_collected).pad_zeros(2)
-	if get_tree().get_first_node_in_group("Players") == null or Settings.file.difficulty.time_limit == 0:
+	if Global.current_game_mode == Global.GameMode.CUSTOM_LEVEL:
+		$ModernHUD/TopLeft/LifeCount.hide()
+		%DeathCountLabel.show()
+		%DeathCountLabel.text = "☠*" + str(Global.total_deaths).pad_zeros(2)
+	else:
+		$ModernHUD/TopLeft/LifeCount.show()
+		%DeathCountLabel.hide()
+		%ModernLifeCount.text = "*" + (str(Global.lives).pad_zeros(2) if Settings.file.difficulty.inf_lives == 0 else "∞")
+	if get_tree().get_first_node_in_group("Players") == null or Settings.file.difficulty.time_limit == 0 or Global.inf_time:
 		%ModernTime.text = "⏲---"
 
 func handle_disco_combo() -> void:
@@ -108,39 +115,43 @@ func handle_challenge_mode_hud() -> void:
 	
 	var idx := 0
 	for i in [$Main/RedCoins/Coin1, $Main/RedCoins/Coin2, $Main/RedCoins/Coin3, $Main/RedCoins/Coin4, $Main/RedCoins/Coin5]:
-		i.frame = int(ChallengeModeHandler.is_coin_collected(idx, red_coins_collected))
+		if (ChallengeModeHandler.is_coin_collected(idx, red_coins_collected)):
+			i.frame = 1
+			i.get_node("Shadow").frame = 1
+		elif ChallengeModeHandler.is_coin_permanently_collected(idx):
+			i.frame = 2
+			i.get_node("Shadow").frame = 1
+		else:
+			i.frame = 0
+			i.get_node("Shadow").frame = 0
 		idx += 1
 	idx = 0
-	for i in [$Main/RedCoins/Coin1Transparent, $Main/RedCoins/Coin2Transparent, $Main/RedCoins/Coin3Transparent, $Main/RedCoins/Coin4Transparent, $Main/RedCoins/Coin5Transparent]:
-		i.visible = false
-		if ChallengeModeHandler.is_coin_permanently_collected(idx) and not ChallengeModeHandler.is_coin_collected(idx, red_coins_collected):
-			i.visible = true
-			i.frame = 1
-		idx += 1
 	
 	$Main/RedCoins/ScoreMedal.frame = 0
-	$Main/RedCoins/ScoreMedalTransparent.visible = false
+	$Main/RedCoins/ScoreMedal.get_node("Shadow").frame = 0
 	var score_target = ChallengeModeHandler.CHALLENGE_TARGETS[Global.current_campaign][Global.world_num - 1][Global.level_num - 1]
-	if Global.score >= score_target or ChallengeModeHandler.top_challenge_scores[Global.world_num - 1][Global.level_num - 1] >= score_target:
+	if Global.score >= score_target:
 		$Main/RedCoins/ScoreMedal.frame = 1
-	elif Global.score > 0 and (Global.score + (Global.time * 50)) >= score_target:
-		$Main/RedCoins/ScoreMedalTransparent.frame = 1
-		$Main/RedCoins/ScoreMedalTransparent.visible = true
+		$Main/RedCoins/ScoreMedal.get_node("Shadow").frame = 1
+	elif ChallengeModeHandler.top_challenge_scores[Global.world_num - 1][Global.level_num - 1] >= score_target:
+		$Main/RedCoins/ScoreMedal.frame = 2
+		$Main/RedCoins/ScoreMedal.get_node("Shadow").frame = 1
 	
 	if ChallengeModeHandler.is_coin_collected(ChallengeModeHandler.CoinValues.YOSHI_EGG, red_coins_collected):
 		$Main/RedCoins/YoshiEgg.frame = Global.level_num
+		$Main/RedCoins/YoshiEgg/Shadow.frame = 1
+	elif ChallengeModeHandler.is_coin_permanently_collected(ChallengeModeHandler.CoinValues.YOSHI_EGG):
+		$Main/RedCoins/YoshiEgg.frame = Global.level_num + 4
+		$Main/RedCoins/YoshiEgg/Shadow.frame = 1
 	else:
 		$Main/RedCoins/YoshiEgg.frame = 0
+		$Main/RedCoins/YoshiEgg/Shadow.frame = 0
 	
 	handle_yoshi_radar()
-	
-	for i in $Main/RedCoins.get_children():
-		i.get_node("Shadow").frame = i.frame
-		i.get_node("Shadow").visible = i.visible
 	for i in $ModernHUD/TopLeft/RedCoins.get_child_count():
 		$ModernHUD/TopLeft/RedCoins.get_child(i).frame = $Main/RedCoins.get_child(i).frame
 		$ModernHUD/TopLeft/RedCoins.get_child(i).visible = $Main/RedCoins.get_child(i).visible
-		$ModernHUD/TopLeft/RedCoins.get_child(i).get_node("Shadow").frame = $Main/RedCoins.get_child(i).frame
+		$ModernHUD/TopLeft/RedCoins.get_child(i).get_node("Shadow").frame = $Main/RedCoins.get_child(i).get_node("Shadow").frame
 		$ModernHUD/TopLeft/RedCoins.get_child(i).get_node("Shadow").visible = $Main/RedCoins.get_child(i).visible
 
 func handle_yoshi_radar() -> void:
@@ -163,6 +174,7 @@ func handle_yoshi_radar() -> void:
 		distance = (egg_position - player_position).length()
 		
 	%Radar.frame = Global.level_num
+	%ModernRadar.frame = Global.level_num
 		
 	if distance < 512:
 		%Radar.get_node("AnimationPlayer").speed_scale = (250 / distance)
@@ -179,18 +191,16 @@ func handle_yoshi_radar() -> void:
 func handle_speedrun_timer() -> void:
 	%Time.hide()
 	%Stopwatch.show()
+	%ModernStopwatch.show()
 	%IGT.show()
-	%IGT.modulate.a = int([Global.GameMode.MARATHON, Global.GameMode.MARATHON_PRACTICE].has(Global.current_game_mode) and get_tree().get_first_node_in_group("Players") != null)
-	%IGT.text = "⏲" + (str(Global.time).pad_zeros(3))
-	%ModernIGT.visible = %IGT.modulate.a == 1
-	%ModernIGT.text = %IGT.text
+	%IGT.text = "⏲" + str(Global.time).pad_zeros(3)
 	var late = SpeedrunHandler.timer > SpeedrunHandler.best_time
 	var diff = SpeedrunHandler.best_time - SpeedrunHandler.timer
 	%PB.visible = SpeedrunHandler.best_time > 0 and (SpeedrunHandler.timer > 0 or Global.current_level != null)
 	%ModernPB.visible = %PB.visible
 	var time_string = SpeedrunHandler.gen_time_string(SpeedrunHandler.format_time(SpeedrunHandler.timer))
 	%Stopwatch.text = time_string
-	%ModernTime.text = "⏲" + time_string
+	%ModernStopwatch.text = time_string
 	%PB.text = ("+" if late else "-") + SpeedrunHandler.gen_time_string(SpeedrunHandler.format_time(diff))
 	%PB.modulate = Color.RED if late else Color.GREEN
 	%ModernPB.text = %PB.text
@@ -199,7 +209,7 @@ func handle_speedrun_timer() -> void:
 func handle_pausing() -> void:
 	if get_tree().get_first_node_in_group("Players") != null and Global.can_pause and (Global.current_game_mode != Global.GameMode.LEVEL_EDITOR):
 		if get_tree().paused == false and Global.game_paused == false:
-			if Input.is_action_just_pressed("pause"):
+			if Global.multibind_action_just_pressed("pause"):
 				activate_pause_menu()
 
 func activate_pause_menu() -> void:
@@ -219,7 +229,7 @@ func activate_pause_menu() -> void:
 const HURRY_UP = preload("res://Assets/Audio/BGM/HurryUp.mp3")
 
 func on_timeout() -> void:
-	if Global.can_time_tick and is_instance_valid(Global.current_level) and Settings.file.difficulty.time_limit > 0:
+	if Global.can_time_tick and is_instance_valid(Global.current_level) and Settings.file.difficulty.time_limit > 0 and not Global.inf_time:
 		if Global.level_editor != null:
 			if Global.level_editor.current_state != LevelEditor.EditorState.PLAYTESTING:
 				return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://br018ivvrtsjd"]
+[gd_scene format=3 uid="uid://br018ivvrtsjd"]
 
 [ext_resource type="Script" uid="uid://cqjtevrvgmcl0" path="res://Scripts/UI/SaveDeletionWarning.gd" id="1_13rbu"]
 [ext_resource type="Texture2D" uid="uid://bnv2ocqgws3p7" path="res://Assets/Sprites/UI/Panel.png" id="2_xoheo"]
@@ -61,14 +61,14 @@ Underwater = SubResource("AtlasTexture_d5ydw")
 Castle = SubResource("AtlasTexture_1wxv0")
 metadata/_custom_type_script = ExtResource("6_livrr")
 
-[node name="CampaignSelect" type="Control"]
+[node name="CampaignSelect" type="Control" unique_id=46614229]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 168.0
 offset_bottom = 132.0
 script = ExtResource("1_13rbu")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=435068055]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,15 +77,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_u5q5e")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=792288012]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=901729650]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="SelectWorld" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SelectWorld" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2046890657]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.968627, 0.223529, 0.0627451, 1)
 text = "Warning!!"
@@ -93,15 +93,15 @@ horizontal_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=973947229]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_ojxyq")
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1874451541]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1709629625]
 layout_mode = 2
 text = "This will erase all of your data from this campaign.
 
@@ -110,27 +110,27 @@ horizontal_alignment = 1
 autowrap_mode = 2
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1850013910]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="Yes" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Yes" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1026673163]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 text = "Yes"
 autowrap_mode = 2
 uppercase = true
 
-[node name="No" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="No" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1329553554]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 text = "no"
 autowrap_mode = 2
 uppercase = true
 
-[node name="Cursor" type="TextureRect" parent="."]
+[node name="Cursor" type="TextureRect" parent="." unique_id=254476992]
 layout_mode = 0
 offset_left = 44.0
 offset_top = 113.0
@@ -139,7 +139,7 @@ offset_bottom = 121.0
 texture = SubResource("AtlasTexture_13rbu")
 stretch_mode = 2
 
-[node name="ResourceSetter" type="Node" parent="Cursor" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Cursor" unique_id=849570470 node_paths=PackedStringArray("node_to_affect")]
 script = ExtResource("5_dyhqq")
 node_to_affect = NodePath("..")
 property_name = "texture"

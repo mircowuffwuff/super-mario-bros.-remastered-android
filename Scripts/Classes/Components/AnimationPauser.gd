@@ -11,7 +11,10 @@ signal resumed
 func _process(_delta: float) -> void:
 	animation_player.speed_scale = int(not paused)
 
-func on_switch_hit() -> void:
-	paused = not paused
-	if paused: just_paused.emit()
-	else: resumed.emit()
+func pause() -> void:
+	paused = true
+	just_paused.emit()
+
+func resume() -> void:
+	paused = false
+	resumed.emit()

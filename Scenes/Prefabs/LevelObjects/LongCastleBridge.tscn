@@ -1,72 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxyecochur0lo"]
+[gd_scene format=3 uid="uid://dxyecochur0lo"]
 
 [ext_resource type="PackedScene" uid="uid://dtpyjucfl16sw" path="res://Scenes/Prefabs/LevelObjects/CastleBridge.tscn" id="1_j8urw"]
 [ext_resource type="Texture2D" uid="uid://boc6yagywb1lu" path="res://Assets/Sprites/Tilesets/Terrain/Castle.png" id="2_2iyqs"]
 
-[node name="CastleBridge" instance=ExtResource("1_j8urw")]
+[node name="CastleBridge" unique_id=1472933192 instance=ExtResource("1_j8urw")]
 
-[node name="Sprite2D16" type="Sprite2D" parent="Bridge" index="0"]
+[node name="Sprite2D16" type="Sprite2D" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="0" unique_id=6966852]
 position = Vector2(192, 0)
 texture = ExtResource("2_2iyqs")
 region_enabled = true
 region_rect = Rect2(64, 48, 16, 16)
 region_filter_clip_enabled = true
 
-[node name="Sprite2D15" type="Sprite2D" parent="Bridge" index="1"]
+[node name="Sprite2D15" type="Sprite2D" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="1" unique_id=369732461]
 position = Vector2(176, 0)
 texture = ExtResource("2_2iyqs")
 region_enabled = true
 region_rect = Rect2(64, 48, 16, 16)
 region_filter_clip_enabled = true
 
-[node name="Sprite2D14" type="Sprite2D" parent="Bridge" index="2"]
+[node name="Sprite2D14" type="Sprite2D" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="2" unique_id=488282523]
 position = Vector2(160, 0)
 texture = ExtResource("2_2iyqs")
 region_enabled = true
 region_rect = Rect2(64, 48, 16, 16)
 region_filter_clip_enabled = true
 
-[node name="CastleBridgeSegment" parent="Bridge" index="3"]
+[node name="CastleBridgeSegment" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="3" unique_id=1507955674]
 position = Vector2(144, 0)
 
-[node name="CastleBridgeSegment2" parent="Bridge" index="4"]
+[node name="CastleBridgeSegment2" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="4" unique_id=278319918]
 position = Vector2(128, 0)
 
-[node name="CastleBridgeSegment3" parent="Bridge" index="5"]
+[node name="CastleBridgeSegment3" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="5" unique_id=49611166]
 position = Vector2(112, 0)
 
-[node name="CastleBridgeSegment4" parent="Bridge" index="6"]
+[node name="CastleBridgeSegment4" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="6" unique_id=443879360]
 position = Vector2(96, 0)
 
-[node name="CastleBridgeSegment5" parent="Bridge" index="7"]
+[node name="CastleBridgeSegment5" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="7" unique_id=488378564]
 position = Vector2(80, 0)
 
-[node name="CastleBridgeSegment6" parent="Bridge" index="8"]
+[node name="CastleBridgeSegment6" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="8" unique_id=451101729]
 position = Vector2(64, 0)
 
-[node name="CastleBridgeSegment7" parent="Bridge" index="9"]
+[node name="CastleBridgeSegment7" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="9" unique_id=640211980]
 position = Vector2(48, 0)
 
-[node name="CastleBridgeSegment8" parent="Bridge" index="10"]
+[node name="CastleBridgeSegment8" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="10" unique_id=2108951897]
 position = Vector2(32, 0)
 
-[node name="CastleBridgeSegment9" parent="Bridge" index="11"]
+[node name="CastleBridgeSegment9" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="11" unique_id=2114650867]
 position = Vector2(16, 0)
 
-[node name="CastleBridgeSegment10" parent="Bridge" index="12"]
+[node name="CastleBridgeSegment10" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="12" unique_id=1627902871]
 position = Vector2(0, 0)
 
-[node name="CastleBridgeSegment11" parent="Bridge" index="13"]
+[node name="CastleBridgeSegment11" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="13" unique_id=757147707]
 visible = false
 position = Vector2(-999, 0)
 
-[node name="CastleBridgeSegment12" parent="Bridge" index="14"]
+[node name="CastleBridgeSegment12" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="14" unique_id=701831054]
 visible = false
 position = Vector2(-999, 0)
 
-[node name="CastleBridgeSegment13" parent="Bridge" index="15"]
+[node name="CastleBridgeSegment13" parent="Bridge" parent_id_path=PackedInt32Array(1389252244) index="15" unique_id=641403732]
 visible = false
 position = Vector2(-999, 0)
-
-[node name="Axe" parent="." index="1"]
-process_mode = 1

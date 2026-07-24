@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b6sqq06q4dhnc"]
+
+[ext_resource type="PackedScene" uid="uid://13vxk381k4gt" path="res://Scenes/Prefabs/Entities/Enemies/AngrySun.tscn" id="1_7nval"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="3_vsw6t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ty1h4"]
+
+[node name="HappyMoon" unique_id=797123896 instance=ExtResource("1_7nval")]
+
+[node name="ResourceSetterNew" parent="Sprite" parent_id_path=PackedInt32Array(2107662186) index="0" unique_id=365299931]
+json_path = "res://Assets/Sprites/Enemies/HappyMoon.json"
+
+[node name="Hitbox" parent="." index="3" unique_id=1629195984]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=650607471]
+shape = null
+
+[node name="PlayerDetection" type="Area2D" parent="." index="6" unique_id=2143278321]
+script = ExtResource("3_vsw6t")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" index="0" unique_id=69415451]
+shape = SubResource("CircleShape2D_ty1h4")
+
+[connection signal="player_entered" from="PlayerDetection" to="." method="moon_wipe" unbinds=1]

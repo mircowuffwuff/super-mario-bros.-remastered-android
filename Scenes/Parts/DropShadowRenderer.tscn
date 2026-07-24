@@ -1,17 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cinr6kcbmo6gr"]
+[gd_scene format=3 uid="uid://cinr6kcbmo6gr"]
 
 [ext_resource type="Script" uid="uid://c3krxjp4ye4ko" path="res://Scripts/Parts/DropShadowRenderer.gd" id="1_q8gs4"]
 [ext_resource type="Shader" uid="uid://x7lh23cq2u38" path="res://Scenes/Parts/ShadowShader.gdshader" id="2_g76ny"]
 [ext_resource type="Script" uid="uid://dwtrmo82e12ud" path="res://Scripts/Parts/ColourPaletteSampler.gd" id="6_03isl"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="7_5ikpa"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Particles/DropShadow.json" id="8_u22ru"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q8gs4"]
 shader = ExtResource("2_g76ny")
 shader_parameter/shadow_colour = Vector4(0, 0, 0, 0)
 shader_parameter/allow_transparency = false
 
-[node name="DropShadow" type="Node2D"]
+[node name="DropShadow" type="Node2D" unique_id=1022488551]
 process_mode = 3
 process_priority = 1
 process_physics_priority = 1
@@ -19,7 +18,7 @@ physics_interpolation_mode = 2
 script = ExtResource("1_q8gs4")
 offset = Vector2(2, 0)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1199014919]
 process_mode = 3
 visibility_layer = 2
 z_index = -50
@@ -35,7 +34,7 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=772924424]
 process_mode = 3
 transparent_bg = true
 handle_input_locally = false
@@ -45,21 +44,21 @@ canvas_cull_mask = 4293918721
 size = Vector2i(2, 2)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport" unique_id=1106941527]
 process_mode = 3
 physics_interpolation_mode = 2
 
-[node name="ColourPaletteSampler" type="Node" parent="." node_paths=PackedStringArray("node_to_affect")]
+[node name="ColourPaletteSampler" type="Node" parent="." unique_id=839336673 node_paths=PackedStringArray("node_to_affect")]
 script = ExtResource("6_03isl")
 node_to_affect = NodePath("..")
 value_to_set = "shadow_colour"
 metadata/_custom_type_script = "uid://dwtrmo82e12ud"
 
-[node name="ResourceSetter" type="Node" parent="ColourPaletteSampler" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="ColourPaletteSampler" unique_id=295284895 node_paths=PackedStringArray("node_to_affect")]
 process_mode = 3
 script = ExtResource("7_5ikpa")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("8_u22ru")
+json_path = "res://Assets/Sprites/Particles/DropShadow.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"

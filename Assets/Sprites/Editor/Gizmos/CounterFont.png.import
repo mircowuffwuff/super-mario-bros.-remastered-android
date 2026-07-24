@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://cwv0t2khcwe00"
+path="res://.godot/imported/CounterFont.png-e5aa2f0a9b39b70bcfdc0fedbe1fa6ba.fontdata"
+
+[deps]
+
+source_file="res://Assets/Sprites/Editor/Gizmos/CounterFont.png"
+dest_files=["res://.godot/imported/CounterFont.png-e5aa2f0a9b39b70bcfdc0fedbe1fa6ba.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("\'0\'-\'9\'", "\'.\'")
+kerning_pairs=PackedStringArray()
+columns=11
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=false
+scaling_mode=0

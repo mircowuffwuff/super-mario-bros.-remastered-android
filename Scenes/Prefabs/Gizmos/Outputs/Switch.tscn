@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dbhud5kb2qnvv"]
+
+[ext_resource type="PackedScene" uid="uid://cllscucqyd033" path="res://Scenes/Prefabs/Gizmos/Outputs/BaseOutput.tscn" id="1_x4k4y"]
+[ext_resource type="Script" uid="uid://otjr0db7dtq7" path="res://Scripts/Classes/Gizmos/Switch.gd" id="2_me4jo"]
+[ext_resource type="Texture2D" uid="uid://gv1pjlssjnso" path="res://Assets/Sprites/Editor/Gizmos/Switch.png" id="3_nea2u"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_me4jo"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="5_nea2u"]
+
+[node name="BaseOutput" unique_id=515746201 instance=ExtResource("1_x4k4y")]
+script = ExtResource("2_me4jo")
+powered = false
+
+[node name="Sprite2D" parent="." index="0" unique_id=1224179792]
+texture = ExtResource("3_nea2u")
+
+[node name="EditorPropertyExposer" type="Node" parent="." index="2" unique_id=615000374]
+script = ExtResource("4_me4jo")
+properties = Array[String](["powered"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." index="3" unique_id=1374188912]
+script = ExtResource("5_nea2u")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="turned_off" from="." to="SignalExposer" method="turn_off"]
+[connection signal="turned_on" from="." to="SignalExposer" method="turn_on"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="toggle"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="toggle"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="start"]

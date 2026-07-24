@@ -1,11 +1,15 @@
 extends AnimatableBody2D
 
-@export var active := false
 @export_enum("Right", "Left", "Up", "Down") var direction := 0
 @export_range(1, 4, 1) var strength := 1
 
-func on_switch_hit() -> void:
-	active = not active
+@export var active := false
+
+func turn_on() -> void:
+	active = true
+
+func turn_off() -> void:
+	active = false
 
 func _physics_process(_delta: float) -> void:
 	$Particles.amount = strength * 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://4bb81eil6a4c"]
+[gd_scene format=3 uid="uid://4bb81eil6a4c"]
 
 [ext_resource type="Texture2D" uid="uid://c3a7sv3y1fjja" path="res://Assets/Sprites/Enemies/LakituCloud.png" id="1_0ier6"]
 [ext_resource type="Script" uid="uid://bohpv3almqrvg" path="res://Scripts/Classes/Entities/Enemies/Lakitu.gd" id="1_iwyhq"]
@@ -6,12 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dinpjmg0q23rv" path="res://Scenes/Prefabs/Entities/Enemies/Spiny.tscn" id="2_hs1pg"]
 [ext_resource type="Texture2D" uid="uid://chrv5ve7vlsjs" path="res://Assets/Sprites/Enemies/Lakitu.png" id="2_iwyhq"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_as0ro"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/Lakitu.json" id="5_p3xbt"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="5_tn6a8"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="6_nr0pc"]
 [ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="7_mgtbd"]
 [ext_resource type="Script" uid="uid://cqif1li7otvpl" path="res://Scripts/Parts/SpriteFramesToJsonConverter.gd" id="7_nr0pc"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/LakituCloud.json" id="7_p3xbt"]
 [ext_resource type="Script" uid="uid://cmvlgsjmsk0v5" path="res://Scripts/Classes/Resources/ThemedResource.gd" id="8_mgtbd"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="14_v233d"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="15_q7b5d"]
@@ -75,20 +73,20 @@ script = ExtResource("8_mgtbd")
 Overworld = SubResource("SpriteFrames_p3xbt")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="Lakitu" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="Lakitu" type="CharacterBody2D" unique_id=820758872 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 script = ExtResource("1_iwyhq")
 item = ExtResource("2_hs1pg")
 on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Cloud" type="AnimatedSprite2D" parent="."]
+[node name="Cloud" type="AnimatedSprite2D" parent="." unique_id=305538518]
 sprite_frames = SubResource("SpriteFrames_as0ro")
 script = ExtResource("2_3a3ug")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Cloud"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Cloud" unique_id=655568064]
 show_behind_parent = true
 position = Vector2(0, -7)
 scale = Vector2(-1, 1)
@@ -100,79 +98,81 @@ script = ExtResource("2_3a3ug")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Cloud/Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Cloud/Sprite" unique_id=376923799 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_as0ro")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_p3xbt")
+json_path = "res://Assets/Sprites/Enemies/Lakitu.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="Cloud"]
+[node name="Hitbox" type="Area2D" parent="Cloud" unique_id=1582964298]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cloud/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cloud/Hitbox" unique_id=109636445]
 visible = false
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_3a3ug")
 
-[node name="ResourceSetterNew" type="Node" parent="Cloud" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Cloud" unique_id=1285830412 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_as0ro")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("7_p3xbt")
+json_path = "res://Assets/Sprites/Enemies/LakituCloud.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=70288328]
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(4.03897e-28, -1.13687e-13)
 scale = Vector2(1.6, 2.1)
 rect = Rect2(-14.999998, -10, 29.999996, 20)
 
-[node name="ThrowTimer" type="Timer" parent="."]
+[node name="ThrowTimer" type="Timer" parent="." unique_id=1856652424]
 wait_time = 2.0
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=127269055 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_tn6a8")
 hitbox = NodePath("../Cloud/Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=850828282 node_paths=PackedStringArray("visuals")]
 script = ExtResource("6_nr0pc")
 visuals = NodePath("../Cloud/Sprite")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=1738589778 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_mgtbd")
 hitbox = NodePath("../Cloud/Hitbox")
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="ThemedToJSONConverter" type="Node" parent="."]
+[node name="ThemedToJSONConverter" type="Node" parent="." unique_id=1301224301]
 script = ExtResource("7_nr0pc")
 resource = SubResource("Resource_3a3ug")
 json_file_path = "res://Assets/Sprites/Enemies/LakituCloud.json"
 metadata/_custom_type_script = "uid://cqif1li7otvpl"
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=2082815520]
 script = ExtResource("14_v233d")
 properties = Array[String](["item"])
 filters = Dictionary[String, String]({
 "item": "can_lakitu_throw"
 })
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1768003609]
 script = ExtResource("15_q7b5d")
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="WallCheck" type="RayCast2D" parent="."]
+[node name="WallCheck" type="RayCast2D" parent="." unique_id=1917416965]
 target_position = Vector2(0, -8)
 collision_mask = 6
 hit_from_inside = true
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=1455962947 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("16_r67tm")
 hitbox = NodePath("../Cloud/Hitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=81915117 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("17_6pdgp")
 hitbox = NodePath("../Cloud/Hitbox")
 metadata/_custom_type_script = "uid://ba18grqjixded"
@@ -186,6 +186,8 @@ metadata/_custom_type_script = "uid://ba18grqjixded"
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" flags=3 binds= [200]]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="summon_cloud_particle" unbinds=1]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="summon_cloud_particle" unbinds=1]
 [connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]

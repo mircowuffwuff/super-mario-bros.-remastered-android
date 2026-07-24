@@ -1,0 +1,15 @@
+{
+	"animations": {
+		"Normal": {
+			"frames": [[0, 0, 16, 16]],
+			"speed": 5,
+			"loop": true
+		},
+		"Diagonal": {
+			"frames": [[16, 0, 16, 16]],
+			"speed": 5,
+			"loop": true
+		}
+	},
+	"variations": {"source": "HomingBill.png"}
+}

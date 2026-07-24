@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://c7jrwo3p5tnty"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://c7jrwo3p5tnty"]
 
-[ext_resource type="AudioStream" uid="uid://0rvr8wemtrnm" path="res://Assets/Audio/BGM/Snow.mp3" id="1_j2pov"]
-[ext_resource type="AudioStream" uid="uid://binebm881jdp4" path="res://Assets/Audio/BGM/SnowHurry.mp3" id="2_45rxi"]
+[ext_resource type="AudioStream" uid="uid://cnehb1g7huu1l" path="res://Assets/Audio/BGM/Snow.mp3" id="1_j2pov"]
+[ext_resource type="AudioStream" uid="uid://c72m544pq51vx" path="res://Assets/Audio/BGM/SnowHurry.mp3" id="2_45rxi"]
 
 [resource]
 clip_count = 2

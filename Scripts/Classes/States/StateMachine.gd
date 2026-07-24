@@ -3,6 +3,9 @@ extends Node
 
 @export var state: State = null
 
+func _ready() -> void:
+	state.enter()
+
 func transition_to(state_name := "", state_msg := {}) -> void:
 	state.exit()
 	state.state_exited.emit()

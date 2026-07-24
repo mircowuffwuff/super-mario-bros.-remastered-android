@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ThemedResource" load_steps=5 format=3 uid="uid://c8ojbqg4q4qh6"]
+[gd_resource type="Resource" script_class="ThemedResource" format=3 uid="uid://c8ojbqg4q4qh6"]
 
 [ext_resource type="Texture2D" uid="uid://dsncqqhfsnq6s" path="res://Assets/Sprites/Editor/RotationIcon.png" id="1_hcjfr"]
 [ext_resource type="Script" uid="uid://cmvlgsjmsk0v5" path="res://Scripts/Classes/Resources/ThemedResource.gd" id="2_sd544"]

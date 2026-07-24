@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://58uk17ixtt4r"]
+[gd_scene format=3 uid="uid://58uk17ixtt4r"]
 
 [ext_resource type="PackedScene" uid="uid://bc1mrna4kybhv" path="res://Scenes/Prefabs/Blocks/QuestionBlocks/QuestionBlock.tscn" id="1_8myna"]
 [ext_resource type="Texture2D" uid="uid://bylhrj768sua2" path="res://Assets/Sprites/Blocks/InvisibleBlock.png" id="2_qh1vn"]
 [ext_resource type="Script" uid="uid://s5e3ps0g7nya" path="res://Scripts/Classes/Blocks/InvisibleQuestionBlock.gd" id="2_u3lik"]
 [ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="4_f783k"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="5_8tag8"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/InvisibleBlock.json" id="6_xdyfy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f783k"]
 size = Vector2(16, 1)
@@ -14,41 +13,43 @@ size = Vector2(16, 1)
 atlas = ExtResource("2_qh1vn")
 region = Rect2(0, 0, 16, 16)
 
-[node name="InvisibleQuestionBlock" instance=ExtResource("1_8myna")]
+[node name="InvisibleQuestionBlock" unique_id=1729997792 instance=ExtResource("1_8myna")]
 collision_layer = 1
 script = ExtResource("2_u3lik")
 combo_meter_amount = 10
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" unique_id=1322431434]
 visible = false
 
-[node name="Collision" parent="." index="1"]
+[node name="Collision" parent="." index="1" unique_id=1652996612]
 visible = true
 rotation = 3.14159
 disabled = true
 
-[node name="Hitbox" type="Area2D" parent="." index="3"]
+[node name="Hitbox" type="Area2D" parent="." index="3" unique_id=2008901292]
 position = Vector2(0, 8)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0" unique_id=658281905]
 shape = SubResource("RectangleShape2D_f783k")
 
-[node name="Node2D" type="Node2D" parent="." index="4"]
+[node name="Node2D" type="Node2D" parent="." index="4" unique_id=1452079836]
 visibility_layer = 2
 script = ExtResource("4_f783k")
 
-[node name="EditorIcon" type="Sprite2D" parent="Node2D" index="0"]
+[node name="EditorIcon" type="Sprite2D" parent="Node2D" index="0" unique_id=524283365]
 texture = SubResource("AtlasTexture_nrsus")
 
-[node name="ResourceSetter" type="Node" parent="Node2D/EditorIcon" index="0" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Node2D/EditorIcon" index="0" unique_id=273263587 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("5_8tag8")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("6_xdyfy")
+json_path = "res://Assets/Sprites/Blocks/InvisibleBlock.json"
 use_cache = false
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
+[connection signal="block_hit" from="." to="LevelPersistance" method="set_as_active"]
 [connection signal="area_entered" from="Hitbox" to="." method="on_area_entered"]
 
 [editable path="BlockAnimations"]

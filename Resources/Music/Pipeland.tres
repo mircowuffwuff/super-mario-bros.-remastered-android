@@ -1,6 +1,6 @@
-[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://dpserdbkmvc0x"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://dpserdbkmvc0x"]
 
-[ext_resource type="AudioStream" uid="uid://o7vd6ds6ue6m" path="res://Assets/Audio/BGM/PipeLand.mp3" id="1_7dkv0"]
+[ext_resource type="AudioStream" uid="uid://d0mpsnncuaxu6" path="res://Assets/Audio/BGM/PipeLand.mp3" id="1_7dkv0"]
 
 [resource]
 clip_count = 1

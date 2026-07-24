@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://djve7q2o304w1"]
+
+[ext_resource type="Texture2D" uid="uid://bb3ix82j6drgo" path="res://Assets/Sprites/Items/10Coin.png" id="1_ff54g"]
+[ext_resource type="Script" uid="uid://bta0sm58oe0ft" path="res://Scripts/Classes/Entities/Items/SPCoin.gd" id="1_yu3cn"]
+[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_qjhmb"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_6rbve"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="6_d14m4"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="7_d14m4"]
+[ext_resource type="Script" uid="uid://maqpreddu5kg" path="res://Scripts/Classes/Components/LevelPersistance.gd" id="8_b5crn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d14m4"]
+radius = 16.492422
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu3cn"]
+atlas = ExtResource("1_ff54g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d14m4"]
+atlas = ExtResource("1_ff54g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5crn"]
+atlas = ExtResource("1_ff54g")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwu6p"]
+atlas = ExtResource("1_ff54g")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7hwy1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu3cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d14m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5crn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwu6p")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu3cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d14m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5crn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwu6p")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 20.0
+}]
+
+[node name="10Coin" type="Node2D" unique_id=1133717281]
+script = ExtResource("1_yu3cn")
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=698094264]
+script = ExtResource("6_d14m4")
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=936255597]
+position = Vector2(0, -12)
+script = ExtResource("7_d14m4")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=949358362]
+shape = SubResource("CircleShape2D_d14m4")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1158279776]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_7hwy1")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.64174795
+script = ExtResource("2_qjhmb")
+metadata/_custom_type_script = "uid://caq1qiwmy0mox"
+
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=465438140 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_6rbve")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Items/10Coin.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="LevelPersistance" type="Node" parent="." unique_id=1484862382]
+script = ExtResource("8_b5crn")
+metadata/_custom_type_script = "uid://maqpreddu5kg"
+
+[connection signal="collected" from="." to="LevelPersistance" method="set_as_active"]
+[connection signal="collected" from="." to="ScoreNoteSpawner" method="spawn_note" binds= [100]]
+[connection signal="area_entered" from="PlayerDetection" to="." method="on_area_entered"]
+[connection signal="player_entered" from="PlayerDetection" to="." method="collect" flags=6 unbinds=1]
+[connection signal="enabled" from="LevelPersistance" to="." method="queue_free"]

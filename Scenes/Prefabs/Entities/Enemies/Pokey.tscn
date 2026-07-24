@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://beggmeixrin75"]
+[gd_scene format=3 uid="uid://beggmeixrin75"]
 
 [ext_resource type="Script" uid="uid://b1b6aiai213ci" path="res://Scripts/Classes/Entities/Enemies/Pokey.gd" id="1_b54ls"]
 [ext_resource type="Texture2D" uid="uid://dj46y8vhqlqjw" path="res://Assets/Sprites/Enemies/Pokey.png" id="2_8aome"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_b54ls"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="4_30hxr"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_bjt0v"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/Pokey.json" id="5_rjgwh"]
 [ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="5_t1h12"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="6_bjt0v"]
 [ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="7_rjgwh"]
@@ -16,6 +15,7 @@
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="12_b54ls"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="13_30hxr"]
 [ext_resource type="Script" uid="uid://blfnd65xcx78c" path="res://Scripts/Classes/Components/LedgeDetectionCast.gd" id="16_rjgwh"]
+[ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="17_1jb5g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6vo0"]
 atlas = ExtResource("2_8aome")
@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 		node.play(\"Head\" if i == owner.length - 1 else \"Body\")
 "
 
-[node name="Pokey" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="Pokey" type="CharacterBody2D" unique_id=872272021 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 collision_layer = 16
 collision_mask = 50
 script = ExtResource("1_b54ls")
@@ -69,12 +69,12 @@ on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Parts" type="Node2D" parent="."]
+[node name="Parts" type="Node2D" parent="." unique_id=1667483832]
 unique_name_in_owner = true
 position = Vector2(0, -8)
 scale = Vector2(-1, 1)
 
-[node name="Part1" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part1" type="AnimatedSprite2D" parent="Parts" unique_id=389571568]
 sprite_frames = SubResource("SpriteFrames_86hsc")
 animation = &"Body"
 flip_h = true
@@ -82,19 +82,20 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part1" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part1" unique_id=1454910882 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part1" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part1" unique_id=1984791451 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part2" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part2" type="AnimatedSprite2D" parent="Parts" unique_id=2136874001]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_86hsc")
 animation = &"Body"
@@ -103,20 +104,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part2" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part2" unique_id=1394510804 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part2" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part2" unique_id=183330759 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part3" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part3" type="AnimatedSprite2D" parent="Parts" unique_id=1518469801]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_86hsc")
 animation = &"Head"
@@ -125,20 +127,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part3" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part3" unique_id=708057604 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part3" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part3" unique_id=1711970225 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part4" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part4" type="AnimatedSprite2D" parent="Parts" unique_id=2130967887]
 visible = false
 position = Vector2(0, -48)
 sprite_frames = SubResource("SpriteFrames_86hsc")
@@ -148,20 +151,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part4" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part4" unique_id=759739623 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part4" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part4" unique_id=287705651 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part5" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part5" type="AnimatedSprite2D" parent="Parts" unique_id=1719485553]
 visible = false
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_86hsc")
@@ -171,20 +175,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part5" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part5" unique_id=170616935 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part5" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part5" unique_id=156625211 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part6" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part6" type="AnimatedSprite2D" parent="Parts" unique_id=480453526]
 visible = false
 position = Vector2(0, -80)
 sprite_frames = SubResource("SpriteFrames_86hsc")
@@ -194,20 +199,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part6" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part6" unique_id=1233588820 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part6" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part6" unique_id=1415608482 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part7" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part7" type="AnimatedSprite2D" parent="Parts" unique_id=1910907861]
 visible = false
 position = Vector2(0, -96)
 sprite_frames = SubResource("SpriteFrames_86hsc")
@@ -217,20 +223,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part7" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part7" unique_id=1853543652 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part7" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part7" unique_id=61043083 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part8" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part8" type="AnimatedSprite2D" parent="Parts" unique_id=1161730613]
 visible = false
 position = Vector2(0, -112)
 sprite_frames = SubResource("SpriteFrames_86hsc")
@@ -240,20 +247,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part8" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part8" unique_id=1936736043 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part8" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part8" unique_id=291218135 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part9" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part9" type="AnimatedSprite2D" parent="Parts" unique_id=1201441548]
 visible = false
 position = Vector2(0, -128)
 sprite_frames = SubResource("SpriteFrames_86hsc")
@@ -263,20 +271,21 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part9" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part9" unique_id=987511255 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part9" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part9" unique_id=791667719 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Part10" type="AnimatedSprite2D" parent="Parts"]
+[node name="Part10" type="AnimatedSprite2D" parent="Parts" unique_id=1742576134]
 visible = false
 position = Vector2(0, -144)
 sprite_frames = SubResource("SpriteFrames_86hsc")
@@ -286,79 +295,79 @@ script = ExtResource("3_b54ls")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Parts/Part10" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Parts/Part10" unique_id=955331471 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_bjt0v")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_rjgwh")
+json_path = "res://Assets/Sprites/Enemies/Pokey.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="GibSpawner" type="Node" parent="Parts/Part10" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="Parts/Part10" unique_id=857679534 node_paths=PackedStringArray("visuals")]
 script = ExtResource("4_30hxr")
 visuals = NodePath("..")
 play_death_sfx = false
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1613432072]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_rjgwh")
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=535015749 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_t1h12")
 hitbox = NodePath("../HeadHitbox")
 play_sfx_on_hit = true
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="FireballDetection2" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection2" type="Node" parent="." unique_id=1589696300 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_t1h12")
 hitbox = NodePath("../BodyHitbox")
 play_sfx_on_hit = true
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=572575309 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("6_bjt0v")
 hitbox = NodePath("../BodyHitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=1205896698 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("7_rjgwh")
 hitbox = NodePath("../BodyHitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="IcicleDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="IcicleDetection" type="Node" parent="." unique_id=801606279 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("8_1jb5g")
 hitbox = NodePath("../HeadHitbox")
 metadata/_custom_type_script = "uid://dq860i312isk"
 
-[node name="BlockBouncingDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=1224834508 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("9_klwvr")
-detection_type = 1
 hitbox = NodePath("../BodyHitbox")
 metadata/_custom_type_script = "uid://cmg61722ktg2m"
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=1782338933 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("10_wuthq")
 hitbox = NodePath("../BodyHitbox")
 metadata/_custom_type_script = "uid://ba18grqjixded"
 
-[node name="BodyHitbox" type="Area2D" parent="."]
+[node name="BodyHitbox" type="Area2D" parent="." unique_id=253258292]
 position = Vector2(0, -8)
 scale = Vector2(0.9, 1)
 
-[node name="Collision" type="CollisionShape2D" parent="BodyHitbox"]
+[node name="Collision" type="CollisionShape2D" parent="BodyHitbox" unique_id=1268035859]
 shape = SubResource("RectangleShape2D_rjgwh")
 
-[node name="HeadHitbox" type="Area2D" parent="."]
+[node name="HeadHitbox" type="Area2D" parent="." unique_id=220063225]
 position = Vector2(0, -8)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadHitbox" unique_id=2083183266]
 shape = SubResource("RectangleShape2D_mpg4k")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=385086110]
 position = Vector2(0, -168)
 rect = Rect2(-10, 0, 20, 176)
 
-[node name="BasicEnemyMovement" type="Node" parent="." node_paths=PackedStringArray("ledge_detection_cast", "visuals")]
+[node name="BasicEnemyMovement" type="Node" parent="." unique_id=1264666828 node_paths=PackedStringArray("ledge_detection_cast", "visuals")]
 script = ExtResource("11_8aome")
 ledge_detection_cast = NodePath("../LedgeDetectionCast")
 move_speed = 16
@@ -366,32 +375,44 @@ second_quest_speed = 20
 visuals = NodePath("../Parts")
 metadata/_custom_type_script = "uid://dlq6o2rg1x7in"
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=2106716762]
 script = ExtResource("12_b54ls")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="EditorPropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1222167752]
 script = ExtResource("13_30hxr")
 properties = Array[String](["length"])
 
-[node name="PartHandler" type="Node" parent="."]
+[node name="PartHandler" type="Node" parent="." unique_id=1119145934]
 process_mode = 3
 script = SubResource("GDScript_30hxr")
 
-[node name="LedgeDetectionCast" type="RayCast2D" parent="."]
+[node name="LedgeDetectionCast" type="RayCast2D" parent="." unique_id=82220824]
 position = Vector2(-4, -5)
 target_position = Vector2(0, 8)
 collision_mask = 2
 script = ExtResource("16_rjgwh")
 
+[node name="TrackJoint" type="Node" parent="." unique_id=1676129714 node_paths=PackedStringArray("movement_node")]
+script = ExtResource("17_1jb5g")
+movement_node = NodePath("../BasicEnemyMovement")
+disable_physics = false
+metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
+
 [connection signal="killed" from="." to="." method="summon_part_gibs" unbinds=1]
 [connection signal="fireball_hit" from="FireballDetection" to="." method="die_from_object"]
+[connection signal="fireball_hit" from="FireballDetection" to="." method="add_score" unbinds=1]
 [connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="add_score"]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
 [connection signal="icicle_detected" from="IcicleDetection" to="." method="die_from_object"]
+[connection signal="icicle_detected" from="IcicleDetection" to="." method="add_score"]
 [connection signal="block_bounced" from="BlockBouncingDetection" to="." method="die_from_object"]
+[connection signal="block_bounced" from="BlockBouncingDetection" to="." method="add_score"]
 [connection signal="explosion_entered" from="ExplosionDetection" to="." method="die_from_object"]
+[connection signal="explosion_entered" from="ExplosionDetection" to="." method="add_score"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1wl10xa3jara"]
+[gd_scene format=3 uid="uid://c1wl10xa3jara"]
 
 [ext_resource type="Script" uid="uid://7b27p232kp7w" path="res://Scripts/Classes/Entities/Enemies/BulletBill.gd" id="1_52tat"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_dwbhe"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_4je76"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/BulletBill.json" id="4_myh77"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="5_edyyd"]
 [ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="6_jwkii"]
 [ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="9_4je76"]
@@ -15,66 +14,67 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbhe"]
 size = Vector2(12, 12)
 
-[node name="BulletBill" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="BulletBill" type="CharacterBody2D" unique_id=1262961544 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 z_index = -2
 script = ExtResource("1_52tat")
 on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2001633884]
 position = Vector2(0, -8)
 scale = Vector2(-1, 1)
 flip_h = true
 script = ExtResource("2_dwbhe")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=979926632 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_4je76")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_myh77")
+json_path = "res://Assets/Sprites/Enemies/BulletBill.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=209427212]
 position = Vector2(0, -4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1533934443]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_dwbhe")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1988386788]
 position = Vector2(0, -8)
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=199694289 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_edyyd")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="GibSpawner" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" type="Node" parent="." unique_id=470709267 node_paths=PackedStringArray("visuals")]
 script = ExtResource("6_jwkii")
 visuals = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1620782179]
 script = ExtResource("9_dwbhe")
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=1163260084 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("9_4je76")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="LevelEditorToggleDetection" type="Node" parent="."]
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=2042891806]
 script = ExtResource("12_0vqq3")
 metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=799147571 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("13_871w6")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://ba18grqjixded"
 
-[node name="OffScreenDespawner" type="Node" parent="."]
+[node name="OffScreenDespawner" type="Node" parent="." unique_id=2012944771]
 script = ExtResource("11_myh77")
 
 [connection signal="killed" from="." to="GibSpawner" method="summon_gib"]
@@ -85,9 +85,10 @@ script = ExtResource("11_myh77")
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="GibSpawner" method="stomp_die"]
 [connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
-[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="_ready"]
 [connection signal="level_start" from="LevelEditorToggleDetection" to="." method="on_screen_entered"]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="_ready"]
 [connection signal="explosion_entered" from="ExplosionDetection" to="." method="die_from_object"]
 [connection signal="explosion_entered" from="ExplosionDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]

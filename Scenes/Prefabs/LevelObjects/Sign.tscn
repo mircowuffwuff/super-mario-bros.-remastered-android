@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bbefraegm6aq8"]
+
+[ext_resource type="Script" uid="uid://dv3hlv5ruebdb" path="res://Scripts/Classes/Entities/Objects/Sign.gd" id="1_k8vxl"]
+[ext_resource type="Texture2D" uid="uid://bdjuvdri4c27u" path="res://Assets/Sprites/Tilesets/Sign.png" id="1_rjgrf"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="3_b80uo"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_qbs2l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qygo"]
+atlas = ExtResource("1_rjgrf")
+region = Rect2(0, 0, 96, 96)
+
+[node name="Sign" type="Node2D" unique_id=1022149561]
+z_index = -5
+script = ExtResource("1_k8vxl")
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=462957406]
+script = ExtResource("3_b80uo")
+properties = Array[String](["post", "head"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="Joint" type="Node2D" parent="." unique_id=774415521]
+
+[node name="Post" type="Sprite2D" parent="Joint" unique_id=1891884054]
+unique_name_in_owner = true
+texture = SubResource("AtlasTexture_6qygo")
+hframes = 4
+frame = 1
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 24)
+
+[node name="ResourceSetterNew" type="Node" parent="Joint/Post" unique_id=78327320 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_qbs2l")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Sign.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Head" type="Sprite2D" parent="Joint" unique_id=103952854]
+unique_name_in_owner = true
+texture = SubResource("AtlasTexture_6qygo")
+hframes = 4
+vframes = 3
+region_enabled = true
+region_rect = Rect2(0, 24, 96, 72)
+
+[node name="ResourceSetterNew" type="Node" parent="Joint/Head" unique_id=1381165390 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_qbs2l")
+node_to_affect = NodePath("..")
+property_name = "texture"
+mode = 1
+json_path = "res://Assets/Sprites/Tilesets/Sign.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[connection signal="modifier_applied" from="EditorPropertyExposer" to="." method="update"]

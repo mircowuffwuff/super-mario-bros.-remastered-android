@@ -1,4 +1,4 @@
-[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cflgloiossd8a"]
+[gd_resource type="FontVariation" format=3 uid="uid://cflgloiossd8a"]
 
 [ext_resource type="FontFile" uid="uid://bk0no5p6sifgu" path="res://Assets/Sprites/UI/ScoreFont.fnt" id="1_mys4o"]
 

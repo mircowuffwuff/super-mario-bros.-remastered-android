@@ -1,53 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://625f6mfacind"]
-
+[gd_scene format=3 uid="uid://625f6mfacind"]
 [ext_resource type="PackedScene" uid="uid://b7k46o1wrbkee" path="res://Scenes/Levels/SMBLL/World6/6-3.tscn" id="1_o1cqg"]
 [ext_resource type="JSON" path="res://Assets/Audio/BGM/Jungle.json" id="2_00rvl"]
 [ext_resource type="Script" uid="uid://bjs5mlc3xrxud" path="res://Scripts/Parts/DiscoLevel.gd" id="2_7iv8c"]
-
-[node name="6-3" instance=ExtResource("1_o1cqg")]
+[node name="6-3" unique_id=881159750 instance=ExtResource("1_o1cqg")]
 music = ExtResource("2_00rvl")
 theme = "Jungle"
 campaign = "SMBANN"
 world_id = 7
-
-[node name="LevelBG" parent="." index="7"]
+[node name="LevelBG" parent="." index="7" unique_id=1120927399]
 primary_layer = 1
 particles = 0
 liquid_layer = 3
-
-[node name="DiscoLevel" type="Node" parent="." index="13"]
+[node name="DiscoLevel" type="Node" parent="." index="13" unique_id=1122507086]
 script = ExtResource("2_7iv8c")
 combo_meter_rate = 0.6000000000058208
 metadata/_custom_type_script = "uid://bjs5mlc3xrxud"
-
-[connection signal="collected" from="Tiles/Coin" to="Tiles/Coin/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118978" to="Tiles/@Node2D@118978/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118979" to="Tiles/@Node2D@118979/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118980" to="Tiles/@Node2D@118980/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118981" to="Tiles/@Node2D@118981/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118982" to="Tiles/@Node2D@118982/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118983" to="Tiles/@Node2D@118983/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118984" to="Tiles/@Node2D@118984/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118985" to="Tiles/@Node2D@118985/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118986" to="Tiles/@Node2D@118986/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118987" to="Tiles/@Node2D@118987/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118988" to="Tiles/@Node2D@118988/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118989" to="Tiles/@Node2D@118989/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118990" to="Tiles/@Node2D@118990/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118991" to="Tiles/@Node2D@118991/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118992" to="Tiles/@Node2D@118992/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118993" to="Tiles/@Node2D@118993/LevelPersistance" method="set_as_active"]
-[connection signal="collected" from="Tiles/@Node2D@118994" to="Tiles/@Node2D@118994/LevelPersistance" method="set_as_active"]
-[connection signal="block_destroyed" from="Tiles/QuestionBlock" to="Tiles/QuestionBlock/LevelPersistance" method="set_as_active_2"]
-[connection signal="block_emptied" from="Tiles/QuestionBlock" to="Tiles/QuestionBlock/LevelPersistance" method="set_as_active"]
-[connection signal="player_block_hit" from="Tiles/QuestionBlock" to="Tiles/QuestionBlock" method="player_mushroom_check"]
-[connection signal="player_block_hit" from="Tiles/QuestionBlock" to="Tiles/QuestionBlock" method="dispense_item" unbinds=1]
-[connection signal="player_block_hit" from="Tiles/QuestionBlock" to="Tiles/QuestionBlock/BlockAnimations" method="bounce_block" unbinds=1]
-[connection signal="shell_block_hit" from="Tiles/QuestionBlock" to="Tiles/QuestionBlock" method="dispense_item" unbinds=1]
-[connection signal="shell_block_hit" from="Tiles/QuestionBlock" to="Tiles/QuestionBlock/BlockAnimations" method="bounce_block" unbinds=1]
-[connection signal="block_destroyed" from="Tiles/BrickBlock" to="Tiles/BrickBlock/LevelPersistance" method="set_as_active_2"]
-[connection signal="block_emptied" from="Tiles/BrickBlock" to="Tiles/BrickBlock/LevelPersistance" method="set_as_active"]
-[connection signal="player_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock" method="on_block_hit"]
-[connection signal="player_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock/BlockAnimations" method="bounce_block" unbinds=1]
-[connection signal="shell_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock" method="on_shell_block_hit"]
-[connection signal="shell_block_hit" from="Tiles/BrickBlock" to="Tiles/BrickBlock/BlockAnimations" method="bounce_block" unbinds=1]

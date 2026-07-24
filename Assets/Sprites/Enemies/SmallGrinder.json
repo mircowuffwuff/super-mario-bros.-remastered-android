@@ -1,0 +1,14 @@
+{
+	"properties": {"can_rotate": false},
+	"animations": {
+		"default": {
+			"frames": [
+				[0, 0, 32, 32],
+				[32, 0, 32, 32]
+			],
+			"speed": 10,
+			"loop": true
+		}
+	},
+	"variations": {"source": "SmallGrinder.png"}
+}

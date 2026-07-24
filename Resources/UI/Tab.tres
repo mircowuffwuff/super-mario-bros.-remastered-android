@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://btw30ed0dg4bt"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://btw30ed0dg4bt"]
 
 [ext_resource type="Texture2D" uid="uid://c6pd7cdhx78od" path="res://Assets/Sprites/UI/Tab.png" id="1_b7qtx"]
 

@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://6rp3wgax4i51"]
+[gd_scene format=3 uid="uid://6rp3wgax4i51"]
 
 [ext_resource type="Script" uid="uid://brl0yede1msau" path="res://Scripts/Classes/Entities/Objects/RopeElevatorPlatform.gd" id="1_h7s5k"]
 [ext_resource type="Texture2D" uid="uid://bk0p52ttwojml" path="res://Assets/Sprites/Tilesets/Platform.png" id="2_j5n7v"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_rve1b"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Platform.json" id="4_o0yqe"]
 [ext_resource type="Texture2D" uid="uid://dt0qtxu2l646n" path="res://Assets/Sprites/Tilesets/Terrain/Overworld.png" id="5_ufhfv"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json" id="5_v7k46"]
 [ext_resource type="Script" uid="uid://d0mqkvopasu8k" path="res://Scripts/Classes/Components/SecondQuestReplaceComponent.gd" id="7_4sogk"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="8_bsily"]
 
@@ -15,13 +13,14 @@ size = Vector2(48, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7k46"]
 size = Vector2(48, 5)
 
-[node name="RopeElevatorPlatform" type="Node2D"]
+[node name="RopeElevatorPlatform" type="Node2D" unique_id=655020355]
 script = ExtResource("1_h7s5k")
 
-[node name="Platform" type="AnimatableBody2D" parent="."]
+[node name="Platform" type="AnimatableBody2D" parent="." unique_id=749308287]
+collision_layer = 3
 sync_to_physics = false
 
-[node name="Sprite" type="NinePatchRect" parent="Platform"]
+[node name="Sprite" type="NinePatchRect" parent="Platform" unique_id=1185437037]
 offset_left = -24.0
 offset_right = 24.0
 offset_bottom = 8.0
@@ -30,46 +29,50 @@ patch_margin_left = 8
 patch_margin_right = 8
 axis_stretch_horizontal = 1
 
-[node name="ResourceSetter" type="Node" parent="Platform/Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Platform/Sprite" unique_id=1272875723 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_rve1b")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("4_o0yqe")
+json_path = "res://Assets/Sprites/Tilesets/Platform.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Shape" type="CollisionShape2D" parent="Platform"]
+[node name="Shape" type="CollisionShape2D" parent="Platform" unique_id=1044337471]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_wf1r1")
 
-[node name="PlayerDetection" type="Area2D" parent="Platform"]
+[node name="PlayerDetection" type="Area2D" parent="Platform" unique_id=726382369]
 
-[node name="Shape" type="CollisionShape2D" parent="Platform/PlayerDetection"]
+[node name="Shape" type="CollisionShape2D" parent="Platform/PlayerDetection" unique_id=1609821578]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_v7k46")
 
-[node name="ScoreNoteSpawner" type="Node" parent="Platform"]
+[node name="ScoreNoteSpawner" type="Node" parent="Platform" unique_id=238915323]
 script = ExtResource("8_bsily")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="Rope" type="NinePatchRect" parent="."]
+[node name="Rope" type="NinePatchRect" parent="." unique_id=118890354]
 z_index = -1
 offset_left = -8.0
 offset_top = -56.0
 offset_right = 8.0
 texture = ExtResource("5_ufhfv")
 region_rect = Rect2(160, 144, 16, 16)
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="ResourceSetterNew" type="Node" parent="Rope" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Rope" unique_id=2138240392 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_rve1b")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("5_v7k46")
+json_path = "res://Assets/Sprites/Tilesets/Terrain/TerrainTiles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="SecondQuestReplacer" type="Node" parent="."]
+[node name="SecondQuestReplacer" type="Node" parent="." unique_id=1230908260]
 script = ExtResource("7_4sogk")
 new_scene = "uid://c6ym8t537v4ac"
 properties = Array[String](["linked_platform", "rope_top"])

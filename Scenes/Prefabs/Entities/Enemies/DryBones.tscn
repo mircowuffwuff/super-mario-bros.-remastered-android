@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bxsay5e6dhcqb"]
+[gd_scene format=3 uid="uid://bxsay5e6dhcqb"]
 
 [ext_resource type="Script" uid="uid://n123x5yuqpjd" path="res://Scripts/Classes/Entities/Enemies/DryBones.gd" id="1_8c647"]
 [ext_resource type="Texture2D" uid="uid://c5snfukhcacyf" path="res://Assets/Sprites/Enemies/DryBones.png" id="2_qya46"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_br3pe"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="4_y8gga"]
 [ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="5_br3pe"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/DryBones.json" id="5_l4h6l"]
 [ext_resource type="Script" uid="uid://bbww34oiexbx2" path="res://Scripts/Classes/Components/ShellDetection.gd" id="6_l4h6l"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="7_qya46"]
 [ext_resource type="Script" uid="uid://dlq6o2rg1x7in" path="res://Scripts/Classes/Components/BasicEnemyMovement.gd" id="10_br3pe"]
@@ -124,7 +123,7 @@ _data = {
 &"Shake": SubResource("Animation_8c647")
 }
 
-[node name="DryBones" type="CharacterBody2D" node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
+[node name="DryBones" type="CharacterBody2D" unique_id=652959706 node_paths=PackedStringArray("on_screen_enabler", "score_note_adder") groups=["Enemies"]]
 collision_layer = 16
 collision_mask = 50
 script = ExtResource("1_8c647")
@@ -132,7 +131,7 @@ on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
 score_note_adder = NodePath("ScoreNoteSpawner")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=280557081]
 position = Vector2(0, -16)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_bqbi3")
@@ -143,70 +142,69 @@ flip_h = true
 script = ExtResource("3_kio7v")
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1513760713 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_br3pe")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_l4h6l")
+json_path = "res://Assets/Sprites/Enemies/DryBones.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="LCollision" type="CollisionShape2D" parent="."]
+[node name="LCollision" type="CollisionShape2D" parent="." unique_id=2079460658]
 position = Vector2(0, -4)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_cngyw")
 one_way_collision = true
 
-[node name="RCollision" type="CollisionShape2D" parent="."]
+[node name="RCollision" type="CollisionShape2D" parent="." unique_id=1400577836]
 position = Vector2(0, -4)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_cngyw")
 one_way_collision = true
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=946187947]
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=813338236]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_tsi1c")
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=1946892277 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("4_y8gga")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="FireballDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="FireballDetection" type="Node" parent="." unique_id=477553729 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_br3pe")
 hitbox = NodePath("../Hitbox")
 play_sfx_on_hit = true
 metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
 
-[node name="ShellDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ShellDetection" type="Node" parent="." unique_id=1598648565 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("6_l4h6l")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://bbww34oiexbx2"
 
-[node name="ShakeAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kio7v")
-}
+[node name="ShakeAnimation" type="AnimationPlayer" parent="." unique_id=244462432]
+libraries/ = SubResource("AnimationLibrary_kio7v")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1966620743]
 position = Vector2(0, -9)
 rect = Rect2(-10, -13, 20, 23)
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1093080143]
 script = ExtResource("7_qya46")
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="BasicEnemyMovement" type="Node" parent="." node_paths=PackedStringArray("ledge_detection_cast")]
+[node name="BasicEnemyMovement" type="Node" parent="." unique_id=581560444 node_paths=PackedStringArray("ledge_detection_cast")]
 script = ExtResource("10_br3pe")
 ledge_detection_cast = NodePath("../LedgeDetectionCast")
 
-[node name="ExplosionDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="ExplosionDetection" type="Node" parent="." unique_id=553568287 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("11_l4h6l")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://ba18grqjixded"
 
-[node name="LedgeDetectionCast" type="RayCast2D" parent="."]
+[node name="LedgeDetectionCast" type="RayCast2D" parent="." unique_id=494439976]
 position = Vector2(-2, -2)
 target_position = Vector2(0, 3)
 collision_mask = 2
@@ -219,6 +217,7 @@ metadata/_custom_type_script = "uid://blfnd65xcx78c"
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="stomped_on"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="stomped_on"]
 [connection signal="moving_shell_entered" from="ShellDetection" to="." method="die_from_object"]
 [connection signal="explosion_entered" from="ExplosionDetection" to="." method="die_from_object"]

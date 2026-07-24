@@ -14,6 +14,7 @@ const ONLINE_LEVEL_CONTAINER = preload("uid://cr2pku7fjkgpo")
 var filter = 0
 var selected_lvl_idx := -1
 var order := 0
+var search := ""
 static var number_of_pages := -1
 
 func _ready() -> void:
@@ -31,7 +32,7 @@ func open(refresh_list := true) -> void:
 	set_process(true)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_back"):
+	if (Global.multibind_action_just_pressed("ui_back") || Input.is_action_just_pressed("mb_right")) and CustomLineEdit.editing == false:
 		closed.emit()
 		close()
 
@@ -43,6 +44,7 @@ func grab_levels() -> void:
 	selected_lvl_idx = -1
 	%OverloadMSG.hide()
 	%ErrorMSG.hide()
+	%SearchFail.hide()
 	http_request.cancel_request()
 	for i in %OnlineLevelList.get_children():
 		i.queue_free()
@@ -50,12 +52,16 @@ func grab_levels() -> void:
 	var filter_str = ["", "", "&sort=plays", "&sort=rating"][filter]
 	var get_type = ["featured?", "get?", "get?", "get?"][filter]
 	var page_str = "&page=" + str(page_number)
-	var url = LSS_URL + "/api/levels/filter/" + get_type + "game=" + str(Global.LSS_GAME_ID) + "&authors=1" + filter_str + page_str + "&sortType=" + str(order)
+	var search_query = "&name=" + search
+	var url = LSS_URL + "/api/levels/filter/" + get_type + "game=" + str(Global.LSS_GAME_ID) + "&authors=1" + filter_str + page_str + "&sortType=" + str(order) + search_query
 	http_request.request(url, [], HTTPClient.METHOD_GET)
 
 func level_list_retrieved(result := 0, response_code := 0, headers: PackedStringArray = [], body: PackedByteArray = []) -> void:
 	$LoadingMSG.hide()
 	var string = body.get_string_from_utf8()
+	if response_code == HTTPClient.RESPONSE_BAD_REQUEST and search != "":
+		%SearchFail.show()
+		return
 	if response_code != HTTPClient.RESPONSE_OK:
 		%ErrorMSG.show()
 		return
@@ -104,4 +110,8 @@ func set_page(page_idx := 0) -> void:
 
 func set_order(order_idx := 0) -> void:
 	order = [-1, 1][order_idx]
+	grab_levels()
+
+func set_search(search_query := "") -> void:
+	search = search_query
 	grab_levels()

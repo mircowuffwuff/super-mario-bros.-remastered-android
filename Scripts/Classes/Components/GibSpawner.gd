@@ -8,6 +8,8 @@ const ENTITY_GIB = preload("res://Scenes/Prefabs/Entities/EntityGib.tscn")
 
 signal gib_about_to_spawn
 
+@export var global_parent := false
+
 
 func summon_gib(direction := 1, play_sfx := play_death_sfx, override_gib_type := gib_type) -> void:
 	gib_about_to_spawn.emit()
@@ -18,16 +20,17 @@ func summon_gib(direction := 1, play_sfx := play_death_sfx, override_gib_type :=
 		return
 	var node = ENTITY_GIB.instantiate()
 	visuals.show()
-	if visuals.has_node("ResourceSetterNew"):
-		visuals.get_node("ResourceSetterNew").update_on_spawn = false
 	node.visuals = visuals.duplicate()
 	node.visuals.set_process(false)
 	node.global_position = visuals.global_position
 	node.visuals.position = Vector2.ZERO
-	node.visuals.offset = Vector2.ZERO
+	node.visuals.set("offset", Vector2.ZERO)
 	node.gib_type = override_gib_type
 	node.direction = direction
-	owner.add_sibling(node)
+	var parent = owner.get_parent()
+	if global_parent:
+		parent = Global.current_level
+	parent.add_child(node)
 
 func play_die_sfx() -> void:
 	AudioManager.play_sfx("kick", owner.global_position)
@@ -41,6 +44,7 @@ func summon_poof() -> void:
 
 func stomp_die(player: Player, add_combo := true) -> void:
 	DiscoLevel.combo_amount += 1
+	owner.killed.emit("Hello")
 	AudioManager.play_sfx("enemy_stomp", owner.global_position)
 	player.enemy_bounce_off(add_combo)
 	summon_gib(1, false, 1)

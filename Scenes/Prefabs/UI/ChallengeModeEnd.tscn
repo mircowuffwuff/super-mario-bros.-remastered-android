@@ -1,14 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://jv82ssp7gwn4"]
+[gd_scene format=3 uid="uid://jv82ssp7gwn4"]
 
 [ext_resource type="Script" uid="uid://by48a8oa5hefr" path="res://Scripts/UI/StoryPause.gd" id="1_1nlpt"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_37ia2"]
 [ext_resource type="Texture2D" uid="uid://3p2l7rec0gh5" path="res://Assets/Sprites/UI/Cursor.png" id="3_kjo5s"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_r6n62"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/Cursor.json" id="5_f5hk3"]
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="6_6v5ys"]
 [ext_resource type="PackedScene" uid="uid://dnksdgorle8su" path="res://Scenes/Prefabs/UI/SettingsMenu.tscn" id="8_s7xbe"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("options")]
+[node name="PauseMenu" type="Control" unique_id=1679279497 node_paths=PackedStringArray("options")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -20,7 +19,7 @@ script = ExtResource("1_1nlpt")
 options = [NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/Label"), NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/Label2"), NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/Label3")]
 is_pause = false
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1962588224]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,7 +33,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=723965394]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,32 +42,32 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_37ia2")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer" unique_id=1466117835]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer" unique_id=1394312741]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1726043739]
 layout_mode = 2
 size_flags_vertical = 7
 text = "PAUSE_RETRY"
 uppercase = true
 
-[node name="Label2" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1005817369]
 layout_mode = 2
 size_flags_vertical = 7
 text = "PAUSE_SELECT_LEVEL"
 uppercase = true
 
-[node name="Label3" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=731901126]
 layout_mode = 2
 size_flags_vertical = 7
 text = "PAUSE_QUIT"
 uppercase = true
 
-[node name="Cursor" type="TextureRect" parent="Control"]
+[node name="Cursor" type="TextureRect" parent="Control" unique_id=1929662798]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 16.0
@@ -77,27 +76,25 @@ offset_bottom = 24.0
 texture = ExtResource("3_kjo5s")
 stretch_mode = 2
 
-[node name="ResourceSetter" type="Node" parent="Control/Cursor" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="Control/Cursor" unique_id=264589973 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_r6n62")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("5_f5hk3")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=948220077 node_paths=PackedStringArray("labels")]
 script = ExtResource("6_6v5ys")
 labels = [NodePath("../Control/PanelContainer/MarginContainer/VBoxContainer/Label"), NodePath("../Control/PanelContainer/MarginContainer/VBoxContainer/Label2"), NodePath("../Control/PanelContainer/MarginContainer/VBoxContainer/Label3"), null]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="SettingsMenu" parent="." node_paths=PackedStringArray("disabled_containers") instance=ExtResource("8_s7xbe")]
+[node name="SettingsMenu" parent="." unique_id=2041377453 node_paths=PackedStringArray("disabled_containers") instance=ExtResource("8_s7xbe")]
 layout_mode = 1
 disabled_containers = [NodePath("PanelContainer/MarginContainer/VBoxContainer/Difficulty")]
 
-[node name="Label" parent="SettingsMenu/PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" index="0"]
-visible = false
-
-[node name="LabelFontChanger" parent="SettingsMenu" index="1" node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" parent="SettingsMenu" index="1" unique_id=1797639177 node_paths=PackedStringArray("labels")]
 labels = [NodePath("../PanelContainer/MarginContainer/VBoxContainer/Title"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/CategorySelect/HBoxContainer/Category"), null, null, null, null, null, null, null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode2/Value"), null, NodePath("../PanelContainer/MarginContainer/VBoxContainer/Audio/SelectableOptionNode3/Value"), NodePath("../PanelContainer/MarginContainer/VBoxContainer/Difficulty/Description/AutoScrollContainer/MarginContainer/Desc")]
 
 [editable path="SettingsMenu"]

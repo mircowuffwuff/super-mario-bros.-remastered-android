@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://033s0lgpb33l"]
+[gd_scene format=3 uid="uid://033s0lgpb33l"]
 
 [ext_resource type="PackedScene" uid="uid://iq86u4w60yee" path="res://Scenes/Prefabs/Entities/Objects/Firebar.tscn" id="1_m6o3e"]
 [ext_resource type="Texture2D" uid="uid://pidoncb5gcax" path="res://Assets/Sprites/Items/Fireball.png" id="2_s1hms"]
@@ -45,96 +45,86 @@ _data = {
 &"Spin": SubResource("Animation_oygiu")
 }
 
-[node name="Firebar" instance=ExtResource("1_m6o3e")]
+[node name="Firebar" unique_id=1440508485 instance=ExtResource("1_m6o3e")]
 
-[node name="RemoteTransform2D19" type="RemoteTransform2D" parent="RotationJoint" index="6"]
+[node name="RemoteTransform2D19" type="RemoteTransform2D" parent="RotationJoint" parent_id_path=PackedInt32Array(978364892) index="6" unique_id=2054123687]
 position = Vector2(0, 48)
 remote_path = NodePath("../../Fireballs/Fireball7")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D20" type="RemoteTransform2D" parent="RotationJoint" index="7"]
+[node name="RemoteTransform2D20" type="RemoteTransform2D" parent="RotationJoint" parent_id_path=PackedInt32Array(978364892) index="7" unique_id=1739477167]
 position = Vector2(0, 56)
 remote_path = NodePath("../../Fireballs/Fireball8")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D21" type="RemoteTransform2D" parent="RotationJoint" index="8"]
+[node name="RemoteTransform2D21" type="RemoteTransform2D" parent="RotationJoint" parent_id_path=PackedInt32Array(978364892) index="8" unique_id=1061274832]
 position = Vector2(0, 64)
 remote_path = NodePath("../../Fireballs/Fireball9")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D22" type="RemoteTransform2D" parent="RotationJoint" index="9"]
+[node name="RemoteTransform2D22" type="RemoteTransform2D" parent="RotationJoint" parent_id_path=PackedInt32Array(978364892) index="9" unique_id=1740042479]
 position = Vector2(0, 72)
 remote_path = NodePath("../../Fireballs/Fireball10")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransform2D23" type="RemoteTransform2D" parent="RotationJoint" index="10"]
+[node name="RemoteTransform2D23" type="RemoteTransform2D" parent="RotationJoint" parent_id_path=PackedInt32Array(978364892) index="10" unique_id=1364707960]
 position = Vector2(0, 80)
 remote_path = NodePath("../../Fireballs/Fireball11")
 update_rotation = false
 update_scale = false
 
-[node name="Shape" parent="RotationJoint/Hitbox" index="0"]
+[node name="Shape" parent="RotationJoint/Hitbox" parent_id_path=PackedInt32Array(1850480383) index="0" unique_id=1076457726]
 shape = SubResource("SegmentShape2D_s77o2")
 
-[node name="Fireballs" parent="." index="2"]
+[node name="Fireballs" parent="." index="2" unique_id=2087178996]
 z_index = 4096
 z_as_relative = false
 
-[node name="Fireball19" type="Sprite2D" parent="Fireballs" index="6"]
+[node name="Fireball19" type="Sprite2D" parent="Fireballs" index="6" unique_id=519901755]
 visible = false
 position = Vector2(33.9411, 33.9411)
 texture = ExtResource("2_s1hms")
 
-[node name="Fireball20" type="Sprite2D" parent="Fireballs" index="7"]
+[node name="Fireball20" type="Sprite2D" parent="Fireballs" index="7" unique_id=99481877]
 visible = false
 position = Vector2(39.598, 39.598)
 texture = ExtResource("2_s1hms")
 
-[node name="Fireball21" type="Sprite2D" parent="Fireballs" index="8"]
+[node name="Fireball21" type="Sprite2D" parent="Fireballs" index="8" unique_id=984567570]
 visible = false
 position = Vector2(45.2548, 45.2548)
 texture = ExtResource("2_s1hms")
 
-[node name="Fireball22" type="Sprite2D" parent="Fireballs" index="9"]
+[node name="Fireball22" type="Sprite2D" parent="Fireballs" index="9" unique_id=1223959769]
 visible = false
 position = Vector2(50.9117, 50.9117)
 texture = ExtResource("2_s1hms")
 
-[node name="Fireball23" type="Sprite2D" parent="Fireballs" index="10"]
+[node name="Fireball23" type="Sprite2D" parent="Fireballs" index="10" unique_id=828097369]
 visible = false
 position = Vector2(56.5685, 56.5686)
 texture = ExtResource("2_s1hms")
 
-[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball7" index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball7" parent_id_path=PackedInt32Array(1435697685) index="0" unique_id=399362434]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball8" index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball8" parent_id_path=PackedInt32Array(1860025908) index="0" unique_id=1957571352]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball9" index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball9" parent_id_path=PackedInt32Array(561753574) index="0" unique_id=1612047027]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball10" index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball10" parent_id_path=PackedInt32Array(1269472994) index="0" unique_id=241365362]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"
 
-[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball11" index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_ytedt")
-}
-autoplay = "Spin"
+[node name="Animation2" type="AnimationPlayer" parent="Fireballs/Fireball11" parent_id_path=PackedInt32Array(1267028039) index="0" unique_id=969670037]
+libraries/ = SubResource("AnimationLibrary_ytedt")
+autoplay = &"Spin"

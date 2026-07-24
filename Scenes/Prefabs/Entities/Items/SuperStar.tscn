@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://5qg8po86pew4"]
+[gd_scene format=3 uid="uid://5qg8po86pew4"]
 
 [ext_resource type="Script" uid="uid://dbeg86pjflojw" path="res://Scripts/Classes/Entities/Items/SuperStar.gd" id="1_aowox"]
 [ext_resource type="Texture2D" uid="uid://1o654l3577lv" path="res://Assets/Sprites/Items/SuperStar.png" id="1_gpwv4"]
 [ext_resource type="AudioStream" uid="uid://73b2bhjg5idd" path="res://Assets/Audio/BGM/StarMan.mp3" id="2_orqf5"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_orqf5"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/StarMan.json" id="5_og7mc"]
 [ext_resource type="Script" uid="uid://dlq6o2rg1x7in" path="res://Scripts/Classes/Components/BasicEnemyMovement.gd" id="6_og7mc"]
 [ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="7_sc6oi"]
 [ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="8_yyobd"]
@@ -58,7 +57,7 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyobd"]
 size = Vector2(16, 16)
 
-[node name="SuperStar" type="CharacterBody2D"]
+[node name="SuperStar" type="CharacterBody2D" unique_id=1449818830]
 z_index = -1
 collision_layer = 8
 collision_mask = 2
@@ -66,42 +65,43 @@ script = ExtResource("1_aowox")
 star_bgm = SubResource("AudioStreamInteractive_og7mc")
 metadata/_custom_type_script = "uid://cjkurwybsaywm"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=670197631]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_og7mc")
 autoplay = "default"
 frame_progress = 0.792139
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=1909908345 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_orqf5")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("5_og7mc")
+json_path = "res://Assets/Sprites/Items/StarMan.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=935769465]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_sc6oi")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=412404538]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=565257949]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_yyobd")
 
-[node name="BasicEnemyMovement" type="Node" parent="."]
+[node name="BasicEnemyMovement" type="Node" parent="." unique_id=2011591949]
 script = ExtResource("6_og7mc")
 auto_call = false
 move_speed = 70
 bounce_on_land = true
 bounce_height = -250
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=326228048]
 script = ExtResource("7_sc6oi")
 add_score = true
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="TrackJoint" type="Node" parent="." node_paths=PackedStringArray("movement_node")]
+[node name="TrackJoint" type="Node" parent="." unique_id=926306032 node_paths=PackedStringArray("movement_node")]
 script = ExtResource("8_yyobd")
 movement_node = NodePath("../BasicEnemyMovement")
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"

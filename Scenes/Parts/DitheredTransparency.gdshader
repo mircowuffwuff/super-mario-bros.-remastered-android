@@ -1,5 +1,7 @@
 shader_type canvas_item;
 
+uniform vec4 transparent_colour: source_color = vec4(0, 0, 0, 0);
+
 void fragment() {
     vec4 tex_color = texture(TEXTURE, UV);
     vec4 color = tex_color;
@@ -13,6 +15,7 @@ void fragment() {
 
     if (checker)
 	{
-		discard;
+		if (COLOR.a <= 0.0) {discard;}
+		COLOR = transparent_colour;
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6t324yc5gx7p"]
+[gd_scene format=3 uid="uid://c6t324yc5gx7p"]
 
 [ext_resource type="Script" uid="uid://cp4040k6fqwow" path="res://Scripts/Classes/Entities/TeleportPipeArea.gd" id="1_40l7q"]
 [ext_resource type="Texture2D" uid="uid://c8yio3lpcsvqu" path="res://Assets/Sprites/UI/PipeArrow.png" id="2_fkbuh"]
@@ -10,51 +10,51 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qh6k"]
 size = Vector2(4, 4)
 
-[node name="TeleportPipeArea" type="Node2D" groups=["Pipes"]]
+[node name="TeleportPipeArea" type="Node2D" unique_id=184518356 groups=["Pipes"]]
 script = ExtResource("1_40l7q")
 
-[node name="Visual" type="CollisionShape2D" parent="."]
+[node name="Visual" type="CollisionShape2D" parent="." unique_id=506788263]
 shape = SubResource("RectangleShape2D_lv0oh")
 debug_color = Color(0, 0.6, 1, 0.419608)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=251176065]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1233156967]
 shape = SubResource("RectangleShape2D_5qh6k")
 
-[node name="ArrowJoint" type="Node2D" parent="."]
+[node name="ArrowJoint" type="Node2D" parent="." unique_id=556233925]
 
-[node name="Arrow" type="Sprite2D" parent="ArrowJoint"]
+[node name="Arrow" type="Sprite2D" parent="ArrowJoint" unique_id=1756056315]
 position = Vector2(0, -8)
 texture = ExtResource("2_fkbuh")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="ArrowJoint"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="ArrowJoint" unique_id=1232410678]
 position = Vector2(0, 8)
 remote_path = NodePath("../../Node2D")
 update_rotation = false
 update_scale = false
 
-[node name="TargetPoint" type="Node2D" parent="ArrowJoint"]
+[node name="TargetPoint" type="Node2D" parent="ArrowJoint" unique_id=2102593577]
 position = Vector2(0, 32)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=37526163]
 position = Vector2(-3.496911e-07, 8)
 script = ExtResource("3_40l7q")
 
-[node name="CenterContainer" type="CenterContainer" parent="Node2D"]
+[node name="CenterContainer" type="CenterContainer" parent="Node2D" unique_id=1327083004]
 use_top_left = true
 
-[node name="Label" type="Label" parent="Node2D/CenterContainer"]
+[node name="Label" type="Label" parent="Node2D/CenterContainer" unique_id=1992946170]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "0"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=440763934]
 layer = 2147483647
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=626760526]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

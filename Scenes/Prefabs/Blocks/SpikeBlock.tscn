@@ -1,9 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://dmxufw748fe32"]
+[gd_scene format=3 uid="uid://dmxufw748fe32"]
 
 [ext_resource type="Script" uid="uid://bpydbpyjk1mt4" path="res://Scripts/Classes/Entities/Enemy.gd" id="1_gcnju"]
 [ext_resource type="Texture2D" uid="uid://do13c2crob4td" path="res://Assets/Sprites/Blocks/SpikeBlock.png" id="2_dftxp"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_4g6tc"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/SpikeBlock.json" id="4_dftxp"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="4_w3ysb"]
 [ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="6_l3otb"]
 [ext_resource type="Script" uid="uid://cqif1li7otvpl" path="res://Scripts/Parts/SpriteFramesToJsonConverter.gd" id="7_4g6tc"]
@@ -128,14 +127,14 @@ GhostHouse = SubResource("SpriteFrames_31p57")
 Castle = SubResource("SpriteFrames_aqm7k")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="SpikeBlock" type="CharacterBody2D" groups=["Enemies"]]
+[node name="SpikeBlock" type="CharacterBody2D" unique_id=871298904 groups=["Enemies"]]
 disable_mode = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_gcnju")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1660534450]
 process_mode = 1
 sprite_frames = SubResource("SpriteFrames_bcd7j")
 autoplay = "default"
@@ -144,36 +143,37 @@ script = ExtResource("3_4g6tc")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=339151174 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("4_w3ysb")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_dftxp")
+json_path = "res://Assets/Sprites/Blocks/SpikeBlock.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2032827127]
 shape = SubResource("RectangleShape2D_cgdwi")
 
-[node name="PlayerDetection" type="Area2D" parent="."]
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=339593714]
 script = ExtResource("6_l3otb")
 metadata/_custom_type_script = "uid://cnheej0sxmoxg"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=1086000420]
 shape = SubResource("RectangleShape2D_r7ue2")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=876233422]
 
-[node name="ScoreNoteSpawner" type="Node" parent="."]
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=429574922]
 script = ExtResource("7_bcd7j")
 metadata/_custom_type_script = "uid://5octqlf4ohel"
 
-[node name="ThemedToJSONConverter" type="Node" parent="."]
+[node name="ThemedToJSONConverter" type="Node" parent="." unique_id=1178931481]
 script = ExtResource("7_4g6tc")
 resource = SubResource("Resource_ji0bc")
 json_file_path = "res://Assets/Sprites/Blocks/SpikeBlock.json"
 metadata/_custom_type_script = "uid://cqif1li7otvpl"
 
-[node name="TrackJoint" type="Node" parent="."]
+[node name="TrackJoint" type="Node" parent="." unique_id=1065445586]
 script = ExtResource("10_xfdnj")
 offset = Vector2(0, 0)
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"

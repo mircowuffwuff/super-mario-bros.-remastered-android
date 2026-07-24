@@ -1,24 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://p42vcj0qmhxl"]
+[gd_scene format=3 uid="uid://p42vcj0qmhxl"]
 
 [ext_resource type="Texture2D" uid="uid://cop8x5m20cqal" path="res://Assets/Sprites/Items/WrenchProjectile.png" id="1_bh1cs"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_wtsxo"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_7wlxe"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/WrenchProjectile.json" id="4_5s4r1"]
 [ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="4_7wlxe"]
 
 [sub_resource type="GDScript" id="GDScript_5s4r1"]
-script/source = "extends Node2D
-
-var direction := -1
-
-const MOVE_SPEED := 80
-
-func _physics_process(delta: float) -> void:
-	$Sprite.flip_h = direction == 1
-	global_position.x += MOVE_SPEED * direction * delta
-
-func damage_player(player: Player) -> void:
-	player.damage()
+script/source = "class_name Wrench
+extends Projectile
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bn4i0"]
@@ -62,40 +51,51 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtsxo"]
+size = Vector2(6, 6)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_srvot"]
-radius = 2.0
+radius = 3.0
 
-[node name="WrenchProjectile" type="Node2D"]
+[node name="WrenchProjectile" type="CharacterBody2D" unique_id=118680446 groups=["Enemies"]]
+collision_layer = 0
+collision_mask = 2
 script = SubResource("GDScript_5s4r1")
+MOVE_SPEED = 80
+metadata/_custom_type_script = "uid://c5elnt7uap15b"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1238193579]
 sprite_frames = SubResource("SpriteFrames_4d740")
-animation = &"Spin"
+animation = &"Idle"
 autoplay = "Spin"
-frame_progress = 0.89535326
 script = ExtResource("2_wtsxo")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=978781804 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_7wlxe")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_5s4r1")
+json_path = "res://Assets/Sprites/Items/WrenchProjectile.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1356480120]
+shape = SubResource("RectangleShape2D_wtsxo")
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Hitbox" type="Area2D" parent="." unique_id=791635058]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=1153420464]
 shape = SubResource("CircleShape2D_srvot")
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=55054619 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("4_7wlxe")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1096789589]
 
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="queue_free"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://n2e3jgmkilvt"]
+[gd_scene format=3 uid="uid://n2e3jgmkilvt"]
 
 [ext_resource type="Script" uid="uid://djuvlj1dt0aay" path="res://Scripts/UI/MarathonResults.gd" id="1_1ama0"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="1_xyd63"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bmn81e10obpjv" path="res://Scenes/Parts/SelectableLabel.tscn" id="4_7l60d"]
 [ext_resource type="PackedScene" uid="uid://dntk2js0tu3y2" path="res://Scenes/Prefabs/UI/WorldSelect.tscn" id="7_nvyky"]
 [ext_resource type="AudioStream" uid="uid://ekxoq3h38iuv" path="res://Assets/Audio/SFX/MarathonMedal.wav" id="7_orie5"]
+[ext_resource type="Script" uid="uid://dmtw1jesw1vl7" path="res://Scripts/Classes/Components/PackStreamPlayer.gd" id="8_3vn76"]
 [ext_resource type="PackedScene" uid="uid://bvgigoyn7lrc2" path="res://Scenes/Prefabs/UI/SpeedrunTypeSelect.tscn" id="8_nvyky"]
 [ext_resource type="PackedScene" uid="uid://bsfkt344e6j38" path="res://Scenes/Prefabs/UI/LevelSelectNew.tscn" id="8_orie5"]
 
@@ -23,7 +24,11 @@ region = Rect2(96, 16, 24, 8)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_v87cy"]
 color = Color(1, 1, 1, 1)
 
-[node name="MarathonResults" type="Control"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvyky"]
+atlas = ExtResource("2_1ama0")
+region = Rect2(96, 32, 8, 8)
+
+[node name="MarathonResults" type="Control" unique_id=782696400]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1ama0")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=295234366]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,15 +52,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_xyd63")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1839365286]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1412883045]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "YOUR RESULTS"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/Label"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/Label" unique_id=1900264180]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -66,15 +71,15 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/separator = SubResource("StyleBoxLine_3vn76")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1393992889]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1083858262]
 layout_mode = 2
 text = "TIME:"
 
-[node name="Medal" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Medal" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1941924363]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -82,7 +87,7 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_q1rpx")
 stretch_mode = 3
 
-[node name="Full" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer/Medal"]
+[node name="Full" type="NinePatchRect" parent="PanelContainer/VBoxContainer/HBoxContainer/Medal" unique_id=1647338267]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,76 +97,76 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_ldcu6")
 region_rect = Rect2(16, 0, 8, 8)
 
-[node name="Time" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Time" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1763969131]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 text = "00:00:00"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1252640924]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=982089784]
 layout_mode = 2
 text = "PB:"
 
-[node name="PB" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="PB" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1742943455]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 text = "--:--:--"
 
-[node name="NewPB" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="NewPB" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=28092480]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Time" type="Label" parent="PanelContainer/VBoxContainer/NewPB"]
+[node name="Time" type="Label" parent="PanelContainer/VBoxContainer/NewPB" unique_id=625410230]
 modulate = Color(0, 0.99912035, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 10
 text = "NEW PB!"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1005536218]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3" unique_id=168233212]
 layout_mode = 2
 text = "TARGET:"
 
-[node name="Target" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3"]
+[node name="Target" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer3" unique_id=1922706736]
 unique_name_in_owner = true
 modulate = Color(1, 0.69803923, 0.34901962, 1)
 layout_mode = 2
 size_flags_horizontal = 10
 text = "00:00:00"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1429284029]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_v87cy")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=2023831552]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=1522442536]
 layout_mode = 2
 
-[node name="Restart" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_7l60d")]
+[node name="Restart" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1890243461 instance=ExtResource("4_7l60d")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "RETRY"
 
-[node name="LevelSelect" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_7l60d")]
+[node name="LevelSelect" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1673820843 instance=ExtResource("4_7l60d")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "LEVEL SELECT"
 
-[node name="Return" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_7l60d")]
+[node name="Return" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=923376913 instance=ExtResource("4_7l60d")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "RETURN TO MENU"
 
-[node name="WorldSelect" parent="." instance=ExtResource("7_nvyky")]
+[node name="WorldSelect" parent="." unique_id=1779089403 instance=ExtResource("7_nvyky")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -177,7 +182,7 @@ grow_horizontal = 2
 grow_vertical = 2
 has_speedrun_stuff = true
 
-[node name="LevelSelect" parent="." instance=ExtResource("8_orie5")]
+[node name="LevelSelect" parent="." unique_id=1074334726 instance=ExtResource("8_orie5")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -193,17 +198,28 @@ grow_horizontal = 2
 grow_vertical = 2
 has_speedrun_stuff = true
 
-[node name="PBSfx" type="AudioStreamPlayer" parent="."]
+[node name="PBSfx" type="AudioStreamPlayer" parent="." unique_id=621526419]
 stream = ExtResource("7_orie5")
 bus = &"SFX"
+script = ExtResource("8_3vn76")
+metadata/_custom_type_script = "uid://dmtw1jesw1vl7"
 
-[node name="SpeedrunTypeSelect" parent="." instance=ExtResource("8_nvyky")]
+[node name="SpeedrunTypeSelect" parent="." unique_id=948576106 instance=ExtResource("8_nvyky")]
 visible = false
 layout_mode = 1
 
-[node name="SpeedrunTypeSelectLevelSelect" parent="." instance=ExtResource("8_nvyky")]
+[node name="SpeedrunTypeSelectLevelSelect" parent="." unique_id=1223353015 instance=ExtResource("8_nvyky")]
 visible = false
 layout_mode = 1
+
+[node name="TextureRect" parent="SpeedrunTypeSelectLevelSelect/Panel/VBoxContainer/Warpless" parent_id_path=PackedInt32Array(1223353015, 1599187849) index="2" unique_id=698667744]
+texture = SubResource("AtlasTexture_nvyky")
+
+[node name="Any" parent="SpeedrunTypeSelectLevelSelect/Panel/VBoxContainer/Warpless" parent_id_path=PackedInt32Array(1223353015, 1599187849) index="3" unique_id=603641441]
+text = "TO FLAGPOLE"
+
+[node name="Any" parent="SpeedrunTypeSelectLevelSelect/Panel/VBoxContainer/Any" parent_id_path=PackedInt32Array(1223353015, 641274277) index="3" unique_id=1526349318]
+text = "TO WARP ZONE"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/Restart" to="." method="check_for_warp"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/Restart" to="." method="set_focus" binds= [false]]
@@ -222,3 +238,5 @@ layout_mode = 1
 [connection signal="cancelled" from="SpeedrunTypeSelectLevelSelect" to="." method="return_focus"]
 [connection signal="cancelled" from="SpeedrunTypeSelectLevelSelect" to="." method="set_focus" binds= [true]]
 [connection signal="selected" from="SpeedrunTypeSelectLevelSelect" to="." method="restart_level"]
+
+[editable path="SpeedrunTypeSelectLevelSelect"]

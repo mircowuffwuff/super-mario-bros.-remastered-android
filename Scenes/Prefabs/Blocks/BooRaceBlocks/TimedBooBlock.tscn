@@ -1,11 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://dgq7enviy1qhw"]
+[gd_scene format=3 uid="uid://dgq7enviy1qhw"]
 
 [ext_resource type="Script" uid="uid://du5hnwdhv7x66" path="res://Scripts/Classes/Blocks/TimedBooBlock.gd" id="1_hessd"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_5y3wt"]
 [ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="3_7bqom"]
 [ext_resource type="Texture2D" uid="uid://bi13n4mw0to20" path="res://Assets/Sprites/Blocks/TimedBooBlock.png" id="3_46g6h"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Blocks/TimedBooBlock.json" id="4_7bqom"]
 [ext_resource type="PackedScene" uid="uid://cijkvfkthetn5" path="res://Scenes/Parts/BlockAnimations.tscn" id="4_tgrgf"]
+[ext_resource type="Script" uid="uid://b8vmbtoaaq5nc" path="res://Scripts/Parts/EditorToggleDetection.gd" id="7_c01ii"]
+[ext_resource type="Script" uid="uid://q45b31h6356r" path="res://Scripts/Classes/Components/OnOffSwitcher.gd" id="7_megl7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_slvan"]
 atlas = ExtResource("3_46g6h")
@@ -137,14 +138,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ce8wa"]
 size = Vector2(16, 16)
 
-[node name="TimedBooBlock" type="AnimatableBody2D" node_paths=PackedStringArray("visuals") groups=["BooBlocks"]]
+[node name="TimedBooBlock" type="AnimatableBody2D" unique_id=2065363737 node_paths=PackedStringArray("visuals") groups=["BooBlocks"]]
 collision_layer = 6
 script = ExtResource("1_hessd")
 visuals = NodePath("Sprite")
 destructable = false
 metadata/_custom_type_script = "uid://b5ejlbl0vp1gm"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1611616935]
+process_mode = 3
 sprite_frames = SubResource("SpriteFrames_7ajl0")
 animation = &"Off3"
 autoplay = "Off3"
@@ -152,23 +154,37 @@ script = ExtResource("3_7bqom")
 do_offset = false
 metadata/_custom_type_script = "uid://caq1qiwmy0mox"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=427949928 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("3_5y3wt")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_7bqom")
+json_path = "res://Assets/Sprites/Blocks/TimedBooBlock.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=271179132]
 visible = false
 shape = SubResource("RectangleShape2D_ce8wa")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=901214225]
+process_mode = 1
 
-[node name="BlockAnimations" parent="." instance=ExtResource("4_tgrgf")]
+[node name="BlockAnimations" parent="." unique_id=1569117138 instance=ExtResource("4_tgrgf")]
 
-[connection signal="player_block_hit" from="." to="." method="block_hit" unbinds=1]
+[node name="OnOffSwitcher" type="Node" parent="." unique_id=1166051288]
+script = ExtResource("7_megl7")
+metadata/_custom_type_script = "uid://q45b31h6356r"
+
+[node name="LevelEditorToggleDetection" type="Node" parent="." unique_id=778638154]
+script = ExtResource("7_c01ii")
+metadata/_custom_type_script = "uid://b8vmbtoaaq5nc"
+
+[connection signal="player_block_hit" from="." to="." method="on_block_hit" unbinds=1]
 [connection signal="player_block_hit" from="." to="BlockAnimations" method="bounce_block" unbinds=1]
-[connection signal="shell_block_hit" from="." to="." method="block_hit" unbinds=1]
+[connection signal="shell_block_hit" from="." to="." method="on_block_hit" flags=3 unbinds=1]
 [connection signal="shell_block_hit" from="." to="BlockAnimations" method="bounce_block" unbinds=1]
+[connection signal="switched" from="." to="OnOffSwitcher" method="switch"]
 [connection signal="timeout" from="Timer" to="." method="on_timeout"]
+[connection signal="switched_off" from="OnOffSwitcher" to="." method="set_active" binds= [false]]
+[connection signal="switched_on" from="OnOffSwitcher" to="." method="set_active" binds= [true]]
+[connection signal="level_start" from="LevelEditorToggleDetection" to="." method="level_start"]

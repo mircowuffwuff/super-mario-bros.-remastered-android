@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dipo5e7fk3avd"]
+[gd_scene format=3 uid="uid://dipo5e7fk3avd"]
 
 [ext_resource type="Texture2D" uid="uid://bnhrmah4dk5xm" path="res://Assets/Sprites/UI/EditorKeybinds.png" id="1_yvgdh"]
 
@@ -39,15 +39,13 @@ _data = {
 &"RESET": SubResource("Animation_lqhbm")
 }
 
-[node name="LevelEditorKeybind" type="Sprite2D"]
+[node name="LevelEditorKeybind" type="Sprite2D" unique_id=848751229]
 texture = ExtResource("1_yvgdh")
 centered = false
 hframes = 2
 region_enabled = true
 region_rect = Rect2(0, 0, 58, 23)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_26est")
-}
-autoplay = "Idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=936666924]
+libraries/ = SubResource("AnimationLibrary_26est")
+autoplay = &"Idle"

@@ -14,19 +14,21 @@ signal axe_touched
 var bowser_present := true
 
 func _ready() -> void:
+	#for x in [axe_touched, victory_begin]:
+		#for i in x.get_connections():
+			#x.disconnect(i.callable)
 	await get_tree().physics_frame
 	$Axe/CameraRightLimit._enter_tree()
 
 func on_area_entered(area: Area2D) -> void:
-	if area.owner is Player:
+	if area.owner is Player and ConditionalClear.valid:
 		destroy_bridge(area.owner)
 
 func destroy_bridge(player: Player) -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	Global.can_pause = false
 	for i in get_tree().get_nodes_in_group("Enemies"):
-		if i is BowserFlame:
-			i.queue_free()
-		elif i is Hammer:
+		if i is Projectile:
 			i.queue_free()
 	if (end_timer and Global.current_game_mode == Global.GameMode.MARATHON) or Global.current_game_mode == Global.GameMode.MARATHON_PRACTICE:
 		SpeedrunHandler.run_finished()
@@ -50,13 +52,7 @@ func destroy_bridge(player: Player) -> void:
 	else:
 		$AxeAnim.queue_free()
 	if bowser_present:
-		var bowser_count = 0
-		for i in get_tree().get_nodes_in_group("Bowser"):
-			if i.ignore_flag_die == false:
-				bowser_count += 1 
-				i.bridge_fall(true)
-		if bowser_count <= 0: 
-			return
+		get_tree().call_group("Bowser", "do_start_fall")
 		get_tree().paused = true
 		await get_tree().create_timer(0.5).timeout
 		AudioManager.play_sfx("bridge_break", $BridgeChain.global_position)
@@ -70,9 +66,8 @@ func destroy_bridge(player: Player) -> void:
 				else:
 					bridge_piece_fall(i)
 				await get_tree().create_timer(0.067).timeout
-		for i in get_tree().get_nodes_in_group("Bowser"):
-			i.bridge_fall(false)
-		await get_tree().create_timer(1).timeout
+		get_tree().call_group("Bowser", "bridge_fall")
+		await get_tree().create_timer(2).timeout
 		get_tree().paused = false
 	victory_sequence(player)
 
@@ -95,12 +90,22 @@ func _physics_process(delta: float) -> void:
 	if cam_move and $Camera.global_position.x < Player.camera_right_limit:
 		$Camera.global_position.x += 96 * delta
 	$Camera.global_position.x = clamp($Camera.global_position.x, -INF, Player.camera_right_limit)
+	if (get_node_or_null("Invalid") != null):
+		%Invalid.visible = not ConditionalClear.valid
+
+func deactivate_all_generators() -> void:
+	for i in get_tree().get_nodes_in_group("EntityGenerators"):
+		i.active = false
+		i.deactivate()
+	get_tree().call_group("Enemies", "start_retreat") # Lakitus
 
 func victory_sequence(player: Player) -> void:
 	get_tree().call_group("Enemies", "flag_die")
+	deactivate_all_generators()
 	Global.level_complete_begin.emit()
 	victory_begin.emit()
 	cam_move = true
+	$Camera.enabled = true
 	$Camera.limit_right = Player.camera_right_limit
 	$Camera.global_position = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
 	$Camera.reset_physics_interpolation()

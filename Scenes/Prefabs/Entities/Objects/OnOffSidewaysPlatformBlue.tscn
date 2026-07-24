@@ -1,15 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://jnun56lervsy"]
+[gd_scene format=3 uid="uid://jnun56lervsy"]
 
 [ext_resource type="PackedScene" uid="uid://c8cxhsod82kwm" path="res://Scenes/Prefabs/Entities/Objects/OnOffSidewaysPlatform.tscn" id="1_bcqgw"]
 
-[node name="SidewaysPlatform" instance=ExtResource("1_bcqgw")]
+[node name="SidewaysPlatform" unique_id=986381325 instance=ExtResource("1_bcqgw")]
 
-[node name="Sprite" parent="AnimatableBody2D" index="0"]
+[node name="Sprite" parent="AnimatableBody2D" parent_id_path=PackedInt32Array(497869728) index="0" unique_id=2119390451]
 region_rect = Rect2(0, 8, 24, 8)
 
-[node name="Sprite2D" parent="AnimatableBody2D/Sprite" index="1"]
+[node name="Sprite2D" parent="AnimatableBody2D/Sprite" index="1" unique_id=54457281]
 frame = 1
 region_rect = Rect2(24, 8, 16, 8)
 
-[node name="AnimationPauser" parent="." index="4"]
+[node name="AnimationPauser" parent="." index="4" unique_id=742086155]
 paused = false
+
+[node name="OnOffSwitcher" parent="." index="5" unique_id=2037754299]
+invert = true

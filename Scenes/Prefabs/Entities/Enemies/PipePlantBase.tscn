@@ -1,0 +1,281 @@
+[gd_scene format=3 uid="uid://bksfxqm6v1a4j"]
+
+[ext_resource type="Script" uid="uid://d23hoj2qc2whq" path="res://Scripts/Classes/Entities/Enemies/PiranhaPlant.gd" id="1_ruec0"]
+[ext_resource type="Script" uid="uid://c3gg32ivrlq8n" path="res://Scripts/Classes/Components/GibSpawner.gd" id="4_fs2ml"]
+[ext_resource type="Script" uid="uid://cg3bquehids7s" path="res://Scripts/Classes/Components/PlantRotation.gd" id="5_w64l8"]
+[ext_resource type="Script" uid="uid://d0mqkvopasu8k" path="res://Scripts/Classes/Components/SecondQuestReplaceComponent.gd" id="6_h4okp"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="8_kckl7"]
+
+[sub_resource type="Animation" id="Animation_471w1"]
+resource_name = "Hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationJoint/PositionJoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotationJoint/PositionJoint:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotationJoint/PositionJoint/Visuals/Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6l0c7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationJoint/PositionJoint:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotationJoint/PositionJoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotationJoint/PositionJoint/Visuals/Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_t8k64"]
+resource_name = "Rise"
+length = 4.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationJoint/PositionJoint:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotationJoint/PositionJoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 24), Vector2(0, 0), Vector2(0, 0), Vector2(0, 24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotationJoint/PositionJoint/Visuals/Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ruec0"]
+resource_name = "RiseLong"
+length = 6.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationJoint/PositionJoint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 24), Vector2(0, 0), Vector2(0, 0), Vector2(0, 24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotationJoint/PositionJoint:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotationJoint/PositionJoint/Visuals/FirePiranhaPlant")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RotationJoint/PositionJoint/Visuals/Hitbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_fs2ml"]
+resource_name = "RiseRed"
+length = 4.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationJoint/PositionJoint:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RotationJoint/PositionJoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 24), Vector2(0, 0), Vector2(0, 0), Vector2(0, 24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RotationJoint/PositionJoint/Visuals/Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjrfx"]
+_data = {
+&"Hide": SubResource("Animation_471w1"),
+&"RESET": SubResource("Animation_6l0c7"),
+&"Rise": SubResource("Animation_t8k64"),
+&"RiseLong": SubResource("Animation_ruec0"),
+&"RiseRed": SubResource("Animation_fs2ml")
+}
+
+[node name="PirannhaPlant" type="CharacterBody2D" unique_id=877679531 node_paths=PackedStringArray("on_screen_enabler") groups=["Enemies", "PiranhaPlants"]]
+z_index = -5
+script = ExtResource("1_ruec0")
+on_screen_enabler = NodePath("VisibleOnScreenEnabler2D")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="RotationJoint" type="Node2D" parent="." unique_id=1388609852]
+unique_name_in_owner = true
+
+[node name="PositionJoint" type="Node2D" parent="RotationJoint" unique_id=531941041]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 24)
+
+[node name="Timer" type="Timer" parent="." unique_id=476338756]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=65639598]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -5)
+scale = Vector2(1, 2.9)
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=787949986]
+script = ExtResource("8_kckl7")
+properties = Array[String](["pipe_direction"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1714542832]
+libraries/ = SubResource("AnimationLibrary_hjrfx")
+autoplay = &"Hide"
+
+[node name="GibSpawner" type="Node" parent="." unique_id=1065734456]
+script = ExtResource("4_fs2ml")
+metadata/_custom_type_script = "uid://c3gg32ivrlq8n"
+
+[node name="PlantRotator" type="Node" parent="." unique_id=652635038 node_paths=PackedStringArray("rotation_joint", "plant")]
+process_mode = 3
+script = ExtResource("5_w64l8")
+rotation_joint = NodePath("../RotationJoint")
+plant = NodePath("..")
+
+[node name="SecondQuestReplacer" type="Node" parent="." unique_id=1574329925]
+script = ExtResource("6_h4okp")
+new_scene = "uid://kj5pw3xhq8f7"
+metadata/_custom_type_script = "uid://d0mqkvopasu8k"
+
+[connection signal="timeout" from="Timer" to="." method="on_timeout"]

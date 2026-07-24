@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://cofvohh45wek8"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://cofvohh45wek8"]
 
 [ext_resource type="Texture2D" uid="uid://cttelvg1404cg" path="res://Assets/Sprites/Players/Toadette/Fire.png" id="1_hqg7n"]
 [ext_resource type="Texture2D" uid="uid://cdmhguxcqt2wv" path="res://Assets/Sprites/Players/Toadette/Small.png" id="2_ijlo6"]

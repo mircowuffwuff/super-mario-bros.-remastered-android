@@ -1,19 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3fabrrcs6yol"]
-
+[gd_scene format=3 uid="uid://b3fabrrcs6yol"]
 [ext_resource type="PackedScene" uid="uid://0xnuvrl7o0gm" path="res://Scenes/Levels/SMB1/World7/7-2.tscn" id="1_2awec"]
 [ext_resource type="PackedScene" uid="uid://dkgu57is78lro" path="res://Scenes/Parts/PipeArea.tscn" id="2_23uo2"]
-
-[node name="7-2" instance=ExtResource("1_2awec")]
+[node name="7-2" unique_id=1435582803 instance=ExtResource("1_2awec")]
 world_id = -1
 level_id = 1
-
-[node name="2-2" parent="." index="2"]
-texture = null
-
-[node name="PipeArea" parent="." index="11"]
+[node name="PipeArea" parent="." index="10" unique_id=1294264941]
 target_level = "uid://b3fabrrcs6yol"
-
-[node name="PipeArea2" parent="." index="12" instance=ExtResource("2_23uo2")]
+[node name="PipeArea2" parent="." index="12" unique_id=1072442244 instance=ExtResource("2_23uo2")]
 position = Vector2(-224, 0)
 target_level = "uid://b3fabrrcs6yol"
 exit_only = true
+[node name="Checkpoint" parent="." index="13" unique_id=320824981 node_paths=PackedStringArray("nodes_to_delete")]
+nodes_to_delete = [null, NodePath("../Enemies/Blooper4")]
+[node name="CheckpointFlag" parent="." index="15" unique_id=1498541041 node_paths=PackedStringArray("nodes_to_delete")]
+nodes_to_delete = [null, NodePath("../Enemies/Blooper4")]

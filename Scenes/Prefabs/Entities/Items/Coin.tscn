@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://chjxyhlwohmi6"]
+[gd_scene format=3 uid="uid://chjxyhlwohmi6"]
 
 [ext_resource type="Script" uid="uid://cexcll4frt0t6" path="res://Scripts/Classes/Entities/Items/Coin.gd" id="1_c6elg"]
 [ext_resource type="Texture2D" uid="uid://b6o28xa83npb1" path="res://Assets/Sprites/Items/StaticCoin.png" id="2_7vxr7"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b1ytbn4cu7msu" path="res://Scenes/Prefabs/Particles/CoinSparkle.tscn" id="2_nu35s"]
 [ext_resource type="Script" uid="uid://cmg61722ktg2m" path="res://Scripts/Classes/Components/BlockBouncingDetection.gd" id="3_korlu"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_uahob"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Items/Coin.json" id="4_thymr"]
 [ext_resource type="Script" uid="uid://bul1nbd2in1gn" path="res://Scripts/Classes/Components/PSwitcher.gd" id="6_uahob"]
 [ext_resource type="Script" uid="uid://d4a7yp6e55u8t" path="res://Scripts/Classes/Components/TrackJoint.gd" id="7_thymr"]
 [ext_resource type="Script" uid="uid://maqpreddu5kg" path="res://Scripts/Classes/Components/LevelPersistance.gd" id="8_apfal"]
@@ -53,55 +52,57 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qjj6w"]
 size = Vector2(8, 8)
 
-[node name="Coin" type="Node2D" groups=["Coins"]]
+[node name="Coin" type="Node2D" unique_id=1340449955 groups=["Coins"]]
 z_index = -2
 script = ExtResource("1_c6elg")
 COIN_SPARKLE = ExtResource("2_nu35s")
 spinning_coin_scene = ExtResource("2_k3746")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=900100431]
 sprite_frames = SubResource("SpriteFrames_nu35s")
 autoplay = "default"
 frame_progress = 0.487032
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect", "property_node")]
+[node name="ResourceSetter" type="Node" parent="Sprite" unique_id=829518313 node_paths=PackedStringArray("node_to_affect", "property_node")]
+unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("3_uahob")
 node_to_affect = NodePath("..")
 property_node = NodePath("../..")
 property_name = "sprite_frames"
-resource_json = ExtResource("4_thymr")
+json_path = "res://Assets/Sprites/Items/Coin.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=497108419]
 visible = false
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=1414889948]
 shape = SubResource("RectangleShape2D_edpyv")
 
-[node name="BlockBouncingDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="BlockBouncingDetection" type="Node" parent="." unique_id=2023462455 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("3_korlu")
 detection_type = 1
 hitbox = NodePath("../BlockHitbox")
 metadata/_custom_type_script = "uid://cmg61722ktg2m"
 
-[node name="BlockHitbox" type="Area2D" parent="."]
+[node name="BlockHitbox" type="Area2D" parent="." unique_id=14984940]
 collision_layer = 0
 collision_mask = 6
 
-[node name="Shape" type="CollisionShape2D" parent="BlockHitbox"]
+[node name="Shape" type="CollisionShape2D" parent="BlockHitbox" unique_id=337798792]
 position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_qjj6w")
 
-[node name="PSwitcher" type="Node" parent="."]
+[node name="PSwitcher" type="Node" parent="." unique_id=27976043]
 script = ExtResource("6_uahob")
 new_scene = "uid://dsa8lpl7n8ge0"
 
-[node name="TrackJoint" type="Node" parent="."]
+[node name="TrackJoint" type="Node" parent="." unique_id=600732349]
 script = ExtResource("7_thymr")
 offset = Vector2(0, 0)
 metadata/_custom_type_script = "uid://d4a7yp6e55u8t"
 
-[node name="LevelPersistance" type="Node" parent="."]
+[node name="LevelPersistance" type="Node" parent="." unique_id=1853178828]
 script = ExtResource("8_apfal")
 
 [connection signal="collected" from="." to="LevelPersistance" method="set_as_active"]

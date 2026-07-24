@@ -3,20 +3,25 @@ class_name Level
 extends Node
 
 @export var music: JSON = null
+static var extra_music: JSON = null
+@export var room_type := RoomType.NORMAL
 @export_enum("Overworld", "Underground", "Desert", "Snow", "Jungle", "Beach", "Garden", "Mountain", "Skyland", "Autumn", "Pipeland", "Space", "Underwater", "Volcano", "Castle", "CastleWater", "Airship", "Bonus") var theme := "Overworld"
 
 @export_enum("Day", "Night") var theme_time := "Day"
 
 const THEME_IDXS := ["Overworld", "Underground", "Desert", "Snow", "Jungle", "Beach", "Garden", "Mountain", "Skyland", "Autumn", "Pipeland", "Space", "Underwater", "Volcano", "GhostHouse", "Castle", "CastleWater", "Airship", "Bonus"]
 
-const WORLD_COUNTS := {
+enum RoomType{NORMAL, BONUS_ROOM, COIN_HEAVEN, PIPE_CUTSCENE, TITLE_SCREEN, SublevelExit}
+const ROOM_STRINGS := ["MainRoom", "BonusRoom", "CoinHeaven", "PipeCutscene", "TitleScreen", "SublevelExit"]
+
+static var WORLD_COUNTS := {
 	"SMB1": 8,
 	"SMBLL": 13,
 	"SMBS": 8,
 	"SMBANN": 8
 }
 
-const WORLD_THEMES := {
+static var WORLD_THEMES := {
 	"SMB1": SMB1_THEMES,
 	"SMBLL": SMB1_THEMES,
 	"SMBS": SMBS_THEMES,
@@ -51,13 +56,6 @@ const SMBS_THEMES := {
 	8: "Overworld"
 }
 
-const BONUS_ROOMS := {
-	"SMB1": ["1-1a", "1-2a", "2-1a", "3-1a", "4-1a", "4-2a", "5-1a", "6-2a", "6-2c", "7-1a", "8-1a", "8-2a"],
-	"SMBLL": ["1-1a", "2-1a", "2-2a", "3-1b", "4-2a", "5-1a", "5-3a", "7-1c", "7-2a", "10-1a", "12-1a", "13-1a", "13-2a", "13-4b"],
-	"SMBS": ["1-1a", "1-2a", "6-2a", "6-2b", "6-2c", "6-2d", "6-3a", "7-1a", "7-3a"],
-	"SMBANN": ["1-1a", "1-2a", "2-1a", "3-1a", "4-1a", "4-2a", "5-1a", "6-2a", "6-2c", "7-1a", "8-1a", "8-2a"]
-}
-
 @export var auto_set_theme := false
 
 @export var time_limit := 400
@@ -82,27 +80,37 @@ static var in_vine_level := false
 
 static var can_set_time := true
 
+@export_storage var enforce_resolution := Vector2.ZERO
+
 func _enter_tree() -> void:
+	Global.level_metadata.clear()
+	Level.extra_music = null
 	Global.current_level = self
-	update_theme()
+	Global.current_room_type = room_type
+	if is_inside_tree():
+		update_theme()
 	SpeedrunHandler.timer_active = true
 	SpeedrunHandler.ghost_active = true
+	Global.stop_all_timers()
 	if can_set_time:
 		can_set_time = false
 		Global.time = time_limit
 	if first_load:
 		start_level_path = scene_file_path
 		Global.can_time_tick = true
+		inf_time_check()
 		Global.level_num = level_id
 		Global.world_num = world_id
 		PlayerGhost.idx = 0
 		SpeedrunHandler.current_recording = ""
 		if SpeedrunHandler.timer <= 0:
 			SpeedrunHandler.start_time = Time.get_ticks_msec()
+		if Global.current_game_mode == Global.GameMode.MARATHON_PRACTICE:
+			SpeedrunHandler.load_best_marathon()
 	else:
 		level_id = Global.level_num
 		world_id = Global.world_num
-	if Settings.file.difficulty.back_scroll == 1 and Global.current_game_mode != Global.GameMode.CUSTOM_LEVEL:
+	if Settings.file.gameplay.back_scroll == 1 and Global.current_game_mode != Global.GameMode.CUSTOM_LEVEL:
 		can_backscroll = true
 	first_load = false
 	if Global.connected_players > 1:
@@ -110,26 +118,52 @@ func _enter_tree() -> void:
 	Global.current_campaign = campaign
 	await get_tree().process_frame
 	AudioManager.stop_music_override(AudioManager.MUSIC_OVERRIDES.NONE, true)
+	apply_resolution_enforcement()
+	tree_exiting.connect(reset_resolution)
+	tree_exiting.connect(func(): OnOffSwitcher.active = false)
+
+func inf_time_check() -> void:
+	Global.inf_time = false
+	if time_limit >= 999:
+		Global.can_time_tick = false
+		Global.inf_time = true
+
+func apply_resolution_enforcement() -> void:
+	if enforce_resolution != Vector2.ZERO:
+		get_tree().root.content_scale_size = enforce_resolution
+		get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
+	else:
+		reset_resolution()
+
+func reset_resolution() -> void:
+	var idx = Settings.file.video.size
+	var res = Global.RESOLUTIONS[idx]
+	get_tree().root.content_scale_size = res
+	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND if idx == Global.RESOLUTIONS.size() - 1 else Window.CONTENT_SCALE_ASPECT_KEEP
 
 
 func spawn_in_extra_players() -> void:
+	# Fuck you lmao, no multiplayer
 	return
 
 func update_theme() -> void:
+	Global.update_theme()
 	if auto_set_theme:
-		theme = WORLD_THEMES[Global.current_campaign][Global.world_num]
-		campaign = Global.current_campaign
-		if Global.world_num > 4 and Global.world_num < 9:
-			theme_time = "Night"
+		if Global.CAMPAIGNS.has(Global.current_campaign) == false and first_load:
+			Global.current_campaign = "SMB1"
+		if Global.in_custom_campaign() == false:
+			theme = WORLD_THEMES[Global.current_campaign][Global.world_num]
+			if Global.world_num > 4 and Global.world_num < 9:
+				theme_time = "Night"
+			else:
+				theme_time = "Day"
+			if Global.current_campaign == "SMBANN":
+				theme_time = "Night"
 		else:
-			theme_time = "Day"
-		if Global.current_campaign == "SMBANN":
-			theme_time = "Night"
-		ResourceSetterNew.cache.clear()
-	if self is CoinHeaven:
-		Global.current_room = Global.Room.COIN_HEAVEN
-	else:
-		Global.current_room = get_room_type()
+			theme = Global.custom_campaign_jsons[Global.current_custom_campaign].world_themes[Global.world_num - 1][0]
+			theme_time = Global.custom_campaign_jsons[Global.current_custom_campaign].world_themes[Global.world_num - 1][1]
+		campaign = Global.current_campaign
+		ResourceSetterNew.clear_cache()
 	Global.current_campaign = campaign
 	Global.level_theme = theme
 	Global.theme_time = theme_time
@@ -138,8 +172,13 @@ func update_theme() -> void:
 		$LevelBG.update_visuals()
 
 func update_next_level_info() -> void:
-	next_level = wrap(level_id + 1, 1, 5)
-	next_world = world_id if level_id != 4 else world_id + 1 
+	Global.custom_level_idx += 1
+	var level_limit = 4
+	if Global.in_custom_campaign():
+		LevelEditor.sub_areas = [null, null, null, null, null]
+		level_limit = Global.custom_campaign_jsons[Global.current_custom_campaign].levels_per_world[Global.world_num - 1]
+	next_level = wrap(level_id + 1, 1, level_limit + 1)
+	next_world = world_id if level_id != level_limit else world_id + 1 
 	next_level_file_path = get_scene_string(next_world, next_level)
 	LevelTransition.level_to_transition_to = next_level_file_path
 
@@ -156,6 +195,12 @@ func transition_to_next_level() -> void:
 	if Global.current_game_mode == Global.GameMode.BOO_RACE:
 		Global.transition_to_scene("res://Scenes/Levels/BooRaceMenu.tscn")
 		return
+	if Global.in_custom_campaign():
+		if Global.custom_campaign_jsons[Global.current_custom_campaign].levels.size() - 1 <= Global.custom_level_idx:
+			Global.transition_to_scene("res://Scenes/Levels/TitleScreen.tscn")
+			Global.game_beaten = true
+			SaveManager.write_save()
+			return
 	update_next_level_info()
 	PipeCutscene.seen_cutscene = false
 	if WarpPipeArea.has_warped == false:
@@ -176,8 +221,3 @@ func reload_level() -> void:
 		Global.transition_to_scene(LevelTransition.level_to_transition_to)
 	else:
 		Global.transition_to_scene("res://Scenes/Levels/LevelTransition.tscn")
-
-func get_room_type() -> Global.Room:
-	if BONUS_ROOMS[campaign].has(scene_file_path.get_file().get_basename()):
-		return Global.Room.BONUS_ROOM
-	return Global.Room.MAIN_ROOM

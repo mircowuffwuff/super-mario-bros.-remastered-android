@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://biupk6yel683f"]
+
+[ext_resource type="Script" uid="uid://c7qf2r1yve6nl" path="res://Scripts/Classes/Entities/Objects/SnakeBlock.gd" id="1_r8seh"]
+[ext_resource type="PackedScene" uid="uid://br1hsfo0ihtxu" path="res://Scenes/Parts/SnakeBlockSegment.tscn" id="2_fuc5y"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="3_fuc5y"]
+[ext_resource type="PackedScene" uid="uid://byv4sv3cayrmo" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyTrackPath.tscn" id="4_7bkk4"]
+[ext_resource type="Texture2D" uid="uid://bid7njjtqgb26" path="res://Assets/Sprites/Editor/SnakeBlockPath.png" id="5_51wbc"]
+[ext_resource type="Script" uid="uid://cpwloakvp672a" path="res://Scripts/Parts/EditorVisibleNode.gd" id="6_51wbc"]
+[ext_resource type="Texture2D" uid="uid://dlldh5aks0wff" path="res://Assets/Sprites/Editor/GhostTile.png" id="7_yol8k"]
+[ext_resource type="Script" uid="uid://b3bokos5jcpr7" path="res://Scripts/Classes/Components/SignalExposer.gd" id="8_46787"]
+
+[sub_resource type="GDScript" id="GDScript_r8seh"]
+script/source = "extends Node
+
+func _ready() -> void:
+	handle_starting_position()
+
+func _physics_process(_delta: float) -> void:
+	if Global.level_editor != null:
+		if Global.level_editor.current_state != LevelEditor.EditorState.PLAYTESTING:
+			handle_starting_position()
+
+func handle_starting_position() -> void:
+	%Head.position = Vector2i.ZERO
+	for i in %Pieces.get_children():
+		i.position = Vector2i(-256, 99999)
+	var pos := Vector2i.ZERO
+	for i in owner.length - 1:
+		if owner.path.size() - 1 < i:
+			%Head.position = pos
+			return
+		pos += owner.path[i] * 16
+		%Pieces.get_child(i).position = pos
+	%Head.position = pos
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51wbc"]
+size = Vector2(15, 15)
+
+[node name="SnakeBlock" type="Node2D" unique_id=583028304]
+process_mode = 3
+z_index = -1
+script = ExtResource("1_r8seh")
+length = 4
+
+[node name="Pieces" type="Node2D" parent="." unique_id=1458866518]
+unique_name_in_owner = true
+physics_interpolation_mode = 2
+
+[node name="SnakeBlockSegment1" parent="Pieces" unique_id=21493935 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment2" parent="Pieces" unique_id=1333507145 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment3" parent="Pieces" unique_id=772127062 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment4" parent="Pieces" unique_id=629280051 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment5" parent="Pieces" unique_id=705004071 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment6" parent="Pieces" unique_id=722680233 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment7" parent="Pieces" unique_id=872786367 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment8" parent="Pieces" unique_id=1183314467 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment9" parent="Pieces" unique_id=2030283242 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment10" parent="Pieces" unique_id=49341877 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment11" parent="Pieces" unique_id=1019642771 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="SnakeBlockSegment12" parent="Pieces" unique_id=1093085847 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+
+[node name="Head" parent="." unique_id=761830843 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+unique_name_in_owner = true
+physics_interpolation_mode = 2
+
+[node name="Tail" parent="." unique_id=1645613948 groups=["SnakePieces"] instance=ExtResource("2_fuc5y")]
+physics_interpolation_mode = 2
+
+[node name="StartingPositioner" type="Node" parent="." unique_id=463318064]
+process_mode = 3
+script = SubResource("GDScript_r8seh")
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1694400623]
+script = ExtResource("3_fuc5y")
+properties = Array[String](["length", "speed", "path", "can_fall"])
+properties_force_selector = Dictionary[String, PackedScene]({
+"path": ExtResource("4_7bkk4")
+})
+animate_change = false
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="PlacePreview" type="Node2D" parent="." unique_id=104556352]
+visible = false
+z_index = 1
+
+[node name="N" type="Sprite2D" parent="PlacePreview" unique_id=337392482]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(0, -16)
+texture = ExtResource("5_51wbc")
+hframes = 5
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/N" unique_id=1172058114]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/N/MouseArea" unique_id=125848809]
+shape = SubResource("RectangleShape2D_51wbc")
+
+[node name="E" type="Sprite2D" parent="PlacePreview" unique_id=1836196850]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(16, 0)
+texture = ExtResource("5_51wbc")
+hframes = 5
+frame = 1
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/E" unique_id=1118281195]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/E/MouseArea" unique_id=1567319650]
+shape = SubResource("RectangleShape2D_51wbc")
+
+[node name="S" type="Sprite2D" parent="PlacePreview" unique_id=1730609624]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(0, 16)
+texture = ExtResource("5_51wbc")
+hframes = 5
+frame = 2
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/S" unique_id=175507285]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/S/MouseArea" unique_id=174623007]
+shape = SubResource("RectangleShape2D_51wbc")
+
+[node name="W" type="Sprite2D" parent="PlacePreview" unique_id=1156398372]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(-16, 0)
+texture = ExtResource("5_51wbc")
+hframes = 5
+frame = 3
+region_rect = Rect2(32, 16, 32, 16)
+
+[node name="MouseArea" type="Area2D" parent="PlacePreview/W" unique_id=581638309]
+
+[node name="Shape" type="CollisionShape2D" parent="PlacePreview/W/MouseArea" unique_id=1740677636]
+shape = SubResource("RectangleShape2D_51wbc")
+
+[node name="PathPreview" type="Node2D" parent="." unique_id=982752610]
+script = ExtResource("6_51wbc")
+
+[node name="Sprite2D" type="Sprite2D" parent="PathPreview" unique_id=133025973]
+texture = ExtResource("7_yol8k")
+
+[node name="Tweens" type="Node2D" parent="." unique_id=1871003237]
+process_mode = 1
+
+[node name="SignalExposer" type="Node2D" parent="." unique_id=1335334571]
+script = ExtResource("8_46787")
+metadata/_custom_type_script = "uid://b3bokos5jcpr7"
+
+[connection signal="modifier_applied" from="EditorPropertyExposer" to="." method="on_modifier_applied"]
+[connection signal="mouse_entered" from="PlacePreview/N/MouseArea" to="." method="on_mouse_entered" binds= [0]]
+[connection signal="mouse_exited" from="PlacePreview/N/MouseArea" to="." method="on_mouse_exited" binds= [0]]
+[connection signal="mouse_entered" from="PlacePreview/E/MouseArea" to="." method="on_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="PlacePreview/E/MouseArea" to="." method="on_mouse_exited" binds= [1]]
+[connection signal="mouse_entered" from="PlacePreview/S/MouseArea" to="." method="on_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="PlacePreview/S/MouseArea" to="." method="on_mouse_exited" binds= [2]]
+[connection signal="mouse_entered" from="PlacePreview/W/MouseArea" to="." method="on_mouse_entered" binds= [3]]
+[connection signal="mouse_exited" from="PlacePreview/W/MouseArea" to="." method="on_mouse_exited" binds= [3]]
+[connection signal="visibility_changed" from="PathPreview" to="." method="queue_redraw"]
+[connection signal="recieved_power" from="SignalExposer" to="." method="start_travelling"]
+[connection signal="recieved_pulse" from="SignalExposer" to="." method="start_travelling"]

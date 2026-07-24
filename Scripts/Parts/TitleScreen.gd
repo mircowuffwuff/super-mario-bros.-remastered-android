@@ -17,9 +17,12 @@ var star_offset_x := 0
 var star_offset_y := 0
 
 func _enter_tree() -> void:
+	Global.current_room_type = room_type
 	check_for_unlocked_achievements()
 	Global.debugged_in = false
 	Global.current_campaign = Settings.file.game.campaign
+	if (Global.current_campaign in Global.CAMPAIGNS) == false:
+		Global.current_campaign = "SMB1"
 	Global.in_title_screen = true
 	Global.current_game_mode = Global.GameMode.NONE
 	last_campaign = Global.current_campaign
@@ -30,7 +33,7 @@ func _ready() -> void:
 	#print(Settings.file.video.size)
 	#get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND if Settings.file.video.size == 1 else Window.CONTENT_SCALE_ASPECT_KEEP
 	setup_stars()
-	$CanvasLayer2/VersionLabel/DevBuildWarning.visible = Global.is_snapshot
+	%DevBuildWarning.visible = Global.is_snapshot
 	Global.level_theme_changed.connect(setup_stars)
 	DiscoLevel.in_disco_level = false
 	get_tree().paused = false
@@ -77,9 +80,11 @@ func campaign_selected() -> void:
 	$CanvasLayer/Options1.close()
 	if last_campaign != Global.current_campaign:
 		last_campaign = Global.current_campaign
-		update_title()
+		await update_title()
 	if Global.current_campaign == "SMBANN":
-		$CanvasLayer/Options2Stripped.open()
+		Global.current_game_mode = Global.GameMode.DISCO
+		$CanvasLayer/AllNightNippon/WorldSelect.open()
+		$%Options1.show()
 		return
 	$CanvasLayer/Options2.open()
 
@@ -101,14 +106,24 @@ func continue_story() -> void:
 	else:
 		$CanvasLayer/StoryMode/NoBeatenCharSelect.open()
 
+func custom_campaign_continue_selected() -> void:
+	SaveManager.apply_save(SaveManager.load_save(Global.current_custom_campaign))
+	Global.current_game_mode = Global.GameMode.CAMPAIGN
+	$CanvasLayer/StoryMode/CustomCampaign2/WorldSelect.custom_campaign_json = Global.custom_campaign_jsons[Global.current_custom_campaign]
+	$CanvasLayer/StoryMode/CustomCampaign2/LevelSelect.custom_campaign_json = Global.custom_campaign_jsons[Global.current_custom_campaign]
+	if Global.game_beaten or Global.debug_mode or Global.custom_campaign_jsons[Global.current_custom_campaign].get("force_level_select", false):
+		$CanvasLayer/StoryMode/CustomCampaign2/WorldSelect.open()
+	else:
+		$CanvasLayer/StoryMode/CustomCampaign2/CharSelect.open()
+
 func check_for_warpless() -> void:
 	SpeedrunHandler.is_warp_run = false
 	SpeedrunHandler.ghost_enabled = false
 	if SpeedrunHandler.WARP_LEVELS[Global.current_campaign].has(str(Global.world_num) + "-" + str(Global.level_num)):
-		%SpeedrunTypeSelect.open()
+		%SpeedrunTypeSelectLevel.open()
 	elif (SpeedrunHandler.best_level_any_times.get(str(Global.world_num) + "-" + str(Global.level_num), -1) > -1 or SpeedrunHandler.best_level_warpless_times[Global.world_num - 1][Global.level_num - 1] > -1):
 		$CanvasLayer/MarathonMode/HasRan/GhostSelect.open()
-	else: $CanvasLayer/MarathonMode/CharacterSelect.open()
+	else: $CanvasLayer/MarathonMode/CharacterSelectLevel.open()
 
 func check_for_ghost() -> void:
 	SpeedrunHandler.ghost_enabled = false
@@ -129,6 +144,13 @@ func get_highscore() -> void:
 func clear_stats() -> void:
 	Global.clear_saved_values()
 
+func clear_custom_save() -> void:
+	Global.world_num = 1
+	Global.level_num = 1
+	Global.custom_level_idx = 0
+	Global.clear_saved_values()
+	Global.reset_values()
+
 func go_back_to_first_level() -> void:
 	Global.world_num = 1
 	Global.level_num = 1
@@ -138,7 +160,9 @@ func start_game() -> void:
 	PipeCutscene.seen_cutscene = false
 	first_load = true
 	Global.reset_values()
-	LevelTransition.level_to_transition_to = Level.get_scene_string(Global.world_num, Global.level_num)
+	LevelEditor.sub_areas = [null, null, null, null, null]
+	if Global.in_custom_campaign() == false:
+		LevelTransition.level_to_transition_to = Level.get_scene_string(Global.world_num, Global.level_num)
 	Global.transition_to_scene("res://Scenes/Levels/LevelTransition.tscn")
 
 func start_full_run() -> void:
@@ -157,6 +181,15 @@ func start_full_run() -> void:
 	Global.level_num = 1
 	LevelTransition.level_to_transition_to = Level.get_scene_string(Global.world_num, Global.level_num)
 	Global.transition_to_scene("res://Scenes/Levels/LevelTransition.tscn")
+
+func open_custom_campaign() -> void:
+	$CanvasLayer/StoryMode/CustomCampaign.open()
+	$CanvasLayer/StoryMode/CustomCampaign/HighScore.text = "TOP- " + str(Global.high_score).pad_zeros(6)
+	if (Global.score <= 0) == false:
+		$CanvasLayer/StoryMode/CustomCampaign.selected_index = 0
+	else:
+		$CanvasLayer/StoryMode/CustomCampaign.selected_index = 1
+
 
 func start_level_run() -> void:
 	Global.second_quest = false
@@ -266,6 +299,3 @@ func check_for_unlocked_achievements() -> void:
 		has_achievements_to_unlock = true
 		%AchievementUnlock.show_popup(new_achievements)
 	AchievementMenu.unlocked_achievements = Global.achievements
-
-func get_room_type() -> Global.Room:
-	return Global.Room.TITLE_SCREEN

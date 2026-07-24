@@ -2,110 +2,163 @@
 	"animations": {
 		"Idle": {
 			"frames": [[0, 0, 16, 32]],
-			"speed": 5.0,
+			"speed": 5,
 			"loop": true
 		},
-		"Emote": {
+		"Await": {
 			"frames": [
 				[0, 0, 16, 32],
 				[16, 0, 16, 32]
 			],
-			"speed": 5.0,
+			"speed": 5,
 			"loop": true
-		}
+		},
+		"Talk": {"link": "Await"}
 	},
 	"variations": {
 		"SMB1": {
 			"choices": [
-				{"source": "ToadNPC.png",
-				"rect": [0, 0, 32, 32]},
-				{"source": "ToadNPC.png",
-				"rect": [0, 32, 32, 32]},
-				{"source": "ToadNPC.png",
-				"rect": [0, 64, 32, 32]},
-				{"source": "ToadNPC.png",
-				"rect": [0, 96, 32, 32]},
-				{"source": "ToadNPC.png",
-				"rect": [32, 0, 32, 32]},
-				{"source": "ToadNPC.png",
-				"rect": [32, 32, 32, 32]},
-				{"source": "ToadNPC.png",
-				"rect": [32, 64, 32, 32]}
+				{
+					"source": "ToadNPC.png",
+					"rect": [0, 0, 32, 32]
+				},
+				{
+					"source": "ToadNPC.png",
+					"rect": [0, 32, 32, 32]
+				},
+				{
+					"source": "ToadNPC.png",
+					"rect": [0, 64, 32, 32]
+				},
+				{
+					"source": "ToadNPC.png",
+					"rect": [0, 96, 32, 32]
+				},
+				{
+					"source": "ToadNPC.png",
+					"rect": [32, 0, 32, 32]
+				},
+				{
+					"source": "ToadNPC.png",
+					"rect": [32, 32, 32, 32]
+				},
+				{
+					"source": "ToadNPC.png",
+					"rect": [32, 64, 32, 32]
+				}
 			]
 		},
 		"SMBLL": {
 			"choices": [
-				{"source": "ToadNPCLL.png",
-				"rect": [0, 0, 32, 32]},
-				{"source": "ToadNPCLL.png",
-				"rect": [0, 32, 32, 32]},
-				{"source": "ToadNPCLL.png",
-				"rect": [0, 64, 32, 32]},
-				{"source": "ToadNPCLL.png",
-				"rect": [0, 96, 32, 32]},
-				{"source": "ToadNPCLL.png",
-				"rect": [32, 0, 32, 32]},
-				{"source": "ToadNPCLL.png",
-				"rect": [32, 32, 32, 32]},
-				{"source": "ToadNPCLL.png",
-				"rect": [32, 64, 32, 32]}
+				{
+					"source": "ToadNPCLL.png",
+					"rect": [0, 0, 32, 32]
+				},
+				{
+					"source": "ToadNPCLL.png",
+					"rect": [0, 32, 32, 32]
+				},
+				{
+					"source": "ToadNPCLL.png",
+					"rect": [0, 64, 32, 32]
+				},
+				{
+					"source": "ToadNPCLL.png",
+					"rect": [0, 96, 32, 32]
+				},
+				{
+					"source": "ToadNPCLL.png",
+					"rect": [32, 0, 32, 32]
+				},
+				{
+					"source": "ToadNPCLL.png",
+					"rect": [32, 32, 32, 32]
+				},
+				{
+					"source": "ToadNPCLL.png",
+					"rect": [32, 64, 32, 32]
+				}
 			]
 		},
 		"SMBS": {
 			"choices": [
-				{"source": "ToadNPCSP.png",
-				"rect": [0, 0, 32, 32]},
-				{"source": "ToadNPCSP.png",
-				"rect": [0, 32, 32, 32]},
-				{"source": "ToadNPCSP.png",
-				"rect": [0, 64, 32, 32]},
-				{"source": "ToadNPCSP.png",
-				"rect": [0, 96, 32, 32]},
-				{"source": "ToadNPCSP.png",
-				"rect": [32, 0, 32, 32]},
-				{"source": "ToadNPCSP.png",
-				"rect": [32, 32, 32, 32]},
-				{"source": "ToadNPCSP.png",
-				"rect": [32, 64, 32, 32]}
+				{
+					"source": "ToadNPCSP.png",
+					"rect": [0, 0, 32, 32]
+				},
+				{
+					"source": "ToadNPCSP.png",
+					"rect": [0, 32, 32, 32]
+				},
+				{
+					"source": "ToadNPCSP.png",
+					"rect": [0, 64, 32, 32]
+				},
+				{
+					"source": "ToadNPCSP.png",
+					"rect": [0, 96, 32, 32]
+				},
+				{
+					"source": "ToadNPCSP.png",
+					"rect": [32, 0, 32, 32]
+				},
+				{
+					"source": "ToadNPCSP.png",
+					"rect": [32, 32, 32, 32]
+				},
+				{
+					"source": "ToadNPCSP.png",
+					"rect": [32, 64, 32, 32]
+				}
 			]
 		},
 		"SMBANN": {
 			"World1": {
 				"source": "DiscoNPCs.png",
-				"rect": [0, 0, 16, 32]
+				"rect": [0, 0, 32, 32]
 			},
 			"World2": {
 				"source": "DiscoNPCs.png",
-				"rect": [16, 0, 16, 32]
+				"rect": [32, 0, 32, 32]
 			},
 			"World3": {
 				"source": "DiscoNPCs.png",
-				"rect": [32, 0, 16, 32]
+				"rect": [64, 0, 32, 32]
 			},
 			"World4": {
 				"source": "DiscoNPCs.png",
-				"rect": [48, 0, 16, 32]
+				"rect": [0, 32, 32, 32]
 			},
 			"World5": {
 				"source": "DiscoNPCs.png",
-				"rect": [64, 0, 16, 32]
+				"rect": [32, 32, 32, 32]
 			},
 			"World6": {
 				"source": "DiscoNPCs.png",
-				"rect": [80, 0, 16, 32]
+				"rect": [64, 32, 32, 32]
 			},
 			"World7": {
 				"choices": [
-						{"source": "DiscoNPCs.png",
-						"rect": [96, 0, 16, 32]},
-						{"source": "DiscoNPCs.png",
-						"rect": [112, 0, 16, 32]}
+					{
+						"source": "DiscoNPCs.png",
+						"rect": [0, 64, 32, 32]
+					},
+					{
+						"source": "DiscoNPCs.png",
+						"rect": [32, 64, 32, 32]
+					}
 				]
 			},
 			"World8": {
 				"source": "DiscoNPCs.png",
-				"rect": [0, 0, 16, 32]
-			}
+				"rect": [64, 64, 32, 32]
+			},
+			"World9": {"link": "World8"},
+			"World10": {"link": "World8"},
+			"World11": {"link": "World8"},
+			"World12": {"link": "World8"},
+			"World13": {"link": "World8"},
+			"World-1": {"link": "World8"}
 		}
 	}
 }

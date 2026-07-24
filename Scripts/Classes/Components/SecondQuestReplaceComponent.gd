@@ -5,11 +5,11 @@ extends Node
 @export var properties: Array[String] = []
 
 func _ready() -> void:
-	if Global.second_quest and new_scene != "" and new_scene != owner.scene_file_path:
+	if (Global.second_quest or HardModeForce.enabled) and new_scene != "" and new_scene != owner.scene_file_path:
 		if owner.owner != null:
 			await owner.owner.ready
 		var node = load(new_scene).instantiate()
-		node.global_position = owner.global_position
+		node.position = owner.position
 		node.global_rotation = owner.global_rotation
 		for i in properties:
 			node.set(i, owner.get(i))

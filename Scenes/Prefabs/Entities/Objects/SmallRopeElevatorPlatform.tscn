@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6ym8t537v4ac"]
+[gd_scene format=3 uid="uid://c6ym8t537v4ac"]
 
 [ext_resource type="PackedScene" uid="uid://6rp3wgax4i51" path="res://Scenes/Prefabs/Entities/Objects/RopeElevatorPlatform.tscn" id="1_uccfj"]
 
@@ -8,17 +8,17 @@ size = Vector2(32, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvar1"]
 size = Vector2(32, 5)
 
-[node name="SmallRopeElevatorPlatform" instance=ExtResource("1_uccfj")]
+[node name="SmallRopeElevatorPlatform" unique_id=870685811 instance=ExtResource("1_uccfj")]
 
-[node name="Sprite" parent="Platform" index="0"]
+[node name="Sprite" parent="Platform" parent_id_path=PackedInt32Array(749308287) index="0" unique_id=1185437037]
 offset_left = -16.0
 offset_right = 16.0
 
-[node name="Shape" parent="Platform" index="1"]
+[node name="Shape" parent="Platform" parent_id_path=PackedInt32Array(749308287) index="1" unique_id=1044337471]
 shape = SubResource("RectangleShape2D_iew1h")
 
-[node name="Shape" parent="Platform/PlayerDetection" index="0"]
+[node name="Shape" parent="Platform/PlayerDetection" parent_id_path=PackedInt32Array(726382369) index="0" unique_id=1609821578]
 shape = SubResource("RectangleShape2D_qvar1")
 
-[node name="SecondQuestReplacer" parent="." index="2"]
+[node name="SecondQuestReplacer" parent="." index="2" unique_id=1230908260]
 new_scene = ""

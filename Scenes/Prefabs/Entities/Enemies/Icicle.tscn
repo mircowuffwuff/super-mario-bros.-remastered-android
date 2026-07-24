@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0gkypf5ow67f"]
+[gd_scene format=3 uid="uid://b0gkypf5ow67f"]
 
 [ext_resource type="Script" uid="uid://cx0ak5ctcg0mi" path="res://Scripts/Classes/Entities/Enemies/Icicle.gd" id="1_dnx1i"]
 [ext_resource type="Texture2D" uid="uid://rbln0ee0fknc" path="res://Assets/Sprites/Enemies/Icicle.png" id="2_1h8cl"]
@@ -46,48 +46,48 @@ _data = {
 &"Shake": SubResource("Animation_dnx1i")
 }
 
-[node name="Icicle" type="CharacterBody2D"]
+[node name="Icicle" type="CharacterBody2D" unique_id=546050169]
 collision_layer = 0
 collision_mask = 55
 script = ExtResource("1_dnx1i")
 metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
 
-[node name="EnemyPlayerDetection" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=1445645254 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("2_5y583")
 hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://chj8hu207lrh"
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=144013119]
 position = Vector2(0, -8)
 texture = ExtResource("2_1h8cl")
 script = ExtResource("3_dnx1i")
 metadata/_custom_type_script = "uid://364rywt44hy6"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1454723688]
 visible = false
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_dnx1i")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=796633011]
 visible = false
 
-[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=1606012451]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_dnx1i")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=262708504]
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -8)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_2sios")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=277092153]
+libraries/ = SubResource("AnimationLibrary_2sios")
 
 [connection signal="killed" from="." to="." method="destroy" unbinds=1]
 [connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
 [connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="player_hit" from="EnemyPlayerDetection" to="." method="destroy" unbinds=1]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="destroy" unbinds=1]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]
 [connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="destroy" unbinds=1]

@@ -15,6 +15,12 @@ func change_scene_to(path) -> void:
 			child.queue_free()
 			await child.tree_exited
 	
+	# TODO add packed scene support, similar to:
+	#if scene_path is String:
+	#	get_tree().change_scene_to_file(scene_path)
+	#elif scene_path is PackedScene:
+	#	get_tree().change_scene_to_packed(scene_path)
+	
 	var new_scene = load(path).instantiate()
 	game_viewport.add_child(new_scene)
 	

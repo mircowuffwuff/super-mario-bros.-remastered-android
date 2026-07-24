@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs8iql18nkljw"]
+[gd_scene format=3 uid="uid://cs8iql18nkljw"]
 
 [ext_resource type="PackedScene" uid="uid://bhmlkk0b6od2o" path="res://Scenes/Parts/WarpPipeArea.tscn" id="1_cqjry"]
 [ext_resource type="Script" uid="uid://b0scyyxg64wbp" path="res://Scripts/Parts/WarpZone.gd" id="1_ngmjk"]
@@ -10,18 +10,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xejae"]
 size = Vector2(18, 1000)
 
-[node name="WarpZone" type="Node2D" groups=["Labels"]]
+[node name="WarpZone" type="Node2D" unique_id=2016939601 groups=["Labels"]]
 script = ExtResource("1_ngmjk")
 
-[node name="Pipes" type="Node2D" parent="."]
+[node name="Pipes" type="Node2D" parent="." unique_id=100359184]
 
-[node name="Left" type="Node2D" parent="Pipes"]
+[node name="Left" type="Node2D" parent="Pipes" unique_id=1105778885]
 position = Vector2(-64, -48)
 
-[node name="Pipe" parent="Pipes/Left" instance=ExtResource("1_cqjry")]
+[node name="Pipe" parent="Pipes/Left" unique_id=644825579 instance=ExtResource("1_cqjry")]
 world_num = -1
 
-[node name="TextLabel" parent="Pipes/Left" groups=["Labels"] instance=ExtResource("3_xejae")]
+[node name="TextLabel" parent="Pipes/Left" unique_id=203973513 groups=["Labels"] instance=ExtResource("3_xejae")]
 visible = false
 offset_left = -8.0
 offset_top = -24.0
@@ -29,15 +29,15 @@ offset_right = 8.0
 offset_bottom = -8.0
 text = "1"
 
-[node name="PirannhaPlant" parent="Pipes/Left" groups=["Plants"] instance=ExtResource("4_usbud")]
+[node name="PirannhaPlant" parent="Pipes/Left" unique_id=1801548070 groups=["Plants"] instance=ExtResource("4_usbud")]
 
-[node name="Middle" type="Node2D" parent="Pipes"]
+[node name="Middle" type="Node2D" parent="Pipes" unique_id=2055117847]
 position = Vector2(0, -48)
 
-[node name="Pipe" parent="Pipes/Middle" instance=ExtResource("1_cqjry")]
+[node name="Pipe" parent="Pipes/Middle" unique_id=1657359784 instance=ExtResource("1_cqjry")]
 world_num = -1
 
-[node name="TextLabel" parent="Pipes/Middle" groups=["Labels"] instance=ExtResource("3_xejae")]
+[node name="TextLabel" parent="Pipes/Middle" unique_id=333482165 groups=["Labels"] instance=ExtResource("3_xejae")]
 visible = false
 offset_left = -8.0
 offset_top = -24.0
@@ -45,15 +45,15 @@ offset_right = 8.0
 offset_bottom = -8.0
 text = "1"
 
-[node name="PirannhaPlant" parent="Pipes/Middle" groups=["Plants"] instance=ExtResource("4_usbud")]
+[node name="PirannhaPlant" parent="Pipes/Middle" unique_id=685257709 groups=["Plants"] instance=ExtResource("4_usbud")]
 
-[node name="Right" type="Node2D" parent="Pipes"]
+[node name="Right" type="Node2D" parent="Pipes" unique_id=823629391]
 position = Vector2(64, -48)
 
-[node name="Pipe" parent="Pipes/Right" instance=ExtResource("1_cqjry")]
+[node name="Pipe" parent="Pipes/Right" unique_id=174818605 instance=ExtResource("1_cqjry")]
 world_num = -1
 
-[node name="TextLabel" parent="Pipes/Right" groups=["Labels"] instance=ExtResource("3_xejae")]
+[node name="TextLabel" parent="Pipes/Right" unique_id=1716520440 groups=["Labels"] instance=ExtResource("3_xejae")]
 visible = false
 offset_left = -8.0
 offset_top = -24.0
@@ -61,9 +61,9 @@ offset_right = 8.0
 offset_bottom = -8.0
 text = "1"
 
-[node name="PirannhaPlant" parent="Pipes/Right" groups=["Plants"] instance=ExtResource("4_usbud")]
+[node name="PirannhaPlant" parent="Pipes/Right" unique_id=1533801816 groups=["Plants"] instance=ExtResource("4_usbud")]
 
-[node name="TextLabel" parent="." groups=["Labels"] instance=ExtResource("3_xejae")]
+[node name="TextLabel" parent="." unique_id=1713053611 groups=["Labels"] instance=ExtResource("3_xejae")]
 visible = false
 offset_left = -104.0
 offset_top = -120.0
@@ -73,16 +73,16 @@ text = "LEVEL_WARPZONE"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="PlayerDetection" type="Area2D" parent="."]
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=402290310]
 position = Vector2(8, -136)
 script = ExtResource("5_3hug5")
 metadata/_custom_type_script = "uid://cnheej0sxmoxg"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=636594856]
 position = Vector2(1, -124)
 shape = SubResource("RectangleShape2D_xejae")
 
-[node name="HardCameraRightLimit" parent="." instance=ExtResource("8_0wmt6")]
+[node name="HardCameraRightLimit" parent="." unique_id=988906801 instance=ExtResource("8_0wmt6")]
 position = Vector2(144, -176)
 reset_on_delete = false
 lock_camera = true

@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbkh4k47ux3ve"]
+[gd_scene format=3 uid="uid://bbkh4k47ux3ve"]
 
 [ext_resource type="PackedScene" uid="uid://bn1kect7h2dlp" path="res://Scenes/Prefabs/LevelObjects/BulletBillGenerator.tscn" id="1_6m0au"]
 [ext_resource type="Script" uid="uid://dgqdo5cvl41l0" path="res://Scripts/Parts/GravityInverter.gd" id="2_yqpt8"]
 [ext_resource type="Texture2D" uid="uid://4fafl7yuo5k0" path="res://Assets/Sprites/Editor/GravityInverter.png" id="3_yqpt8"]
 
-[node name="GravityInverter" instance=ExtResource("1_6m0au")]
+[node name="GravityInverter" unique_id=1072320699 instance=ExtResource("1_6m0au")]
 script = ExtResource("2_yqpt8")
 entity_scene = null
 
-[node name="Sprite" parent="LevelEditorVisibleNode" index="0"]
+[node name="Sprite" parent="LevelEditorVisibleNode" parent_id_path=PackedInt32Array(1819047736) index="0" unique_id=2086579252]
 texture = ExtResource("3_yqpt8")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh5w143a52d04"]
+[gd_scene format=3 uid="uid://dh5w143a52d04"]
 
 [ext_resource type="Script" uid="uid://c3c1o65wvi6tq" path="res://Scripts/UI/TitleScreenOptions.gd" id="1_dlelg"]
-[ext_resource type="FontFile" uid="uid://b4hv3ito0uwa8" path="res://Assets/Sprites/UI/Font.png" id="1_hofsk"]
 
-[node name="TitleScreenOptions" type="VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="TitleScreenOptions" type="VBoxContainer" unique_id=1624110285 node_paths=PackedStringArray("options")]
 custom_minimum_size = Vector2(9, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -23,31 +22,28 @@ script = ExtResource("1_dlelg")
 can_exit = false
 options = [NodePath("Play"), NodePath("Options"), NodePath("Label")]
 
-[node name="Play" type="Label" parent="."]
+[node name="Play" type="Label" parent="." unique_id=647327591]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_hofsk")
 text = "Play Game"
 uppercase = true
 
-[node name="Options" type="Label" parent="."]
+[node name="Options" type="Label" parent="." unique_id=742675642]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_hofsk")
 text = "settings"
 uppercase = true
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=270936262]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_hofsk")
 text = "Quit Game"
 uppercase = true
 
-[node name="Buffer" type="Control" parent="."]
+[node name="Buffer" type="Control" parent="." unique_id=861626796]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 4

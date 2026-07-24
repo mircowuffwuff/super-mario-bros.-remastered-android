@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="ThemedResource" load_steps=32 format=3 uid="uid://b3uqx71poted1"]
+[gd_resource type="Resource" script_class="ThemedResource" format=3 uid="uid://b3uqx71poted1"]
 
 [ext_resource type="Texture2D" uid="uid://cnkidb1wdx000" path="res://Assets/Sprites/Tilesets/Terrain/Autumn.png" id="1_kopdp"]
-[ext_resource type="Texture2D" uid="uid://co20dp5hbejik" path="res://Assets/Sprites/Tilesets/Terrain/CastleSP.png" id="1_v1uin"]
 [ext_resource type="Texture2D" uid="uid://3flklmluw5rd" path="res://Assets/Sprites/Tilesets/Terrain/Space.png" id="2_67vvt"]
 [ext_resource type="Texture2D" uid="uid://vok5es8ssgf" path="res://Assets/Sprites/Tilesets/Terrain/Beach.png" id="2_hyuh7"]
 [ext_resource type="Script" uid="uid://cixtosud3mfaq" path="res://Scripts/Classes/Resources/CampaignResource.gd" id="3_g1un6"]
@@ -26,11 +25,14 @@
 [ext_resource type="Texture2D" uid="uid://ocip11wxnwa8" path="res://Assets/Sprites/Tilesets/Terrain/Underwater.png" id="18_wugss"]
 [ext_resource type="Texture2D" uid="uid://dhviikrqow61p" path="res://Assets/Sprites/Tilesets/Terrain/Volcano.png" id="23_wolgd"]
 
+[sub_resource type="Resource" id="Resource_wolgd"]
+metadata/__load_path__ = "res://Assets/Sprites/Tilesets/Terrain/CastleSP.png"
+
 [sub_resource type="Resource" id="Resource_d4nyf"]
 script = ExtResource("3_g1un6")
 SMB1 = ExtResource("3_t31it")
 SMBLL = ExtResource("4_8m7hy")
-SMBS = ExtResource("1_v1uin")
+SMBS = SubResource("Resource_wolgd")
 metadata/_custom_type_script = ExtResource("3_g1un6")
 
 [sub_resource type="Resource" id="Resource_rmflr"]

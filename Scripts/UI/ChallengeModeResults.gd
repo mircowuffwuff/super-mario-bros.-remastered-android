@@ -19,11 +19,12 @@ func _ready() -> void:
 	coin_medal = int(ChallengeModeHandler.red_coins_collected[Global.world_num - 1][Global.level_num - 1]) & 0b011111 == 0b011111
 	score_medal = ChallengeModeHandler.top_challenge_scores[Global.world_num -1][Global.level_num - 1] >= ChallengeModeHandler.CHALLENGE_TARGETS[Global.current_campaign][Global.world_num -1][Global.level_num -1]
 	yoshi_medal = ChallengeModeHandler.is_coin_collected(ChallengeModeHandler.CoinValues.YOSHI_EGG, ChallengeModeHandler.red_coins_collected[Global.world_num - 1][Global.level_num - 1])
+	%YoshiEgg.frame = Global.level_num - 1
 	$ChallengeResults.play()
 	setup_results()
 
 func _process(_delta: float) -> void:
-	if can_exit and Input.is_action_just_pressed("jump_0"):
+	if can_exit and Global.multibind_action_just_pressed("jump_0"):
 		can_exit = false
 		exiting = true
 		save_results()

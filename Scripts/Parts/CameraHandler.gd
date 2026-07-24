@@ -21,6 +21,8 @@ static var cam_locked := false
 var scrolling := false
 var cam_direction := 1
 
+static var solid_cam_bounds := false
+
 # how far between the center and the edge of the screen before scrolling to the center
 const SCROLL_DIFFERENCE := 48.0
 
@@ -30,26 +32,46 @@ var can_diff := true
 static var sp_screen_scroll := false
 #static var sp_scroll_style := 1
 
+var player: Player = null
+
 var sp_scrolling := false
+
 
 func _exit_tree() -> void:
 	cam_locked = false
+	solid_cam_bounds = false
+
+func _ready() -> void:
+	player = owner
+
 
 func _physics_process(delta: float) -> void:
 	sp_screen_scroll = Settings.file.visuals.smbs_scroll > 0
-	handle_camera(delta)
-	last_position = global_position
+	handle_camera.call_deferred(delta)
+	if is_instance_valid(player):
+		set_deferred("last_position", player.global_position)
 
 func handle_camera(delta: float) -> void:
-	
+	if get_tree().get_first_node_in_group("Players") == null:
+		return
+	for i in get_tree().get_nodes_in_group("Players"):
+		if is_instance_valid(player) == false:
+			player = i
+		if i != player:
+			if i.velocity.x > player.velocity.x:
+				if i.global_position.x + (i.velocity.x * delta * 60) > player.global_position.x:
+					player = i
+			elif i.global_position.x > player.global_position.x:
+				player = i
 	can_scroll_left = camera_position.x + camera_offset.x > -255
 	can_scroll_right = camera_position.x + camera_offset.x < camera_right_limit - 1
 	
-	if ["Pipe", "Climb", "FlagPole"].has(owner.state_machine.state.name):
+	if ["Pipe", "Climb", "FlagPole"].has(player.state_machine.state.name):
 		handle_vertical_scrolling(delta)
 		do_limits()
 		camera.global_position = camera_position + camera_offset
-		return
+		if not player.exiting_pipe:
+			return
 	
 	if not cam_locked:
 		if not sp_screen_scroll:
@@ -64,64 +86,65 @@ func handle_camera(delta: float) -> void:
 	update_camera_barriers()
 
 func update_camera_barriers() -> void:
-	if Global.get_game_viewport() != null:
+	if Global.get_game_viewport() != null and Global.get_game_viewport().get_camera_2d() != null:
 		camera_center_joint.global_position = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
 		camera_center_joint.get_node("LeftWall").position.x = -(get_viewport_rect().size.x / 2)
 		camera_center_joint.get_node("RightWall").position.x = (get_viewport_rect().size.x / 2)
+		for i in [camera_center_joint.get_node("RightWall"), camera_center_joint.get_node("LeftWall")]:
+			i.get_node("CollisionShape2D").set_deferred("one_way_collision", not solid_cam_bounds)
 
 func handle_horizontal_scrolling(delta: float) -> void:
 	scrolling = false
-	var true_velocity = (global_position - last_position) / delta
+	var true_velocity = (player.global_position - last_position) / delta
 	var true_vel_dir = sign(true_velocity.x)
-	if (owner.is_on_wall() and owner.direction == -owner.get_wall_normal().x):
+	if (player.is_on_wall() and player.direction == -player.get_wall_normal().x):
 		true_vel_dir = 0
 		true_velocity.x = 0
 	## RIGHT MOVEMENT
 	if true_vel_dir == 1 and can_scroll_right:
 		cam_direction = 1
-		if global_position.x >= camera_position.x:
+		if player.global_position.x >= camera_position.x:
 			var offset = 0
-			if camera_position.x <= global_position.x - 4:
-				offset = camera_position.x - global_position.x + abs(true_velocity.x * delta)
+			if camera_position.x <= player.global_position.x - 4:
+				offset = camera_position.x - player.global_position.x + abs(true_velocity.x * delta)
+				offset += abs(true_velocity.x) * delta / 2
 			scrolling = true
-			camera_position.x = global_position.x + offset
+			
+			camera_position.x = player.global_position.x + offset
+		elif player.global_position.x >= camera.get_screen_center_position().x - Global.get_game_viewport().get_visible_rect().size.x / 5 and (player.velocity.x) > 20:
+			camera_position.x += min(abs(player.velocity.x), 40) * delta
 	
 	## LEFT MOVEMENT
 	elif true_vel_dir == -1 and can_scroll_left and Global.current_level.can_backscroll:
 		cam_direction = -1
-		if global_position.x <= camera_position.x:
+		if player.global_position.x <= camera_position.x:
 			scrolling = true
 			var offset = 0
-			if camera_position.x >= global_position.x + 4:
-				offset = camera_position.x - global_position.x - abs(true_velocity.x * delta)
-			camera_position.x = global_position.x + offset
+			if camera_position.x >= player.global_position.x + 4:
+				offset = camera_position.x - player.global_position.x - abs(true_velocity.x * delta)
+			camera_position.x = player.global_position.x + offset
+		elif player.global_position.x <= camera.get_screen_center_position().x + Global.get_game_viewport().get_visible_rect().size.x / 5 and (player.velocity.x) < -20:
+			camera_position.x += max(player.velocity.x, -40) * delta
 	
 	if can_diff == false: 
 		position.x = 0
 		return
-	# horizontal adjusgments
-	# if the position is matching the camera, start scrolling towards the center
-	if global_position.x >= camera_position.x:
-		position.x = move_toward(position.x,0.0,delta * max(30.0, abs(true_velocity.x / 2.3)))
-	else:
-		# if the camera if behind the middle of the screen, calculate the current difference
-		position.x = max(min(camera_position.x-global_position.x,SCROLL_DIFFERENCE),position.x)
 
 
 func handle_vertical_scrolling(_delta: float) -> void:
 	## VERTICAL MOVEMENT
-	if global_position.y < camera_position.y and owner.is_on_floor():
-		camera_position.y = move_toward(camera_position.y, global_position.y, 3)
-	elif global_position.y < camera_position.y - 64:
-		camera_position.y = global_position.y + 64
-	elif global_position.y > camera_position.y + 32:
-		camera_position.y = global_position.y - 32
+	if player.global_position.y < camera_position.y and player.is_on_floor():
+		camera_position.y = move_toward(camera_position.y, player.global_position.y, 3)
+	elif player.global_position.y < camera_position.y - 64:
+		camera_position.y = player.global_position.y + 64
+	elif player.global_position.y > camera_position.y + 32:
+		camera_position.y = player.global_position.y - 32
 
 func handle_sp_scrolling() -> void:
-	var distance = camera_position.x - owner.global_position.x
+	var distance = camera_position.x - player.global_position.x
 	var limit = Global.get_game_viewport().get_visible_rect().size.x / 2 - 16
 	if abs(distance) > limit:
-		do_sp_scroll(sign(owner.global_position.x - camera_position.x))
+		do_sp_scroll(sign(player.global_position.x - camera_position.x))
 
 func do_sp_scroll(direction := 1) -> void:
 	if sp_scrolling: return
@@ -151,27 +174,38 @@ func tween_ahead() -> void:
 	tween.tween_property(self, "camera_position:x", camera_position.x + (32 * cam_direction), 0.25)
 
 func recenter_camera() -> void:
-	camera_position = global_position
+	if is_instance_valid(player) == false:
+		player = owner
+	camera_position = player.global_position
 	last_position = camera_position
 	camera_position += camera_offset
 	do_limits()
 	camera.global_position = camera_position
+	camera.reset_physics_interpolation()
+	camera.reset_smoothing()
 
 func handle_offsets(delta: float) -> void:
-	var true_velocity = (global_position - last_position) / delta
+	var true_velocity = (player.global_position - last_position) / delta
 	var true_vel_dir = sign(true_velocity.x)
-	if owner.velocity.x == 0 or (owner.is_on_wall() and owner.direction == -owner.get_wall_normal().x):
+	if player.velocity.x == 0 or (player.is_on_wall() and player.direction == -player.get_wall_normal().x):
 		true_vel_dir = 0
 		true_velocity.x = 0
 	if Global.current_level.can_backscroll:
+		const CENTER_OFFSET := 8
 		if true_vel_dir != 0 and abs(true_velocity.x) > 80:
-			if abs(camera_position.x - global_position.x) <= 64:
-				camera_offset.x = move_toward(camera_offset.x, 8 * true_vel_dir, abs(true_velocity.x) / 200)
+			var left_bound := camera_position.x - CENTER_OFFSET >= point_to_camera_limit(-256, -1)
+			var right_bound = camera_position.x + CENTER_OFFSET <= point_to_camera_limit(camera_right_limit, 1)
+			if abs(camera_position.x - player.global_position.x) <= 16 and left_bound and right_bound:
+				camera_offset.x = move_toward(camera_offset.x, CENTER_OFFSET * true_vel_dir, abs(true_velocity.x) / 200)
 	else:
 		camera_offset.x = 8
 
 func do_limits() -> void:
-	camera_right_limit = clamp(Player.camera_right_limit, -256 + (Global.get_game_viewport().get_visible_rect().size.x), INF)
+	if Global.get_game_viewport() == null: return
+	var viewport_size = Global.get_game_viewport().get_visible_rect().size
+	if Global.current_level.enforce_resolution != Vector2.ZERO:
+		viewport_size = Global.current_level.enforce_resolution
+	camera_right_limit = clamp(Player.camera_right_limit, -256 + (viewport_size.x), INF)
 	camera_position.x = clamp(camera_position.x, point_to_camera_limit(-256 - camera_offset.x, -1), point_to_camera_limit(camera_right_limit - camera_offset.x, 1))
 	camera_position.y = clamp(camera_position.y, point_to_camera_limit_y(Global.current_level.vertical_height, -1), point_to_camera_limit_y(32, 1))
 	var wall_enabled := true
@@ -180,12 +214,12 @@ func do_limits() -> void:
 			wall_enabled = false
 	$"../CameraCenterJoint/LeftWall".set_collision_layer_value(1, wall_enabled)
 	var level_exit = false
-	if owner.state_machine != null:
-		level_exit = owner.state_machine.state.name == "LevelExit"
+	if player.state_machine != null:
+		level_exit = player.state_machine.state.name == "LevelExit"
 	$"../CameraCenterJoint/RightWall".set_collision_layer_value(1, wall_enabled and level_exit == false)
 	
-func point_to_camera_limit(point := 0, point_dir := -1) -> float:
+func point_to_camera_limit(point := 0, point_dir := -1) -> int:
 	return point + ((get_viewport_rect().size.x / 2.0) * -point_dir)
 
-func point_to_camera_limit_y(point := 0, point_dir := -1) -> float:
+func point_to_camera_limit_y(point := 0, point_dir := -1) -> int:
 	return point + ((get_viewport_rect().size.y / 2.0) * -point_dir)

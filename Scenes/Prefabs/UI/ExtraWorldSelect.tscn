@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8e82usnfbw1t"]
+[gd_scene format=3 uid="uid://b8e82usnfbw1t"]
 
 [ext_resource type="PackedScene" uid="uid://dntk2js0tu3y2" path="res://Scenes/Prefabs/UI/WorldSelect.tscn" id="1_fvn0p"]
 

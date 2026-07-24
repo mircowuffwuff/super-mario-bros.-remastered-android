@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://df474c625gx75"]
+
+[ext_resource type="PackedScene" uid="uid://27kpnmk5wqlb" path="res://Scenes/Prefabs/Entities/Objects/OnOffRedMovingPlatform.tscn" id="1_bxfwm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxfwm"]
+resource_local_to_scene = true
+size = Vector2(32, 8)
+
+[node name="MovingPlatform" unique_id=285771311 instance=ExtResource("1_bxfwm")]
+moving = true
+
+[node name="Sprite" parent="." index="0" unique_id=1840586283]
+region_rect = Rect2(0, 8, 24, 8)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1046612248]
+shape = SubResource("RectangleShape2D_bxfwm")
+
+[node name="Projection" parent="." index="4" unique_id=1165185292]
+region_rect = Rect2(0, 8, 24, 8)
+
+[node name="OnOffToggle" parent="." index="6" unique_id=431716092]
+frame = 1
+region_rect = Rect2(24, 8, 16, 8)
+
+[node name="OnOffSwitcher" parent="." index="7" unique_id=1836842981]
+invert = true

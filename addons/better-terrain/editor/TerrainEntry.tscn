@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://u2y444hj182c"]
+[gd_scene format=3 uid="uid://u2y444hj182c"]
 
 [ext_resource type="Script" uid="uid://c2qfovpuj58b7" path="res://addons/better-terrain/editor/TerrainEntry.gd" id="1_o2na3"]
 [ext_resource type="Texture2D" uid="uid://kmypxsqhynyv" path="res://addons/better-terrain/icons/Decoration.svg" id="2_ossyj"]
@@ -39,7 +39,7 @@ content_margin_left = 3.0
 bg_color = Color(0, 0, 0, 0.439216)
 draw_center = false
 
-[node name="TerrainEntry" type="PanelContainer"]
+[node name="TerrainEntry" type="PanelContainer" unique_id=2124699272]
 custom_minimum_size = Vector2(60, 60)
 offset_right = 200.0
 offset_bottom = 60.0
@@ -48,17 +48,17 @@ focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3pdcc")
 script = ExtResource("1_o2na3")
 
-[node name="Layout" type="BoxContainer" parent="."]
+[node name="Layout" type="BoxContainer" parent="." unique_id=1575816553]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="IconLayout" type="HBoxContainer" parent="Layout"]
+[node name="IconLayout" type="HBoxContainer" parent="Layout" unique_id=430723430]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Color" type="PanelContainer" parent="Layout/IconLayout"]
+[node name="Color" type="PanelContainer" parent="Layout/IconLayout" unique_id=1454291220]
 unique_name_in_owner = true
 z_index = 1
 custom_minimum_size = Vector2(24, 24)
@@ -67,21 +67,21 @@ size_flags_horizontal = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_dqhir")
 
-[node name="PanelContainer" type="PanelContainer" parent="Layout/IconLayout/Color"]
+[node name="PanelContainer" type="PanelContainer" parent="Layout/IconLayout/Color" unique_id=1529533543]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_rohyw")
 
-[node name="TypeIcon" type="TextureRect" parent="Layout/IconLayout/Color/PanelContainer"]
+[node name="TypeIcon" type="TextureRect" parent="Layout/IconLayout/Color/PanelContainer" unique_id=1423439681]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_ossyj")
 
-[node name="TerrainIconPanel" type="PanelContainer" parent="Layout/IconLayout"]
+[node name="TerrainIconPanel" type="PanelContainer" parent="Layout/IconLayout" unique_id=2015739441]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
@@ -90,7 +90,7 @@ size_flags_vertical = 4
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xa0fl")
 
-[node name="TerrainIcon" type="TextureRect" parent="Layout/IconLayout/TerrainIconPanel"]
+[node name="TerrainIcon" type="TextureRect" parent="Layout/IconLayout/TerrainIconPanel" unique_id=426153002]
 unique_name_in_owner = true
 texture_filter = 1
 custom_minimum_size = Vector2(40, 40)
@@ -98,7 +98,7 @@ layout_mode = 2
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Name" type="Label" parent="Layout"]
+[node name="Name" type="Label" parent="Layout" unique_id=1429028407]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

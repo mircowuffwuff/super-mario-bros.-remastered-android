@@ -1,16 +1,12 @@
-[gd_resource type="Resource" script_class="ThemedResource" load_steps=11 format=3 uid="uid://cmlds1yc6l5tq"]
+[gd_resource type="Resource" script_class="ThemedResource" format=3 uid="uid://cmlds1yc6l5tq"]
 
-[ext_resource type="Texture2D" uid="uid://cd4uqcrq4m6yb" path="res://Assets/Sprites/Items/PowerUps.png" id="1_b5v53"]
-[ext_resource type="Texture2D" uid="uid://cq5nub8sir7d0" path="res://Assets/Sprites/Items/PowerUpsLL.png" id="2_n0t0k"]
 [ext_resource type="Script" uid="uid://cixtosud3mfaq" path="res://Scripts/Classes/Resources/CampaignResource.gd" id="3_g6rlj"]
 [ext_resource type="Script" uid="uid://cmvlgsjmsk0v5" path="res://Scripts/Classes/Resources/ThemedResource.gd" id="4_fw0kt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b5v53"]
-atlas = ExtResource("1_b5v53")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0t0k"]
-atlas = ExtResource("2_n0t0k")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="Resource" id="Resource_opi0g"]
@@ -20,11 +16,9 @@ SMBLL = SubResource("AtlasTexture_n0t0k")
 metadata/_custom_type_script = ExtResource("3_g6rlj")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6rlj"]
-atlas = ExtResource("1_b5v53")
 region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fw0kt"]
-atlas = ExtResource("2_n0t0k")
 region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="Resource" id="Resource_p1ytm"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4al7s87fo1nd"]
+[gd_scene format=3 uid="uid://b4al7s87fo1nd"]
 
 [ext_resource type="PackedScene" uid="uid://bx23j813jg0bl" path="res://Scenes/Prefabs/Blocks/SpringBlock.tscn" id="1_uhtsl"]
 [ext_resource type="Texture2D" uid="uid://bd25s0rlv8axh" path="res://Assets/Sprites/Blocks/SuperSpringBlock.png" id="2_wkxon"]
@@ -43,13 +43,13 @@ script = ExtResource("3_0fxaq")
 Overworld = SubResource("SpriteFrames_nqm1f")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
-[node name="SpringBlock" instance=ExtResource("1_uhtsl")]
+[node name="SpringBlock" unique_id=1112568554 instance=ExtResource("1_uhtsl")]
 is_super = true
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="0" unique_id=211871466]
 sprite_frames = SubResource("SpriteFrames_nqm1f")
 frame = 1
 frame_progress = 1.0
 
-[node name="ResourceSetter" parent="Sprite" index="0"]
+[node name="ResourceSetter" parent="Sprite" index="0" unique_id=110092941]
 themed_resource = SubResource("Resource_it1ds")

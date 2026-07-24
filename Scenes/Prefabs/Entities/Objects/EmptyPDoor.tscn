@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4wvocqpy0w66"]
+[gd_scene format=3 uid="uid://c4wvocqpy0w66"]
 
 [ext_resource type="Script" uid="uid://bul1nbd2in1gn" path="res://Scripts/Classes/Components/PSwitcher.gd" id="1_d6q2l"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="2_hj3mh"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Tilesets/PDoors.json" id="3_7tad6"]
 [ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_hj3mh"]
 [ext_resource type="PackedScene" uid="uid://dse5pwhodrqcr" path="res://Scenes/Prefabs/Editor/EditorProperties/TilePropertyIntRangeSpin.tscn" id="5_7tad6"]
 
@@ -22,29 +21,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="EmptyPDoor" type="Node2D"]
+[node name="EmptyPDoor" type="Node2D" unique_id=251214593]
 script = SubResource("GDScript_7tad6")
 
-[node name="PSwitcher" type="Node" parent="."]
+[node name="PSwitcher" type="Node" parent="." unique_id=1752792791]
 script = ExtResource("1_d6q2l")
 new_scene = "uid://bmsecpiv7yllv"
 properties = ["door_id", "sublevel_id"]
 metadata/_custom_type_script = "uid://bul1nbd2in1gn"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2134307842]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_vytwy")
 animation = &"Locked"
 autoplay = "Locked"
 
-[node name="ResourceSetterNew" type="Node" parent="Sprite" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=422447256 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_hj3mh")
 node_to_affect = NodePath("..")
 property_name = "sprite_frames"
-resource_json = ExtResource("3_7tad6")
+json_path = "res://Assets/Sprites/Tilesets/PDoors.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="PropertyExposer" type="Node" parent="."]
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=1247674978]
 script = ExtResource("4_hj3mh")
 properties = ["door_id", "sublevel_id"]
 properties_force_selector = Dictionary[String, PackedScene]({

@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmv5rl1ckkwsk"]
+[gd_scene format=3 uid="uid://dmv5rl1ckkwsk"]
 
 [ext_resource type="PackedScene" uid="uid://csl71p1unsc8p" path="res://Scenes/Prefabs/LevelObjects/CheepCheepGenerator.tscn" id="1_4xckd"]
 [ext_resource type="PackedScene" uid="uid://blbarreyjem4l" path="res://Scenes/Prefabs/Entities/Enemies/BowserFlame.tscn" id="2_fevce"]
 [ext_resource type="Texture2D" uid="uid://dtgpkjj1dy7pu" path="res://Assets/Sprites/Editor/BowserFlameGenerator.png" id="3_fevce"]
 
-[node name="EntityGenerator" instance=ExtResource("1_4xckd")]
+[node name="EntityGenerator" unique_id=2035957726 instance=ExtResource("1_4xckd")]
 y_pos = 1
 direction = 0
 entity_scene = ExtResource("2_fevce")
 
-[node name="Sprite" parent="LevelEditorVisibleNode" index="0"]
+[node name="Sprite" parent="LevelEditorVisibleNode" parent_id_path=PackedInt32Array(1819047736) index="0" unique_id=2086579252]
 texture = ExtResource("3_fevce")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmcpug8hc74jf"]
+[gd_scene format=3 uid="uid://cmcpug8hc74jf"]
 
 [ext_resource type="Script" uid="uid://djg0ved0eqede" path="res://Scripts/Parts/PickAPathPoint.gd" id="1_ix7da"]
 [ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="2_eadvl"]
@@ -6,13 +6,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_usqbd"]
 size = Vector2(16, 48)
 
-[node name="PickAPathPoint" type="Node2D"]
+[node name="PickAPathPoint" type="Node2D" unique_id=422045706]
 script = ExtResource("1_ix7da")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=2132951636]
 script = ExtResource("2_eadvl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=177216845]
 shape = SubResource("RectangleShape2D_usqbd")
 
 [connection signal="player_entered" from="Hitbox" to="." method="on_player_entered"]

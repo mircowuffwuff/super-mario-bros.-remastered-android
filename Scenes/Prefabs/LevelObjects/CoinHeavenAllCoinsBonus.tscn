@@ -1,17 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm6nbstl2uceh"]
+[gd_scene format=3 uid="uid://cm6nbstl2uceh"]
 
 [ext_resource type="Script" uid="uid://ds3idw2a2udai" path="res://Scripts/Parts/CoinHeavenAllCoinsBonus.gd" id="1_pr18t"]
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="1_rbqyi"]
-[ext_resource type="Resource" uid="uid://8dcuxbc3h2u2" path="res://Resources/ThemedResources/Font.tres" id="2_pr18t"]
 [ext_resource type="Script" uid="uid://dt2p68xl462v2" path="res://Scripts/Parts/TextShadowColourChanger.gd" id="3_uimg1"]
 
-[node name="CoinHeavenAllCoinsBonus" type="Node"]
+[node name="CoinHeavenAllCoinsBonus" type="Node" unique_id=200360400]
 script = ExtResource("1_pr18t")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=919198862]
 visible = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1070224637]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,23 +24,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -4
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1001602710]
 layout_mode = 2
 text = "PERFECT BONUS!"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer"]
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=2035389019]
 layout_mode = 2
 text = "+10,000 POINTS"
 horizontal_alignment = 1
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=191133549 node_paths=PackedStringArray("labels")]
 script = ExtResource("1_rbqyi")
 labels = [NodePath("../CanvasLayer/VBoxContainer/Label"), NodePath("../CanvasLayer/VBoxContainer/Label2")]
-resource = ExtResource("2_pr18t")
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="TextShadowColourChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="TextShadowColourChanger" type="Node" parent="." unique_id=1479220964 node_paths=PackedStringArray("labels")]
 script = ExtResource("3_uimg1")
 labels = [NodePath("../CanvasLayer/VBoxContainer/Label"), NodePath("../CanvasLayer/VBoxContainer/Label2")]
 metadata/_custom_type_script = "uid://dt2p68xl462v2"

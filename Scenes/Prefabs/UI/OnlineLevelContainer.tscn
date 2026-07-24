@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cr2pku7fjkgpo"]
+[gd_scene format=3 uid="uid://cr2pku7fjkgpo"]
 
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="1_1k7iw"]
 [ext_resource type="StyleBox" uid="uid://dlbdmqmnl30sq" path="res://Resources/UI/PanelSelected.tres" id="2_h6n8u"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://35who743oaxe" path="res://Assets/Sprites/UI/LSSRatingStars.png" id="7_1k7iw"]
 [ext_resource type="Texture2D" uid="uid://dfeu75lbxfkim" path="res://Assets/Sprites/UI/GameStyles.png" id="7_scevv"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="8_vfnya"]
-[ext_resource type="JSON" path="res://Assets/Sprites/UI/Cursor.json" id="9_d0564"]
 [ext_resource type="Script" uid="uid://co6tjg3w6qpd8" path="res://Scripts/Parts/LabelFontChanger.gd" id="10_x7igx"]
 
 [sub_resource type="Animation" id="Animation_w0xci"]
@@ -50,13 +49,12 @@ _data = {
 &"RESET": SubResource("Animation_1k7iw")
 }
 
-[node name="CustomLevelContainer" type="Button"]
+[node name="CustomLevelContainer" type="Button" unique_id=1501849030]
 custom_minimum_size = Vector2(0, 40)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_styles/normal = ExtResource("1_1k7iw")
 theme_override_styles/pressed = ExtResource("1_1k7iw")
 theme_override_styles/hover = ExtResource("2_h6n8u")
@@ -64,7 +62,7 @@ theme_override_styles/focus = ExtResource("2_h6n8u")
 button_mask = 0
 script = ExtResource("3_1k7iw")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1006501909]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -75,19 +73,19 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=199359389]
 layout_mode = 2
 
-[node name="HSplitContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="HSplitContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=693815879]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
-[node name="LeftHalf" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer"]
+[node name="LeftHalf" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=225279953]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LevelIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf"]
+[node name="LevelIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf" unique_id=1361056200]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -96,7 +94,7 @@ size_flags_vertical = 4
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelIcon"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelIcon" unique_id=758884102]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -110,13 +108,11 @@ vertical_alignment = 1
 visible_characters = 0
 visible_ratio = 0.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelIcon/Label"]
-libraries = {
-&"": SubResource("AnimationLibrary_h6n8u")
-}
-autoplay = "Load"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelIcon/Label" unique_id=413413737]
+libraries/ = SubResource("AnimationLibrary_h6n8u")
+autoplay = &"Load"
 
-[node name="Error" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelIcon"]
+[node name="Error" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelIcon" unique_id=1126606813]
 visible = false
 modulate = Color(0.32172796, 0.32172796, 0.32172796, 1)
 layout_mode = 1
@@ -129,33 +125,35 @@ text = " NONE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelInfo" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf"]
+[node name="LevelInfo" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf" unique_id=788084636]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo" unique_id=339759982]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_filter = 2
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("5_ajmg3")
 
-[node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo/ScrollContainer"]
+[node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo/ScrollContainer" unique_id=1010981833]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "&&&&&&&&"
 uppercase = true
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo"]
+[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo" unique_id=1470364982]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_filter = 2
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("5_ajmg3")
 
-[node name="LevelAuthor" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo/ScrollContainer2"]
+[node name="LevelAuthor" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo/ScrollContainer2" unique_id=1707200061]
 unique_name_in_owner = true
 modulate = Color(0.47058824, 0.47058824, 0.47058824, 1)
 layout_mode = 2
@@ -163,15 +161,15 @@ size_flags_horizontal = 3
 text = "Level Name"
 uppercase = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=426986777]
 layout_mode = 2
 
-[node name="DifficultyStars" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer"]
+[node name="DifficultyStars" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer" unique_id=858728374]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Star1" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars"]
+[node name="Star1" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars" unique_id=1473959208]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("6_m23pw")
@@ -180,7 +178,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star2" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars"]
+[node name="Star2" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars" unique_id=429890557]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("6_m23pw")
@@ -189,7 +187,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star3" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars"]
+[node name="Star3" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars" unique_id=1774242566]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("6_m23pw")
@@ -198,7 +196,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star4" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars"]
+[node name="Star4" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars" unique_id=1419607942]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("6_m23pw")
@@ -207,7 +205,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star5" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars"]
+[node name="Star5" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/DifficultyStars" unique_id=1660564230]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("6_m23pw")
@@ -216,12 +214,12 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="RatingStars" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer"]
+[node name="RatingStars" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer" unique_id=1514105308]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Star1" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars"]
+[node name="Star1" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars" unique_id=785633559]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("7_1k7iw")
@@ -230,7 +228,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star2" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars"]
+[node name="Star2" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars" unique_id=55510865]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("7_1k7iw")
@@ -239,7 +237,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star3" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars"]
+[node name="Star3" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars" unique_id=780110103]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("7_1k7iw")
@@ -248,7 +246,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star4" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars"]
+[node name="Star4" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars" unique_id=1348047747]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("7_1k7iw")
@@ -257,7 +255,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="Star5" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars"]
+[node name="Star5" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer/RatingStars" unique_id=1894643180]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = ExtResource("7_1k7iw")
@@ -266,7 +264,7 @@ patch_margin_bottom = 8
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="CampaignIcon" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer"]
+[node name="CampaignIcon" type="NinePatchRect" parent="MarginContainer/HBoxContainer/HSplitContainer/VBoxContainer" unique_id=1139793965]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(42, 16)
 layout_mode = 2
@@ -276,7 +274,7 @@ region_rect = Rect2(0, 0, 42, 16)
 script = ExtResource("6_w0xci")
 metadata/_custom_type_script = "uid://xem6lai3ufyj"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1809654753]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -287,24 +285,27 @@ offset_top = -4.0
 offset_bottom = 4.0
 grow_vertical = 2
 
-[node name="ResourceSetterNew" type="Node" parent="TextureRect" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetterNew" type="Node" parent="TextureRect" unique_id=1523521567 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("8_vfnya")
 node_to_affect = NodePath("..")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("9_d0564")
+json_path = "res://Assets/Sprites/UI/Cursor.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="LabelFontChanger" type="Node" parent="." node_paths=PackedStringArray("labels")]
+[node name="LabelFontChanger" type="Node" parent="." unique_id=1978684210 node_paths=PackedStringArray("labels")]
 script = ExtResource("10_x7igx")
 labels = [NodePath("../MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo/ScrollContainer/LevelName"), NodePath("../MarginContainer/HBoxContainer/HSplitContainer/LeftHalf/LevelInfo/ScrollContainer2/LevelAuthor")]
 metadata/_custom_type_script = "uid://co6tjg3w6qpd8"
 
-[node name="ThumbnailDownloader" type="HTTPRequest" parent="."]
+[node name="ThumbnailDownloader" type="HTTPRequest" parent="." unique_id=1149999629]
 
 [connection signal="focus_entered" from="." to="TextureRect" method="show"]
 [connection signal="focus_entered" from="." to="." method="set_process" binds= [true]]
 [connection signal="focus_exited" from="." to="TextureRect" method="hide"]
 [connection signal="focus_exited" from="." to="." method="set_process" binds= [false]]
+[connection signal="mouse_entered" from="." to="." method="grab_focus"]
+[connection signal="mouse_exited" from="." to="." method="release_focus"]
 [connection signal="request_completed" from="ThumbnailDownloader" to="." method="on_request_completed"]
 [connection signal="tree_exiting" from="ThumbnailDownloader" to="ThumbnailDownloader" method="cancel_request"]

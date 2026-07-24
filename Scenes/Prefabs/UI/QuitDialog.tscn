@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b75f3fd7xjeya"]
+[gd_scene format=3 uid="uid://b75f3fd7xjeya"]
 
 [ext_resource type="Script" uid="uid://fwgm5xy4jvwf" path="res://Scripts/UI/QuitDialog.gd" id="1_w3irg"]
 [ext_resource type="AudioStream" uid="uid://drs3md0tuek2w" path="res://Assets/Audio/SFX/Beep.wav" id="2_yapnp"]
@@ -66,7 +66,7 @@ _data = {
 &"RESET": SubResource("Animation_kfsue")
 }
 
-[node name="QuitDialog" type="Control"]
+[node name="QuitDialog" type="Control" unique_id=272180054]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,7 +75,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w3irg")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=659758567]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,7 +84,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=406881500]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,16 +100,14 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "QUITTING GAME..."
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_fbj8r")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=967645559]
+libraries/ = SubResource("AnimationLibrary_fbj8r")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=993908745]
 stream = ExtResource("2_yapnp")
 script = ExtResource("3_fbj8r")
 metadata/_custom_type_script = "uid://dmtw1jesw1vl7"
 
-[node name="ResourceGetter" type="Node" parent="."]
+[node name="ResourceGetter" type="Node" parent="." unique_id=635806123]
 script = ExtResource("3_kfsue")
 metadata/_custom_type_script = "uid://bsp584niccobr"

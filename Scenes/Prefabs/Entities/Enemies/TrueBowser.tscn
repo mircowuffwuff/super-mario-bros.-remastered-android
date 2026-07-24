@@ -1,17 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://pfhvflypjq6y"]
+[gd_scene format=3 uid="uid://pfhvflypjq6y"]
 
 [ext_resource type="PackedScene" uid="uid://duptcik2j0b04" path="res://Scenes/Prefabs/Entities/Enemies/Bowser.tscn" id="1_xtf8a"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Enemies/Bowser.json" id="4_ryqkh"]
 
-[node name="TrueBowser" instance=ExtResource("1_xtf8a")]
+[node name="TrueBowser" unique_id=2024715158 instance=ExtResource("1_xtf8a")]
 can_hammer = true
-is_real = true
 
-[node name="ResourceSetterNew" parent="SpriteScaleJoint/DeathSprite" index="0"]
-resource_json = ExtResource("4_ryqkh")
-
-[node name="GibSpawner" parent="." index="8" node_paths=PackedStringArray("visuals")]
+[node name="GibSpawner" parent="." index="6" unique_id=383912089 node_paths=PackedStringArray("visuals")]
 visuals = NodePath("../SpriteScaleJoint/Sprite")
-gib_type = 1
-
-[connection signal="fireball_hit" from="FireballDetection" to="." method="fireball_hit" unbinds=1]

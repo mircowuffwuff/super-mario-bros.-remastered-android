@@ -3,8 +3,8 @@ extends HBoxContainer
 
 signal value_changed(this, new_value)
 
-var max_value = null
-var min_value = null
+var max_value = 0
+var min_value = 0
 var property_step = 1.0
 
 var values := {}

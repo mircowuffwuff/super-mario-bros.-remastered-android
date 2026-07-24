@@ -1,0 +1,13 @@
+{
+	"animations": {
+		"default": {
+			"frames": [
+				[0, 0, 24, 24],
+				[24, 0, 24, 24]
+			],
+			"speed": 7,
+			"loop": true
+		}
+	},
+	"variations": {"source": "SpikeTop.png"}
+}

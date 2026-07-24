@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://cfwnj3srwa7xh"]
+
+[ext_resource type="Texture2D" uid="uid://pougbopeo602" path="res://Assets/Sprites/Blocks/OneWayPanel.png" id="1_c4anl"]
+[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="1_ghoth"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="2_2bcx2"]
+[ext_resource type="Script" uid="uid://ctfbuoxtnnl0q" path="res://Scripts/Classes/Components/EditorPropertyExposer.gd" id="4_2bcx2"]
+[ext_resource type="Script" uid="uid://cnheej0sxmoxg" path="res://Scripts/Parts/PlayerDetection.gd" id="6_3seur"]
+
+[sub_resource type="GDScript" id="GDScript_ghoth"]
+script/source = "extends StaticBody2D
+
+@export_enum(\"Up\", \"Down\", \"Left\", \"Right\") var direction := 0
+
+
+func on_player_entered(player: Player) -> void:
+	if player.velocity.normalized().dot([Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT][direction]) < 0.5:
+		$Sprite/AnimationPlayer.play(\"Shake\")
+		AudioManager.play_sfx(\"door_locked\", global_position)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5y82"]
+atlas = ExtResource("1_c4anl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1jhgp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5y82")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_kdm3g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7os83"]
+resource_name = "Shake"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.17453292, 0.17453292, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ruvh4"]
+_data = {
+&"RESET": SubResource("Animation_kdm3g"),
+&"Shake": SubResource("Animation_7os83")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlcjw"]
+size = Vector2(32, 32)
+
+[sub_resource type="GDScript" id="GDScript_2bcx2"]
+script/source = "extends Node
+
+func _process(delta: float) -> void:
+	owner.global_rotation_degrees = [0, 180, -90, 90][owner.direction]
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvgs1"]
+size = Vector2(32, 4)
+
+[node name="OneWayPlatform" type="StaticBody2D" unique_id=1243276669]
+collision_layer = 2
+collision_mask = 0
+script = SubResource("GDScript_ghoth")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=90981639]
+sprite_frames = SubResource("SpriteFrames_1jhgp")
+autoplay = "default"
+frame_progress = 0.006926023
+script = ExtResource("1_ghoth")
+do_offset = false
+metadata/_custom_type_script = "uid://caq1qiwmy0mox"
+
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=2112420637 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("2_2bcx2")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Blocks/OneWayPanel.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" unique_id=354137571]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_ruvh4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1034277210]
+shape = SubResource("RectangleShape2D_tlcjw")
+one_way_collision = true
+
+[node name="Rotation" type="Node" parent="." unique_id=1432914252]
+process_mode = 3
+script = SubResource("GDScript_2bcx2")
+
+[node name="EditorPropertyExposer" type="Node" parent="." unique_id=988527912]
+script = ExtResource("4_2bcx2")
+properties = Array[String](["direction"])
+metadata/_custom_type_script = "uid://ctfbuoxtnnl0q"
+
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=791704503]
+script = ExtResource("6_3seur")
+metadata/_custom_type_script = "uid://cnheej0sxmoxg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=647837956]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_tvgs1")
+
+[connection signal="player_entered" from="PlayerDetection" to="." method="on_player_entered"]

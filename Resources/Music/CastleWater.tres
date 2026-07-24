@@ -1,7 +1,7 @@
-[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://br1me35h3615h"]
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://br1me35h3615h"]
 
-[ext_resource type="AudioStream" uid="uid://chjcecfp5w06v" path="res://Assets/Audio/BGM/CastleWater.mp3" id="1_3rnxh"]
-[ext_resource type="AudioStream" uid="uid://srmnaat7c2cw" path="res://Assets/Audio/BGM/CastleWaterHurry.mp3" id="2_rcp7f"]
+[ext_resource type="AudioStream" uid="uid://cpvasn2pq0lex" path="res://Assets/Audio/BGM/CastleWater.mp3" id="1_3rnxh"]
+[ext_resource type="AudioStream" uid="uid://eotmoed1msyw" path="res://Assets/Audio/BGM/CastleWaterHurry.mp3" id="2_rcp7f"]
 
 [resource]
 clip_count = 2

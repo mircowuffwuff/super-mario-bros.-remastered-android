@@ -1,73 +1,76 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnoc8w00gkwba"]
+[gd_scene format=3 uid="uid://cnoc8w00gkwba"]
 
 [ext_resource type="Script" uid="uid://f50767fxajwh" path="res://Scripts/Parts/BlockDestructionParticles.gd" id="1_grxvh"]
 [ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="2_3y2s4"]
-[ext_resource type="JSON" path="res://Assets/Sprites/Particles/IcicleDestructionParticles.json" id="3_rw0un"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8gw0u"]
 region = Rect2(0, 0, 8, 8)
 
-[node name="BlockDestructionParticles" type="Node2D"]
+[node name="BlockDestructionParticles" type="Node2D" unique_id=671416568]
 z_index = 5
 script = ExtResource("1_grxvh")
 
-[node name="TL" type="Node2D" parent="."]
+[node name="TL" type="Node2D" parent="." unique_id=261730837]
 position = Vector2(-4, -4)
 
-[node name="Sprite" type="Sprite2D" parent="TL"]
+[node name="Sprite" type="Sprite2D" parent="TL" unique_id=981885524]
 texture = SubResource("AtlasTexture_8gw0u")
 
-[node name="ResourceSetter" type="Node" parent="TL" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="TL" unique_id=303095763 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_3y2s4")
 node_to_affect = NodePath("../Sprite")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("3_rw0un")
+json_path = "res://Assets/Sprites/Particles/IcicleDestructionParticles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="TR" type="Node2D" parent="."]
+[node name="TR" type="Node2D" parent="." unique_id=20861241]
 position = Vector2(4, -4)
 
-[node name="Sprite" type="Sprite2D" parent="TR"]
+[node name="Sprite" type="Sprite2D" parent="TR" unique_id=1976620347]
 texture = SubResource("AtlasTexture_8gw0u")
 
-[node name="ResourceSetter" type="Node" parent="TR" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="TR" unique_id=2050781063 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_3y2s4")
 node_to_affect = NodePath("../Sprite")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("3_rw0un")
+json_path = "res://Assets/Sprites/Particles/IcicleDestructionParticles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="BL" type="Node2D" parent="."]
+[node name="BL" type="Node2D" parent="." unique_id=309856632]
 position = Vector2(-4, 4)
 
-[node name="Sprite" type="Sprite2D" parent="BL"]
+[node name="Sprite" type="Sprite2D" parent="BL" unique_id=1980733752]
 texture = SubResource("AtlasTexture_8gw0u")
 
-[node name="ResourceSetter" type="Node" parent="BL" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="BL" unique_id=351400173 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_3y2s4")
 node_to_affect = NodePath("../Sprite")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("3_rw0un")
+json_path = "res://Assets/Sprites/Particles/IcicleDestructionParticles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="BR" type="Node2D" parent="."]
+[node name="BR" type="Node2D" parent="." unique_id=1187890941]
 position = Vector2(4, 4)
 
-[node name="Sprite" type="Sprite2D" parent="BR"]
+[node name="Sprite" type="Sprite2D" parent="BR" unique_id=1804090204]
 texture = SubResource("AtlasTexture_8gw0u")
 
-[node name="ResourceSetter" type="Node" parent="BR" node_paths=PackedStringArray("node_to_affect")]
+[node name="ResourceSetter" type="Node" parent="BR" unique_id=1608032511 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
 script = ExtResource("2_3y2s4")
 node_to_affect = NodePath("../Sprite")
 property_name = "texture"
 mode = 1
-resource_json = ExtResource("3_rw0un")
+json_path = "res://Assets/Sprites/Particles/IcicleDestructionParticles.json"
 metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1926891611]
 wait_time = 3.0
 autostart = true
 

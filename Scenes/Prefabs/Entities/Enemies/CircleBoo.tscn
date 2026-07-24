@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://c2avl86pxl2pt"]
+
+[ext_resource type="Script" uid="uid://bpydbpyjk1mt4" path="res://Scripts/Classes/Entities/Enemy.gd" id="1_otlrx"]
+[ext_resource type="Texture2D" uid="uid://c3l6ynlufxcfp" path="res://Assets/Sprites/Enemies/Boo.png" id="1_xdwya"]
+[ext_resource type="Script" uid="uid://caq1qiwmy0mox" path="res://Scripts/Parts/BetterAnimatedSprite.gd" id="2_s60cn"]
+[ext_resource type="Script" uid="uid://cbal8ms2oe1ik" path="res://Scripts/Classes/Components/ResourceSetterNew.gd" id="3_otlrx"]
+[ext_resource type="Script" uid="uid://chj8hu207lrh" path="res://Scripts/Classes/Components/EnemyPlayerDetection.gd" id="5_ifiga"]
+[ext_resource type="Script" uid="uid://dri2d5jtu0fbq" path="res://Scripts/Classes/Components/FireballDetection.gd" id="7_034y4"]
+[ext_resource type="Script" uid="uid://5octqlf4ohel" path="res://Scripts/Classes/Components/ScoreNoteSpawner.gd" id="8_ifiga"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u2yg"]
+atlas = ExtResource("1_xdwya")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu7y3"]
+atlas = ExtResource("1_xdwya")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8qb0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u2yg")
+}],
+"loop": true,
+"name": &"Hide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu7y3")
+}],
+"loop": true,
+"name": &"WhiteMove",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eh5v"]
+size = Vector2(12, 12)
+
+[node name="Boo1" type="CharacterBody2D" unique_id=2013550200]
+script = ExtResource("1_otlrx")
+metadata/_custom_type_script = "uid://bpydbpyjk1mt4"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1379655167]
+sprite_frames = SubResource("SpriteFrames_8qb0a")
+animation = &"WhiteMove"
+autoplay = "WhiteMove"
+flip_h = true
+script = ExtResource("2_s60cn")
+do_offset = false
+metadata/_custom_type_script = "uid://caq1qiwmy0mox"
+
+[node name="ResourceSetterNew" type="Node" parent="Sprite" unique_id=238954944 node_paths=PackedStringArray("node_to_affect")]
+process_mode = 3
+script = ExtResource("3_otlrx")
+node_to_affect = NodePath("..")
+property_name = "sprite_frames"
+json_path = "res://Assets/Sprites/Enemies/BooBuddy.json"
+metadata/_custom_type_script = "uid://cbal8ms2oe1ik"
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1305109786]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox" unique_id=286103471]
+shape = SubResource("RectangleShape2D_1eh5v")
+
+[node name="EnemyPlayerDetection" type="Node" parent="." unique_id=1712600174 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("5_ifiga")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://chj8hu207lrh"
+
+[node name="FireballDetection" type="Node" parent="." unique_id=1194602477 node_paths=PackedStringArray("hitbox")]
+script = ExtResource("7_034y4")
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://dri2d5jtu0fbq"
+
+[node name="ScoreNoteSpawner" type="Node" parent="." unique_id=1512993912]
+script = ExtResource("8_ifiga")
+metadata/_custom_type_script = "uid://5octqlf4ohel"
+
+[connection signal="killed" from="." to="ScoreNoteSpawner" method="spawn_note" binds= [200]]
+[connection signal="hammer_player_hit" from="EnemyPlayerDetection" to="." method="die_from_hammer"]
+[connection signal="invincible_player_hit" from="EnemyPlayerDetection" to="." method="die_from_object"]
+[connection signal="player_hit" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_below" from="EnemyPlayerDetection" to="." method="damage_player"]
+[connection signal="player_stomped_on" from="EnemyPlayerDetection" to="." method="damage_player"]
