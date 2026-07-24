@@ -46,12 +46,12 @@ func _ready() -> void:
 	%NameLabel.text = tile_name
 
 func _process(_delta: float) -> void:
-	var target_position = get_viewport().get_mouse_position()
-	target_position.x = clamp(target_position.x, %Panel.size.x / 2, (get_viewport().get_visible_rect().size.x) - %Panel.size.x / 2)
+	var target_position = Global.get_game_viewport().get_mouse_position()
+	target_position.x = clamp(target_position.x, %Panel.size.x / 2, (Global.get_game_viewport().get_visible_rect().size.x) - %Panel.size.x / 2)
 	%NamePanel.position = target_position
 	%Description.text = tile_desc
 	%Line.visible = tile_desc != ""
-	%Description.custom_minimum_size.x = get_viewport().get_visible_rect().size.x / 2
+	%Description.custom_minimum_size.x = Global.get_game_viewport().get_visible_rect().size.x / 2
 	if tile_desc != "":
 		%DescPreview.visible = not Input.is_action_pressed("editor_inspect")
 		%Description.visible = not %DescPreview.visible

@@ -25,7 +25,7 @@ func add_nodes() -> void:
 	$CanvasLayer/AnimationPlayer.play("Grow")
 
 func _physics_process(_delta: float) -> void:
-	$CanvasLayer/CanvasGroup/Darkness.size = get_viewport().get_visible_rect().size
+	$CanvasLayer/CanvasGroup/Darkness.size = Global.get_game_viewport().get_visible_rect().size
 	for i: Node2D in get_tree().get_nodes_in_group("Lights"):
 		if tracking_nodes.has(i):
 			tracking_nodes[i].global_position = i.get_global_transform_with_canvas().origin

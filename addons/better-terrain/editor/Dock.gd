@@ -773,10 +773,10 @@ func canvas_mouse_exit() -> void:
 func _shortcut_input(event) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_C and (event.is_command_or_control_pressed() and not event.echo):
-			get_viewport().set_input_as_handled()
+			Global.get_game_viewport().set_input_as_handled()
 			tile_view.copy_selection()
 		if event.keycode == KEY_V and (event.is_command_or_control_pressed() and not event.echo):
-			get_viewport().set_input_as_handled()
+			Global.get_game_viewport().set_input_as_handled()
 			tile_view.paste_selection()
 
 

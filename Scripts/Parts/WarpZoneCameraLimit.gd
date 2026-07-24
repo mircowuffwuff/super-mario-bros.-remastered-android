@@ -2,13 +2,13 @@ extends Node2D
 
 @export var y_limit := -176
 
-@onready var camera := get_viewport().get_camera_2d()
+@onready var camera := Global.get_game_viewport().get_camera_2d()
 
 @onready var old_limit = Player.camera_right_limit
 
 
 func enter_screen() -> void:
-	if get_viewport().get_camera_2d().get_target_position().x > global_position.x: return
+	if Global.get_game_viewport().get_camera_2d().get_target_position().x > global_position.x: return
 	Player.camera_right_limit = int(global_position.x)
 
 func _physics_process(_delta: float) -> void:

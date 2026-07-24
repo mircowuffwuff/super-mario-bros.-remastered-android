@@ -194,10 +194,10 @@ func toggle_fullscreen() -> void:
 	fullscreen_toggled.emit()
 
 func on_window_resized() -> void:
-	var window_size = get_viewport().get_window().size
-	if get_viewport().get_window().mode == Window.Mode.MODE_MAXIMIZED:
+	var window_size = Global.get_game_viewport().get_window().size
+	if Global.get_game_viewport().get_window().mode == Window.Mode.MODE_MAXIMIZED:
 		Settings.file.video.mode = 1
-	elif get_viewport().get_window().mode == Window.Mode.MODE_WINDOWED:
+	elif Global.get_game_viewport().get_window().mode == Window.Mode.MODE_WINDOWED:
 		Settings.file.video.mode = 0
 	Settings.file.video.window_size[0] = window_size.x
 	Settings.file.video.window_size[1] = window_size.y

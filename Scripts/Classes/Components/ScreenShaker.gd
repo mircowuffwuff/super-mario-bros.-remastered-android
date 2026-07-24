@@ -18,11 +18,11 @@ func _physics_process(delta: float) -> void:
 	if shake_time > 0:
 		handle_shaking(delta)
 	else:
-		if get_viewport().get_camera_2d() != null:
-			get_viewport().get_camera_2d().offset.y = 0
+		if Global.get_game_viewport().get_camera_2d() != null:
+			Global.get_game_viewport().get_camera_2d().offset.y = 0
 
 func handle_shaking(delta: float) -> void:
 	shake_time -= delta
 	wave = fmod(wave + delta, PI * 2)
-	if get_viewport().get_camera_2d() != null:
-		get_viewport().get_camera_2d().offset.y = (-abs(sin(wave * 64)))
+	if Global.get_game_viewport().get_camera_2d() != null:
+		Global.get_game_viewport().get_camera_2d().offset.y = (-abs(sin(wave * 64)))

@@ -15,7 +15,7 @@ static var level_id := ""
 
 func _input(event: InputEvent) -> void:
 	if (event is InputEventKey):
-		if get_viewport().gui_get_focus_owner() == null or ($CharacterSelect.visible or $LSSCharacterSelect.visible):
+		if Global.get_game_viewport().gui_get_focus_owner() == null or ($CharacterSelect.visible or $LSSCharacterSelect.visible):
 			if (%LevelList.visible):
 				$BG/Border/Levels/VBoxContainer/LevelList/TopBit/Button.grab_focus()
 			if (%LevelInfo.visible):

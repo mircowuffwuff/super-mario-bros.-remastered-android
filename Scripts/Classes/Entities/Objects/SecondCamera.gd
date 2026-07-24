@@ -15,7 +15,7 @@ static var enforced_res := false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	$Camera2D.global_position = global_position
-	$NinePatchRect.size = get_viewport().get_visible_rect().size
+	$NinePatchRect.size = Global.get_game_viewport().get_visible_rect().size
 	$NinePatchRect.position = -($NinePatchRect.size / 2)
 	for i in 4:
 		await get_tree().physics_frame
@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 
 func toggle() -> void:
 	active = !active
-	if get_viewport() == null: return
+	if Global.get_game_viewport() == null: return
 	if active:
 		transition_to_self()
 	else:
@@ -85,14 +85,14 @@ func return_to_old_camera() -> void:
 func transition_to_self() -> void:
 	active = true
 	taken = true
-	if get_viewport() == null:
+	if Global.get_game_viewport() == null:
 		return
 	var trans_cam = Camera2D.new()
 	for i in ["limit_left", "limit_right", "limit_top", "limit_bottom"]:
 		trans_cam.set(i, $Camera2D.get(i))
 	if frame_one:
 		add_child(trans_cam)
-		var old_cam = get_viewport().get_camera_2d()
+		var old_cam = Global.get_game_viewport().get_camera_2d()
 		trans_cam.make_current()
 		trans_cam.global_position = (old_cam.get_screen_center_position())
 		trans_cam.reset_physics_interpolation()
