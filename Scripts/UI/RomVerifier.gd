@@ -6,8 +6,6 @@ const VALID_HASHES := [
 	"c9b34443c0414f3b91ef496d8cfee9fdd72405d673985afa11fb56732c96152b"
 ]
 
-@onready var file_dialog = $FileDialog
-
 # implemented as per https://github.com/SeppNel/Godot-File-Picker/tree/main
 var android_picker
 

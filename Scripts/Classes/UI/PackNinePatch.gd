@@ -11,4 +11,5 @@ func update() -> void:
 	texture = resource_getter.get_resource(texture)
 
 func _exit_tree() -> void:
+	Global.level_theme_changed.disconnect(update)
 	resource_getter.free()
