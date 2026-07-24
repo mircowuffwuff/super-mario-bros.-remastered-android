@@ -107,7 +107,7 @@ func victory_sequence(player: Player) -> void:
 	cam_move = true
 	$Camera.enabled = true
 	$Camera.limit_right = Player.camera_right_limit
-	$Camera.global_position = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
+	$Camera.global_position = Global.get_game_viewport_camera_2d().get_screen_center_position()
 	$Camera.reset_physics_interpolation()
 
 	player.state_machine.transition_to("LevelExit")

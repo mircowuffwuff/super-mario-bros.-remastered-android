@@ -201,9 +201,9 @@ func update_visuals() -> void:
 	
 	$SecondaryLayer.visible = second_layer > 0
 	$SecondaryLayer.scroll_offset = Vector2(80, 64) + second_layer_offset
-	if Engine.is_editor_hint() == false and Global.get_game_viewport().get_camera_2d() != null:
+	if Engine.is_editor_hint() == false and Global.get_game_viewport_camera_2d() != null:
 		for i in [$PrimaryLayer, $SecondaryLayer, $SkyLayer]:
-			i.screen_offset.x = Global.get_game_viewport().get_camera_2d().get_screen_center_position().x / i.scroll_scale.x
+			i.screen_offset.x = Global.get_game_viewport_camera_2d().get_screen_center_position().x / i.scroll_scale.x
 	$SecondaryLayer/Mushrooms.visible = second_layer == 1
 	$SecondaryLayer/Trees.visible = second_layer == 2
 	for i in $Parallax2D/Toads.get_children():

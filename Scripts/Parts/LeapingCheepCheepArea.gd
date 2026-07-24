@@ -13,6 +13,6 @@ func _physics_process(delta: float) -> void:
 
 func spawn_cheep_cheep() -> void:
 	var node = LEAPING_CHEEP_CHEEP.instantiate()
-	node.global_position.x = Global.get_game_viewport().get_camera_2d().get_screen_center_position().x + [ -32 ,-64, -96, -128].pick_random()
+	node.global_position.x = Global.get_game_viewport_camera_2d().get_screen_center_position().x + [ -32 ,-64, -96, -128].pick_random()
 	node.global_position.y = 48
 	add_sibling(node)

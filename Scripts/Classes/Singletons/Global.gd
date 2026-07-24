@@ -112,7 +112,7 @@ var coins := 0:
 		if coins >= 100:#
 			if Settings.file.difficulty.inf_lives == 0 and (current_game_mode != GameMode.CHALLENGE and current_campaign != "SMBANN"):
 				lives += floor(coins / 100.0)
-				AudioManager.play_sfx("1_up", Global.get_game_viewport().get_camera_2d().get_screen_center_position())
+				AudioManager.play_sfx("1_up", Global.get_game_viewport_camera_2d().get_screen_center_position())
 			coins = coins % 100
 var time := 300
 var inf_time := false
@@ -723,6 +723,9 @@ func merge_dict(target: Dictionary, source: Dictionary) -> void:
 # i wouldve much preferred to use Wrapper.get_game_viewport() everywhere instead, but i just cannot get Wrapper to be a global without loading twice right now! for the time being, thisll do
 func get_game_viewport() -> SubViewport:
 	return game_viewport
+
+func get_game_viewport_camera_2d() -> Camera2D:
+	return null if game_viewport == null else game_viewport.get_camera_2d()
 
 func nice_json_format(json_string := "") -> String:
 	var inside_array := 0

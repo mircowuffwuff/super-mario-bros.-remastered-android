@@ -35,14 +35,14 @@ func _ready() -> void:
 	get_parent().move_child(self, 0)
 
 func _process(_delta: float) -> void:
-	screen_center = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
+	screen_center = Global.get_game_viewport_camera_2d().get_screen_center_position()
 
 func _physics_process(delta: float) -> void:
 	player = get_tree().get_first_node_in_group("Players")
 	handle_movement(delta)
 
 func handle_movement(_delta: float) -> void:
-	if Global.get_game_viewport().get_camera_2d().get_screen_center_position().x >= retreat_x:
+	if Global.get_game_viewport_camera_2d().get_screen_center_position().x >= retreat_x:
 		retreat = true
 	var player_x = player.global_position.x + ((player.velocity.x))
 	var distance = abs(global_position.x - player_x)

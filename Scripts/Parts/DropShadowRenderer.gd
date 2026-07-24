@@ -12,14 +12,14 @@ func _process(_delta: float) -> void:
 		return
 	show()
 	if is_instance_valid(get_tree().current_scene):
-		if is_instance_valid(Global.get_game_viewport().get_camera_2d()):
-			$SubViewportContainer/SubViewport.world_2d = Global.get_game_viewport().get_camera_2d().get_world_2d()
+		if is_instance_valid(Global.get_game_viewport_camera_2d()):
+			$SubViewportContainer/SubViewport.world_2d = Global.get_game_viewport_camera_2d().get_world_2d()
 		else:
 			return
 	else:
 		return
 	$SubViewportContainer.material.set_shader_parameter("shadow_colour", shadow_colour)
 	$SubViewportContainer/SubViewport.size = Global.get_game_viewport().get_visible_rect().size + Vector2(9, 2)
-	global_position = Global.get_game_viewport().get_camera_2d().get_screen_center_position() + offset
-	$SubViewportContainer/SubViewport/Camera2D.global_position = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
+	global_position = Global.get_game_viewport_camera_2d().get_screen_center_position() + offset
+	$SubViewportContainer/SubViewport/Camera2D.global_position = Global.get_game_viewport_camera_2d().get_screen_center_position()
 	queue_redraw()

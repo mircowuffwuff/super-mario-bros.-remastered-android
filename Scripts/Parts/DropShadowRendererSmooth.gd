@@ -14,8 +14,8 @@ func _ready() -> void:
 	sub_viewport.set_world_2d(Global.get_game_viewport().get_world_2d())
 
 func _physics_process(_delta: float) -> void:
-	if Global.get_game_viewport().get_camera_2d() != null:
-		camera.global_position = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
+	if Global.get_game_viewport_camera_2d() != null:
+		camera.global_position = Global.get_game_viewport_camera_2d().get_screen_center_position()
 	camera.zoom = Vector2i(Vector2.ONE / $"%Container".scale)
 	point.global_position = camera.global_position
 	var colour := day_colour

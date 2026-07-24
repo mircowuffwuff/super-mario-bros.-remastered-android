@@ -42,14 +42,14 @@ func spawn_entity() -> void:
 	if entity_scene == null: return
 	var node = entity_scene.instantiate()
 	if direction == 1:
-		node.global_position.x = Global.get_game_viewport().get_camera_2d().get_screen_center_position().x + [ -32 ,-64, -96, -128].pick_random()
+		node.global_position.x = Global.get_game_viewport_camera_2d().get_screen_center_position().x + [ -32 ,-64, -96, -128].pick_random()
 		node.global_position.y = 48
 	else:
 		if y_pos == 0:
 			node.global_position.y = get_tree().get_first_node_in_group("Players").global_position.y + randi_range(-4, 4)
 		else:
 			node.global_position.y = randf_range(0, -152)
-		node.global_position.x = Global.get_game_viewport().get_camera_2d().get_screen_center_position().x + ((Global.get_game_viewport().get_visible_rect().size.x / 2) + 8)
+		node.global_position.x = Global.get_game_viewport_camera_2d().get_screen_center_position().x + ((Global.get_game_viewport().get_visible_rect().size.x / 2) + 8)
 	if get_parent() is EntityGenerator:
 		get_parent().add_sibling(node)
 	else:

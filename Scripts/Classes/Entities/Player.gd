@@ -1697,7 +1697,7 @@ func water_exited() -> void:
 func reset_camera_to_center() -> void:
 	animating_camera = true
 	var old_position = camera.position
-	camera.global_position = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
+	camera.global_position = Global.get_game_viewport_camera_2d().get_screen_center_position()
 	camera.reset_physics_interpolation()
 	var tween = create_tween()
 	tween.tween_property(camera, "position", old_position, 0.5)

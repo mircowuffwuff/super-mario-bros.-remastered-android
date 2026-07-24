@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 func handle_off_screen_icon() -> void:
 	$OffScreenIcon.visible = $Sprite/VisibleOnScreenNotifier2D.is_on_screen() == false and moving
 	var sprite_position = $Sprite.global_position
-	var screen_center = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
+	var screen_center = Global.get_game_viewport_camera_2d().get_screen_center_position()
 	var screen_size = Global.get_game_viewport().get_visible_rect().size
 	sprite_position.x = clamp(sprite_position.x, (screen_center.x - (screen_size.x / 2)) + 8, (screen_center.x + (screen_size.x / 2)) - 8)
 	sprite_position.y = clamp(sprite_position.y, (screen_center.y - (screen_size.y / 2)) + 8, (screen_center.y + (screen_size.y / 2)) - 8)

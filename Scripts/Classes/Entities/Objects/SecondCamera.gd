@@ -92,7 +92,7 @@ func transition_to_self() -> void:
 		trans_cam.set(i, $Camera2D.get(i))
 	if frame_one:
 		add_child(trans_cam)
-		var old_cam = Global.get_game_viewport().get_camera_2d()
+		var old_cam = Global.get_game_viewport_camera_2d()
 		trans_cam.make_current()
 		trans_cam.global_position = (old_cam.get_screen_center_position())
 		trans_cam.reset_physics_interpolation()

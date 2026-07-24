@@ -1,7 +1,7 @@
 extends Enemy
 
 func _ready() -> void:
-	direction = sign(Global.get_game_viewport().get_camera_2d().get_screen_center_position().x - global_position.x)
+	direction = sign(Global.get_game_viewport_camera_2d().get_screen_center_position().x - global_position.x)
 	velocity.x = randf_range(50, 200) * direction
 	velocity.y = randf_range(-250, -350)
 	$Sprite.scale.x = direction

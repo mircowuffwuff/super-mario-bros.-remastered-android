@@ -27,7 +27,7 @@ func _ready() -> void:
 		$IdleMeter.start()
 
 func _physics_process(delta: float) -> void:
-	screen_center_pos = Global.get_game_viewport().get_camera_2d().get_screen_center_position()
+	screen_center_pos = Global.get_game_viewport_camera_2d().get_screen_center_position()
 	screen_size = Global.get_game_viewport().get_visible_rect().size
 	target_position = (screen_center_pos + Vector2((screen_size.x / 2) * screen_direction, -screen_size.y / 2)) + (margin * Vector2(-screen_direction, 1))
 	handle_states.call_deferred(delta)
