@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cj6858gmexp11" path="res://Scripts/UI/SettingsMenu.gd" id="1_hnwhb"]
 [ext_resource type="StyleBox" uid="uid://comkghpj0djcl" path="res://Resources/UI/Panel.tres" id="2_t6b48"]
-[ext_resource type="Texture2D" uid="uid://0ffyi283pret" path="res://Assets/Sprites/UI/SettingsIcon.png" id="3_7l5ko"]
+[ext_resource type="Texture2D" uid="uid://dg72kegsksph8" path="res://Assets/Sprites/UI/SettingsIcon.png" id="3_7l5ko"]
 [ext_resource type="PackedScene" uid="uid://dbvy0rhwpv4w4" path="res://Scenes/Parts/SelectableOptionNode.tscn" id="3_dl6kk"]
 [ext_resource type="Script" uid="uid://dcmjifllvi3qd" path="res://Scripts/UI/SettingsCategory.gd" id="4_avtty"]
 [ext_resource type="Script" uid="uid://dogw674i1q4yq" path="res://Scripts/UI/WindowChanger.gd" id="5_hnwhb"]
@@ -585,12 +585,6 @@ options = [NodePath("VBoxContainer/SelectableOptionNode"), NodePath("VBoxContain
 layout_mode = 2
 theme_override_constants/separation = -8
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks"]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 2
-text = "RESOURCE_PACK_WARNING_LOCATION"
-autowrap_mode = 2
-
 [node name="SelectableOptionNode" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks/VBoxContainer" unique_id=1129427645 groups=["Options"] instance=ExtResource("9_t6b48")]
 layout_mode = 2
 title = "RESOURCE_OPEN_FOLDER"
@@ -604,6 +598,12 @@ title = "RESOURCE_REFRESH"
 layout_mode = 2
 title = "RESOURCE_PACK_CREATE"
 press_sfx = ""
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" unique_id=2095077320]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "RESOURCE_PACK_WARNING_LOCATION"
+autowrap_mode = 2
 
 [node name="ResourcePackLoader" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/ResourcePacks" unique_id=1249240363]
 script = ExtResource("9_2qqpf")
@@ -864,7 +864,7 @@ uppercase = true
 [node name="DifficultySetter" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/Difficulty" unique_id=1509049297]
 script = ExtResource("10_2qqpf")
 
-[node name="OnScreenControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("options")]
+[node name="OnScreenControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1425137459 node_paths=PackedStringArray("options")]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = -4
@@ -872,41 +872,41 @@ script = ExtResource("4_avtty")
 category_name = "SETTINGS_OSC"
 options = [NodePath("Visibility"), NodePath("TransitionVisibility"), NodePath("HapticFeedback")]
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=1169719602]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Visibility" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="Visibility" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=185082585 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "visibility"
 title = "OSC_VISIBILITY"
 values = ["SETTING_SHOW", "SETTING_AUTO", "SETTING_HIDE"]
 settings_category = "osc"
 
-[node name="TransitionVisibility" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="TransitionVisibility" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=1030994154 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "transition_visibility"
 title = "OSC_TRANSITION_VISIBILITY"
 values = ["SETTING_SHOW", "SETTING_HIDE"]
 settings_category = "osc"
 
-[node name="HapticFeedback" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" groups=["Options"] instance=ExtResource("3_dl6kk")]
+[node name="HapticFeedback" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=1931413064 groups=["Options"] instance=ExtResource("3_dl6kk")]
 layout_mode = 2
 option_key = "haptic_feedback"
 title = "OSC_HAPTIC_FEEDBACK"
 values = ["SETTING_ON", "SETTING_OFF"]
 settings_category = "osc"
 
-[node name="OSCAdjuster" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls"]
+[node name="OSCAdjuster" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=322470134]
 script = ExtResource("14_yvj4y")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=458381236]
 layout_mode = 2
 size_flags_vertical = 10
 text = "TAP AND HOLD HERE TO RESET."
 uppercase = true
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=935131501]
 z_index = 4000
 position = Vector2(110, 128)
 shape = SubResource("RectangleShape2D_k6yev")
@@ -1083,7 +1083,7 @@ size_flags_vertical = 10
 text = "TAP AND HOLD HERE TO RESET."
 uppercase = true
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="PanelContainer/MarginContainer/VBoxContainer/Controller"]
+[node name="TouchScreenButton" type="TouchScreenButton" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1464838642]
 z_index = 4000
 position = Vector2(110, 128)
 shape = SubResource("RectangleShape2D_k6yev")
@@ -1294,12 +1294,12 @@ uppercase = true
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/GameOverStyle" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="game_over_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/LevelDesign" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="level_design_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Difficulty/ScrollContainer/VBoxContainer/TimeLimit" to="PanelContainer/MarginContainer/VBoxContainer/Difficulty/DifficultySetter" method="time_limit_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Controller/Deadzone" to="PanelContainer/MarginContainer/VBoxContainer/Controller/InputMapSaving" method="set_deadzone"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/Visibility" to="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/OSCAdjuster" method="visibility_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/TransitionVisibility" to="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/OSCAdjuster" method="transition_visibility_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/HapticFeedback" to="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/OSCAdjuster" method="haptic_feedback_changed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/TouchScreenButton" to="." method="on_osc_reset_button_down"]
 [connection signal="released" from="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls/TouchScreenButton" to="." method="on_osc_reset_button_up"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Controller/Deadzone" to="PanelContainer/MarginContainer/VBoxContainer/Controller/InputMapSaving" method="set_deadzone"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Controller/TouchScreenButton" to="." method="on_controller_reset_button_down"]
 [connection signal="released" from="PanelContainer/MarginContainer/VBoxContainer/Controller/TouchScreenButton" to="." method="on_controller_reset_button_up"]
 [connection signal="deleted" from="PanelContainer/MarginContainer/VBoxContainer/Data/CampaignData" to="PanelContainer/MarginContainer/VBoxContainer/Data/DataDeletion" method="delete_story"]

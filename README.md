@@ -42,9 +42,9 @@ im happy you want to help!! below are the steps to get a development environment
 1. open a powershell, i recommend [terminal](https://github.com/microsoft/terminal)
 2. [install git](https://git-scm.com/downloads), if you havent yet
 3. navigate to your projects folder using `cd`
-4. run `git clone https://github.com/YOUR_NAME/super-mario-bros.-remastered-android.git`
-5. run `cd super-mario-bros.-remastered-android; mkdir .\android\build\libs\release; curl https://github.com/mircey/Godot-Android-Export-Template-libs/releases/download/4.5b3/godot-lib.template_release.aar -OutFile .\android\build\libs\release\godot-lib.template_release.aar; mkdir .\android\build\libs\debug; curl https://github.com/mircey/Godot-Android-Export-Template-libs/releases/download/4.5b3/godot-lib.template_debug.aar -OutFile .\android\build\libs\debug\godot-lib.template_debug.aar`
-6. [install Godot 4.5 beta 3](https://godotengine.org/download/archive/4.5-beta3/), if you havent yet
+4. replace `YOUR_NAME` with your GitHub username and run `git clone https://github.com/YOUR_NAME/super-mario-bros.-remastered-android.git`
+5. run `cd super-mario-bros.-remastered-android; mkdir .\android\build\libs\release; curl https://github.com/mircowuffwuff/Godot-Android-Export-Template-libs/releases/download/4.6.1/godot-lib.template_release.aar -OutFile .\android\build\libs\release\godot-lib.template_release.aar; mkdir .\android\build\libs\debug; curl https://github.com/mircowuffwuff/Godot-Android-Export-Template-libs/releases/download/4.6.1/godot-lib.template_debug.aar -OutFile .\android\build\libs\debug\godot-lib.template_debug.aar`
+6. [install Godot 4.6.1](https://godotengine.org/download/archive/4.6.1-stable/), if you havent yet
 7. launch Godot
 8. import `.\project.godot`
 
