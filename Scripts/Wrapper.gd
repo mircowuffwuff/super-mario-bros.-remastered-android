@@ -22,11 +22,6 @@ func change_scene_to(scene_path) -> void:
 	
 	var new_scene
 	if scene_path is String:
-		print("----")
-		print(scene_path)
-		print(load(scene_path))
-		print(load(scene_path).instantiate())
-		print("----")
 		new_scene = load(scene_path).instantiate()
 	elif scene_path is PackedScene:
 		new_scene = scene_path.instantiate()
