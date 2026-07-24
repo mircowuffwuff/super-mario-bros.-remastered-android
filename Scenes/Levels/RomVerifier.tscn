@@ -94,6 +94,8 @@ script = ExtResource("8_c20ch")
 Overworld = SubResource("Resource_euqtg")
 metadata/_custom_type_script = "uid://cmvlgsjmsk0v5"
 
+[sub_resource type="GDScript" id="GDScript_2ok7u"]
+
 [node name="ROMVerifier" type="Node" unique_id=762456775]
 script = ExtResource("1_r85ci")
 
@@ -305,7 +307,7 @@ stream = ExtResource("11_4o1wk")
 [node name="ErrorSFX" type="AudioStreamPlayer" parent="." unique_id=107038704]
 stream = ExtResource("12_2ok7u")
 
-[node name="ROMSelectorButton" type="Button" parent="."]
+[node name="ROMSelectorButton" type="Button" parent="." unique_id=1398396578]
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
