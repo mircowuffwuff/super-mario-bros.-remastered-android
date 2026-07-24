@@ -4,6 +4,7 @@
 /android/build/assets/
 /android/build/build/
 /android/build/libs/
+/android/build/src/main/assets/
 Exports/
 
 # SMB1R specific ignores
