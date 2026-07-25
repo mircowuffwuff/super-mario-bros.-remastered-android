@@ -128,18 +128,17 @@ func inf_time_check() -> void:
 		Global.can_time_tick = false
 		Global.inf_time = true
 
+# TODO test
 func apply_resolution_enforcement() -> void:
 	if enforce_resolution != Vector2.ZERO:
-		get_tree().root.content_scale_size = enforce_resolution
-		get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
+		# only works if y is not variable. needs testing.
+		Global.change_window_size(enforce_resolution.x)
 	else:
 		reset_resolution()
 
+# TODO test
 func reset_resolution() -> void:
-	var idx = Settings.file.video.size
-	var res = Global.RESOLUTIONS[idx]
-	get_tree().root.content_scale_size = res
-	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND if idx == Global.RESOLUTIONS.size() - 1 else Window.CONTENT_SCALE_ASPECT_KEEP
+	Global.change_window_size_via_index(Settings.file.video.size)
 
 
 func spawn_in_extra_players() -> void:

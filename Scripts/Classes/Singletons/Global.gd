@@ -799,3 +799,16 @@ func handle_input() -> void:
 func warper_cooldown() -> void:
 	await get_tree().create_timer(1, false).timeout
 	Warper.can_warp = true
+
+func change_window_size_via_index(index) -> void:
+	var center_container : CenterContainer = get_tree().root.get_node("Wrapper/CenterContainer")
+	var screen_width = floor(center_container.size.x)
+	var width = mini(screen_width if index == 4 else 426 if index == 3 else 384 if index == 2 else 320 if index == 1 else 256, screen_width)
+	change_window_size(width)
+
+func change_window_size(width) -> void:
+	# this redundancy is not very nice, but using this classes game_viewport errors out because it is still null when the game starts
+	var game_viewport = get_tree().root.get_node("Wrapper/CenterContainer/SubViewportContainer/SubViewport")
+	var game_viewport_container : SubViewportContainer = get_tree().root.get_node("Wrapper/CenterContainer/SubViewportContainer")
+	game_viewport.size.x = width
+	game_viewport_container.size.x = width

@@ -18,23 +18,8 @@ func window_multiplier_changed(new_value := 0) -> void:
 	pass
 
 func window_size_changed(new_value := 0) -> void:
-	var center_container : CenterContainer = get_tree().root.get_node("Wrapper/CenterContainer")
-	var screen_width = floor(center_container.size.x)
-	#var x = mini(screen_width if new_value == 2 else 384 if new_value == 1 else 256, screen_width)
-	var x = mini(screen_width if new_value == 4 else 426 if new_value == 3 else 384 if new_value == 2 else 320 if new_value == 1 else 256, screen_width)
-	#print("WindowChanger/x: ", x)
-	var game_viewport : SubViewport = get_tree().root.get_node("Wrapper/CenterContainer/SubViewportContainer/SubViewport")
-	var game_viewport_container : SubViewportContainer = get_tree().root.get_node("Wrapper/CenterContainer/SubViewportContainer")
-	game_viewport.size.x = x
-	game_viewport_container.size.x = x
-	
+	Global.change_window_size_via_index(new_value)
 	Settings.file.video.size = new_value
-
-	# TODO should this stay? compare with release 9s sources
-	var idx = new_value
-	var res = Global.RESOLUTIONS[new_value]
-	get_tree().root.content_scale_size = res
-	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND if idx == Global.RESOLUTIONS.size() - 1 else Window.CONTENT_SCALE_ASPECT_KEEP
 
 func vsync_changed(new_value := 0) -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if new_value == 1 else DisplayServer.VSYNC_DISABLED)
