@@ -54,6 +54,9 @@ func _process(_delta: float) -> void:
 		var remaining := 3.0 - (Time.get_unix_time_from_system() - controller_reset_time)
 		if remaining < 0.0001:
 			controller_reset_label.text = "SUCCESSFULLY RESET BINDINGS!"
+			# since the multibind thingy, this did not work anymore.
+			# to patch this dirtily, i reintroduced the old method
+			# of input detection to the script in SettingsMenu.tscn
 			Input.action_press("ui_reset_keybindings")
 			Input.action_release("ui_reset_keybindings")
 			last_controller_reset = Time.get_unix_time_from_system()

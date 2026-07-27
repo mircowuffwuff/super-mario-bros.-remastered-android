@@ -64,7 +64,7 @@ func get_input_nodes() -> void:
 			input_nodes.append(i)
 
 func _process(_delta: float) -> void:
-	if Global.multibind_action_just_pressed(\"ui_reset_keybindings\"):
+	if Input.is_action_just_pressed(\"ui_reset_keybindings\"):
 		InputMap.load_from_project_settings()
 		save_inputs()
 		Settings.save_settings()
@@ -575,6 +575,7 @@ settings_category = "visuals"
 script = ExtResource("9_kfq5n")
 
 [node name="ResourcePacks" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1947474697 node_paths=PackedStringArray("options")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_avtty")
@@ -865,6 +866,7 @@ uppercase = true
 script = ExtResource("10_2qqpf")
 
 [node name="OnScreenControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1425137459 node_paths=PackedStringArray("options")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = -4
@@ -908,7 +910,7 @@ uppercase = true
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="PanelContainer/MarginContainer/VBoxContainer/OnScreenControls" unique_id=935131501]
 z_index = 4000
-position = Vector2(110, 128)
+position = Vector2(110, 129)
 shape = SubResource("RectangleShape2D_k6yev")
 
 [node name="KeyboardControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=458097214 node_paths=PackedStringArray("options")]
@@ -1085,7 +1087,7 @@ uppercase = true
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="PanelContainer/MarginContainer/VBoxContainer/Controller" unique_id=1464838642]
 z_index = 4000
-position = Vector2(110, 128)
+position = Vector2(110, 141)
 shape = SubResource("RectangleShape2D_k6yev")
 
 [node name="Data" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=320183905 node_paths=PackedStringArray("options")]
