@@ -26,6 +26,8 @@ var liquid_override := -1
 var particle_override := -1
 var extra_music_override := ""
 var level_metadata := {}
+var overlay_clouds_override := -1
+var second_order_override := -1
 
 signal level_theme_changed
 
@@ -655,6 +657,9 @@ func get_snapshot_num_int(ver_num := "26w00a") -> int:
 	var num = ver_num[5]
 	
 	return (int(year) * int(week)) + int(num.unicode_at(0))
+
+func get_rc_num_int(rc_num := "rc1") -> int:
+	return int(rc_num.right(1)) * 1000
 
 func load_default_translations() -> void:
 	for i in lang_codes:

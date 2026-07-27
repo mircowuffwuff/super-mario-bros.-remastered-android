@@ -196,9 +196,6 @@ func _ready() -> void:
 		LevelEditor.selecting_room = false
 		open_tile_menu()
 		last_camera_position = Vector2(-128, -88)
-	if (LevelEditor.recorded_trail):
-		create_player_trail()
-		LevelEditor.recorded_trail = false
 	
 	selected_tile_index = wrap(selected_tile_index, 0, tile_list.size())
 	on_tile_selected(tile_list[selected_tile_index])
@@ -254,6 +251,7 @@ func handle_player_trail() -> void:
 			return
 		var distance = last_placed_position.distance_to(target_player.global_position)
 		if distance >= 32:
+			print("recorded")
 			record_player_frame()
 
 func handle_hud() -> void:
@@ -389,6 +387,9 @@ func return_to_editor() -> void:
 	recorded_trail = saved_trail.size() > 0
 	last_commit = undo_redo.get_current_action()
 	last_camera_position = get_tree().get_first_node_in_group("Players").camera.global_position
+	if (LevelEditor.saved_trail.size() > 1):
+		create_player_trail()
+		LevelEditor.recorded_trail = false
 
 var zoom := 1.0
 
@@ -848,6 +849,7 @@ func replace_area(top_corner := Vector2i.ZERO, layer_num := current_layer, area 
 		var true_target_position = top_corner + Vector2i(int(decode[2]), int(decode[3]))
 		var source = entity_tiles[layer_num][true_source_position]
 		source.get_node("SignalExposer").connections.append([layer_num, true_target_position])
+		source.get_node("SignalExposer").connect_pre_existing_signals()
 
 func save_area(top_corner := Vector2i.ZERO, select_start := Vector2i.ZERO, select_end := Vector2i.ZERO, layer_num := current_layer) -> Dictionary:
 	var dict := {"Tiles": "", "Entities": "", "Connections": "", "Empty": "", "Size": "0,0"}

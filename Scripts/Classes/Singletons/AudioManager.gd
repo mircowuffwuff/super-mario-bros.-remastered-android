@@ -362,7 +362,7 @@ func generate_interactive_stream(bgm_file := {}) -> AudioStreamInteractive:
 		else:
 			Global.log_error("Hurry variation source for current track was not found.")
 		if (bgm_file["Hurry"].has("loop")):
-			normal_loop = bgm_file["Hurry"]["loop"]
+			hurry_loop = bgm_file["Hurry"]["loop"]
 		else:
 			Global.log_warning("Hurry variation looping for current track was not found.")
 	stream.set_clip_stream(0, import_stream(normal_path, normal_loop))
@@ -371,6 +371,7 @@ func generate_interactive_stream(bgm_file := {}) -> AudioStreamInteractive:
 
 func import_stream(file_path := "", loop_point := -1.0) -> AudioStream:
 	var stream = null
+	## Importing
 	if file_path.begins_with("res://"):
 		stream = load(file_path)
 	elif file_path.ends_with(".mp3"):
@@ -379,13 +380,19 @@ func import_stream(file_path := "", loop_point := -1.0) -> AudioStream:
 		stream = AudioStreamOggVorbis.load_from_file(file_path)
 	elif file_path.ends_with(".wav"):
 		stream = AudioStreamWAV.load_from_file(file_path)
+	elif file_path.ends_with(".json"):
+		stream = create_stream_from_json(file_path)
+	
+	## Setting Loops
 	if file_path.ends_with(".mp3"):
 		stream.set_loop(loop_point >= 0)
 		stream.set_loop_offset(loop_point)
 	elif file_path.ends_with(".ogg"):
+		stream = AudioStreamOggVorbis.load_from_file(file_path)
 		stream.set_loop(loop_point >= 0)
 		stream.set_loop_offset(loop_point)
-	elif file_path.ends_with(".json"):
-		stream = create_stream_from_json(file_path)
+	elif file_path.ends_with(".wav"):
+		stream = AudioStreamWAV.load_from_file(file_path)
+		stream.loop_begin = loop_point
 	return stream
 	

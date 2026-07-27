@@ -131,11 +131,13 @@ extends CharacterBody2D
 		
 		"BOUNCE_SPEED": {
 			"SMB1": {"value": 248.0},
-			"SMBLL": {"value": 370.0}
+			"SMBLL": {"value": 370.0},
+			"SMBANN": {"link": "SMBLL"}
 		},
 		"BOUNCE_JUMP_SPEED": {
 			"SMB1": {"value": 310.0},
-			"SMBLL": {"value": 370.0}
+			"SMBLL": {"value": 370.0},
+			"SMBANN": {"link": "SMBLL"}
 		},                                 # The strength at which the player bounces off enemies without any extra input, measured in px/sec.   # The strength at which the player bounces off enemies while holding jump, measured in px/sec.
 		
 		"FALL_GRAVITY_PREDETERMINED": true,          # Determines if the player's gravity is determined by their last X velocity from leaving the ground rather than their current X velocity.
@@ -331,8 +333,8 @@ extends CharacterBody2D
 		"RAINBOW_POWERUP_FX": true,        # Determines whether or not the player will play the rainbow effect when powering up.
 		"RAINBOW_FX_SPEED": 15.0,          # Determines the speed of the rainbow effect in other scenarios, measured in cycles/sec
 		"ICE_SPEED_MOD": 1.5,
-		"WALK_SFX": "walk",                # Determines which sound effect to play when walking.
-		"RUN_SFX": "run",                  # Determines which sound effect to play when running.
+		"WALK_SFX": "",                # Determines which sound effect to play when walking.
+		"RUN_SFX": "",                  # Determines which sound effect to play when running.
 		"SKID_SFX": "skid",            # Determines which sound effect to play when skidding.
 		"JUMP_SFX": "big_jump",            # Determines which sound effect to play when jumping.
 		"TRAMPOLINE_SFX": "big_trampoline",          # Determines which sound effect to play when bouncing on a trampoline.
@@ -812,8 +814,8 @@ func _physics_process(delta: float) -> void:
 	elif is_actually_on_floor():
 		has_flung = false
 		projectiles_fired_since_left_ground = 0
+		land_on_ground()
 		if not is_invincible:
-			land_on_ground()
 			stomp_combo = 0
 	elif actual_velocity_y() > 15:
 		can_bump_sfx = true
