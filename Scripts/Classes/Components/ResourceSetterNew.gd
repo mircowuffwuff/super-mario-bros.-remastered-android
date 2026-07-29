@@ -218,8 +218,10 @@ func get_resource(json_file: JSON) -> Resource:
 				else:
 					rect_error_message.call()
 		ResourceMode.AUDIO:
-			var loop_point = json.get("loop", 0.0)
-			resource = load_audio_from_path(source_resource_path, loop_point)
+			var loop_point = json.get("loop", -1.0)
+			print(source_resource_path)
+			resource = AudioManager.import_stream(source_resource_path, loop_point)
+			print(resource)
 		ResourceMode.RAW:
 			pass
 		ResourceMode.FONT:
@@ -230,6 +232,7 @@ func get_resource(json_file: JSON) -> Resource:
 				resource = load(source_resource_path)
 			resource.set_meta("base_path", source_resource_path)
 		ResourceMode.THEME:
+			print([json, get_variation_path()])
 			Global.theme_override = json.get("theme", "")
 			Global.time_override = json.get("time", "")
 			Global.music_override = json.get("music", "")
@@ -552,6 +555,8 @@ func create_sprite_frames_from_image(image: Resource, animation_json := {}, reso
 					continue
 				if (animation_json[anim_name].has("loop")):
 					sprite_frames.set_animation_loop(anim_name, animation_json[anim_name].loop)
+					if animation_json[anim_name].has("loop_offset") and node_to_affect is AnimatedSprite2D:
+						node_to_affect.animation_looped.connect(on_animation_looped.bind(anim_name, animation_json[anim_name].get("loop_offset", 0)))
 				else:
 					log_warning("Animation frame for resource: \"%s\" has no loop set: \"%s\":Frame%s" % [resource_path, anim_name, str(animation_json[anim_name].frames.find(frame))])
 				if (animation_json[anim_name].has("speed")):
@@ -592,30 +597,6 @@ func load_image_from_path(path := "") -> Texture2D:
 	var image = Image.new()
 	image.load(path)
 	return ImageTexture.create_from_image(image)
-
-func load_audio_from_path(path := "", loop := -1.0) -> AudioStream:
-	var stream = null
-	# Importing
-	if path.contains(".bgm"):
-		stream = AudioManager.generate_interactive_stream(JSON.parse_string(FileAccess.get_file_as_string(path)))
-	elif path.contains("res://"):
-		return load(path)
-	elif path.contains(".mp3"):
-		stream = AudioStreamMP3.load_from_file(path)
-	elif path.contains(".ogg"):
-		stream = AudioStreamOggVorbis.load_from_file(path)
-	elif path.contains(".wav"):
-		stream = AudioStreamWAV.load_from_file(path)
-	
-	if path.contains(".mp3"):
-		stream.set_loop(loop >= 0)
-		stream.set_loop_offset(loop)
-	elif path.contains(".ogg"):
-		stream.set_loop(loop >= 0)
-		stream.set_loop_offset(loop)
-	elif path.contains(".wav"):
-		stream.loop_begin = loop
-	return stream
 
 func sync_metadata() -> void:
 	for i in sync:
@@ -659,4 +640,8 @@ func set_material(blend_mode := "mix") -> void:
 	elif node_to_affect.material != null:
 		if node_to_affect.material.resource_path.has("res://"):
 			node_to_affect.material = null
-		
+
+func on_animation_looped(anim_name := "", loop_offset := 0) -> void:
+	var sprite: AnimatedSprite2D = node_to_affect
+	if sprite.animation == anim_name:
+		sprite.set_frame_and_progress(loop_offset, 0)
