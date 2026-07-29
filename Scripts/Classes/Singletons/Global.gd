@@ -228,13 +228,13 @@ func _ready() -> void:
 	setup_config_dirs()
 	check_for_rom()
 	
-	await get_tree().process_frame  # Wait for scene tree to be ready
-	game_viewport = get_tree().root.get_node("Wrapper/CenterContainer/SubViewportContainer/SubViewport")
-	if game_viewport:
-		reparent(game_viewport)
-
 	load_default_translations()
 	level_theme_changed.connect(load_default_translations)
+	
+	await get_tree().process_frame  # Wait for scene tree to be ready
+	game_viewport = get_tree().root.get_node("Wrapper/CenterContainer/SubViewportContainer/SubViewport") # ooohh.. THIS is why wrapper is "auto-loaded", without being in Autoloads, right!?
+	if game_viewport:
+		reparent(game_viewport)
 
 func update_theme() -> void:
 	theme_override = ""
