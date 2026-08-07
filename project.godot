@@ -17,6 +17,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 
 config/name="SMB1R"
 run/main_scene="uid://d3e1cch72jsyh"
+run/max_fps=60
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -46,6 +47,7 @@ gdscript/warnings/narrowing_conversion=0
 
 [display]
 
+window/vsync/vsync_mode=1
 window/size/viewport_width=256
 window/size/viewport_height=240
 window/size/window_width_override=1024
@@ -521,6 +523,7 @@ common/physics_interpolation=true
 
 [rendering]
 
+renderer/rendering_method.mobile="mobile"
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
